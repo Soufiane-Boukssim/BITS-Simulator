@@ -1,0 +1,440 @@
+<div class="box_of_content p-block-1">
+    <div class="row">
+        <div class="form">
+            <!-- <h2 class="h2-title">{{'label.search' | translate}}</h2> -->
+
+            <div class="row inputTime" >
+                <div class="form__control">
+                    <label for="">{{'label.startDate' | translate}}</label>
+                    <input type="date" class="form-control "  [(ngModel)]="dateFrom" >
+                </div>
+                <div class="form__control">
+                    <label for="">{{'label.endDate' | translate}}</label>
+                    <input type="date" class="form-control"  [(ngModel)]="dateTo" >
+                </div>
+                <div class="form__control">
+                    <label for="" style="color: white;">.</label>
+                     
+                    <!-- <i class="material-icons icon_refresh" (click)="clearInputDate()">plus</i> -->
+
+                    <button class="btn btn-primary"  (click)="fetchDataLogs()" >Search</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row p-1">
+       
+        <div class="table">
+            <table cellspacing="0">
+              <thead>
+                <tr>
+                    <th>{{'label.header.tableLog_Operation' | translate}}</th>
+                    <th> {{'label.header.tableLog_Operation_Date_Send' | translate}}</th>
+                    <th> {{'label.header.tableLog_Operation_Sended_Data' | translate}} </th>
+                    <th> {{'label.header.tableLog_Operation_Date_Received' | translate}} </th>
+                    <th> {{'label.header.tableLog_Operation_Data_Received' | translate}}</th>
+
+
+                </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let log of logsData | paginate : {itemsPerPage:5, currentPage:p}" (click)="showData(log)">
+                <td>{{ log.logTrxCode }}</td>
+                <td>{{ log.logEDate }}</td>
+                <td>{{  cleanUnicode(log.logEData) }}</td>
+                <td>{{ log.logRDate }}</td>
+                <td>{{  cleanUnicode(log.logRData) }}</td>
+              </tr>
+              <p style="margin: auto; width: fit-content; padding: .5rem;" *ngIf="logsDataFiltered.length == 0" >{{'label.No_data'| translate}} </p>
+              </tbody>
+            </table>
+          <div class="DflexPagination">
+            <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                                 (pageChange)="p = $event"
+            ></pagination-controls>
+
+            <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
+          </div>
+          </div>
+
+    </div>
+
+
+    <div class="tabs__container">
+        <div class="tab__buttons">
+            <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)">{{'label.send' | translate}} </a>
+            <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)">{{'label.receive' | translate}}</a>
+            <a [className]="tab_3 ? 'active':''" (click)="open_tab(2)">{{'label.advice' | translate}}</a>
+            <a [className]="tab_4 ? 'active':''" (click)="open_tab(3)"> {{'label.Detail' | translate}}</a>
+        </div>
+        <div class="tabs">
+            <div class="tab-content" *ngIf="tab_1">
+                <div class="box_log boxDetait" >
+
+                    <ng-container *ngFor="let item of mergedArray">
+                        <div class="row">
+                          <div class="col col-2">
+                            {{ item.label }}
+                          </div>
+                          <div class="col col-6">
+                            {{ item.HexUtil }}
+                          </div>
+                          <div class="col col-4">
+                            {{ item.HexUtilV2 }}
+                          </div>
+                        </div>
+                      </ng-container>
+
+                </div>
+            </div>
+            <div class="tab-content" *ngIf="tab_2" >
+                <div class="box_log boxDetait">
+                    <ng-container *ngFor="let item of mergedArrayReceive">
+                        <div class="row">
+                          <div class="col col-2">
+                            {{ item.label }}
+                          </div>
+                          <div class="col col-6">
+                            {{ item.HexUtil }}
+                          </div>
+                          <div class="col col-4">
+                            {{ item.HexUtilV2 }}
+                          </div>
+                        </div>
+                      </ng-container>
+                </div>
+            </div>
+            <div class="tab-content" *ngIf="tab_3">
+                <div class="box_log boxDetait">
+                        <ng-container *ngFor="let item of mergedArrayAdvice">
+                            <div class="row">
+                              <div class="col col-2">
+                                {{ item.label }}
+                              </div>
+                              <div class="col col-6">
+                                {{ item.HexUtil }}
+                              </div>
+                              <div class="col col-4">
+                                {{ item.HexUtilV2 }}
+                              </div>
+                            </div>
+                          </ng-container>
+                </div>
+            </div>
+            <div class="tab-content" *ngIf="tab_4">
+                <div class="box_log boxDetait">
+
+              <div *ngIf="showDetails">
+
+                <div class="tabs__container">
+                    <div class="tab__buttons">
+                        <a [className]="tab_MsgOUT ? 'active':''" (click)="open_tabInfo(0)">{{'label.messageOut' | translate}}</a>
+                        <a [className]="tab_MsgIN ? 'active':''" (click)="open_tabInfo(1)">{{'label.Message_IN' | translate}} </a>
+                        <a [className]="tab_MsgRendue ? 'active':''" (click)="open_tabInfo(2)">{{'label.Compte_Rendue' | translate}}</a>
+                    </div>
+                    <div class="tabs">
+                           <div class="tab-content" *ngIf="tab_MsgOUT">
+                            <div>
+                                <div *ngIf="messageClasse">
+                                   <div class="row" >
+                                       <div class="col col-8">
+                                           <p>{{'label.messageClassess' | translate}}</p>
+                                       </div>
+                                       <div class="col col-4"> {{ messageClasse }}</div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Message_Sub_Class' | translate}}  </p>
+                                       </div>
+                                       <div class="col col-4"> {{ messageSubClass  }}</div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Logical_Unit_Number' | translate}}</p>
+                                       </div>
+                                       <div class="col col-4">: {{luno}}</div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Time_Variant_Number' | translate}}</p>
+                                       </div>
+                                       <div class="col col-4"> {{timeVariantNumber}}</div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Top_of_Receipt_Transaction_Flag' | translate}} </p>
+                                       </div>
+                                       <div class="col col-4"> {{topOfReceiptTransactionFlag}}</div>
+                                   </div>
+
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Message_C_Ordination_Number' | translate}} </p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{messageCoOrdinationNumber}}
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Track_2_Data' | translate}}</p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{track2Data}}
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Track_3_Data' | translate}} </p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{track3Data}}
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Operationç_Code_Data' | translate}}</p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{operationCodeData}}
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Amount_Entry' | translate}} </p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{amountEntry}}
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.PIN_Buffer' | translate}}</p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{pinBuffer}}
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.General_Purpose_Buffer_B' | translate}} </p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{generalPurposeBufferB}}
+                                       </div>
+                                   </div>
+
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.General_Purpose_Buffer_C' | translate}}</p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{generalPurposeBufferC}}
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Track_1_Data' | translate}}</p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{track1Data}}
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col col-8">
+                                           <p> {{'label.Last_Transaction_Status' | translate}} </p>
+                                       </div>
+                                       <div class="col col-4">
+                                         {{lastTransactionStatus}}
+                                       </div>
+                                   </div>
+                               </div>
+
+                               <div *ngIf="!messageClasse">
+                                    <p> {{'label.Message_Non_Valide' | translate}}.</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                <div class="tab-content" *ngIf="tab_MsgIN">
+                    <div>
+
+                    <div *ngIf="messageClasseIN">
+
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.messageClassess' | translate}}</p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{messageClasseIN}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Logical_Unit_Number' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{logicalUnitNumber}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Message_Sequence_Number' | translate}}</p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{messageSequenceNumber}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Next_State_ID_Data' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{nextStateIDData}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Note_Distribuer' | translate}}</p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{noteDistribuer}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Transaction_Serial_Number' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{transactionSerialNumber}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Function_ID' | translate}}</p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{functionID}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Screen_Number' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{screenNumber}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Screen_Update_data' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{screenUpdateData}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Message_Co_Ordination_Number' | translate}}</p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{messageCoOrdinationNumberIN}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Card_Return_Retain_Flag' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{cardReturnRetainFlag}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="printerFlag">
+                            <div class="col col-8">
+                                <p> {{'label.Printer_Flag' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{printerFlag}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="printerData">
+                            <div class="col col-8">
+                                <p> {{'label.Printer_Data' | translate}}</p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{printerData}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="!messageClasseIN">
+                        <p> {{'label.Message_Non_Valide' | translate}} .</p>
+                    </div>
+
+
+                    </div>
+                </div>
+                <div class="tab-content" *ngIf="tab_MsgRendue">
+                    <div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.messageClassess' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{messageClasseRendue}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Message_Sub_Class' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{messageSubClassRendue}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Logical_Unit_Number' | translate}}</p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{logicalUnitNumberRendue}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Status_Descriptor' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{statusDescription}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <p> {{'label.Status_Information' | translate}} </p>
+                            </div>
+                            <div class="col col-4">
+                                <p>{{statusInfo}}</p>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                </div>
+            </div>
+         </div>
+      </div>
+    </div>
+   </div>
+  </div>
+</div>

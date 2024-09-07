@@ -1,0 +1,25 @@
+<div class="tabs__container">
+    <div class="tab__buttons">
+        <a class="a_Config" [className]="tab1 ? 'active':''" (click)="openTab(0)"> Option</a>
+        <a class="a_Config" [className]="tab3 ? 'active':''" (click)="openTab(2)"> Launch</a>
+        <a class="a_Config" [className]="tab2 ? 'active':''" (click)="openTab(1)">Result</a>
+       
+
+ </div>
+    <div class="tabs">
+      <div class="tab-content" *ngIf="tab2">
+              <app-cpa-result></app-cpa-result>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab-content" *ngIf="tab1">
+          <app-cpa-option class="custom-menu"> </app-cpa-option>
+      </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-content" *ngIf="tab3">
+            <app-cpa-launch class="custom-menu"> </app-cpa-launch>
+        </div>
+      </div>

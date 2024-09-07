@@ -1,0 +1,100 @@
+<div class="container">
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+    <button (click)="clearSuccessMessage()">Close</button>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+    <button (click)="clearErrorMessage()">Close</button>
+  </div>
+
+  <!-- Profile Form -->
+  <div class="profile-form">
+    <h2>{{ isEditing ? 'Edit Profile' : 'Create Profile' }}</h2>
+    <form (ngSubmit)="isEditing ? updateProfile() : addProfile()">
+      <div>
+        <label for="profileCode" >Code:</label>
+        <input id="profileCode" 
+               type="text" 
+               [(ngModel)]="profileCode" 
+               name="code" 
+               required 
+               pattern="^\d*$" 
+               placeholder="Enter code (e.g., 00123)"
+               [attr.disabled]="isEditing ? true : null"               
+        >
+      </div>
+      <div>
+        <label for="profileWording">Wording:</label>
+        <input id="profileWording" 
+               type="text" 
+               [(ngModel)]="profileWording" 
+               name="wording" 
+               required>
+      </div>
+      <div>
+        <label for="profileType">Type Profile:</label>
+        <select id="profileType" 
+                [(ngModel)]="profileType" 
+                name="type" 
+                required>
+          <option *ngFor="let type of profileTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="!profileCode || !profileWording || !profileType">
+        {{ isEditing ? 'Update Profile' : 'Add Profile' }}
+      </button>
+      <button type="button" (click)="resetForm()" *ngIf="isEditing" class="cancel-button">Cancel</button>
+    </form>
+  </div>
+
+  <!-- Profile List -->
+  <div class="profile-list">
+    <h2>Profile List</h2>
+    <div class="search-bar">
+      <input type="text" 
+             placeholder="Search by code..." 
+             [(ngModel)]="searchText" 
+             (input)="filterProfiles()">
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Code Profile</th>
+            <th>Wording Profile</th>
+            <th>Type Profile</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let profile of displayedProfiles">
+            <td>{{ profile.profileCode }}</td>
+            <td>{{ profile.profileWording }}</td>
+            <td>{{ profile.profileType }}</td>
+            <td class="action-buttons">
+              <button class="edit-button" (click)="editProfile(profile)">Edit</button>
+              <button class="del-button" (click)="deleteProfile(profile)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      <button (click)="togglePageList()">
+        Page {{ currentPage }} ▼
+      </button>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages || displayedProfiles.length === 0">Next</button>
+    </div>
+
+    <div *ngIf="showPageList" class="page-list">
+      <button *ngFor="let page of [].constructor(totalPages); let i = index"
+              (click)="goToPage(i + 1)"
+              [class.active]="i + 1 === currentPage">{{ i + 1 }}</button>
+    </div>
+  </div>
+</div>

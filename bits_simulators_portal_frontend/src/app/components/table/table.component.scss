@@ -1,0 +1,91 @@
+$primary-clr-500:#3894bc;
+$secondary-clr-100:#F0F0F0;
+$neutral-clr-100:#ffff;
+$neutral-clr-800:#333;
+$neutral-clr-900:#222;
+$success-clr:#3EC67C;
+$danger-clr:#c61c52;
+
+
+$ff-primary :'Mukta', sans-serif;
+
+$ff-body:$ff-primary;
+$ff-heading:$ff-primary;
+
+$fw-thin:300;
+$fw-regular:400;
+$fw-semi-bold:500;
+$fw-bold:800;
+
+$fs-200:.775rem;
+$fs-300:.8125rem;
+$fs-400:.875rem;
+$fs-500:1rem;
+$fs-600:1.875rem;
+$fs-700:2.5rem;
+
+/**tabs**/
+$tab-primary-bg:$primary-clr-500;
+$tab-primary-clr:$neutral-clr-100;
+
+$tab-secondary-bg:$neutral-clr-100;
+$tab-secondary-clr:$primary-clr-500;
+
+/**buttons**/
+$btn-primary-bg:$primary-clr-500;
+$btn-primary-clr:$neutral-clr-100;
+
+$btn-success-bg:$success-clr;
+$btn-success-clr:$neutral-clr-100;
+
+$btn-secondary-bg:$neutral-clr-100;
+$btn-secondary-clr:$primary-clr-500;
+
+$btn-danger-bg:$danger-clr;
+$btn-danger-clr:$btn-primary-clr;
+
+
+.table{
+  box-shadow: 1px 1px 8px  #7b7b7b47;
+  background-color: $neutral-clr-100;
+  width: fit-content;
+  border-radius: 7px;
+  text-align: left;
+  font-size: $fs-300;
+  min-width: 400px;
+  margin-block: .5rem;
+  table{
+    width: 100%;
+    margin-bottom: .5rem;
+    thead{
+      tr{
+        font-size: $fs-300;
+        font-weight: $fw-semi-bold;
+      }
+    }
+    td,th{
+      padding: .3rem 1rem;
+
+    }
+    td + td, th + th{
+      border-left: 1px solid #efefef;
+    }
+    tbody{
+      tr{
+        font-size: $fs-200;
+        cursor: pointer;
+        transition: .3s ease;
+        color: $neutral-clr-800;
+        &:hover{
+          scale: 1.02;
+        }
+      }
+      tr:nth-child(odd){
+        background-color: #e1e1e1;
+      }
+      tr:nth-child(even){
+        background-color: $neutral-clr-100;
+      }
+    }
+  }
+}

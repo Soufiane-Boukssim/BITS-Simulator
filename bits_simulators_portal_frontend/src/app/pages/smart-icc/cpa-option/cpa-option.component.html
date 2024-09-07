@@ -1,0 +1,809 @@
+<nav>
+    <div class="tabs__container">
+        <div class="tab__buttons">
+
+
+            <a [className]="tab1 ? 'active':''" (click)="openTab(0)">Configuration Profile</a>
+            <a [className]="tab2 ? 'active':''" (click)="openTab(1)">Teste Case</a>
+
+
+        </div>
+    </div>
+
+</nav>
+
+<div class="col col-8 container-tabs">
+    <div class="tabs">
+
+        <div class="box_of_contentV2">
+            <div *ngIf="tab1">
+
+                <div class="side__list">
+                    <div class="header">
+                        <div class="form__control" style="margin-block: 0.5rem">
+                            <input type="text" placeholder="search" [(ngModel)]="searchProfil" />
+                        </div>
+                    </div>
+
+
+                    <button class="add__btn btn btn-secondary" (click)="init()">New</button>
+
+
+                    <ul>
+                        <li *ngFor="let item of data_cpa | search : searchProfil |  paginate : { itemsPerPage: 14, currentPage: p_profile }   "
+                            (click)="selectProfil(item.profile_code)">
+                            <div class="icon">
+                                <img src="assets/icons/credit-card.png" height="18" width="18" alt="" />
+                            </div>
+                            <span>{{ item.wording }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="DflexPaginationV2">
+                    <pagination-controls nextLabel="{{ 'label.next' | translate}}"
+                        previousLabel="{{ 'label.previous' | translate}}"
+                        (pageChange)="p_profile = $event"></pagination-controls>
+
+                </div>
+
+
+                <div class="side__content">
+
+
+                    <fieldset class="fieldset_Aria1">
+                        <legend class="legend1">
+                            <h2>Identification General</h2>
+                        </legend>
+                        <div class="row">
+                          
+                            <div class="form__control">
+                                <label>Profile</label>
+                                <input type="text" [disabled]="isUpdating"
+                                    [(ngModel)]="codeProfil">
+                            </div>
+
+                            <div class="form__control">
+                                <label>BanK</label>
+
+                                <div class="select__box">
+                                    <select class="styl-select" [(ngModel)]="bankCode" [disabled]="isUpdating">
+                                        <option value="" disabled>--select--</option>
+                                        <option *ngFor="let banck of dataBanck" [value]="banck.id">
+                                            {{ banck.wording }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form__control">
+                                <label>Wording</label>
+                                <input type="text"  [disabled]="isUpdating" [(ngModel)]="wording">
+
+                            </div>
+
+                            <div class="form__control">
+                                <label>CPA nbr
+                                </label>
+                                <input type="text"  [(ngModel)]="cpa_certificate_nbr">
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form__control">
+                                <label>Bin</label>
+                                <input type="text"  [(ngModel)]="bin_id">
+                            </div>
+
+                            <div class="form__control">
+                                <label>Pan Sequence</label>
+                                <input type="text"  [(ngModel)]="pan_seq">
+                            </div>
+
+                            <div class="form__control">
+                                <label>Amount</label>
+                                <input type="text"  [(ngModel)]="amount">
+
+                            </div>
+
+                            <div class="form__control">
+                                <label>Date Creation/Modif
+                                </label>
+                                <input type="date" [(ngModel)]="cpa_expiry_certificate">
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form__control">
+                                <label>Country</label>
+                                <div class="select__box">
+                                    <select class="styl-select" [(ngModel)]="country_code">
+                                        <option value="">select</option>
+                                        <option *ngFor="let country of countryList" [value]="country.id">{{
+                                            country.countryDesc
+                                            }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form__control">
+                                <label>Currency</label>
+                                <div class="select__box">
+                                    <select class="styl-select" [(ngModel)]="currency_code">
+                                        <option value="">-- select--</option>
+                                        <option *ngFor="let currency of currencyList" [value]="currency.id">{{
+                                            currency.ccyDesc
+                                            }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form__control">
+                            </div>
+
+                            <div class="form__control">
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+
+
+                    <fieldset class="fieldset_Aria1">
+                        <legend class="legend1">
+                            <h2>Terminal</h2>
+                        </legend>
+
+
+                        <div class="row">
+
+                            <div class="form__control">
+                                <label>Identifant </label>
+                                <input type="number" [(ngModel)]="terminal_id" />
+                            </div>
+
+                            <div class="row al_f_end  p-1">
+
+                                <app-checkbox-square [isChecked]="isChipedON" [text]="'On-line'"
+                                    (checkboxChanged)="handleCheckboxChang()">
+                                </app-checkbox-square>
+                                <app-checkbox-square (checkboxChanged)="handleCheckboxChange('Of')"
+                                    [isChecked]="isChipedOF" [text]="'Off-line'">
+                                </app-checkbox-square>
+                            </div>
+
+
+                            <div class="form__control">
+
+
+                            </div>
+
+                            <div class="form__control">
+
+                            </div>
+                            <div class="form__control">
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="fieldset_Aria1">
+                        <legend class="legend1">
+                            <h2>Information</h2>
+                        </legend>
+
+
+                        <div class="row">
+
+                            <div class="form__control">
+                                <label>Applicationtype</label>
+
+                                <div class="select__box">
+                                    <select class="styl-select" [(ngModel)]="application_type">
+                                        <option value="">select</option>
+                                        <option *ngFor="let type of data_application_type" [value]="type.value">{{
+                                            type.label }}
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>Nbr.Application</label>
+                                <input type="number" [(ngModel)]="num_applications">
+
+                            </div>
+                            <div class="form__control">
+
+                                <label>Nbr.Record History</label>
+                                <input type="number" [(ngModel)]="num_applications">
+                            </div>
+                            <div class="form__control">
+
+                                <div class="d-flex">
+                                    <div class="d-flex">
+                                        <input type="radio" name="type" value="SDA" [(ngModel)]="cam_supported">
+                                        <label for="">SDA</label>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <input type="radio" name="type" value="DDA" [(ngModel)]="cam_supported">
+                                        <label for="">DDA</label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <!-- (change)="filterMtisByDirection('in', 'req')" -->
+                                        <input type="radio" name="type" value="CDA" [(ngModel)]="cam_supported">
+                                        <label for="">CDA</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="row al_f_end  p-1">
+
+                                <app-checkbox-square [isChecked]="ispse_supported" [text]="'PES Supported'"
+                                    (checkboxChanged)="handleCheckboxChangpse_supported()"></app-checkbox-square>
+
+                                <app-checkbox-square (checkboxChanged)="handleCheckboxOfflineSupported()"
+                                    [isChecked]="isOfflineSupportedON"
+                                    [text]="'Offline Pin Supported'"></app-checkbox-square>
+
+                                <app-checkbox-square (checkboxChanged)="handleCheckboxOfflineSupportedPin()"
+                                    [isChecked]="isOfflineSupportedOF"
+                                    [text]="'Offline Supported'"></app-checkbox-square>
+
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="fieldset_Aria1">
+                        <legend class="legend1">
+                            <h2>PIN Management</h2>
+                        </legend>
+
+
+                        <div class="row">
+
+                            <div class="form__control">
+                                <label>Nbr Pin verification</label>
+                                <input type="number" [(ngModel)]="nbr_pin_verification" />
+                            </div>
+                            <div class="form__control">
+                                <div class="d-flex">
+                                    <div class="d-flex">
+                                        <input type="radio" name="S" value="P" [(ngModel)]="type_pin_verification" (ngModelChange)="updateIsSamekey()">
+                                        <label for="">Plaintext PIN</label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" name="D" value="E" [(ngModel)]="type_pin_verification" (ngModelChange)="updateIsSamekey()">
+                                        <label for="">Enciphered PIN</label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <app-checkbox-square (checkboxChanged)="handleCheckboxChangeSamekey()"
+                                [isChecked]="isSamekey" 
+                                [isDisabled]="type_pin_verification!='E'"
+                                [text]="'Same key as DDA/CDA '"></app-checkbox-square>
+                            <div class="form__control">
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <label for="" class="heigth-Label"></label>
+                            <app-checkbox-square (checkboxChanged)="handleCheckboxChange('PIN')"
+                             [isChecked]="isChipedPIN"
+                                [text]="'PIN Request '"></app-checkbox-square>
+                            <div class="form__control">
+                                <!-- <input type="checkbox" value="Y" [(ngModel)]="pin_request_flag">
+                                <label class="label-ContentStyl checkbox">PIN Request </label> -->
+
+                            </div>
+                            <div class="form__control">
+                                <label class="">Pin Value</label>
+                                <input type="number" [(ngModel)]="pin_value" [disabled]="!isChipedPIN" />
+                            </div>
+                            <div class="form__control">
+                            </div>
+
+
+                        </div>
+                    </fieldset>
+
+
+
+
+                    <fieldset class="fieldset_Aria1">
+                        <legend class="legend1">
+                            <h2>Keys</h2>
+                        </legend>
+
+
+                        <div class="row">
+
+                            <div class="form__control">
+
+                                <label>Paiement key</label>
+                                <input type="text" [(ngModel)]="payment_Key" class="input-key"
+                                    (input)="encryptKey($event,'payment_Key')" />
+
+
+                            </div>
+                            <div class="form__control">
+                                <label for="" class="checkValue"></label>
+                                <p  class="checkValueInput" *ngIf="cv_KP">{{cv_KP}}</p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="form__control">
+                                <label>MAC key</label>
+                                <input type="text" [(ngModel)]="mac_Key" (input)="encryptKey($event,'mac_Key')" class="input-key" />
+
+                            </div>
+                            <div class="form__control">
+                                <label for="" class="checkValue"></label>
+                                <p  class="checkValueInput" *ngIf="cv_MAC">{{cv_MAC}}</p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="form__control">
+                                <label class="label-ContentStyl">Encryption key</label>
+                                <input type="text" [(ngModel)]="encryption_Key" class="input-key"
+                                    (input)="encryptKey($event,'encryption_Key')" />
+                                <p></p>
+                            </div>
+                            <div class="form__control">
+                                <label for="" class="checkValue"></label>
+                                <p  class="checkValueInput" *ngIf="cv_KE">{{cv_KE}}</p>
+                            </div>
+
+                        </div>
+
+
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="form__control">
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="form__control">
+                            <fieldset class="fieldset_Aria1">
+                                <legend class="legend1">
+                                    <h2>TRX Tags</h2>
+                                </legend>
+
+                                <div class="row">
+
+                                    <div class="form__control">
+                                        <label>Tags Liste</label>
+                                        <div class="select__box">
+                                            <select name="" class="styl-select" [(ngModel)]="selectedTag"
+                                                (change)="onTagSelectionChange()">
+                                                <option value="">--select--</option>
+                                                <option *ngFor="let tag of tags" [value]="tag.tag">{{ tag.tag}} - {{
+                                                    tag.name}}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="form__control">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form__control">
+                                        <label>Tag Value</label>
+                                        <input type="text" [(ngModel)]="tagValue">
+                                    </div>
+                                    <div class="form__control ">
+                                        <label class="Tag-Value"></label>
+                                        <button class="btn btn-secondary" (click)="addTag()">Add</button>
+
+                                    </div>
+                                </div>
+                                <p *ngIf="showError" class="error-message">Veuillez sélectionner un tag et saisir
+                                    une valeur.</p>
+
+
+                                <div class="row table-tag">
+                                    <div class="table">
+                                        <table cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <!-- <input type="checkbox" (change)="selectAll($event)"
+                                                            class="checkbox-table"> -->
+                                                        </th>
+                                                    <th>Tag</th>
+                                                    <th>valeur</th>
+                                                    <th class="table-wording">wording</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let tag of data_TagDefinition">
+                                                    <td><input type="checkbox" [(ngModel)]="tag.selected"
+                                                            class="checkbox-table" (change)="selectOne()"></td>
+                                                    <td>{{ tag.tagCode }}</td>
+                                                    <td>{{tag.tagValue }}</td>
+                                                    <td class="table-wording">{{tag.wording }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+
+
+
+                                </div>
+                                <div class="row">
+                                    <button class="btn btn-danger" (click)="deleteTagDefinition()">Delete</button>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form__control">
+                            <fieldset class="fieldset_Aria1">
+                                <legend class="legend1">
+                                    <h2>Offline Tags</h2>
+                                </legend>
+
+                                <div class="row">
+
+                                    <div class="form__control">
+                                        <label>Tags Liste</label>
+                                        <div class="select__box">
+                                            <select name="" [(ngModel)]="selectedTagOffline"
+                                                (change)="onTagSelectionChange()">
+                                                <option value="">--select--</option>
+                                                <option *ngFor="let tag of tagsOffline" [value]="tag.tag">{{ tag.name }}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="form__control">
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form__control">
+                                        <label for="">Tag Value</label>
+                                        <input type="text" [(ngModel)]="tagValueOffline">
+                                    </div>
+                                    <div class="form__control ">
+                                        <label for="" class="Tag-Value"></label>
+                                        <button class="btn btn-secondary" (click)="addTagOffline()">Add</button>
+                                    </div>
+
+                                </div>
+
+                                <div class="row table-tag">
+
+                                    <div class="table">
+                                        <table cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <!-- <input type="checkbox" (change)="selectAll($event)"
+                                                            class="checkbox-table"> -->
+                                                     </th>
+                                                    <th>Tag</th>
+                                                    <th>valeur</th>
+                                                    <th class="table-wording">wording</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let tag of data_TagDefinitionOffline">
+                                                    <td><input type="checkbox" [(ngModel)]="tag.selected"
+                                                            class="checkbox-table" (change)="selectOne()"></td>
+                                                    <td>{{ tag.tagCode }}</td>
+                                                    <td>{{tag.tagValue }}</td>
+                                                    <td class="table-wording">{{tag.wording }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <button class="btn btn-danger" (click)="deleteTagDefinition()">Delete</button>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="row container-button">
+                        <button style="margin-right: 40px;" class="btn btn-danger" *ngIf="isUpdating" 
+                        (click)="deleteProfilCpa()">{{"label.delete" | translate}}</button>
+                        
+                        <button class="btn btn-primary" *ngIf="!isUpdating" 
+                        (click)="saveCpaProfil()">{{"label.save" | translate}}</button>
+
+                        <button style="margin-right: 20px;" class="btn btn-primary" 
+                        *ngIf="isUpdating" (click)="saveCpaProfil()">{{"label.update" | translate}}</button>
+                    </div>
+                   
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+            <div *ngIf="tab2">
+
+                <div class="side__list">
+                    <div class="header">
+                        <div class="form__control" style="margin-block: 0.5rem">
+                            <input type="text" placeholder="search" [(ngModel)]="searchProfil" />
+                        </div>
+                    </div>
+
+
+                    <!-- <button class="add__btn btn btn-secondary" (click)="init()">New</button> -->
+
+
+                    <ul>
+                        <li *ngFor="let item of data_cpa | search : searchProfil|  paginate : { itemsPerPage: 14, currentPage: p_profile }   "
+                            (click)="selectProfilTest(item.profile_code)">
+                            <div class="icon">
+                                <img src="assets/icons/credit-card.png" height="18" width="30" alt="" />
+                            </div>
+                            <span>{{ item.wording }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="DflexPaginationV2">
+                    <pagination-controls nextLabel="{{ 'label.next' | translate}}"
+                        previousLabel="{{ 'label.previous' | translate}}"
+                        (pageChange)="p_profile = $event"></pagination-controls>
+
+                </div>
+
+
+                <div class="side__content">
+                    <div class="panel">
+
+                        <mat-accordion>
+                            <mat-expansion-panel *ngFor="let testCase of data_test_cases">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{ testCase.description }}
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+
+                                <div class="row">
+                                    <div class="form__control">
+                                        <label>Profile</label>
+                                        <input type="text" readonly value={{testCase.profileCode}}>
+
+                                    </div>
+
+                                    <div class="form__control">
+                                        <label>Condition</label>
+                                        <input type="text" readonly>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form__control">
+                                        <label>Test Case</label>
+                                        <input type="text" readonly value={{testCase.test_case}}>
+
+                                    </div>
+                                    <div class="form__control">
+                                        <label>Sub Case</label>
+                                        <input type="text" readonly value={{testCase.test_case}}>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form__control">
+                                        <label>Description</label>
+                                        <textarea class="form-control" readonly rows="3"
+                                            value={{testCase.description}}></textarea>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <table class="tablePanel">
+                                        <thead>
+                                            <tr>
+                                                <th>Seq</th>
+                                                <th>Step Type</th>
+                                                <th>Step Code</th>
+                                                <th>Argument 1</th>
+                                                <th>Argument 2</th>
+                                                <th>Argument 3</th>
+                                                <th>Argument 4</th>
+                                                <th>Argument 5</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="tabs">
+        <div class="tab-content" *ngIf="tab2">
+            <div class="containerSelect">
+                <div class="form__control box_of_contentSelct ">
+                    <div class="div-container radio-container">
+
+                        <div class="mb-3 row">
+                            <h1>Profile :</h1>
+                            <div class="col-sm-10">
+                                <select name="" id="" class="select__box" [(ngModel)]="selectedProfileTestCase"
+                                    (change)="getTestCasesCPAProfiles()">
+                                    <option value="">-- select--</option>
+                                    <option *ngFor="let profil of data_cpa" [value]="profil.profile_code">{{
+                                        profil.wording }} </option>
+
+                                </select>
+                                <input value={{selectedProfileTestCase}} readonly class="input-profilTest">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <mat-accordion>
+                        <mat-expansion-panel *ngFor="let testCase of data_test_cases">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    {{ testCase.description }}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+
+                            <div class="row">
+                                <div class="form__control">
+                                    <label >Profile</label>
+                                    <input type="text" readonly   value={{testCase.profileCode}}>
+
+                                </div>
+
+                                <div class="form__control">
+                                    <label >Condition</label>
+                                    <input type="text" readonly  >
+
+                                </div>
+                            </div>
+
+                            <div class="row" >
+                                <div class="form__control">
+                                    <label>Test Case</label>
+                                    <input type="text" readonly   value={{testCase.test_case}}>
+
+                                </div>
+                                <div class="form__control">
+                                    <label >Sub Case</label>
+                                    <input type="text" readonly   value={{testCase.test_case}}>
+
+                                </div>
+
+                            
+                            </div>
+
+                            <div class="row">
+                                <div class="form__control">
+                                    <label >Description</label>
+                                    <textarea class="form-control" readonly
+                                                     rows="3" value={{testCase.description}}></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <table class="tablePanel">
+                                    <thead>
+                                        <tr>
+                                            <th>Seq</th>
+                                            <th>Step Type</th>
+                                            <th>Step Code</th>
+                                            <th>Argument 1</th>
+                                            <th>Argument 2</th>
+                                            <th>Argument 3</th>
+                                            <th>Argument 4</th>
+                                            <th>Argument 5</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                </div>
+
+            </div>
+        </div>
+    </div> -->
+
+</div>
+
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message"
+[isAlertVisible]="alertBody.open"></app-alert>

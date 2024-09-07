@@ -1,0 +1,60 @@
+<div class="form__control">
+
+    <button class="btn btn-secondary" type="submit" (click)="addRow(null)">Add</button>
+
+
+    <!-- <label for="">Value builder</label> -->
+
+    
+    <fieldset class="fieldset_Aria1">
+        <legend class="legend1"><h2>{{ "label.ValueBuilder" | translate }}</h2></legend>
+        <form [formGroup]="userTable">
+            <div class="logs">
+                <table class="builder table">
+                    <thead>
+                        <th>{{ "label.Name" | translate }}</th>
+                        <th>{{ "label.Value" | translate }}</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls ; let i=index">
+                            <tr *ngIf="group.get('isEditable')?.value" [formGroupName]="i">
+                                <td>
+                                    <div class="form__control">
+                                        <div class="select__box">
+                                            <select formControlName="name">
+                                                <option disabled selected value="">- select -</option>
+                                                <option *ngFor="let c of tags" [value]="c.subfldDefinitionId.subfldId">{{ c.subfldDefinitionId.subfldId + ' ' + c.subfldDescr }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form__control">
+                                        <input type="text" formControlName="value">
+                                    </div>
+                                </td>
+                                
+                                <td>
+                                    <img src="assets/icons/delete.png" height="16" (click)="deleteRow(i)" />
+                                    <!-- <mat-icon class="done" (click)="doneRow(group)">done</mat-icon> -->
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row__sb button-confirm">
+                <!-- <button [disabled]="userTable.invalid" type="submit"
+                    (click)="submitForm()">Submit</button> -->
+                <button class="btn btn-primary" [disabled]="userTable.invalid" type="submit"
+                    (click)="confirmDetails()">  {{ "button.Confirm" | translate }}</button>
+            </div>
+        </form>
+
+    </fieldset>
+    
+    
+   
+</div>

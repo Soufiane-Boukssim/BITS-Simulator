@@ -1,0 +1,31 @@
+
+<div class="d__hor__2">
+    <div class="box not__owned">
+        <div class="title">{{not_owned_title}}</div>
+        <div class="list__box">
+            <div class="scroll__list">
+                <div class="item" *ngFor="let item of not_owned">
+                    <div class="text">{{item.title}}</div>
+                    <app-checkbox (click)="logLists(item.id)" [checked]="item.checked"></app-checkbox>
+                </div>
+            </div>
+            <div class="buttons" *ngIf="not_owned_checked">
+                <button class="btn btn-primary" (click)="addItem()">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="box owned">
+        <div class="title">{{owned_title}}</div>
+        <div class="list__box">
+            <div class="scroll__list">
+                <div class="item" *ngFor="let item of owned">
+                    <div class="text">{{item.title}}</div>
+                    <app-checkbox (click)="logLists(item.id)" [checked]="item.checked"></app-checkbox>
+                </div>
+                <div class="buttons" *ngIf="owned_checked">
+                    <button class="btn btn-danger" (click)="removeItem()">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

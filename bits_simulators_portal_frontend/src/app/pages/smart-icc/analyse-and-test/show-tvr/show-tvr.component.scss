@@ -1,0 +1,58 @@
+/* styles.css (ou dans le même fichier HTML avec la balise <style>) */
+.centered-container {
+    background-color: rgb(222, 239, 255);
+   
+    margin-top: -840px;
+  
+  
+    /* Pour centrer le contenu horizontalement si nécessaire */
+  }
+  
+  
+  /* styles.css (ou dans le même fichier HTML avec la balise <style>) */
+  .text-container {
+    background-color: rgb(212, 230, 248);
+    padding: 5px;
+    height: 35px;
+    
+  }
+  
+  .container{
+    background-color:rgb(222, 239, 255);
+  }
+  
+  .custom-btn {
+    background-color: rgb(222, 239, 255);
+    border-color: rgb(222, 239, 255);
+    color: #000; /* Couleur du texte, vous pouvez ajuster cela selon vos préférences */
+  }
+  
+/* menu.component.css */
+/* menu.component.css */
+.horizontal-menu {
+    display: flex;
+   /* Couleur de fond facultative */
+    padding: 10px; /* Marge intérieure facultative */
+
+  }
+  
+  .horizontal-menu button {
+    padding: 10px; /* Ajoutez de l'espace interne aux boutons */
+    cursor: pointer;
+    margin-right: 5px; /* Ajoute une marge à droite pour séparer les boutons */
+  }
+  
+  .horizontal-menu button:last-child {
+    margin-right: 0; /* Aucune marge à droite pour le dernier bouton */
+  }
+  
+  /* menu.component.css */
+.option-content {
+    margin-left: 45px;
+    width: 800px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px; /* Marge intérieure facultative */
+  }
+  

@@ -1,0 +1,81 @@
+<!--<div class="container">-->
+<!--  <div class="row">-->
+
+<!--    &lt;!&ndash; Table &ndash;&gt;-->
+<!--    <div class="col-md-6">-->
+<!--      <div class="form">-->
+<!--        <div class="search">-->
+<!--          <div class="form__control">-->
+<!--            <input type="text" [(ngModel)]="searchText" (input)="searchByAll()" placeholder="Search">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="table">-->
+<!--          <table cellspacing="0">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--              <th>{{"label.idATMfield" | translate }}</th>-->
+<!--              <th>{{"label.messageTypeField" | translate }}</th>-->
+<!--              <th>{{"label.description" | translate }}</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr *ngFor="let atmfield of atmfields | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }" (click)="selectATMfield(atmfield)">-->
+<!--              <td>{{ atmfield.idATMfield }}</td>-->
+<!--              <td>{{ atmfield.messageTypeField }}</td>-->
+<!--              <td>{{ atmfield.description }}</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--          </table>-->
+<!--        </div>-->
+<!--        <p class="no_data" *ngIf="atmfields.length == 0">{{ "error.Nodata" | translate }}</p>-->
+<!--        <div class="DflexPagination">-->
+<!--          <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"-->
+<!--                               (pageChange)="p = $event"></pagination-controls>-->
+<!--          <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">-->
+<!--            <option value="5">5</option>-->
+<!--            <option value="10">10</option>-->
+<!--            <option value="15">15</option>-->
+<!--            <option value="20">20</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Form &ndash;&gt;-->
+<!--    <div class="col col-6 col-body">-->
+<!--      <div class="row">-->
+<!--        <form [formGroup]="atmfieldForm" class="form f_b bg">-->
+<!--          <div class="row p-block-1" >-->
+<!--            <div class="form__control">-->
+<!--              <label class="lbl">{{ "label.description" | translate}}<div class="required"></div></label>-->
+<!--              <input type="text" formControlName="description" readonly />-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="row p-block-1">-->
+<!--            <div class="form__control">-->
+<!--              <label class="lbl">{{ "label.messageTypeField" | translate}}<div class="required"></div></label>-->
+<!--              <input type="text" formControlName="messageTypeField"  readonly/>-->
+<!--            </div>-->
+<!--            <div class="form__control" >-->
+<!--              <label class="lbl">{{ "label.idATMfield" | translate}}<div class="required"></div></label>-->
+<!--              <input type="text" formControlName="idATMfield" readonly/>-->
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="row p-block-1">-->
+<!--            &lt;!&ndash; Clear Button &ndash;&gt;-->
+<!--            <button type="button" class="btn btn-danger" (click)="clearForm()">{{ "label.Clear" | translate }}</button>-->
+<!--            &lt;!&ndash; Save Button &ndash;&gt;-->
+<!--&lt;!&ndash;            <button type="button" class="btn btn-success" (click)="saveATMfield()">{{ "label.Save" | translate }}</button>&ndash;&gt;-->
+<!--            &lt;!&ndash; Delete Button &ndash;&gt;-->
+<!--&lt;!&ndash;            <button type="button" class="btn btn-warning" [disabled]="!selectedATMfield" (click)="deleteATMfield()">{{ "label.delete" | translate }}</button>&ndash;&gt;-->
+<!--          </div>-->
+
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->

@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">Key Block Decodeur</a>
+    </div>
+    <div class="tabs">
+      <div class="box_of_content_fit" *ngIf="tab_1">
+        <div class="content">
+          <div class="box">
+
+            <div class="box-middle">
+
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="two-cols-content">
+                    <div class="details">
+                            <span (click)="toggleContent()" class="toggle-ico">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+
+                            </span>
+                      <br>
+                      <div class="form__control">
+                          <label>Key Block</label>
+                          <textarea class="input" [(ngModel)]="key"></textarea>
+                      </div>
+
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                          <div class="buttons">
+                            <button class="btn btn-primary" (click)="changeOperation()">Add</button>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="content-box">
+
+
+                      <div class="con" *ngIf="contentVisible">
+
+                        <p>
+
+                          <b>Data - </b>
+                          <span>provide the data block in hex ( i.ed every byte is coded with 2 charaters of a
+                                        A..E, 0..9 sets).</span>
+                          <span>For encrypt operation,the data block can be of arbitrary length (the
+                                        respective padding will be applied),</span>
+                          <span>but for decrypt - it should be strictly aligned to 8 bytes (16 hex
+                                        charachter),otherwise the error "must be a multiple of 8bytes"</span>
+                          <span>will be shown</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_2">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_3">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_4">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_5">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_6">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_7">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_8">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_9">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_10">
+
+      </div>
+    </div>
+  </div>
+</div>

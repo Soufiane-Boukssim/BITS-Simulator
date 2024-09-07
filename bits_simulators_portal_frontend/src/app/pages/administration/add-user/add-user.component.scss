@@ -1,0 +1,156 @@
+
+.horizontal__scroll{
+  display: grid;
+  gap: 1rem;
+  margin-block: 1.5rem;
+  padding-bottom: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  // background-color: rgb(247, 247, 247) ;
+  border-radius: 5px;
+  //border: solid 1.5px rgb(117, 117, 117);
+  .title{
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: 500;
+  }
+}
+
+.container-drag-item{
+
+  padding-left: 15%;
+  margin-bottom: 20px;
+}
+
+.container-drag-item {
+
+}
+
+.row{
+  //background-color: yellow;
+  margin: auto;
+  margin-top: 10px;
+  padding-left: 0;
+  width: 70%;
+}
+
+.btnContainer button{
+  width: fit-content;
+  padding: 5px;
+  margin-left:0px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 3px;
+}
+
+
+#saveUserBtn {
+  color: white;
+  background-color: rgb(0, 131, 219);
+  cursor: pointer;
+}
+
+/*------------------- TOGGLE SWITCH -----------------------------*/
+.checkbox-wrapper-4 input[type="checkbox"] {
+  visibility: hidden;
+  display: none;
+}
+
+.checkbox-wrapper-4 .toggle {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+}
+.checkbox-wrapper-4 .toggle:before {
+  content: "";
+  position: relative;
+  top: 3px;
+  left: 3px;
+  width: 34px;
+  height: 14px;
+  display: block;
+  background: #9A9999;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+.checkbox-wrapper-4 .toggle span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+  transition: all 0.2s ease;
+}
+.checkbox-wrapper-4 .toggle span:before {
+  content: "";
+  position: absolute;
+  display: block;
+  margin: -18px;
+  width: 56px;
+  height: 56px;
+  background: #62DE94;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.checkbox-wrapper-4 #cbx-4:checked + .toggle:before {
+  background: #9dd8b5;
+}
+.checkbox-wrapper-4 #cbx-4:checked + .toggle span {
+  background: #62DE94;
+  transform: translateX(20px);
+  transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+  box-shadow: 0 3px 8px #39aa66;
+}
+.checkbox-wrapper-4 #cbx-4:checked + .toggle span:before {
+  transform: scale(1);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+/*---------------------TOGGLE END -------------------------------*/
+
+.errorValid{
+  position: relative;
+  color: red;
+  font-size: 10px;
+}
+
+.isValid{
+  position: relative;
+  color: rgb(0, 216, 90);
+  font-size: 10px;
+}
+
+
+/*------------------MODAL BUTTON----------------------*/
+
+#returnToHomeBtn{
+  position: relative;
+  margin: auto;
+  background-color: rgb(0, 216, 90);
+  color: white;
+  border: none;
+  padding: 5px;
+}
+
+
+.addUserForm{
+
+  padding: 10px;
+  border: 1px solid rgb(192, 192, 192);;
+  border-radius: 8px;
+  max-height: 70vh;
+  overflow-y: visible;
+}

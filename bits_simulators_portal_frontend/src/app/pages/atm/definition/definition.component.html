@@ -1,0 +1,802 @@
+<div class="box_of_content p-block-1" [formGroup]="definitionForm" style=" padding-top: 12px">
+  <div class="row">
+    <fieldset class="fieldset_Aria1" style="margin-left: 40px; margin-bottom: 20px">
+      <legend class="legend1"><h2>Identifier</h2></legend>
+      <div class="form" [formGroupName]="'terminalDefinition'">
+        <div class="row" style="align-items: flex-end;">
+          <div class="form__control" formGroupName="id">
+            <label for="">Identifier</label>
+            <input type="text" formControlName="terminalNumber">
+          </div>
+          <div class="form__control" >
+            <label for="">Terminal Name</label>
+            <input type="text" formControlName="terminalLabel">
+          </div>
+          <div class="form__control">
+            <label for="">Config ID</label>
+            <input type="text" formControlName="configId">
+          </div>
+          <div class="form__control">
+            <label for="">Luno</label>
+            <input type="text" formControlName="luno">
+          </div>
+        </div>
+        <div class="row" style="align-items: flex-end;">
+          <div class="form__control">
+            <label for="">Protocol</label>
+            <input type="text" formControlName="nomProtocol">
+          </div>
+          <div class="form__control">
+            <label for="">Machine</label>
+            <input type="text" formControlName="machineNumber">
+          </div>
+          <div class="form__control">
+            <label for="">Date Time</label>
+            <input type="datetime-local" [(ngModel)]="datetimeValue" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="fieldset_Aria1">
+      <legend class="legend1"><h2>Software</h2></legend>
+      <div class="form" formGroupName="terminalDefinition">
+        <div class="form__control">
+          <label for="">Release</label>
+          <input type="text" formControlName="terminalRelease">
+        </div>
+        <div class="form__control">
+          <label for="">ID</label>
+          <input type="text" formControlName="softwareId">
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+    <div class="tabs__container">
+        <div class="tab__buttons">
+            <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)">Note</a>
+            <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)">Printer</a>
+            <a [className]="tab_3 ? 'active':''" (click)="open_tab(2)">Configuration</a>
+            <a [className]="tab_4 ? 'active':''" (click)="open_tab(3)">Security</a>
+        </div>
+        <div class="tabs">
+            <div class="tab" *ngIf="tab_1" [formGroupName]="'note'">
+                <details #cassette1Config>
+                    <summary>
+                        <label for="">Cassette 1</label>
+                        <app-checkbox-square [text]="'1'" [isChecked]="(definitionForm.get('note')!.get('cassette1Config')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(cassette1Config,'note','cassette1Config',$event)"></app-checkbox-square>
+                    </summary>
+                    <div class="details__content">
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Type</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette1Config,'note','cassette1Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Available</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette1Config,'note','cassette1Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Dispenser</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette1Config,'note','cassette1Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Rejected</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette1Config,'note','cassette1Config', true)">
+                            </div>
+                        </div>
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Fitness</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="cassette1Fitness" (change)="updateCheckboxValue(cassette1Config,'note','cassette1Config', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No error</option>
+                                      <option value="1">Routine errors</option>
+                                      <option value="2">Warning conditions</option>
+                                      <option value="3">Suspend</option>
+                                      <option value="4">Fatal error</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Supplies</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="cassette1Supplies" (change)="updateCheckboxValue(cassette1Config,'note','cassette1Config', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No new state</option>
+                                      <option value="1">No overfill condition</option>
+                                      <option value="4">Overfill condition</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+              <details #cassette2Config>
+                <summary>
+                  <label>Cassette 2</label>
+                  <app-checkbox-square [text]="'2'" [isChecked]="(definitionForm.get('note')!.get('cassette2Config')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(cassette2Config,'note','cassette2Config',$event)"></app-checkbox-square>
+                </summary>
+                    <div class="details__content">
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Type</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette2Config,'note','cassette2Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Available</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette2Config,'note','cassette2Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Dispenser</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette2Config,'note','cassette2Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Rejected</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette2Config,'note','cassette2Config', true)">
+                            </div>
+                        </div>
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Fitness</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="cassette2Fitness" (change)="updateCheckboxValue(cassette2Config,'note','cassette2Config', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No error</option>
+                                      <option value="1">Routine errors</option>
+                                      <option value="2">Warning conditions</option>
+                                      <option value="3">Suspend</option>
+                                      <option value="4">Fatal error</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Supplies</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="cassette2Supplies" (change)="updateCheckboxValue(cassette2Config,'note','cassette2Config', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No new state</option>
+                                      <option value="1">No overfill condition</option>
+                                      <option value="4">Overfill condition</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </details>
+              <details #cassette3Config>
+                <summary>
+                  <label>Cassette 3</label>
+                  <app-checkbox-square [text]="'3'" [isChecked]="(definitionForm.get('note')!.get('cassette3Config')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(cassette3Config,'note','cassette3Config',$event)"></app-checkbox-square>
+                </summary>
+                    <div class="details__content">
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Type</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette3Config,'note','cassette3Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Available</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette3Config,'note','cassette3Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Dispenser</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette3Config,'note','cassette3Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Rejected</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette3Config,'note','cassette3Config', true)">
+                            </div>
+                        </div>
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Fitness</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="cassette3Fitness" (change)="updateCheckboxValue(cassette3Config,'note','cassette3Config', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No error</option>
+                                      <option value="1">Routine errors</option>
+                                      <option value="2">Warning conditions</option>
+                                      <option value="3">Suspend</option>
+                                      <option value="4">Fatal error</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Supplies</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="cassette3Supplies" (change)="updateCheckboxValue(cassette3Config,'note','cassette3Config', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No new state</option>
+                                      <option value="1">No overfill condition</option>
+                                      <option value="4">Overfill condition</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </details>
+              <details #cassette4Config>
+                <summary>
+                  <label>Cassette 4</label>
+                  <app-checkbox-square [text]="'4'" [isChecked]="(definitionForm.get('note')!.get('cassette4Config')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(cassette4Config,'note','cassette4Config',$event)"></app-checkbox-square>
+                </summary>
+                    <div class="details__content">
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Type</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette4Config,'note','cassette4Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Available</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette4Config,'note','cassette4Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Dispenser</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette4Config,'note','cassette4Config', true)">
+                            </div>
+                            <div class="form__control">
+                                <label for="">Rejected</label>
+                                <input type="text" name="" id="" (change)="updateCheckboxValue(cassette4Config,'note','cassette4Config', true)">
+                            </div>
+                        </div>
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Fitness</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="cassette4Fitness" (change)="updateCheckboxValue(cassette4Config,'note','cassette4Config', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No error</option>
+                                      <option value="1">Routine errors</option>
+                                      <option value="2">Warning conditions</option>
+                                      <option value="3">Suspend</option>
+                                      <option value="4">Fatal error</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Supplies</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="cassette4Supplies" (change)="updateCheckboxValue(cassette4Config,'note','cassette4Config', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No new state</option>
+                                      <option value="1">No overfill condition</option>
+                                      <option value="4">Overfill condition</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </details>
+              <details #hcashConfig>
+                <summary>
+                  <label>Cash Handler</label>
+                  <app-checkbox-square [text]="'CH'" [isChecked]="(definitionForm.get('note')!.get('hcashConfig')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(hcashConfig,'note','hcashConfig',$event)"></app-checkbox-square>
+                </summary>
+                    <div class="details__content">
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Type</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="hcashType" (change)="updateCheckboxValue(hcashConfig,'note','hcashConfig', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">Standard cash handler not configured</option>
+                                      <option value="1">Standard cash handler configured</option>
+                                      <option value="2">Spray cash dispenser configured.</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Fitness</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="hcashFitness" (change)="updateCheckboxValue(hcashConfig,'note','hcashConfig', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">No error</option>
+                                      <option value="1">Routine errors</option>
+                                      <option value="2">Warning conditions</option>
+                                      <option value="3">Suspend</option>
+                                      <option value="4">Fatal error</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Supplies</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="hcashSupplies" (change)="updateCheckboxValue(hcashConfig,'note','hcashConfig', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">Goods state</option>
+                                      <option value="1">Media low</option>
+                                      <option value="3">Media out</option>
+                                      <option value="4">Overfill</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Reject</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="hcashReject" (change)="updateCheckboxValue(hcashConfig,'note','hcashConfig', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">Not configured</option>
+                                      <option value="1">Good state</option>
+                                      <option value="2">Media low</option>
+                                      <option value="3">Media out</option>
+                                      <option value="4">Overfill</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </details>
+            </div>
+          <div class="tab" *ngIf="tab_2" [formGroupName]="'printer'">
+            <!-- Recipe Section -->
+            <details #receiptConfig>
+              <summary>
+                <label>Receipt</label>
+                <app-checkbox-square [text]="'R'" [isChecked]="(definitionForm.get('printer')!.get('receiptConfig')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(receiptConfig,'printer','receiptConfig',$event)"></app-checkbox-square>
+              </summary>
+              <div class="details__content">
+                <div class="row p-1 w-fit">
+                  <div class="form__control">
+                    <label for="">Type</label>
+                    <div class="select__box">
+                      <select formControlName="receiptType" (change)="updateCheckboxValue(receiptConfig,'printer','receiptConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="1">Plain paper</option>
+                        <option value="2">Black dot paper</option>
+                        <option value="3">Sideways printing - no black mark</option>
+                        <option value="4">Sideways printing - black mark</option>
+                        <option value="5">Thermal printer  - no black mark</option>
+                        <option value="6">Thermal printer - black mark</option>
+                        <option value="7">Thermal printer  - sideways printing - no black mark</option>
+                        <option value="8">Thermal printer  - sideways printing - black mark</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form__control">
+                    <label for="">Fitness</label>
+                    <div class="select__box">
+                      <select formControlName="receiptFitness" (change)="updateCheckboxValue(receiptConfig,'printer','receiptConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="0">No error</option>
+                        <option value="1">Routine errors</option>
+                        <option value="2">Warning conditions</option>
+                        <option value="3">Suspend</option>
+                        <option value="4">Fatal error</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form__control">
+                    <label for="">Supplies</label>
+                    <div class="select__box">
+                      <select formControlName="receiptSupplie" (change)="updateCheckboxValue(receiptConfig,'printer','receiptConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="0">No new state</option>
+                        <option value="1">No overfill condition</option>
+                        <option value="4">Overfill condition</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row p-1 w-fit">
+                  <div class="form__control">
+                    <label for="">Roll Width</label>
+                    <input type="text" formControlName="receiptRollwidth" (change)="updateCheckboxValue(receiptConfig,'printer','receiptConfig', true)">
+                  </div>
+                  <div class="form__control">
+                    <label for="">Left Column</label>
+                    <input type="text" formControlName="receiptLeftcol" (change)="updateCheckboxValue(receiptConfig,'printer','receiptConfig', true)">
+                  </div>
+                  <div class="form__control">
+                    <label for="">Max Lines</label>
+                    <input type="text" formControlName="receiptMaxline" (change)="updateCheckboxValue(receiptConfig,'printer','receiptConfig', true)">
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <!-- Journal Section -->
+            <details #journalConfig>
+              <summary>
+                <label>Journal</label>
+                <app-checkbox-square [text]="'J'" [isChecked]="(definitionForm.get('printer')!.get('journalConfig')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(journalConfig,'printer','journalConfig',$event)"></app-checkbox-square>
+              </summary>
+              <div class="details__content">
+                <div class="row p-1 w-fit">
+                  <div class="form__control">
+                    <label for="">Type</label>
+                    <div class="select__box">
+                      <select formControlName="journalType" (change)="updateCheckboxValue(journalConfig,'printer','journalConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="1">Intergral journal printer</option>
+                        <option value="3">Thermal printer</option>
+                        <option value="80">Electronic journal</option>
+                        <option value="81">Electronic journal and integral journal printer</option>
+                        <option value="83">Electronic journal and thermal printer</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form__control">
+                    <label for="">Fitness</label>
+                    <div class="select__box">
+                      <select formControlName="journalFitness" (change)="updateCheckboxValue(journalConfig,'printer','journalConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="0">No error</option>
+                        <option value="1">Routine errors</option>
+                        <option value="2">Warning conditions</option>
+                        <option value="3">Suspend</option>
+                        <option value="4">Fatal error</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form__control">
+                    <label for="">Supplies</label>
+                    <div class="select__box">
+                      <select formControlName="journalSupplie" (change)="updateCheckboxValue(journalConfig,'printer','journalConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="0">No new state</option>
+                        <option value="1">No overfill condition</option>
+                        <option value="4">Overfill condition</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row p-1">
+                  <app-checkbox-square [text]="'Turn On'" [isChecked]="(definitionForm.get('printer')!.get('journalTraceonoff')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(undefined, 'printer','journalTraceonoff',$event)"></app-checkbox-square>
+                </div>
+              </div>
+            </details>
+
+            <!-- Statements Section -->
+            <details #statementConfig>
+              <summary>
+                <label>Statements</label>
+                <app-checkbox-square [text]="'S'" [isChecked]="(definitionForm.get('printer')!.get('statementConfig')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(statementConfig,'printer','statementConfig',$event)"></app-checkbox-square>
+              </summary>
+              <div class="details__content">
+                <div class="row p-1 w-fit">
+                  <div class="form__control">
+                    <label for="">Type</label>
+                    <div class="select__box">
+                      <select formControlName="statementType" (change)="updateCheckboxValue(statementConfig,'printer','statementConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="09">Enhanced thermal statement printer (SDC+)</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form__control">
+                    <label for="">Fitness</label>
+                    <div class="select__box">
+                      <select formControlName="statementFitness" (change)="updateCheckboxValue(statementConfig,'printer','statementConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="0">No error</option>
+                        <option value="1">Routine errors</option>
+                        <option value="2">Warning conditions</option>
+                        <option value="3">Suspend</option>
+                        <option value="4">Fatal error</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form__control">
+                    <label for="">Supplies</label>
+                    <div class="select__box">
+                      <select formControlName="statementSupplie" (change)="updateCheckboxValue(statementConfig,'printer','statementConfig', true)">
+                        <option value="">-- select --</option>
+                        <option value="0">No new state</option>
+                        <option value="1">No overfill condition</option>
+                        <option value="4">Overfill condition</option>
+                        <!-- Add additional options here -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row p-1">
+                  <div class="form__control">
+                    <label for="">Roll Width</label>
+                    <input type="text" formControlName="statementRollwidth" (change)="updateCheckboxValue(statementConfig,'printer','statementConfig', true)">
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+          <div class="tab" *ngIf="tab_3" [formGroupName]="'configuration'">
+            <!-- General Section -->
+            <details #generalConfig>
+              <summary>
+                <label>General</label>
+                <app-checkbox-square [text]="'G'" [isChecked]="(definitionForm.get('configuration')!.get('generalConfig')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(generalConfig,'configuration','generalConfig',$event)"></app-checkbox-square>
+              </summary>
+              <div class="details__content">
+                <div class="row p-1 w-fit">
+                <div class="form__control">
+                  <label for="">Model</label>
+                  <div class="select__box">
+                    <select formControlName="terminalModel" (change)="updateCheckboxValue(generalConfig,'printer','generalConfig', true)">
+                      <option value="">-- select --</option>
+                      <option value="0E">5663</option>
+                      <option value="0F">5674</option>
+                      <option value="10">5675</option>
+                      <option value="11">5684</option>
+                      <option value="12">5685</option>
+                      <option value="13">5688</option>
+                      <option value="14">5665</option>
+                      <option value="15">5670</option>
+                      <option value="16">Personas75</option>
+                      <option value="17">Personas88</option>
+                      <option value="18">Personas40</option>
+                      <option value="19">Personas70</option>
+                      <option value="1A">Personas74</option>
+                      <option value="1B">Personas84</option>
+                      <option value="1C">Personas85</option>
+                      <option value="1D">Personas90</option>
+                      <option value="1E">5305</option>
+                      <option value="1F">Personas86</option>
+                      <option value="20">5588</option>
+                      <option value="21">Personas73</option>
+                      <option value="22">Personas72</option>
+                      <option value="23">Personas77</option>
+                      <!-- Additional model options here -->
+                    </select>
+                  </div>
+                </div>
+                <div class="form__control">
+                  <label for="">Card Reader/Writer</label>
+                  <div class="select__box">
+                    <select formControlName="terminalMCRW" (change)="updateCheckboxValue(generalConfig,'printer','generalConfig', true)">
+                      <option value="">-- select --</option>
+                      <option value="01">Track 2 (read only)</option>
+                      <option value="03">Track 1/2/3 MCRW (write on track 3 only)</option>
+                      <option value="05">Low Cost Dip Reader</option>
+                      <option value="07">3 Track Write MCRW</option>
+                      <option value="08">Track 2 Smart Card Reader</option>
+                      <option value="09">Track 1/2/3 Smart Card Reader</option>
+                      <option value="0A">Track Write Smart Card Reader</option>
+                      <option value="0B">Track 2/3 Dip MSR</option>
+                      <option value="10">Track 1/2 Dip MSR</option>
+                      <option value="11">Track 1/2 Swipe reader</option>
+                      <option value="1D">MIMIC Smart Card Dip Reader</option>
+                      <!-- Additional options here -->
+                    </select>
+                  </div>
+                </div>
+                <div class="form__control">
+                  <label for="">Encryptor</label>
+                  <div class="select__box">
+                    <select formControlName="terminalEncryptor" (change)="updateCheckboxValue(generalConfig,'printer','generalConfig', true)">
+                      <option value="">-- select --</option>
+                      <option value="00">Not configured</option>
+                      <option value="01">NBS encryptor single length keys without XOR key entry</option>
+                      <option value="B1">NBS encryptor single length keys using XOR key entry</option>
+                      <option value="C1">NBS encryptor double length keys</option>
+                      <option value="D1">NBS encryptor double length keys, restricted mode</option>
+                      <option value="07">EPP encryptor single length keys without XOR key entry</option>
+                      <option value="B7">EPP encryptor single length keys using XOR key entry</option>
+                      <option value="C7">EPP encryptor double key length</option>
+                      <option value="D7">EPP encryptor double key length, restricted mode</option>
+                      <!-- Additional options here -->
+                    </select>
+                  </div>
+                </div>
+                <div class="form__control">
+                  <label for="">Keyboard</label>
+                  <div class="select__box">
+                    <select formControlName="terminalKeyboard" (change)="updateCheckboxValue(generalConfig,'printer','generalConfig', true)">
+                      <option value="">-- select --</option>
+                      <option value="1">Standar (BAPE) Keyboard</option>
+                      <option value="2">EPP or EKC Keyboard</option>
+                      <!-- Additional options here -->
+                    </select>
+                  </div>
+                </div>
+                </div>
+                        <div class="row p-1 w-fit">
+                            <div class="form__control">
+                                <label for="">Cheque Processing</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="terminalCheqProcessing" (change)="updateCheckboxValue(generalConfig,'printer','generalConfig', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0000">Not configured</option>
+                                      <option value="0016">MICR reader</option>
+                                      <option value="0032">Rear printer</option>
+                                      <option value="0064">Void stamp</option>
+                                      <option value="0128">Front scanner</option>
+                                      <option value="0256">Reader scanner</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Flex Disk</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="terminalFlexDisk" (change)="updateCheckboxValue(generalConfig,'printer','generalConfig', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="0">Not configured</option>
+                                      <option value="1">1.44 MB</option>
+                                      <option value="2">2.88 MB</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="">Security Camera</label>
+                                <div class="select__box">
+                                    <select name="" id="" formControlName="terminalSecurityCamera" (change)="updateCheckboxValue(generalConfig,'printer','generalConfig', true)">
+                                      <option value="">-- select --</option>
+                                      <option value="00">Not configured</option>
+                                      <option value="01">Fixed format(for instance, 3M)</option>
+                                      <option value="02">Variable format(for instance,D/A)</option>
+                                      <option value="04">Digital</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            <details #deviceConfig>
+              <summary>
+                <label>Device</label>
+                <app-checkbox-square [text]="'D'" [isChecked]="(definitionForm.get('configuration')!.get('deviceConfig')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig,'configuration','deviceConfig',$event)"></app-checkbox-square>
+              </summary>
+                  <div class="details__content">
+                    <div class="row p-1">
+                      <app-checkbox-square [text]="'Depository'" [isChecked]="(definitionForm.get('configuration')!.get('terminalDepository')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalDepository', true)"></app-checkbox-square>
+                      <app-checkbox-square [text]="'Night Safe Depository'" [isChecked]="(definitionForm.get('configuration')!.get('terminalNightsafe')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalNightsafe', true)"></app-checkbox-square>
+                      <app-checkbox-square [text]="'Signage Display'" [isChecked]="(definitionForm.get('configuration')!.get('terminalSignageDisplay')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalSignageDisplay', true)"></app-checkbox-square>
+                      <app-checkbox-square [text]="'Media Entry Indicators'" [isChecked]="(definitionForm.get('configuration')!.get('terminalMedia')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalMedia', true)"></app-checkbox-square>
+                      <app-checkbox-square [text]="'Door Access'" [isChecked]="(definitionForm.get('configuration')!.get('terminalDoorAccess')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalDoorAccess', true)"></app-checkbox-square>
+                    </div>
+                    <div class="row p-1">
+                      <app-checkbox-square [text]="'Envelope Dispenser'" [isChecked]="(definitionForm.get('configuration')!.get('terminalEnvDisp')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalEnvDisp', true)"></app-checkbox-square>
+                      <app-checkbox-square [text]="'Document Processing Module'" [isChecked]="(definitionForm.get('configuration')!.get('terminalDPM')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalDPM', true)"></app-checkbox-square>
+                      <app-checkbox-square [text]="'Bunch Note Acceptor (BNA)'" [isChecked]="(definitionForm.get('configuration')!.get('terminalBNA')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalBNA', true)"></app-checkbox-square>
+                      <app-checkbox-square [text]="'Digital Audio Service'" [isChecked]="(definitionForm.get('configuration')!.get('terminalDigitalAudio')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalDigitalAudio', true)"></app-checkbox-square>
+                      <app-checkbox-square [text]="'Card Capture Bin'" [isChecked]="(definitionForm.get('configuration')!.get('terminalCardCaptureBin')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(deviceConfig, 'configuration','terminalCardCaptureBin', true)"></app-checkbox-square>
+                    </div>
+                  </div>
+
+                </details>
+            <details #displayVoiceConfig>
+              <summary>
+                <label>Cardholder Display/Voice</label>
+                <app-checkbox-square [text]="'DV'" [isChecked]="(definitionForm.get('configuration')!.get('displayVoiceConfig')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(displayVoiceConfig,'configuration','displayVoiceConfig',$event)"></app-checkbox-square>
+              </summary>
+              <div class="details__content">
+                <div class="row p-1">
+                  <app-checkbox-square [text]="'Voice Supported'" [isChecked]="(definitionForm.get('configuration')!.get('voiceSupported')?.value === 'Y')" (checkboxChange)="updateCheckboxValue(displayVoiceConfig, 'configuration','voiceSupported', $event)"></app-checkbox-square>
+                  <div class="radio__box">
+                    <div class="col">
+                      <div class="d-flex">
+                        <input type="radio" name="displayType" value="standardFDKs" [checked]="(definitionForm.get('configuration')!.get('displayType')?.value === 'S')" (click)="updateRadioValue('displayType', 'S')">
+                        <label for="">Standard FDK's</label>
+                      </div>
+                      <div class="d-flex">
+                        <input type="radio" name="displayType" value="touchScreen" [checked]="(definitionForm.get('configuration')!.get('displayType')?.value === 'T')" (click)="updateRadioValue('displayType', 'T')">
+                        <label for="">Touch screen</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="radio__box">
+                    <div class="col">
+                      <div class="d-flex">
+                        <input type="radio" name="screenType" value="VGA" [checked]="(definitionForm.get('configuration')!.get('screenType')?.value === 'V')" (click)="updateRadioValue('displayType', 'V')">
+                        <label for="">VGA</label>
+                      </div>
+                      <div class="d-flex">
+                        <input type="radio" name="screenType" value="VGMTranslator" [checked]="(definitionForm.get('configuration')!.get('screenType')?.value === 'M')" (click)="updateRadioValue('displayType', 'M')">
+                        <label for="">VGM Translator</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+          <div class="tab" *ngIf="tab_4" [formGroupName]="'keys'">
+            <div class="row">
+              <!-- Initial Key Section -->
+              <div class="details__container">
+                <div class="header">
+                  <label for="">Initial Key</label>
+                </div>
+                <div class="content">
+                  <div class="col">
+                    <div class="row p-1 w-fit">
+                      <div class="form__control key">
+                        <label for="">Master Key</label>
+                        <input type="text" formControlName="keyAOld">
+                      </div>
+                      <div class="form__control sm">
+                        <label for="">Check Value</label>
+                        <input type="text" formControlName="keyACv">
+                      </div>
+                    </div>
+                    <div class="row p-1 w-fit">
+                      <div class="form__control key">
+                        <label for="">Comms Key</label>
+                        <input type="text" formControlName="keyBOld">
+                      </div>
+                      <div class="form__control sm">
+                        <label for="">Check Value</label>
+                        <input type="text" formControlName="keyBCv">
+                      </div>
+                    </div>
+                    <div class="row p-1 w-fit">
+                      <div class="form__control key">
+                        <label for="">MAC Key</label>
+                        <input type="text" formControlName="keyMacOld">
+                      </div>
+                      <div class="form__control sm">
+                        <label for="">Check Value</label>
+                        <input type="text" formControlName="keyMacCv">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Current Key Section -->
+              <div class="details__container">
+                <div class="header">
+                  <label for="">Current Key</label>
+                </div>
+                <div class="content">
+                  <div class="col">
+                    <div class="row p-1 w-fit">
+                      <div class="form__control key">
+                        <label for="">Master Key</label>
+                        <input type="text" formControlName="keyA">
+                      </div>
+                      <div class="form__control sm">
+                        <label for="">Check Value</label>
+                        <input type="text" formControlName="keyACv">
+                      </div>
+                    </div>
+                    <div class="row p-1 w-fit">
+                      <div class="form__control key">
+                        <label for="">Comms Key</label>
+                        <input type="text" formControlName="keyB">
+                      </div>
+                      <div class="form__control sm">
+                        <label for="">Check Value</label>
+                        <input type="text" formControlName="keyBCv">
+                      </div>
+                    </div>
+                    <div class="row p-1 w-fit">
+                      <div class="form__control key">
+                        <label for="">MAC Key</label>
+                        <input type="text" formControlName="keyMac">
+                      </div>
+                      <div class="form__control sm">
+                        <label for="">Check Value</label>
+                        <input type="text" formControlName="keyMacCv">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  <div class="row f_right">
+    <button
+      class="btn btn-primary"
+      type="button"
+      (click)="save()"
+    >
+      Save
+    </button>
+    <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+  </div>
+</div>

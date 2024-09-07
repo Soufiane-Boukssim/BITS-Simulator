@@ -1,0 +1,316 @@
+
+<div class="box__wrap-Bank">
+    
+  <div class="row  rowWith">
+
+      <div class="col col-6 col-body">
+          <div class="form">
+              <div class="search">
+              <div class="form__control">
+                <input type="text" [(ngModel)]="searchText" placeholder="{{ 'label.search' | translate}}">
+              </div>
+              </div>
+              <div class="table">
+      
+                <table cellspacing="0">
+                  <thead>
+                    <th>{{ "label.Code" | translate}}</th>
+                    <th>{{ "label.wording" | translate}}</th>
+                    <th>{{ "label.bankType" | translate}}</th>
+                    <th>{{ "label.email" | translate}}</th>
+                    <!-- <th>{{ "label.address" | translate}}</th> -->
+                    <th>{{ "label.phone" | translate}}</th>
+                    
+                    
+                   
+                    
+                   
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="
+                        let item of filteredBankList
+                          | paginate : { itemsPerPage: 5, currentPage: p }
+                      "
+                      (click)="selectBankRecord(item.id)"
+                    >
+          
+                    <td>{{  item.id  }}</td>
+                    <td>{{  item.wording  }}</td>
+                    <td>
+                      <span *ngIf="item.bankType === 'P'">Processor</span>
+                      <span *ngIf="item.bankType === 'B'">Bank</span>
+                      <span *ngIf="item.bankType === 'C'">Central Bank</span>
+                      <span *ngIf="item.bankType === 'V'">Virtual Bank</span>
+                      <span *ngIf="item.bankType === 'S'">Save & Lean</span>
+                      <span *ngIf="item.bankType === 'O'">Other</span>
+                    </td>
+                    <td>{{  item.emailAdress  }}</td>
+                    <!-- <td>{{  item.address  }}</td> -->
+                    <td>{{  item.phoneNumber  }}</td>
+                   
+                   
+                    
+                    
+                  
+                    </tr>
+                  </tbody>
+                </table>
+               
+          </div>
+
+          <p class="no_data" *ngIf="filteredBankList.length == 0">{{ "error.Nodata" | translate }}</p>
+          <div class="DflexPagination">
+                   <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                   (pageChange)="p = $event"
+                   ></pagination-controls> 
+              
+                   <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                       <option value="5">5</option>
+                       <option value="10">10</option>
+                       <option value="15">15</option>
+                       <option value="20">20</option>
+                   </select>
+          </div>
+
+      </div>
+  </div>
+
+  <div class="col col-6 col-body">
+    <div class="row">
+      <form
+        [formGroup]="this.bankForm"
+        class="form f_b bg"
+        
+      >
+        <div  >
+          <h2>{{ "label.Information" | translate}}</h2>
+        </div>
+
+        <div class="row p-block-1" style="justify-content: flex-end">
+          <div class="form__control" >
+            <label class="lbl">{{ "label.bankCode" | translate}}<div class="required">*</div></label>
+            <input type="text" formControlName="id" [readonly]="isDelete" />
+
+            <div class="errorValid" *ngIf="!idValid">{{ "label.should not be empty" | translate}}</div>
+          </div>
+          <div class="form__control" >
+          </div>
+          <div class="form__control" >
+          </div>
+        </div>
+          
+        <div class="row p-block-1" style="justify-content: flex-end">
+         
+          <div class="form__control" >
+            <label class="lbl">{{ "label.wording" | translate}}<div class="required">*</div></label>
+            <input type="text" formControlName="wording" />
+            <div class="errorValid" *ngIf="!wordingValid">{{ "label.should not be empty" | translate}}</div>
+          </div>
+  
+          <div class="form__control">
+            <label class="lbl">{{ "label.bankType" | translate}}</label>
+            <!-- <input type="text" formControlName="bankType" /> -->
+            <div class="select__box">
+              <select formControlName="bankType" >
+                  <option value="">{{ "label.select" | translate}}</option>
+                  <option value="P">Processor</option>
+                  <option value="B">Bank</option>
+                  <option value="C">Central Bank</option>
+                  <option value="V">Virtual Bank</option>
+                  <option value="S">Save & Lean</option>
+                  <option value="O">Other</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="form__control">
+            <label class="lbl">{{ "label.MasterBankCode" | translate}}</label>
+            <input type="text" formControlName="masterBankCode" />
+          </div>
+  
+        </div>
+     
+        <div class="row p-block-1" style="justify-content: flex-end">
+          <div class="form__control">
+            <label class="lbl">{{ "label.tvaRate" | translate}}</label>
+            <input type="text" formControlName="tvaRate" />
+            <span class="percent-symbol">%</span>
+          </div>
+  
+          <div class="form__control" >
+            <label class="lbl">{{ "label.email" | translate}}<div class="required">*</div></label>
+            <input type="text" formControlName="emailAdress" />
+            <div class="errorValid" *ngIf="!emailAddValid">{{ "label.incorrectSyntax" | translate}}</div>
+          </div>
+  
+          <div class="form__control">
+            <label class="lbl">{{ "label.zipCode" | translate}}</label>
+            <input type="text" formControlName="zipCode" />
+          </div>
+        </div>
+
+        <div class="row p-block-1" style="justify-content: flex-end">
+
+          <div class="form__control">
+            <label class="lbl">{{ "label.mobileNumber" | translate}}<div class="required">*</div></label>
+            <input type="text" formControlName="mobileNumber" />
+            <div class="errorValid" *ngIf="!mobileValid">{{ "label.incorrectSyntax" | translate}}</div>
+          </div>
+
+          <div class="form__control" >
+            <label class="lbl">{{ "label.phoneNumber" | translate}}<div class="required">*</div></label>
+            <input type="text" formControlName="phoneNumber" />
+            <div class="errorValid" *ngIf="!phoneValid">{{ "label.incorrectSyntax" | translate}}</div>
+          </div>
+
+         
+
+
+        </div>
+
+
+        <div  >
+          <h2> {{ "label.Adressinformation" | translate}}</h2>
+        </div>
+        <div class="row p-block-1" style="justify-content: flex-end">
+          <div class="form__control">
+            <label >{{ "label.country" | translate}}<div class="required">*</div></label>
+          </div>
+          <div class="form__control">
+            <label class="lbl">{{ "label.city" | translate}}<div class="required">*</div></label>
+          </div>
+          <div class="form__control">
+            <label class="lbl">{{ "label.currency" | translate}}<div class="required">*</div></label>
+          </div>
+
+        </div>
+
+       
+
+        <div class="row p-block-1" style="justify-content: flex-end">
+
+          
+
+          <div class="form__controlV2">
+            <!-- <label >{{ "label.country" | translate}}<div class="required">*</div></label> -->
+            <div class="select__box">
+              <select formControlName="countryCode">
+                  <option value="">{{ "label.select" | translate}}</option>
+                  <option *ngFor="let item of countryList" value="{{ item.id }}">{{ item.countryDesc }}</option>
+              </select>
+              
+            </div>
+            <div class="div-code" *ngIf="bankForm.get('countryCode')?.value !=''" >
+              {{ bankForm.get('countryCode')?.value }}
+            </div>
+            <!-- <div class="errorValid" *ngIf="!countryValid">{{ "label.should not be empty" | translate}}</div> -->
+          </div>
+         
+  
+          <div class="form__controlV2">
+            <!-- <label class="lbl">{{ "label.city" | translate}}<div class="required">*</div></label> -->
+            <div class="select__box">
+              <select formControlName="cityCode">
+                  <option value="">{{ "label.select" | translate}}</option>
+                  <option *ngFor="let item of cityList" value="{{ item.cityCode }}">{{ item.wording }}</option>
+              </select>
+            </div>
+            <div class="div-code" *ngIf="bankForm.get('cityCode')?.value!=''">{{ bankForm.get('cityCode')?.value }}</div>
+            <!-- <div class="errorValid" *ngIf="!cityValid">{{ "label.should not be empty" | translate}}</div> -->
+          </div>
+         
+        
+  
+          <div class="form__controlV2">
+            <!-- <label class="lbl">{{ "label.currency" | translate}}<div class="required">*</div></label> -->
+            <div class="select__box">
+              <select formControlName="currencyCode">
+                  <option value="">{{ "label.select" | translate}}</option>
+                  <option *ngFor="let item of currencyList" value="{{ item.id }}">{{ item.ccyAlpha }}</option>
+              </select>
+            </div>
+            <div class="div-code" *ngIf="bankForm.get('currencyCode')?.value !=''">{{ bankForm.get('currencyCode')?.value }}</div>
+            <!-- <div class="errorValid" *ngIf="!currencyValid">{{ "label.should not be empty" | translate}}</div> -->
+          </div>
+         
+        </div>
+
+        <div class="row">
+          <div class="form__control">
+            <label class="lbl">{{ "label.address" | translate}}</label>
+            <textarea formControlName="address" style="width: 100%;border-radius: 10px; border: 1px solid rgb(192, 192, 192);min-height: 40px;max-width: 100%;" cols="30" rows=""></textarea>
+          </div>
+        </div>
+        <!-- <hr  style="width: 100%;"/> -->
+
+
+
+        <!-- <div class="row p-block-1" style="justify-content: flex-end">
+        
+          
+          <div class="buttons" *ngIf="isDelete">
+            <button
+              class="btn btn-danger"
+              (click)="openDeletePopUp()"
+            >
+            {{ "label.delete" | translate}}
+            </button>
+          </div>
+
+          <div class="buttons">
+            <button class="btn btn-primary" (click)="openSavePopUp()">{{ "label.save" | translate}}</button>
+          </div>
+
+        </div> -->
+
+
+        <div class="row p-block-1" style="justify-content: flex-end">
+          <div class="Dflex">
+              <div class="button-clear">
+              <button class="btn btn-outlined clearBtn" (click)="clearAll()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+              </div>
+              <div class="DflexButton">
+               <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+               <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                   <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+              </div>
+          </div>
+      
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+
+
+<dialog class="modal" #modal>
+  <div class="header">
+      <div class="title">{{ "label.actionPanel" | translate}}</div>
+      <div class="close" (click)="closeModal()">&times;</div>
+  </div>
+  <div class="form">
+      <div class="row">
+          <label for="">{{ message }}</label>
+
+      </div>
+      <div class="row" *ngIf="userDeleteActive">
+        <button id="deleteBtnUser" class="btn btn-danger"  (click)="deleteBankRecord()">{{ "label.delete" | translate}}</button>
+        <button id="cancelDelete" class="btn btn-primary" (click)="closeModal()">{{ "label.cancel" | translate}}</button>
+      </div>
+
+      <div class="row" *ngIf="userSaveActive">
+        <button id="deleteBtnUser" class="btn btn-primary"   *ngIf="!isDelete" (click)="submitBank()">{{ "label.save" | translate}}</button>
+        <button id="deleteBtnUser" class="btn btn-primary"  *ngIf="isDelete" (click)="submitBank()">{{ "label.update" | translate}}</button>
+        <button id="cancelDelete" class="btn btn-danger" (click)="closeModal()">{{ "label.cancel" | translate}}</button>
+      </div>
+  </div>
+
+</dialog>
+
+

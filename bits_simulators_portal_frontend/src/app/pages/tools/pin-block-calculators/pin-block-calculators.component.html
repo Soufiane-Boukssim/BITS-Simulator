@@ -1,0 +1,350 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">ISO 9564 - Format 0</a>
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">ISO 9564 - Format 1</a>
+      <a [className]="tab_4 ? 'active' : ''" (click)="open_tab(3)"
+      [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}"
+      >IBM 3624</a>
+      <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)"  
+      [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}" [class.disabled]="true"
+      >Visa Pvv</a>
+     
+      <a [className]="tab_5 ? 'active' : ''" (click)="open_tab(4)"
+      [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}" [class.disabled]="true"
+      >IBM 3624 offset</a>
+      <a [className]="tab_6 ? 'active' : ''" (click)="open_tab(5)"
+      [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}" [class.disabled]="true"
+      >PIN from PIN block</a>
+      <a [className]="tab_7 ? 'active' : ''" (click)="open_tab(6)"
+      [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}" [class.disabled]="true"
+      >PIN for pvv</a>
+    </div>
+    <div class="tabs">
+      <div class="box_of_content_fit" *ngIf="tab_1">
+        <div class="content">
+          <div class="details">
+            <div class="form__control">
+                <label>PAN</label>
+                <input type="text" style="min-width: 250px" class="input" [(ngModel)]="pan" max="19">
+                <small *ngIf="pan.length <= 9 || pan.length >= 19">PIN must be between 9 and 19 characters long</small>
+            </div>
+            <div class="form__control">
+                <label>PIN</label>
+                <input type="text" class="input" [(ngModel)]="pin">
+                <small *ngIf="pin.length < 3 || pin.length >= 12">PIN must be between 4 and 12 characters long</small>
+            </div>
+
+            <div class="form__control">
+                <label>PIN Block</label>
+                <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="pinblock">
+            </div>
+            <div class="row buttons-Calculate">
+                  <button class="btn btn-secondary" (click)="calculatePinBlock()">Calculate</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_2">
+        <div class="content">
+
+
+          <div class="details">
+            <div class="form__control">
+                <label>PIN</label>
+                <input type="text" class="input" [(ngModel)]="pin">
+            </div>
+
+            <div class="form__control">
+                <label>PIN Block</label>
+                <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="pinblock">
+            </div>
+            <div class="row buttons-Calculate">
+              <button class="btn btn-secondary" (click)="calculatePinBlockToPin()">Calculate</button>
+             </div>
+          </div>
+
+
+        
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_3">
+        <div class="content">
+
+          <div class="details">
+            <div class="form__control">
+                <label>PAN</label>
+                <input type="text" class="input" [(ngModel)]="pan">
+              </div>
+
+
+            <div class="form__control">
+                <label>PIN </label>
+                <input type="text" class="input" [(ngModel)]="pin">
+            </div>
+
+
+            <div class="form__control">
+                <label>PVKI</label>
+                <input type="number" class="input" [(ngModel)]="pvki">
+            </div>
+
+            <div class="form__control">
+                <label>PVK </label>
+                <input type="text" class="input" [(ngModel)]="pvk">
+            </div>
+
+            <div class="form__control">
+                <label>PVV</label>
+                <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="pvv">
+              </div>
+              <div class="row buttons-Calculate">
+                <button class="btn btn-secondary" (click)="calculateVisaPvv()">Calculate</button>
+               </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_4">
+        <div class="content">
+          
+               <div class="row">
+
+                <div class="form__control">
+
+                  <div class="row">
+                    <div class="form__control">
+                      <label>PAN</label>
+                      <input type="text" class="input" [(ngModel)]="pan">
+                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="form__control">
+                        <label>Decimalizattion table </label>
+                        <input type="text" class="input" [(ngModel)]="destable">
+
+                    </div>
+
+                  </div>
+                  <div class="row">
+
+                    <div class="form__control">
+
+                        <label>PIN length</label>
+                        <input type="number" class="input" [(ngModel)]="pinlength">
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form__control">
+
+                        <label>PGK </label>
+                        <input type="text" class="input" [(ngModel)]="pgk">
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form__control">
+                        <label>Intermediate PIN</label>
+                        <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="intermediatepin">
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="form__control" >
+                      
+                          <button class="btn btn-primary" (click)="calculatePinBlock()">Calculate</button>
+                      
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="form__control">
+                  <div class="form__control con">
+                     
+                    <p>Select Operation and provide data in hex
+                        Operands can be of arbitrary length up to 8 Bytes (16 hex character).
+                          The only condition is that the operands must be of the same length
+                    </p>
+               
+                </div>
+                </div>
+              
+               </div>
+                    
+                  
+                  
+                  
+                
+                 
+       
+
+                  
+                   
+                      
+                   
+                
+                    
+                    </div>
+                 
+             
+              
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_5">
+        <div class="content">
+        
+          
+
+                      <div class="form__control">
+                          <label>Customer Selected PIN </label>
+                          <input type="text" class="input" [(ngModel)]="CSpin">
+                      </div>
+
+                      <div class="form__control">
+                          <label>Intermediate PIN</label>
+                          <input type="text" class="input " [(ngModel)]="intermediatepin">
+                      </div>
+                      <div class="form__control">
+                          <label> Offset</label>
+                          <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="offset">
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                          <div class="buttons">
+                            <button class="btn btn-primary" (click)="calculatePinBlock()">Calculate</button>
+                        </div>
+                      </div>
+                 
+                  
+                      <div class="con" *ngIf="contentVisible">
+                        <p>Select Operation and provide data in hex </p>
+                        <p>
+                          <span>Operands can be of arbitrary length up to 8 Bytes (16 hex character).</span>
+                          <span> The only condition is that the operands must be of the same length</span>
+                        </p>
+                      </div>
+                   
+                  
+             
+             
+           
+          
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_6">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="two-cols-content">
+                    <div class="details">
+
+                      <div class="form__control">
+                          <label>PIN Block </label>
+                          <input type="text" class="input" [(ngModel)]="pinb">
+                      </div>
+
+                      <div class="form__control">
+                          <label> PAN</label>
+                          <input type="text" class="input " [(ngModel)]="pan">
+                      </div>
+                      <div class="form__control">
+                          <label> PEK</label>
+                          <input type="text" class="input " [(ngModel)]="pek">
+                      </div>
+
+                      <div class="form__control">
+                          <label> PIN</label>
+                          <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="pin">
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                          <div class="buttons">
+                            <button class="btn btn-primary" (click)="calculatePinBlock()">Calculate</button>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="content-box">
+                      <!-- <span (click)="toggleContent()" class="toggle-icon">{{ contentVisible ? '✕' : '' }}</span> -->
+
+                      <div class="con" *ngIf="contentVisible">
+                        <p>Select Operation and provide data in hex </p>
+                        <p>
+                          <span>Operands can be of arbitrary length up to 8 Bytes (16 hex character).</span>
+                          <span> The only condition is that the operands must be of the same length</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_7">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="two-cols-content">
+                    <div class="details">
+
+                      <div class="form__control">
+                          <label>PVV </label>
+                          <input type="text" class="input" [(ngModel)]="pvv">
+                      </div>
+
+                      <div class="form__control">
+                          <label> PAN</label>
+                          <input type="text" class="input " [(ngModel)]="pan">
+                      </div>
+
+                      <div class="form__control">
+                          <label> PEKI</label>
+                          <input type="number" class="input " [(ngModel)]="peki">
+                      </div>
+                      <div class="form__control">
+                          <label> PEK</label>
+                          <input type="text" class="input " [(ngModel)]="pek">
+                      </div>
+
+                      <div class="form__control">
+                          <label> PIN(s)</label>
+                          <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="pin">
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                          <div class="buttons">
+                            <button class="btn btn-primary" (click)="calculatePinBlock()">Calculate</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-box">
+                      <!-- <span (click)="toggleContent()" class="toggle-icon">{{ contentVisible ? '✕' : '' }}</span> -->
+
+                      <div class="con" *ngIf="contentVisible">
+                        <p>Select Operation and provide data in hex </p>
+                        <p>
+                          <span>Operands can be of arbitrary length up to 8 Bytes (16 hex character).</span>
+                          <span> The only condition is that the operands must be of the same length</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>

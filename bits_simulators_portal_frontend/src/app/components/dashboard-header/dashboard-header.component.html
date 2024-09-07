@@ -1,0 +1,38 @@
+<header  [ngStyle]="{ 'left': isVisibleMenu_btn_close ? '0' :'0','width':isVisibleMenu_btn_close?'100%':'100%'}">
+
+    <div class="show_Menu">
+      <span (clickOutside)="hideMenu()"  (click)="toggleMnnu()">
+        <img class="icon_menu"   *ngIf="!isVisibleMenu_btn_close" src="assets/icons/menu.png" height="20px" alt="">
+      </span>
+
+      <!-- <div class="tool__tip" *ngIf="isVisibleMenu">
+        <app-sidebar></app-sidebar>
+      </div> -->
+
+      
+    </div>
+
+    <div class="current_protocol" style="position: absolute; left: .5rem;"  [ngStyle]="{ 'margin-left': isVisibleMenu_btn_close ? '250px' :'30px'}">
+        <img [src]="getProtocolLogo(protocol)" height="15" alt="">
+    </div>
+    <!--<div>
+        <label for="">Reference</label>
+        <app-switch></app-switch>
+    </div>-->
+    <div class="LanguageImg">
+      <img src="/assets/icons/FrenshFlag.png" alt="" srcset="" height="15" *ngIf="frenshFDisplay">
+      <img src="/assets/icons/SpanishFlag.png" alt="" srcset="" height="15" *ngIf="spanishFDisplay">
+      <img src="/assets/icons/EnglishFlag.png" alt="" srcset="" height="15" *ngIf="englishFDisplay">
+    </div>
+    <span class="login__time">
+        <span><img src="assets/icons/clock.png" height="18" alt=""></span>
+        <span>{{ formattedDate }}</span>
+    </span>
+    <div class="user__area">
+        <span class="user__name">{{ fullUserName }}<span><img style="cursor: pointer;" (clickOutside)="hideToolTip()" appClickOutside (click)="toggleToolTip()" src="assets/icons/down.png" height="14px" alt=""></span></span>
+        <div class="tool__tip" *ngIf="isVisible">
+            <span (click)="logout()"><img src="assets/icons/logout.png" height="20" alt=""><p>{{ 'label.logOut' | translate}}</p></span>
+            <span (click)="goToChangePass()"><img src="assets/icons/user.png" height="20" alt=""><p>{{ 'label.changePassword' | translate}}</p></span>
+        </div>
+    </div>
+</header>

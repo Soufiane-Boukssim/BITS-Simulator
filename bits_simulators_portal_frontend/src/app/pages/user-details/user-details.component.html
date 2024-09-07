@@ -1,0 +1,333 @@
+<div class="container">
+
+
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)">Definition </a>
+      <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)"> Access</a>
+      <a *ngIf="userActivityList.length>0" [className]="tab_3 ? 'active':''" (click)="open_tab(2)">Tracking</a>
+    </div>
+  </div>
+
+
+  <div class="horizontal__scroll">
+
+    <div *ngIf="tab_1">
+
+      <div class="title">
+        <img src="assets/icons/setting.png" height="25" alt="">
+        <div class="text">{{ "label.UserManagement" | translate }}</div>
+      </div>
+      <div class="userInfoForm" [style.color]="allowEdit ? 'black' : 'gray'">
+        <div class="row">
+          <!--<app-checkbox-square class="check__square" [text]="'Block on Error'"></app-checkbox-square>-->
+          <div class="form__control">
+            <label for="" class="lbl">{{ "label.userCode" | translate }}<div class="required">*</div></label>
+            <input type="text" [(ngModel)]="user.userCode" name="uCode" disabled>
+          </div>
+          <div class="form__control">
+
+          </div>
+        </div>
+        <div class="row">
+          <!--<app-checkbox-square class="check__square" [text]="'Block on Error'"></app-checkbox-square>-->
+          <div class="form__control">
+            <label for="userName2" class="lbl">{{ "label.userName" | translate }}<div class="required">*</div></label>
+            <input name="userName2" type="text" [(ngModel)]="user.userName2">
+          </div>
+          <div class="form__control">
+            <label for="" class="lbl">{{ "label.email" | translate }}<div class="required">*</div></label>
+            <input type="text" [(ngModel)]="user.email">
+            <div class="errorValid" *ngIf="!goodEmailSyntax">Incorrect syntax</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form__control">
+            <label for="">{{ "label.address" | translate }}</label>
+            <input type="text" [(ngModel)]="user.address">
+          </div>
+          <div class="form__control">
+            <label for="">{{ "label.approval" | translate }}</label>
+            <!--<input type="text" [(ngModel)]="user.status" >-->
+            <div class="select__box">
+              <select [(ngModel)]="user.status">
+                <option value="A">{{ "label.Approved" | translate }}</option>
+                <option value="P">{{ "label.Pending" | translate }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form__control">
+            <label for="" class="lbl">{{ "label.mobileNumber" | translate }}<div class="required">*</div></label>
+            <input type="text" [(ngModel)]="user.mobileNumber">
+            <div class="errorValid" *ngIf="!goodPhoneSyntax">Incorrect syntax</div>
+          </div>
+          <div class="form__control">
+            <label>{{ "label.userType" | translate }}</label>
+            <div class="select__box">
+              <select [(ngModel)]="user.userType">
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form__control">
+            <label class="lbl">{{ "label.nbOfTriesAllowed" | translate }}<div class="required">*</div></label>
+            <input type="text" [(ngModel)]="user.numberOfTriesAllowed">
+          </div>
+          <div class="form__control">
+            <label for="" class="lbl">{{ "label.language" | translate }}<div class="required">*</div></label>
+            <!--<input type="text"  >-->
+            <div class="select__box">
+              <select [(ngModel)]="user.languageCode">
+                <option value="en">{{ "label.english" | translate }}</option>
+                <option value="fr">{{ "label.frensh" | translate }}</option>
+                <option value="esp">{{ "label.spanish" | translate }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form__control">
+            <label>{{ "label.bank" | translate }}</label>
+            <div class="select__box">
+              <select [(ngModel)]="user.userBankCode">
+                <option value="">{{ 'label.select' | translate}}</option>
+                <option *ngFor="let item of bankList" [value]="item.id" [selected]="item.id === user.userBankCode">
+                  {{ item.wording }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form__control">
+            <label for="" class="lbl">{{ "label.ipAddress" | translate }}<div class="required">*</div></label>
+            <input type="text" [(ngModel)]="user.ipAddress" placeholder="Enter IPv4 address">
+            <div class="errorValid" *ngIf="!goodIpSyntax">Incorrect syntax</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form__control">
+            <label for="" class="lbl">{{ "label.startingLicenseDate" | translate }}<div class="required">*</div></label>
+            <input type="date" [(ngModel)]="user.dateStartPass">
+            <!--<div class="errorValid" *ngIf="userIpAdress">should not be empty</div>-->
+          </div>
+          <div class="form__control">
+            <label for="" class="lbl">{{ "label.expirationDate" | translate }}<div class="required">*</div></label>
+            <input type="date" [(ngModel)]="user.dateEndPass">
+            <!--<div class="errorValid" *ngIf="userIpAdress">should not be empty</div>-->
+          </div>
+        </div>
+        <div class="row">
+          <div class="form__control">
+            <label>{{ "label.userStatus" | translate }}</label>
+            <div class="checkbox-wrapper-4">
+              <input type="checkbox" id="cbx-4" [checked]="!userBlocked" (change)="onCheckboxChange()" />
+              <label for="cbx-4" class="toggle"><span></span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="footer_btn">
+            <hr />
+            <div class="Dflex">
+              <div class="button-clear">
+              </div>
+              <div class="DflexButton">
+                <button type="submit" class="btn btn-danger btn-delete" (click)="openDeletePopUp()">{{ "label.delete" |
+                  translate }}</button>
+                <button type="submit" class="btn btn-primary" (click)="editUser()">{{ "label.update" | translate
+                  }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+        <div class="form__control">
+          <div class="btnContainer">
+            <button id="editUserBtn" *ngIf="saveEdit" (click)="editUser()">{{ "label.save" | translate }}</button>
+            <button id="resetEdit" *ngIf="saveEdit" (click)="resetUpdate()">{{ "label.cancel" | translate }}</button>
+            <button id="displayButton" *ngIf="hideFirstEdit"  (click)="displaySaveButton()">{{ "label.modify" | translate }}</button>
+            <button id="deleteUserBtn" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+          </div>
+        </div>
+      </div> -->
+
+
+      </div>
+
+    </div>
+
+
+    <div *ngIf="tab_2">
+      <div class="horizontal__scroll">
+        <div class="title">
+          <img src="assets/icons/verified.png" height="25" alt="">
+          <div class="text">{{ "label.userAccess" | translate }}</div>
+        </div>
+
+        <div class="row container-drag-item d-flex justify-content-start pr-lg-5 ">
+          <div class="drag-container col col-xl-4 col-lg-5 col-md-6 col-12 mr-xl-5 " id="HBNotIn">
+            <div class="section-heading ">{{ "label.Habilitations" | translate }}</div>
+            <div class="item-list border bg-white rounded " id="DontHaveDIV">
+              <div class="item-box" *ngFor="let item of userHabilitationN">
+                <button class="dontHaveHabi" [class.selected1]="isSelected(item)" (click)="selectMenuNameNotHave(item)"
+                  [disabled]="isISOEnabled ? item.groupName !== 'ISO' : false">
+                  {{item.groupCode}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="buttonsContainer">
+            <div class="section-heading">Iso</div>
+            <div class="protocolsNotIn">
+              <div class="drag-container col col-xl-4 col-lg-5 col-md-6 col-12 mr-xl-5 " id="ProtoNotIn">
+                <div class="item-list border bg-white rounded " id="DontHaveDIVProto">
+                  <div class="item-box" *ngFor="let item of protoNotHaveSelected[0]">
+                    <button class="dontHaveHabiProto" [class.selected1]="isSelectedProtoNot(item)"
+                      (click)="selectedProtoNotHave(item)" *ngIf="isoProtoSelect">{{item.protoWording}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="Dflex btn-Habilitation">
+              <!-- [disabled]="blueMSelected" -->
+              <button class="btn btn-danger" (click)="displayMenuNameNotHave()" [disabled]="RedMSelected"
+                [ngStyle]="{'opacity': RedMSelected ? '0.5' : '1'}">{{ "label.remove" | translate }}</button>
+              <button class="btn btn-secondary" (click)="displayMenuNameHave()" [disabled]="blueMSelected"
+                [ngStyle]="{'opacity': blueMSelected ? '0.5' : '1'}">{{ "label.add" | translate }}</button>
+            </div>
+
+          </div>
+
+          <div class="drag-container col col-xl-4 col-lg-5 col-md-6 col-12 mr-xl-5" id="HBIn">
+            <div class="section-heading">{{ "label.userHabilitations" | translate }}</div>
+            <div class="item-list border bg-white rounded" id="HaveDIV">
+              <div class="item-box" *ngFor="let item2 of userHabilitation">
+                <button class="haveHabi" [class.selected2]="isSelected2(item2)" (click)="selectMenuNameHave(item2)">
+                  {{item2.groupCode}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="btnContainer" class="col col-lg-4 col-md-4 col-2 d-flex justify-content-start ml-lg-3">
+            <div class="section-heading ">Iso</div>
+            <div class="protocolsIn">
+              <div class="drag-container col col-xl-4 col-lg-5 col-md-6 col-12 mr-xl-5 " id="ProtoIn">
+                <div class="item-list border bg-white rounded " id="HaveDIVProto">
+                  <div class="item-box" *ngFor="let item of protoHaveSelected[0]">
+                    <button class="HaveHabiProto" [class.selected2]="isSelectedProto(item)"
+                      (click)="selectedProtoHave(item)" *ngIf="isoProtoSelect">
+                      {{item.protoWording}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="Dflex">
+              <!-- <div class="mybutton" style=" width: 500px;"> -->
+              <button class="btn btn-primary" (click)="submit()">{{ "label.save" | translate }}</button>
+              <!--<button mat-raised-button class="button1" (click)="submit(user)">Submit</button>-->
+              <button class="btn btn-danger" (click)="resetSelections()">{{ "label.reset" | translate }}</button>
+              <!-- <button type="submit" style="width: 100px;height:40px;background-color: #3f4d67;" class="btn btn-primary"
+                        (click)="readData()">Submit</button> -->
+              <!-- </div> -->
+            </div>
+
+          </div>
+
+        </div>
+        <!--<app-access-management [not_owned_title]="'All Habilitations'" [owned_title]="'User Habilitation'"></app-access-management>-->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="horizontal__scroll">
+
+    <div *ngIf="tab_3">
+
+      <div class="title">
+        <img src="assets/icons/activity.png" height="25" alt="">
+        <div class="text">{{ "label.userTracking" | translate }}</div>
+      </div>
+
+      <div style="height: 50vh;">
+
+
+        <div class="table" style="margin-left: 20px;">
+          <table cellspacing="0">
+            <thead>
+              <th>Tracking Id</th>
+              <th>Operation</th>
+              <th>Table</th>
+              <th>OperationDate</th>
+              <th>Response</th>
+              <th>Narration</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="
+            let item of userActivityList | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }">
+                <td>{{ item.idTrack }}</td>
+                <td>{{ item.operation }}</td>
+                <td>{{ item.operationLink }}</td>
+                <td>{{ item.operationDate }}</td>
+                <td>{{ item.responseBody }}</td>
+                <td>{{ item.requestNarration }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="no_data" *ngIf="userActivityList.length == 0">{{ "error.Nodata" | translate}}</p>
+        <div class="DflexPagination">
+          <pagination-controls nextLabel="{{ 'label.next' | translate}}"
+            previousLabel="{{ 'label.previous' | translate}}" (pageChange)="p = $event"></pagination-controls>
+
+          <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <dialog class="modal" #modal>
+    <div class="header">
+      <div class="title">{{ "label.actionPanel" | translate }}</div>
+      <div class="close" (click)="closeModal()">&times;</div>
+    </div>
+    <div class="form">
+      <div class="row" style="width: 100%;">
+        <label for="" >{{ "error.DeleteConfirmationDeleteUSer" | translate }}</label>
+
+      </div>
+      <div class="row" *ngIf="userDeleteActive">
+        <button id="deleteBtnUser" class="btn btn-outlined" (click)="closeModal()">{{ "label.cancel" | translate }}</button>
+        <button  id="cancelDelete" class="btn btn-danger" (click)="deleteUser()">{{ "label.delete" | translate }}</button>
+      </div>
+    </div>
+
+  </dialog>
+
+  <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>

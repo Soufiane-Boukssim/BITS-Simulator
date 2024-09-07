@@ -1,0 +1,132 @@
+
+
+<!-- new-configuration.component.html -->
+<div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-2">
+        <div class="centered-container">
+          <div class="text-container">
+            <p>Analyse Terminal Verification Result</p>
+          </div>
+         
+  
+          <div style="display: flex; align-items: center; margin-top: 10px;">
+            <label for="label1" style="margin-left: 90px;">Label 1:</label>
+            <input type="text" id="input1" style="width: 50px;  margin-left: 30px;">
+            <input type="text" id="input2" style="width: 50px;  margin-left: 10px;">
+            <input type="text" id="input3" style="width: 50px;  margin-left: 10px;">
+            <input type="text" id="input4" style="width: 50px;  margin-left: 10px;">
+            <input type="text" id="input5" style="width: 50px;  margin-left: 10px;">
+            <input type="text" id="input6" style="width: 120px; margin-left: 10px;">
+            <label for="label2" style="margin-left: 20px;">(hex)</label>
+          </div>
+          
+
+          <!-- menu.component.html -->
+
+  
+        
+  
+  
+         
+         <!-- menu.component.html -->
+<!-- menu.component.html -->
+<!-- menu.component.html -->
+<div class="horizontal-menu" style="margin-left: 130px; margin-top: 20px;">
+    <button (click)="selectOption(1)" [ngStyle]="{'background-color': selectedOption === 1 ? 'white' : 'gray'}" style="width: 120px;">BYTE 1</button>
+    <button (click)="selectOption(2)" [ngStyle]="{'background-color': selectedOption === 2 ? 'white' : 'gray'}" style="width: 120px;">BYTE 2</button>
+    <button (click)="selectOption(3)" [ngStyle]="{'background-color': selectedOption === 3 ? 'white' : 'gray'}" style="width: 120px;">BYTE 3</button>
+    <button (click)="selectOption(4)" [ngStyle]="{'background-color': selectedOption === 4 ? 'white' : 'gray'}" style="width: 120px;">BYTE 4</button>
+    <button (click)="selectOption(5)" [ngStyle]="{'background-color': selectedOption === 5 ? 'white' : 'gray'}" style="width: 120px;">BYTE 5</button>
+  </div>
+  
+  
+  <div>
+  <!-- Contenu pour l'option 1 -->
+<!-- Contenu pour l'option 1 -->
+<div *ngIf="selectedOption === 1" class="option-content">
+    <div style="display: flex; justify-content: space-between;">
+      <!-- Partie gauche -->
+      <div style="flex: 0 1 45%; display: flex; flex-direction: column;">
+        <label style="width: 320px; padding-top: 15px;">
+          <input type="checkbox"> cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa  cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa 
+        </label>
+        <label style="width: 320px; padding-top: 15px;">
+          <input type="checkbox"> cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa  cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa 
+        </label>
+        <label style="width: 320px; padding-top: 15px;">
+          <input type="checkbox"> cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa  cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa 
+        </label>
+        <label style="width: 320px; padding-top: 15px;">
+          <input type="checkbox"> cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa  cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa 
+        </label>
+      </div>
+  
+      <!-- Partie droite -->
+      <div style="flex: 0 1 45%; display: flex; flex-direction: column;">
+        <label style="width: 320px; padding-top: 15px;">
+          <input type="checkbox"> cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa  cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa 
+        </label>
+        <label style="width: 320px; padding-top: 15px;">
+          <input type="checkbox"> cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa  cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa 
+        </label>
+        <label style="width: 320px; padding-top: 15px;">
+          <input type="checkbox"> cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa  cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa 
+        </label>
+        <label style="width: 320px; padding-top: 15px;">
+          <input type="checkbox"> cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa  cdhg b,aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa 
+        </label>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+    <ng-container *ngIf="selectedOption === 2">
+      <!-- Contenu pour l'option 2 -->
+      <div *ngIf="selectedOption === 2" class="option-content">
+        <p> 22222222222222</p>
+        </div>
+    </ng-container>
+  
+    <ng-container *ngIf="selectedOption === 3">
+      <!-- Contenu pour l'option 3 -->
+      <div *ngIf="selectedOption === 3" class="option-content">
+        <p> 3333333333333333</p>
+        </div>
+    </ng-container>
+  
+    <ng-container *ngIf="selectedOption === 4">
+      <!-- Contenu pour l'option 4 -->
+      <div *ngIf="selectedOption === 4" class="option-content">
+        <p> 44444444444444444444</p>
+        </div>
+    </ng-container>
+  
+    <ng-container *ngIf="selectedOption === 5">
+      <!-- Contenu pour l'option 5 -->
+      <div *ngIf="selectedOption === 5" class="option-content">
+        <p> 5555555555555</p>
+        </div>
+    </ng-container>
+  </div>
+  
+  
+  
+       
+          
+  
+          <div class="row mt-3" style="padding: 20px;">
+            <div class="col-md-12 text-center">
+              <button type="button" class="btn btn-primary mr-2">Ok</button>
+              <!-- <button type="button" class="btn btn-secondary">Annuler</button> -->
+            </div>
+          </div>
+          
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

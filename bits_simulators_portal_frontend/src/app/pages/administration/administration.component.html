@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="users__container">
+        <div class="header">
+            <div class="title">
+                <span><img src="assets/icons/add-friend.png" height="25" alt=""></span>
+                <label>{{"label.PendingRequests" | translate }}</label>
+            </div>
+        </div>
+        <div class="row horizontal__scroll" style="background-color: rgb(237, 237, 237);border-radius: 10px;">
+            
+            <div class="box__square" *ngFor="let item of usersPendingList  | paginate : { itemsPerPage: itemsPerPageSelctUserP, currentPage: pp,id:'1' }" (click)="goToUserDetails(item.userCode)">
+              <div class="box__content">
+                <div class="user__name">{{item.username}}</div>
+                <!-- <div class="dep">{{item.userType}}</div> -->
+                <div class="dep" *ngIf="item.userType === 'USER'">{{ "label.user" | translate }}</div>
+                <div class="dep" *ngIf="item.userType === 'ADMIN'">{{ "label.admin" | translate }}</div>
+                <div class="timestamp">{{"label.LastActivity" | translate}} :</div>
+                <!-- <div class="t_value">
+                    {{ item.dateStartPass | date:'yyyy-MM-dd' }}
+                </div> -->
+                  <div class="t_value" *ngIf="item.secretKey !=null">
+                    {{ item.secretKey }}
+                  </div>
+                  <div class="t_value" *ngIf="item.secretKey==null  " >
+                       <p>{{"label.Noactivity" | translate}}</p> 
+                  </div>
+            </div>
+                <div class="status__circle"></div>
+            </div>
+        </div>
+        <!-- <pagination-controls nextLabel='{{"label.next" | translate}}'  previousLabel="{{ 'label.previous' | translate}}" [id]="'p1'" style="margin:auto;margin-block: 1rem;" (pageChange)="page = $event" ></pagination-controls> -->
+        <div class="DflexPagination">
+            <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+            (pageChange)="pp = $event " id="1"
+            ></pagination-controls> 
+       
+            <!-- <select [(ngModel)]="itemsPerPageSelctUserP" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select> -->
+          </div>
+    
+    </div>
+    <div class="users__container">
+        <div class="header">
+            <div class="title">
+                <span><img src="assets/icons/customer.png" height="25" alt=""></span>
+                <label>{{"label.UsersList" | translate}}</label>
+            </div>
+            <div class="filter" style="margin-right: 20px;">
+                <div class="form__control">
+                    <input type="text" placeholder='{{"label.search" | translate}}' [(ngModel)]="searchText">
+                    <img src="assets/icons/user-search.png" height="25" class="icon" alt="">
+                </div>
+            </div>
+            <button  class="btn btn-secondary" (click)="goToAddUserComponent()">{{ "label.Add" | translate }}</button>
+            <!-- class="addUserBtn" -->
+        </div>
+
+        <div style=" position: relative; min-height: 200px;min-width: 500px;" class=" row horizontal__scroll">
+
+            <div class="box__rect" *ngFor="let item of filteredUserList  | paginate : { itemsPerPage: itemsPerPageSelctUser, currentPage: p ,id:'2'}" (click)="goToUserDetails(item.userCode)">
+                <div class="box__content">
+                    <div class="user__name">{{item.username}}</div>
+                    <div class="dep">{{item.userType}}</div>
+                    <div class="timestamp">{{"label.LastActivity" | translate}} :</div>
+                    <div class="t_value" *ngIf="item.secretKey !=null">
+                      {{ item.secretKey }}
+                    </div>
+                    <div class="t_value" *ngIf="item.secretKey==null  " >
+                         <p>{{"label.Noactivity" | translate}}</p> 
+                    </div>
+                </div>
+                <!-- <div class="status__circle" [class]="item.status == 'P' ? 'circle__red':'circle__green' "></div> -->
+
+                <div class="status__circle" [class]="item.blockAccess == 'Y' ? 'circle__red':'circle__green' "></div>
+            </div>
+            <p *ngIf="usersList.length == 0" style="width: max-content; position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">No user exist</p>
+        </div>
+        <!-- <pagination-controls nextLabel='{{"label.next" | translate}}'  previousLabel="{{ 'label.previous' | translate}}" [id]="'p2'" style="margin:auto;margin-block: 1rem;" (pageChange)="p = $event"></pagination-controls> -->
+        <div class="DflexPagination">
+            <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+            (pageChange)="p = $event" id="2"
+            ></pagination-controls> 
+       
+            <!-- <select [(ngModel)]="itemsPerPageSelctUser" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select> -->
+          </div>
+  
+    </div>
+</div>

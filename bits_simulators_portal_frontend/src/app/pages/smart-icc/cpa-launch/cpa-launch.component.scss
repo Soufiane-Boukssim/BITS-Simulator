@@ -1,0 +1,137 @@
+
+
+.box_of_contentV2{
+  // position: absolute;
+  width:98%;
+  height: 100%;
+  min-height: 80vh;
+  top: 3rem;
+  left: 1rem;
+  border-radius: 10px;
+  //overflow-y: visible;
+  overflow-x: hidden !important;
+  background-color: #fff;
+  //background-color: red;
+  border: 1px solid #BCBCBC;
+  font-size: 12px;
+  margin: auto;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+ 
+  .side__list{
+    position: absolute;
+    border-right: 1px solid #BCBCBC;
+    // min-height: 850px;
+    // height: 100%;
+    height: 78vh;
+    width: 220px;
+    .header{
+      padding:.5rem;
+      margin-bottom: .5rem;
+      .btn{
+        font-size: 12px;
+      }
+    }
+    .add__btn{
+      margin-left: 5%;
+      bottom: 20px;
+      display: flex;
+      
+    }
+    ul{
+      margin-top: 15px;
+      display: grid;
+      li{
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        border-bottom: 1px solid #BCBCBC;
+        padding-left:1rem;
+        height: 40px;
+        cursor: pointer;
+        &:hover{
+          background-color: #f7f7f7;
+        }
+      }
+    }
+  }
+  .side__content{
+    
+    position: relative;
+    left: 220px;
+    padding-left: .5rem;
+    width: calc(100% - 230px);
+    height: 78vh;
+    overflow-y: visible;
+    overflow-x: hidden;
+  }
+  
+}
+
+
+
+
+
+
+.containerSelect{
+    margin-left: 2%;
+    width: 95%;
+    height: fit-content;
+  }
+
+  .box_of_contentSelct{
+    width: 95%;
+   padding: 1rem;
+   background-color: #fff;
+   border-radius: 10px;
+   //box-shadow: 20px 20px 30px rgba(0, 0, 0, .05);
+   justify-content: center; /* Aligner horizontalement au centre */
+   align-items: center;
+ }
+ .panel{
+  min-height: 400px;
+ }
+ .height-div{
+  height: 80px;
+ }
+
+ .label-panel-profil{
+    margin-top: 5px;
+    text-align: left;
+  }
+.form__control{
+    width: 100%;
+}
+.Dflex{
+  display: flex;
+    
+    //  width: 60%;
+    top: 10px;
+ }
+
+ .btn-Ex{
+    margin-left: 4px;
+
+   border-radius: 100%;
+
+    
+ }
+
+ .td-table-launch{
+    min-width: 300px;
+   width: 40%;
+ }
+
+ .input-profil{
+    width: 70px;
+  }
+
+  .row-logs{
+    height: 400px;
+  }
+
+
+  .row-btn{
+    padding: 20px    ;
+  }

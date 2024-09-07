@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="grid__row">
+    <div class="module__box orange"  *ngIf="getFilteredHabilitation('ISO').length > 0" (click)="navigateTo()" >
+     
+      <div class="box__content"  >
+        <img src="assets/icons/iso.png" height="60" alt="" />
+        <div class="title">ISO Switch</div>
+        <p>ISO8583 payment simulator</p>
+      </div>
+     
+
+      <div class="form__control protocol__select">
+      <div class="select__box" (click)="$event.stopPropagation()" style="width: 100%;">
+        <select [(ngModel)]="protocol" name="protocol"  (click)="chooseProtocol()">
+          <option disabled selected value="">-- select--</option>
+          <ng-container *ngFor="let user of User_Page">
+            <ng-container *ngIf="user.habilitationCode === 'ISO'">
+              <ng-container *ngFor="let protocol of iso_Protocole">
+                <ng-container *ngIf="user.protocolCode === protocol.idProtocole">
+                  <option [value]="protocol.idProtocole">
+                    {{ protocol.protoWording }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="module__box red"
+        *ngIf="getFilteredHabilitation('ATM').length > 0"
+        [routerLink]="['/user/atm']"
+        (click)="changeRoute('/user/atm')"
+    >
+      <div class="box__content">
+        <img src="assets/icons/atm.png" height="60" alt="" />
+        <div class="title">ATM</div>
+        <p>NDC Automatic teller machine</p>
+      </div>
+    </div>
+
+    <div class="module__box orange" 
+        *ngIf="getFilteredHabilitation('Tools').length > 0"
+        [routerLink]="['tools']"
+        (click)="changeRoute('/tools')"
+      >
+    <div class="box__content">
+      <img src="assets/icons/card.png" height="60" alt="" />
+      <div class="title">Tools</div>
+      <p>Tools</p>
+    </div>
+    </div>
+
+    <div class="module__box purple"
+        *ngIf="getFilteredHabilitation('ICC').length > 0"
+         [routerLink]="['icc']"
+         (click)="changeRoute('/icc')"
+         >
+      <div class="box__content">
+        <img src="assets/icons/card.png" height="60" alt="" />
+        <div class="title">Smart ICC</div>
+        <p>ICC smart cards simulator</p>
+      </div>
+    </div>
+
+    <div class="module__box orange" 
+         *ngIf="getFilteredHabilitation('POS').length > 0"
+          [routerLink]="['pos']" 
+          (click)="changeRoute('/pos')"
+        >
+      <div class="box__content">
+        <img src="assets/icons/card.png" height="60" alt="" />
+        <div class="title">POS</div>
+        <p>Point of sell</p>
+      </div>
+    </div>
+
+    <div class="module__box blue" *ngIf="getFilteredHabilitation('ISO').length > 0"
+       [routerLink]="['/user/iso_2022']"
+      (click)="changeRoute('/user/iso_2022')" 
+      [ngClass]="{'disabled': true}"
+      >
+      <div class="box__content">
+        <img src="assets/icons/iso.png" height="60" alt="" />
+        <div class="title">ISO Switch</div>
+        <p>ISO20022 payment simulator</p>
+      </div>
+    </div>
+
+   
+  </div>
+</div>
+<dialog class="modal" #modal>
+  <div class="form">
+    <div class="close" (click)="closeModal()">&times;</div>
+    <div class="title">Protocols :</div>
+    <div class="row__flex">
+      <div class="btn__img">
+        <img src="assets/icons/mastercard.png" height="50" alt="" />
+      </div>
+      <div class="btn__img">
+        <img src="assets/icons/visalogo.png" height="50" alt="" />
+      </div>
+    </div>
+  </div>
+</dialog>
+
+
+
+<app-alert   [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+  

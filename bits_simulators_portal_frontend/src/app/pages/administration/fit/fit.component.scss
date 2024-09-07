@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;600&display=swap');
+
+body {
+  font-family: sans-serif; // Default font for the body
+  margin: 0; // Remove default margin
+  overflow: hidden; // Prevent body from scrolling
+}
+
+.container {
+  padding: 10px; // Reduced padding
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 6px; // Reduced border-radius
+  max-width: 60%; // Reduce width to 60%
+  margin: 0 auto;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+
+  .form-content {
+    max-height: 80vh; // Set max-height for scrolling
+    overflow-y: auto; // Enable vertical scrolling
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .block {
+    margin-bottom: 12px; // Reduced margin-bottom
+    padding: 8px; // Reduced padding
+    border-radius: 5px; // Reduced border-radius
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    &.title {
+      font-size: 14px; // Reduced font-size
+      font-weight: 600;
+      border-bottom: 1px solid #62DE94; // Border color
+      padding-bottom: 6px; // Reduced padding-bottom
+      margin-bottom: 8px; // Reduced margin-bottom
+      font-family: 'Mukta', sans-serif; // Apply Mukta font to titles
+    }
+  }
+
+  .sub-block {
+    margin-bottom: 12px; // Reduced margin-bottom
+
+    label {
+      display: block;
+      font-size: 12px; // Reduced font-size
+      margin-bottom: 4px; // Reduced margin-bottom
+      color: #555;
+    }
+
+    input, select {
+      width: 350px;
+      padding: 4px; // Reduced padding
+      border: 1px solid #ddd;
+      border-radius: 3px; // Reduced border-radius
+      font-size: 12px; // Reduced font-size
+      box-sizing: border-box;
+    }
+
+    select {
+      height: auto;
+      background-color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 4px 8px; // Reduced padding
+      border: none;
+      border-radius: 3px; // Reduced border-radius
+      background-color: #62DE94;
+      color: white;
+      font-size: 12px; // Reduced font-size
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #52c074; // Slightly different color for hover effect
+      }
+    }
+  }
+
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      flex: 1;
+      margin: 0 5px; // Space between buttons
+      padding: 10px; // Adjust padding
+      font-size: 14px; // Font size for buttons
+      background-color: #62DE94;
+      color: white;
+      border: none;
+      border-radius: 5px; // Match border-radius with security buttons
+      cursor: pointer;
+
+      &:hover {
+        background-color: #52c074; // Hover effect
+      }
+    }
+  }
+
+  .security-form, .index-pin-form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .data-track-locator {
+    margin-bottom: 20px;
+
+    .data-track-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      label {
+        flex: 1;
+        font-size: 12px; // Reduced font-size
+        color: #555;
+      }
+
+      input {
+        width: 350px;
+        padding: 4px; // Reduced padding
+        border: 1px solid #ddd;
+        border-radius: 3px; // Reduced border-radius
+        font-size: 12px; // Reduced font-size
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 4px 8px; // Reduced padding
+        font-size: 12px; // Reduced font-size
+      }
+    }
+  }
+
+  .form-group {
+    margin-bottom: 15px; // Space between form groups
+
+    label {
+      display: block;
+      font-size: 12px; // Font size for labels
+      margin-bottom: 5px; // Space below the label
+      color: #555;
+    }
+
+    input {
+      width: 100%; // Full width for inputs
+      padding: 8px; // Padding inside input fields
+      border: 1px solid #ddd; // Border color
+      border-radius: 3px; // Rounded corners
+      font-size: 12px; // Font size for input text
+      box-sizing: border-box; // Include padding and border in the element's total width and height
+    }
+  }
+}

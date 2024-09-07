@@ -1,0 +1,455 @@
+<div class="box_of_content p-block-1">
+    <!-- <div class="row">
+        <div class="form">
+            <h2 class="h2-title"> {{'label.search' | translate}} </h2> -
+            <div class="row">
+                <div class="form__control">
+                    <label for="">{{'label.search' | translate}}</label>
+                    <input type="text" [(ngModel)]="searchText" (input)="searchByAll()"  placeholder="type to search . . .">
+                  </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="tabs__container">
+        <div class="tab__buttons">
+            <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)"> {{'label.Configuration' | translate}} </a>
+            <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)"> {{'label.Screen' | translate}} </a>
+            <a [className]="tab_3 ? 'active':''" (click)="open_tab(2)"> {{'label.State' | translate}} </a>
+            <a [className]="tab_4 ? 'active':''" (click)="open_tab(3)"> {{'label.Fit' | translate}} </a>
+            <a [className]="tab_5 ? 'active':''" (click)="open_tab(4)"> {{'label.AID' | translate}} </a>
+        </div>
+        <div class="tabs">
+            <div class="tab tab-one" *ngIf="tab_1" style="display: block;">
+                <!-- <div class="row">
+                    <app-table [arrayHeader]="arrayHeadConfig"  [arrayGrid]="logsDataConfigFilter" [numberOfLines]="lines" ></app-table>
+                </div> -->
+
+                <div class="row">
+                    <div class="form">
+                        <div class="row">
+                            <div class="form__control">
+                                <input type="text" [(ngModel)]="searchText"   placeholder="type to search . . .">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table">
+                        <table cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>{{'label.header.Code' | translate}}</th>
+                                <th> {{'label.header.Label' | translate}}</th>
+                                <th> {{'label.header.Value' | translate}} </th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let logConfig of logsDataConfigFilter | search : searchText  | paginate : {itemsPerPage:numberOfLines, currentPage:p}" >
+                                <td>{{ logConfig.Code }}</td>
+                                <td>{{ logConfig.Label }}</td>
+                                <td>{{ logConfig.Value }}</td>
+                            </tr>
+                            <p style="margin: auto; width: fit-content; padding: .5rem;" *ngIf="logsDataConfigFilter.length == 0" >{{'label.No_data'| translate}} </p>
+                        </tbody>
+                        </table>
+                    <div class="DflexPagination">
+                        <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                                            (pageChange)="p = $event"
+                        ></pagination-controls>
+
+                        <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        </select>
+                    </div>
+
+                    </div> 
+                </div>
+
+
+
+            </div>
+            <div class="tab" *ngIf="tab_2">
+                <div class="row">
+                    <div class="form">
+                        <div class="row">
+                            <div class="form__control">
+                                <input type="text" [(ngModel)]="searchText"   placeholder="type to search . . .">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                 <div class="table">
+                    <table cellspacing="0">
+                      <thead>
+                        <tr>
+                            <th>{{'label.header.Number' | translate}}</th>
+                            <th> {{'label.header.Value' | translate}} </th>
+                            <!-- <th>Action</th> -->
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let logScreen of logsDataScreenFilter | search : searchText  | paginate : {itemsPerPage:numberOfLines, currentPage:p} "
+                           (click)="showScreeImg(logScreen)"
+                        >
+                            <td>{{ logScreen.Number }}</td>
+                            <td>{{ logScreen.Value }}</td>
+                            <!-- <td>
+                                <div class="div_icon_show">
+                                    <img src="\assets\icons\visibility.png" alt="Visibility Icon" class="icon_show"  (click)="showScreeImg(logScreen)">
+                                </div>
+                            </td> -->
+                          </tr>
+                         <p style="margin: auto; width: fit-content; padding: .5rem;" *ngIf="logsDataScreenFilter.length == 0" >{{'label.No_data'| translate}} </p>
+                      </tbody>
+                    </table>
+                   <div class="DflexPagination">
+                     <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                                          (pageChange)="p = $event"
+                     ></pagination-controls>
+
+                     <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="" class="pagination-select">
+                       <option value="5">5</option>
+                       <option value="10">10</option>
+                       <option value="15">15</option>
+                       <option value="20">20</option>
+                     </select>
+                   </div>
+                 </div>
+                    <div class="tab_Img" >
+                        <div class="tab_Img" *ngIf="imageToShow">
+                            <div class="screen_image">
+                              <img [src]="imageToShow"  />
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab_3">
+
+                <div class="row">
+                    <div class="form">
+                        <div class="row">
+                            <div class="form__control">
+                                <input type="text" [(ngModel)]="searchText"   placeholder="type to search . . .">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+
+                <div class="table">
+                    <table cellspacing="0">
+                      <thead>
+                        <tr>
+                            <th>{{'label.header.Number' | translate}}</th>
+                            <th>{{'label.header.Type' | translate}}</th>
+                            <th> {{'label.header.Value' | translate}} </th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let logState of logsDataStateFilter| search : searchText | paginate : {itemsPerPage:numberOfLines, currentPage:p} " (click)="selectNDCStateRecord(logState)">
+                            <td>{{ logState.Number }}</td>
+                            <td>{{ logState.Type }}</td>
+                            <td>{{ logState.Value }}</td>
+
+                          </tr>
+                         <p style="margin: auto; width: fit-content; padding: .5rem;" *ngIf="logsDataStateFilter.length == 0" >{{'label.No_data'| translate}}</p>
+                      </tbody>
+                    </table>
+                  <div class="DflexPagination">
+                    <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                                         (pageChange)="p = $event"
+                    ></pagination-controls>
+
+                    <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="" class="pagination-select">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                    <div class="right__side tab_state" *ngIf="showDiv">
+                        <div class="form f_b">
+                            <div class="row">
+                                <div class="form__control">
+                                    <label> {{'label.State_Name' | translate}}  </label>
+                                    <input  type="text"  [(ngModel)]="stateDetail.stateName" readonly>
+                                    <p class="code">
+                                        {{stateDetail.stateNumber}}
+                                      </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label>{{entry2}}</label>
+                                    <input type="text"  [(ngModel)]="stateDetail.entry2" readonly>
+                                </div>
+                                <div class="form__control">
+                                    <label>{{entry3}}</label>
+                                    <input type="text" [(ngModel)]="stateDetail.entry3" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label>{{entry4}}</label>
+                                    <input type="text" [(ngModel)]="stateDetail.entry4" readonly>
+                                </div>
+                                <div class="form__control">
+                                    <label>{{entry5}}</label>
+                                    <input type="text" [readOnly]="true" [(ngModel)]="stateDetail.entry5" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label>{{entry6}}</label>
+                                    <input type="text" [readOnly]="true" [(ngModel)]="stateDetail.entry6">
+                                </div>
+                                <div class="form__control">
+                                    <label>{{entry7}}</label>
+                                    <input type="text" [readOnly]="true" [(ngModel)]="stateDetail.entry7">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label>{{entry8}}</label>
+                                    <input type="text" [readOnly]="true"  [(ngModel)]="stateDetail.entry8">
+                                </div>
+                                <div class="form__control">
+                                    <label>{{entry9}}</label>
+                                    <input type="text" [readOnly]="true" [(ngModel)]="stateDetail.entry9">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab_4">
+                <div class="row">
+                    <div class="form">
+                        <div class="row">
+                            <div class="form__control">
+                                <input type="text" [(ngModel)]="searchText"   placeholder="type to search . . .">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="table">
+                        <table cellspacing="0">
+                          <thead>
+                            <tr>
+                                <th>{{'label.header.Number' | translate}}</th>
+                                <th> {{'label.header.Value' | translate}} </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let logFit of logsDataFitFilter | search : searchText| paginate : {itemsPerPage:numberOfLines, currentPage:p} " (click)="selectFITRecord(logFit)">
+                            <td>{{ logFit.Number }}</td>
+                            <td>{{ logFit.Value }}</td>
+                          </tr>
+                             <p style="margin: auto; width: fit-content; padding: .5rem;" *ngIf="logsDataFitFilter.length == 0" >{{'label.No_data'| translate}} </p>
+                          </tbody>
+                        </table>
+                      <div class="DflexPagination">
+                        <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                                             (pageChange)="p = $event"
+                        ></pagination-controls>
+
+                        <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" class="pagination-select">
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="right__side tab_Fait" *ngIf="showDivFIT">
+                        <div class="form f_b">
+                            <div class="row">
+                                <div class="form__control">
+                                    <label>  {{'label.FIT_Code' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.fitCode">
+                                </div>
+                                <div class="form__control">
+                                </div>
+                                <div class="form__control">
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="form__control">
+                                    <label> {{'label.Institution_ID_Index' | translate}}  </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.institutionIdIndex">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.Track_3_PIN_retry_count_index' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.track3PINRetryCountIndex">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.Institution_ID' | translate}}</label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.institutionId">
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form__control">
+                                    <label> {{'label.PIN_offset_index' | translate}}</label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.pinOffsetIndex">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.Indirect_next_state_index' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.indirectNextStateIndex">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.Decimalisation_table' | translate}}</label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.decimalisationTable">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label> {{'label.Algorithm_Bank_ID' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.algorithmBankId">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.Encrypted_PIN_Key' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.encryptedPinKey">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.Maximum_PIN_digits_entred' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.maximumPinDigit1">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label> {{'label.Index_Reference_point' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.indexReferencePoint">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.Maximum_PIN_digits_checked' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.maximumPinDigit2">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.Language_code_index' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.languageCodeIndex">
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form__control">
+                                    <label> {{'label.PIN_pad' | translate}}</label>
+                                    <input type="text" readonly  [(ngModel)]="fitDetail.pinPad">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.CIM86_sensor_flag' | translate}}</label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.cim86SensorFlag">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.PAN_data_index' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.panDataIndex">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label> {{'label.Reserved' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.reserved">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.PAN_data_length' | translate}}</label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.panDataLength">
+                                </div>
+                                <div class="form__control">
+                                    <label> {{'label.PIN_Block_format' | translate}}</label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.pinBlockFormat">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label> {{'label.PAN_pad' | translate}} </label>
+                                    <input type="text" readonly [(ngModel)]="fitDetail.panPad">
+                                </div>
+                                <div class="form__control">
+                                </div>
+                                <div class="form__control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab_5" >
+                <div class="row">
+                    <div class="form">
+                        <div class="row">
+                            <div class="form__control">
+                                <input type="text" [(ngModel)]="searchText"   placeholder="type to search . . .">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                   <div class="table">
+                    <table cellspacing="0">
+                      <thead>
+                        <tr  style="font-size: 9.5px;">
+                            <th>{{'label.header.Entry' | translate}}</th>
+                            <th> {{'label.header.Primary_AID_Value' | translate}} </th>
+                            <th> {{'label.header.Application_Label' | translate}} </th>
+                            <th> {{'label.header.Lowest_AID_NBR' | translate}} </th>
+                            <th> {{'label.header.Heighest_AID_NBR' | translate}} </th>
+                            <th> {{'label.header.TAC_Decline' | translate}} </th>
+                            <th> {{'label.header.TAGS_Transactions_Req' | translate}} </th>
+                            <th> {{'label.header.Data_Object_for_Completion_D' | translate}} </th>
+                            <th> {{'label.header.Secondary_AID_Value' | translate}} </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr style="font-size: 9.5px;" *ngFor="let logAid of logsDataAidFilter | search : searchText | paginate : {itemsPerPage:numberOfLines, currentPage:p}" >
+                            <td>{{ logAid.entryNumber }}</td>
+                            <td>{{ logAid.fullAID }}</td>
+                            <td>{{ logAid.applicationLabel }}</td>
+                            <td>{{ logAid.lavn }}</td>
+                            <td>{{ logAid.havn }}</td>
+                            <td>{{ logAid.tacdecline }}</td>
+                            <td>{{ logAid.tagstrsReq }}</td>
+                            <td>{{ logAid.tagscompletion }}</td>
+                            <td>{{ logAid.secondaryAID }}</td>
+                          </tr>
+                         <p style="margin: auto; width: fit-content; padding: .5rem;" *ngIf="logsDataAidFilter.length == 0" >{{'label.No_data'| translate}} </p>
+                      </tbody>
+                    </table>
+                     <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                                            (pageChange)="p = $event"
+                       ></pagination-controls>
+
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" class="pagination-select">
+                         <option value="5">5</option>
+                         <option value="10">10</option>
+                         <option value="15">15</option>
+                         <option value="20">20</option>
+                       </select>
+                     </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

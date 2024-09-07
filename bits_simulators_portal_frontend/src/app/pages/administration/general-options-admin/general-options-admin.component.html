@@ -1,0 +1,437 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">{{ "label.currency" | translate}}</a>
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">{{ "label.country" | translate}}</a>
+      <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)">{{ "label.city" | translate}}</a>
+      
+      <!-- <a [className]="tab_12 ? 'active' : ''" (click)="open_tab(11)">{{ "label.Habilitations" | translate}}</a> -->
+   
+      <!-- <button class="clearBtn" (click)="clearAll()">Clear Form</button> -->
+    </div>
+
+    <div class="tabs">
+      <div class="box_of_content_fit" *ngIf="tab_1">
+        <div class="rowGeneral">
+          <div class="form">
+            <div class="search">
+              <div class="form__control">
+                <!--<input type="text" placeholder="type to search" />-->
+                <input type="text" [(ngModel)]="searchText" placeholder="{{ 'label.search' | translate}}">
+              </div>
+            </div>
+            <div class="table">
+
+              <table cellspacing="0">
+                <thead>
+                  <th>{{ "label.CurrencyCode" | translate}}</th>
+                  <th>{{ "label.Description" | translate}}</th>
+                  <th>{{ "label.alpha" | translate}}</th>
+                  <th>{{ "label.Exponent" | translate}}</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of filteredCurrencyList
+                        | paginate : { itemsPerPage: 5, currentPage: p }
+                    "
+                    (click)="selectCurrencyRecord(item.id)"
+                  >
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.ccyDesc }}</td>
+                    <td>{{ item.ccyAlpha }}</td>
+                    <td>{{ item.ccyExponent }}</td>
+                  </tr>
+                </tbody>
+              </table> 
+
+            </div>
+         
+            <p class="no_data" *ngIf="filteredCurrencyList.length == 0">{{ "error.Nodata" | translate}}</p>
+            <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+              (pageChange)="p = $event"
+            ></pagination-controls>
+          </div>
+          <form
+            class="form f_b bg"
+            [formGroup]="currencyForm"
+            
+          >
+     
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>{{ "label.currencyCode" | translate }}</label>
+                <input type="text" formControlName="id" [attr.disabled]="isReadOnly ? true : null"/>
+                <div class="errorValid" *ngIf="!idCcyValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+              <div class="form__control">
+                <label>{{ "label.Description" | translate }}</label>
+                <input type="text" formControlName="ccyDesc" />
+                <div class="errorValid" *ngIf="!CcyDescValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+            </div>
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>{{ "label.alpha" | translate }}</label>
+                <input type="text" formControlName="ccyAlpha" />
+                <div class="errorValid" *ngIf="!CcyAlphaValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+              <div class="form__control">
+                <label>{{ "label.Exponent" | translate }}</label>
+                <input type="number" formControlName="ccyExponent" />
+                <div class="errorValid" *ngIf="!CcyExponnentValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+            </div>
+
+
+        
+
+            <div class="row  ">
+              <div class="Dflex">
+                <div class="button-clear">
+                  <button class="btn btn-outlined " (click)="clearAll()" *ngIf="isReadOnly"> {{ "label.Clear" |
+                    translate}}</button>
+                </div>
+                <div class="DflexButton">
+                  <button type="submit" class="btn btn-danger btn-delete" *ngIf="isReadOnly" (click)="openDeletePopUp()">{{
+                    "label.delete" | translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="!isReadOnly" (click)="openSavePopUp()">{{ "label.save" |
+                    translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="isReadOnly" (click)="openSavePopUp()">{{ "label.update" |
+                    translate }}</button>
+                </div>
+              </div>
+            
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_2">
+        <div class="rowGeneral">
+          <div class="form">
+            <div class="search">
+              <div class="form__control">
+                <!--<input type="text" placeholder="type to search" />-->
+                <input type="text" [(ngModel)]="searchText" placeholder="{{ 'label.search' | translate}}">
+              </div>
+            </div>
+
+            <div  class="table">
+            <table cellspacing="0">
+              <thead>
+                <th>{{ "label.countryCode" | translate }}</th>
+                <th>{{ "label.Description" | translate }}</th>
+                <th>{{ "label.alpha2" | translate }}</th>
+                <th>{{ "label.alpha3" | translate }}</th>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let item of filteredCountryList
+                      | paginate : { itemsPerPage: 5, currentPage: p }
+                  "
+                  (click)="selectCountryRecord(item.id)"
+                >
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.countryDesc }}</td>
+                  <td>{{ item.countryAlpha2 }}</td>
+                  <td>{{ item.countryAlpha3 }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            <p class="no_data" *ngIf="filteredCountryList.length == 0">{{ "error.Nodata" | translate }}</p>
+            <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+              (pageChange)="p = $event"
+            ></pagination-controls>
+          </div>
+          <form
+            class="form f_b bg"
+            [formGroup]="countryForm"
+           
+          >
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>{{ "label.countryCode" | translate }}</label>
+                <input type="text" formControlName="id" [attr.disabled]="isReadOnly ? true : null">
+                <div class="errorValid" *ngIf="!idCountValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+              <div class="form__control">
+                <label>{{ "label.Description" | translate }}</label>
+                <input type="text" formControlName="countryDesc" />
+                <div class="errorValid" *ngIf="!countDescValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+            </div>
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>{{ "label.alpha2" | translate }}</label>
+                <input type="text" formControlName="countryAlpha2" />
+                <div class="errorValid" *ngIf="!countAlpha2Valid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+              <div class="form__control">
+                <label>{{ "label.alpha3" | translate }}</label>
+                <input type="text" formControlName="countryAlpha3" />
+                <div class="errorValid" *ngIf="!countAlpha3Valid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+            </div>
+
+
+            <div class="row  ">
+              <div class="Dflex">
+                <div class="button-clear">
+                  <button class="btn btn-outlined " (click)="clearAll()" *ngIf="isReadOnly"> {{ "label.Clear" |
+                    translate}}</button>
+                </div>
+                <div class="DflexButton">
+                  <button type="submit" class="btn btn-danger btn-delete" *ngIf="isReadOnly" (click)="openDeletePopUp()">{{
+                    "label.delete" | translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="!isReadOnly" (click)="openSavePopUp()">{{ "label.save" |
+                    translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="isReadOnly" (click)="openSavePopUp()">{{ "label.update" |
+                    translate }}</button>
+                </div>
+              </div>
+            
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+
+      <div class="box_of_content_fit" *ngIf="tab_3">
+        <div class="rowGeneral">
+          <div class="form">
+            <div class="search">
+              <div class="form__control">
+                <!--<input type="text" placeholder="type to search" />-->
+                <input type="text" [(ngModel)]="searchText" placeholder="{{ 'label.search' | translate}}">
+              </div>
+            </div>
+            <div  class="table">
+              <table cellspacing="0">
+              <thead>
+                <th>{{ "label.cityCode" | translate }}</th>
+                <th>{{ "label.wording" | translate }}</th>
+                <th>{{ "label.countryCode" | translate }}</th>
+                <th>{{ "label.bankCode" | translate }}</th>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let item of filteredCityList
+                      | paginate : { itemsPerPage: 5, currentPage: p }
+                  "
+                  (click)="selectCityRecord(item.cityCode)"
+                >
+                  <td>{{ item.cityCode }}</td>
+                  <td>{{ item.wording }}</td>
+                  <td>{{ item.countryCode }}</td>
+                  <td>{{ item.bankCode }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            <p class="no_data" *ngIf="filteredCityList.length == 0">{{ "error.Nodata" | translate }}</p>
+            <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+              (pageChange)="p = $event"
+            ></pagination-controls>
+          </div>
+          <form
+            class="form f_b bg"
+            [formGroup]="cityForm"
+          >
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>{{ "label.cityCode" | translate }}</label>
+                <input type="text" formControlName="cityCode" [attr.disabled]="isReadOnly ? true : null">
+                <div class="errorValid" *ngIf="!cityCodeValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+              <div class="form__control">
+                <label>{{ "label.wording" | translate }}</label>
+                <input type="text" formControlName="wording" />
+                <div class="errorValid" *ngIf="!cityWordingValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+            </div>
+            <div class="row p-block-1" style="justify-content: flex-end">
+             
+              <div class="form__control">
+                <label>{{ "label.country" | translate }}</label>
+                    <div class="select__box">
+                        <select formControlName="countryCode">
+                            <option value="">{{ 'label.select' | translate}}</option>
+                            <option *ngFor="let item of countryList" [value]="item.id" >{{ item.countryDesc }}</option>
+                        </select>
+                    </div>
+                    <div class="errorValid" *ngIf="!countryCodeValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+             
+              <div class="form__control" >
+                <label>{{ "label.bank" | translate }}</label>
+                    <div class="select__box">
+                        <select formControlName="bankCode">
+                            <option value="">{{ 'label.select' | translate}}</option>
+                            <option *ngFor="let item of bankList" [value]="item.id" >{{ item.wording }}</option>
+                        </select>
+                    </div>
+                    <div class="errorValid" *ngIf="!bankCodeValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+              </div>
+            </div>
+
+           <div class="row  ">
+              <div class="Dflex">
+                <div class="button-clear">
+                  <button class="btn btn-outlined " (click)="clearAll()" *ngIf="isReadOnly"> {{ "label.Clear" |
+                    translate}}</button>
+                </div>
+                <div class="DflexButton">
+                  <button type="submit" class="btn btn-danger btn-delete" *ngIf="isReadOnly" (click)="openDeletePopUp()">{{
+                    "label.delete" | translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="!isReadOnly" (click)="openSavePopUp()">{{ "label.save" |
+                    translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="isReadOnly" (click)="openSavePopUp()">{{ "label.update" |
+                    translate }}</button>
+                </div>
+              </div>
+            
+            </div>
+          </form>
+        </div>
+      </div>
+  
+    <!-- HABILITATION MANAGEMENT -->
+      <div class="box_of_content_fit" *ngIf="tab_12">
+        <div class="row">
+          <div class="form">
+            <div class="search">
+              <div class="form__control">
+                <!--<input type="text" placeholder="type to search" />-->
+                <input type="text" [(ngModel)]="searchText" placeholder="{{ 'label.search' | translate}}">
+              </div>
+            </div>
+            <div  class="table">
+              <table cellspacing="0">
+              <thead>
+                <th>{{ "label.groupCode" | translate }}</th>
+                <th>{{ "label.groupName" | translate }}</th>
+                <th>{{ "label.menuCode" | translate }}</th>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let item of filteredGroupList
+                      | paginate : { itemsPerPage: 5, currentPage: p }
+                  "
+                  (click)="selectedGroupRecord(item.groupId)"
+                >
+                  <td>{{ item.groupId.groupCode }}</td>
+                  <td>{{ item.groupName }}</td>
+                  <td>{{ item.groupId.menuCode }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            <p class="no_data" *ngIf="filteredGroupList.length == 0">{{ "error.Nodata" | translate }}</p>
+            <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+              (pageChange)="p = $event"
+            ></pagination-controls>
+          </div>
+          <form
+            class="form f_b bg"
+            [formGroup]="GroupForm"
+         
+          >
+          <h3>Group Form</h3>
+          <div class="row p-block-1" style="justify-content: flex-end">
+            <div class="form__control" [formGroup]="this.idGroup">
+              <label>{{ "label.groupCode" | translate }}</label>
+              <input type="text" formControlName="groupCode" [attr.disabled]="isReadOnly ? true : null"/>
+              <div class="errorValid" *ngIf="!groupCodeValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+            </div>
+            <div class="form__control">
+              <label>{{ "label.groupName" | translate }}</label>
+              <input type="text" formControlName="groupName" />
+              <div class="errorValid" *ngIf="!groupNameValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+            </div>
+          </div>
+          <div class="row p-block-1" style="justify-content: flex-end">
+          
+            <div class="form__control" [formGroup]="this.idGroup">
+              <label>{{ "label.menu" | translate }}</label>
+                  <div class="select__box" >
+                      <select formControlName="menuCode" [attr.disabled]="isReadOnly ? true : null">
+                          <option value="">{{ 'label.select' | translate}}</option>
+                          <option *ngFor="let item of MenusList[0]" [value]="item.id" >{{ item.title }}</option>
+                      </select>
+                  </div>
+                  <div class="errorValid" *ngIf="!menuCodeValid">{{ "error.ShouldNotBeEmpty" | translate }}</div>
+            </div>
+          </div>
+
+
+          <div class="row  ">
+              <div class="Dflex">
+                <div class="button-clear">
+                  <button class="btn btn-outlined " (click)="clearAll()" *ngIf="isReadOnly"> {{ "label.Clear" |
+                    translate}}</button>
+                </div>
+                <div class="DflexButton">
+                  <button type="submit" class="btn btn-danger btn-delete" *ngIf="isReadOnly" (click)="openDeletePopUp()">{{
+                    "label.delete" | translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="!isReadOnly" (click)="openSavePopUp()">{{ "label.save" |
+                    translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="isReadOnly" (click)="openSavePopUp()">{{ "label.update" |
+                    translate }}</button>
+                </div>
+              </div>
+            
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- <dialog class="modal" #modal>
+  <div class="header">
+      <div class="title">{{ "label.actionPanel" | translate }}</div>
+      <div class="close" (click)="closeModal()">&times;</div>
+  </div>
+  <div class="form">
+      <div class="row">
+          <label for="">{{ "error.DeleteConfirmation" | translate }}</label>
+      </div>
+      <div class="row">
+        <button id="deleteBtnUser"  (click)="Delete()">{{ "label.delete" | translate }}</button>
+        <button id="cancelDelete" (click)="closeModal()">{{ "label.cancel" | translate }}</button>
+      </div>
+  </div>
+</dialog> -->
+
+
+<dialog class="modal" #modal>
+  <div class="header">
+      <div class="title">{{ "label.actionPanel" | translate}}</div>
+      <div class="close" (click)="closeModal()">&times;</div>
+  </div>
+  <div class="form">
+      <div class="row">
+            <label class="lbl" for="">{{ message }} </label>
+
+      </div>
+      <div class="row" *ngIf="userDeleteActiveSelect">
+        <button id="deleteBtnUser" class="btn btn-danger"  (click)="deleteGlobal()">{{ "label.delete" | translate}}</button>
+        <button id="cancelDelete" class="btn btn-primary" (click)="closeModal()">{{ "label.cancel" | translate}}</button>
+      </div>
+
+      <div class="row" *ngIf="userSaveActive">
+        <button id="deleteBtnUser" class="btn btn-primary"  *ngIf="!isReadOnly" (click)="SaveGlobal()">{{ "label.save" | translate}}</button>
+        <button id="deleteBtnUser" class="btn btn-primary" *ngIf="isReadOnly"  (click)="SaveGlobal()">{{ "label.update" | translate}}</button>
+        <button id="cancelDelete" class="btn btn-danger" (click)="closeModal()">{{ "label.cancel" | translate}}</button>
+      </div>
+  </div>
+
+</dialog>
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>

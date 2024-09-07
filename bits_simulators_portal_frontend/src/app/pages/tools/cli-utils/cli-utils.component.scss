@@ -1,0 +1,56 @@
+/* upload.component.css */
+.file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.file-upload .button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.file-upload .button:hover {
+  background-color: #297cb7;
+}
+
+.file-upload .button:focus {
+  outline: none;
+}
+
+.file-upload .choose-btn {
+  /* Styles for choose button */
+}
+
+.file-upload .upload-btn {
+  /* Styles for upload button */
+}
+
+.file-upload .cancel-btn {
+  /* Styles for cancel button */
+}
+
+.file-upload .drop-zone {
+  border: 2px dashed #3498db;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+}
+
+.file-upload .drop-zone p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+
+.search{
+  // padding-top: 20px;
+  padding-bottom: 20px;
+}

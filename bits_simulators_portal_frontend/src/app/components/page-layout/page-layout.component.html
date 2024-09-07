@@ -1,0 +1,17 @@
+<app-dashboard-header >
+</app-dashboard-header>
+
+<!-- [ngStyle]="{ 'left': isVisibleMenu ? '250px' :'0','width':isVisibleMenu?'calc(100% - 250px)':'100%'}" -->
+    <div class="content"  [ngStyle]="{ 'left': (isVisibleMenu&& isVisiblePhone) ? '250px' :'0','width':(isVisibleMenu&& isVisiblePhone)?'calc(100% - 250px)':'100%'}" >
+        <div class="page__title">{{page__title}}</div>
+        <div class="box__wrapV2">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="overlay"> </div>
+    </div>
+    <app-sidebar >
+    </app-sidebar>
+
+
+
+ 

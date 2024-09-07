@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">Currency</a>
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">Country</a>
+      <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)">Exchange</a>
+      <a [className]="tab_4 ? 'active' : ''" (click)="open_tab(3)">Response</a>
+      <a [className]="tab_5 ? 'active' : ''" (click)="open_tab(4)">MCC</a>
+      <a [className]="tab_6 ? 'active' : ''" (click)="open_tab(5)">MTI</a>
+      <a [className]="tab_7 ? 'active' : ''" (click)="open_tab(6)">TAG</a>
+      <a [className]="tab_8 ? 'active' : ''" (click)="open_tab(7)">Account</a>
+      <a [className]="tab_9 ? 'active' : ''" (click)="open_tab(8)">Function</a>
+      <a [className]="tab_10 ? 'active' : ''" (click)="open_tab(9)"
+      >Processing</a
+      >
+    </div>
+    <div class="tabs">
+      <div class="box_of_content_fit" *ngIf="tab_1">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_2">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_3">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_4">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_5">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_6">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_7">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_8">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_9">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_10">
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,432 @@
+
+<div class="box_of_content">
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)"
+        >{{ "label.Institution" | translate }}</a
+      >
+
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)"
+        >{{ "label.Communication" | translate }}</a
+      >
+      <!-- <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)"
+        >Acquirer Institution</a
+      > -->
+      
+    </div>
+    
+    
+
+    <div class="tabs">
+
+      <div  class="div-loader" >
+        <span class="loader-page" *ngIf="isLoading"   ></span>
+      </div>
+  
+
+      <form
+        class="box_of_content_fit"
+        *ngIf="tab_1 && !isLoading" 
+        [formGroup]="communicationForm"
+      >
+        <!-- First row with Institution Code, Bank Code, and Manag MAC -->
+
+        <fieldset class="fieldset_Aria1">
+          <legend class="legend1"><h2>{{ "label.Institution" | translate }}</h2></legend>
+          <div class="row al_f_end  p-1">
+            <div class="form__control">
+              <label>{{ "label.Code" | translate }}</label>
+              <input type="text" formControlName="instCode" [readonly]="isDelete" />
+            </div>
+            <div class="form__control" formGroupName="id">
+              <label>{{ "label.BankCode" | translate }}</label>
+              <!-- <input type="text" formControlName="bankCode"  readonly /> -->
+
+              <div class="select__box"  >
+                <select formControlName="bankCode"   class="readonly-select" >
+                  <option value="">-- select --</option>
+                  <option
+                    *ngFor="let item of bankList"
+                    value="{{ item.id }}"
+                  >
+                    {{ item.wording }}
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                
+              </div>
+              <!-- [readonly]="isDelete" -->
+            </div>
+
+            
+           
+          </div>
+          <div class="row al_f_end  p-1">
+
+            <app-checkbox-square
+            [isChecked]="isChiped"
+            [text]="'Chip Supported'"
+            (checkboxChanged)="handleCheckboxChang()"
+          ></app-checkbox-square>
+            <app-checkbox-square
+              (checkboxChanged)="handleCheckboxChange('m')"
+              [isChecked]="manageHeaderMac"
+              [text]="'Manag MAC'"
+            ></app-checkbox-square>
+          </div>
+
+        
+        </fieldset>
+
+
+        
+        <!-- Second row with Service and Client checkboxes -->
+  <fieldset class="fieldset_Aria1">
+    <legend class="legend1"><h2>{{ "label.Communication" | translate }}</h2></legend>
+
+      
+
+        <fieldset class="fieldset_Aria1">
+          <legend class="legend1 legend-DFlex ">
+            <app-checkbox-square
+            [text]="'Client'"
+            [isChecked]="clientChecked"
+            (checkboxChanged)="handleCheckboxChange('c')"
+          ></app-checkbox-square>
+          <app-checkbox-square
+          [text]="'Server'"
+          [isChecked]="serviceChecked"
+          (checkboxChanged)="handleCheckboxChange('s')"
+        ></app-checkbox-square>
+        
+        </legend>
+           
+            <div class="row al_f_end border_bottom p-1">
+              <div class="form__control">
+                <label>{{ "label.IPAddress" | translate }}</label>
+                <input type="text" formControlName="commIp"  [disabled]="serviceChecked" />
+              </div>
+              <div class="form__control">
+                <label>{{ "label.Port" | translate }}</label>
+                <input type="text" formControlName="commPort" />
+              </div>
+              <div class="form__control">
+                <label>{{ "label.TimeOut" | translate }}</label>
+                <div class="span-timeOut"><input type="number" formControlName="timeOutComms" /><h2>(S)</h2></div>
+              </div>
+            </div>
+
+        </fieldset>
+
+        
+        
+      
+
+        <fieldset class="fieldset_Aria1">
+          <legend class="legend1">  
+            <app-checkbox-square
+            [text]="'Header'"
+            [isChecked]="manageHeaderChecked"
+            (checkboxChanged)="handleCheckboxChange('h')"
+          ></app-checkbox-square></legend>
+          
+           <!-- Fifth row with Header Type, Header Communication, and Message Header -->
+            <div class="al_f_end p-1"  *ngIf="manageHeaderChecked" >
+              <div class="row p-block-1">
+                <div class="form__control">
+                  <label>{{ "label.Type" | translate }}</label>
+                  <div class="select__box">
+                    <select formControlName="headerType">
+                      <option value="">-- select --</option>
+                      <option value="A">{{ "option.A" | translate }}</option>
+                      <option value="B">{{ "option.B" | translate }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form__control">
+                  <label> <label>{{ "label.Communication" | translate }}</label></label>
+                  <!-- <input type="text" formControlName="headerComm" /> -->
+                  <div class="select__box">
+                    <select formControlName="headerComm">
+                      <option value="0">0</option>
+                      <option value="2">2</option>
+                      <option value="4">4</option>
+                    </select>
+                  </div>
+
+                </div>
+                <div class="form__control">
+                  <label>{{ "label.Message" | translate }}</label>
+                  <input type="text" formControlName="msgHeader" />
+                </div>
+                
+              </div>
+
+             
+            
+            </div>
+
+        </fieldset>
+
+       
+  </fieldset>
+
+            <div class="row block" style="justify-content: flex-end">
+              
+                  <div class="DflexButton">
+
+                    <button  type="submit" class="btn btn-danger btn-delete " *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+
+                    <button type="submit" class="btn btn-primary " *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    <button type="submit" class="btn btn-primary " *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                  
+
+                  </div>
+            </div>
+
+
+      </form>
+     
+      <form
+        class="box_of_content_fit"
+        *ngIf="tab_3 && !isLoading"
+        [formGroup]="instForm"
+      >
+
+
+      <div>
+
+
+     
+
+        <fieldset class="fieldset_Aria1">
+          <legend class="legend1"><h2>{{ "label.PaymentSystemManagement" | translate }}</h2></legend>          <div class="row p-block-1">
+            <div class="form__control">
+              <label>{{ "label.Forwarding" | translate }}</label>
+              <input type="text" formControlName="fwdCode" />
+            </div>
+            <div class="form__control">
+              <label>{{ "label.Acquiring" | translate }}</label>
+              <input type="text" formControlName="acqCode" />
+            </div>
+            <div class="form__control">
+              <label>{{ "label.AcquirerID" | translate }}</label>
+              <input type="text" formControlName="acquirerId" />
+            </div>
+          </div>
+
+
+        
+
+          <div class="row p-block-1">
+            <div class="form__control">
+              <label>{{ "label.StationID" | translate }}</label>
+              <input type="text" formControlName="stationId" />
+            </div>
+            <div class="form__control">
+              <label>{{ "label.ICA" | translate }}</label>
+              <input type="text" formControlName="ica" />
+            </div>
+            <div class="form__control">
+              <label>{{ "label.ProcessorID" | translate }}</label>
+              <input type="text" formControlName="processorId" />
+            </div>
+          </div>
+
+        </fieldset>
+
+
+
+        <fieldset class="fieldset_Aria1">
+          <legend class="legend1"><h2>{{ "label.CurrencyManagement" | translate }}</h2></legend>
+          <div class="row">
+            <div class="row p-block-1">
+              <label>{{ "label.Transaction" | translate }}</label>
+            </div>
+            <div class="row p-block-1">
+              <label>{{ "label.Settlement" | translate }}</label>
+              
+            </div>
+            <div class="row p-block-1">
+              </div>
+          </div>
+
+          <div class="row p-block-1">
+            <div class="form__controlV2">
+              <!-- <label>Transaction</label> -->
+              <div class="select__box">
+                <select formControlName="instTransCur1">
+                  <option value="">-- select --</option>
+                  <option
+                    *ngFor="let item of currencyList"
+                    value="{{ item.id }}"
+                  >
+                    {{ item.ccyDesc }}
+                  </option>
+                </select>
+              </div>
+              <div class="div-code">
+                {{instForm.value.instTransCur1}}
+               </div>
+            </div>
+            
+           
+            <div class="form__controlV2">
+              <!-- <label>Settlement</label> -->
+              <div class="select__box">
+                <select formControlName="instSettCurr">
+                  <option value="">-- select --</option>
+                  <option
+                    *ngFor="let item of currencyList"
+                    value="{{ item.id }}"
+                  >
+                    {{ item.ccyDesc }}
+                  </option>
+                </select>
+              </div>
+              <div class="div-code">
+                {{instForm.value.instSettCurr}}
+              </div>
+            </div>
+            
+            <div class="form__control">
+            </div>
+          </div>
+
+        </fieldset>
+
+
+        <fieldset class="fieldset_Aria1">
+          <legend class="legend1"><h2>{{ "label.KeyManagement" | translate }}</h2></legend>
+
+          <div class="row p-block-1">
+            <div class="form__control">
+              <label>{{ "label.PINFormat" | translate }}</label>
+              <div class="select__box">
+                <select formControlName="pinFormat">
+                  <option value="0">-- select --</option>
+                  <option
+                    *ngFor="let item of pinFormats"
+                    value="{{ item.code }}"
+                  >
+                    {{ item.code }} - {{ item.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form__control">
+              </div>
+              <div class="form__control">
+              </div>
+              
+          </div>
+       
+
+          <fieldset class="fieldset_Aria1">
+            <legend class="legend1"><h2>{{ "label.Key" | translate }}</h2></legend>
+            <div class="row p-block-1">
+
+              <div class="form__control" style="width: 377px;">
+                <label>{{ "label.Master" | translate }}</label>
+                <input type="text" formControlName="masterKey"  class="key-input" 
+                (input)="encryptKey($event,'masterKey')" />
+              </div>
+              <div class="">
+                <label class="label-color">  '</label>
+                <p *ngIf="checkValMasterKey" class="check-input" >{{checkValMasterKey}}</p>
+               
+              </div>
+
+              
+            </div>
+  
+  
+            <div class="row p-block-1">
+              <div class="form__control" style="width: 377px;">
+                <label>{{ "label.PIN" | translate }}</label>
+                <input type="text" formControlName="pinKey"  class="key-input"
+                (input)="encryptKey($event,'pinKey')"
+                />
+              </div>
+              <div class="">
+                <label class="label-color"> '</label>
+                <p  *ngIf="checkValPinKey" class="check-input" >{{checkValPinKey}}</p>
+               
+              </div>
+            </div>
+  
+            <div class="row p-block-1">
+              <div class="form__control" style="width: 377px;">
+                <label>{{ "label.MAC" | translate }}</label>
+                <input type="text" formControlName="macKey" class="key-input" 
+                (input)="encryptKey($event,'macKey')"
+                />
+              </div>
+              <div class="">
+                <label class="label-color"> '</label>
+                <p  *ngIf="checkValMacKey"  class="check-input" >{{checkValMacKey}}</p>
+                
+              </div>
+            </div>
+
+          </fieldset>
+
+        </fieldset>
+
+      </div>
+
+
+
+        <div class="row block" style="justify-content: flex-end">
+              
+          <div class="DflexButton"> 
+            <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+            
+              <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+              <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+            
+             
+          </div>
+        </div>
+
+
+       
+      </form>
+
+
+    </div>
+
+
+  </div>
+</div>
+</div>
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+
+<dialog class="modal" #modal>
+  <div class="header">
+      <div class="title">{{ "label.actionPanel" | translate}}</div>
+      <div class="close" (click)="closemodal()">&times;</div>
+  </div>
+  <div class="form">
+      <div class="row">
+            <label class="lbl" for="">{{ message }} </label>
+
+      </div>
+      <div class="row" *ngIf="userDeleteActive">
+        <button id="deleteBtnUser" class="btn btn-danger"  (click)="deleteGlobal()">{{ "label.delete" | translate}}</button>
+        <button id="cancelDelete" class="btn btn-primary" (click)="closemodal()">{{ "label.cancel" | translate}}</button>
+      </div>
+
+      <div class="row" *ngIf="userSaveActive">
+        <button id="deleteBtnUser" class="btn btn-primary"  *ngIf="!isDelete" (click)="SaveGlobal()">{{ "label.save" | translate}}</button>
+        <button id="deleteBtnUser" class="btn btn-primary" *ngIf="isDelete"  (click)="SaveGlobal()">{{ "label.update" | translate}}</button>
+        <button id="cancelDelete" class="btn btn-danger" (click)="closemodal()">{{ "label.cancel" | translate}}</button>
+      </div>
+  </div>
+
+</dialog>

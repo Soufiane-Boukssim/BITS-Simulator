@@ -1,0 +1,217 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">SID</a>
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">Visa</a>
+      <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)">Mastercard</a>
+      <a [className]="tab_5 ? 'active' : ''" (click)="open_tab(4)">Union</a>
+      <!-- <a [className]="tab_6 ? 'active' : ''" (click)="open_tab(5)">CMI</a> -->
+    </div>
+
+    <div class="tabs">
+
+      <div class="box_of_content_fit" *ngIf="tab_1">
+    
+
+        <div class="div-content">
+          <div class="row">
+            <div class="form__control">
+              <label>{{"DatainHexta" | translate }}</label>
+              <textarea  [(ngModel)]="dataHex" ></textarea>
+            </div>
+          </div>
+
+          <div class="row div-btn">
+            <button class="btn btn-primary" (click)="messageParcerSid()" >{{"Parse" | translate }}</button>
+
+          </div>
+
+        </div> 
+
+
+        <div>
+            <h3>{{"DetailsDataTable" | translate }}</h3>
+
+            <table class="table">
+              <thead>
+                <th>{{"DataElement" | translate }} </th>
+                <th>{{"Value" | translate }}</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data_parser ">
+                  <td>{{item.id}}</td>
+                  <td>{{item.value}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+
+
+      </div>
+
+      <div class="box_of_content_fit" *ngIf="tab_2">
+    
+          
+        <div class="div-content">
+          <div class="row">
+            <div class="form__control">
+              <label>{{"DatainHexta" | translate }}</label>
+              <textarea  [(ngModel)]="dataHex" ></textarea>
+            </div>
+          </div>
+
+          <div class="row div-btn">
+            <button class="btn btn-primary" (click)="messageParcerSid()" >{{"Parse" | translate }}</button>
+
+          </div>
+
+        </div>
+
+
+        <div>
+          <h3>{{"DetailsDataTable" | translate }}</h3>
+
+            <table class="table">
+              <thead>
+                <th>{{"DataElement" | translate }} </th>
+                <th>{{"Value" | translate }}</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data_parser ">
+                  <td>{{item.id}}</td>
+                  <td>{{item.value}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+
+
+      </div>
+       
+
+      <div class="box_of_content_fit" *ngIf="tab_3">
+    
+          
+        <div class="div-content">
+          <div class="row">
+            <div class="form__control">
+              <label>{{"DatainHexta" | translate }}</label>
+              <textarea  [(ngModel)]="dataHex" ></textarea>
+            </div>
+          </div>
+
+          <div class="row div-btn">
+            <button class="btn btn-primary" (click)="messageParcerSid()" >{{"Parse" | translate }}</button>
+
+          </div>
+
+        </div>
+
+
+        <div>
+           <h3>{{"DetailsDataTable" | translate }}</h3>
+
+            <table class="table">
+              <thead>
+                <th>{{"DataElement" | translate }} </th>
+                <th>{{"Value" | translate }}</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data_parser ">
+                  <td>{{item.id}}</td>
+                  <td>{{item.value}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+
+
+      </div>
+
+      <div class="box_of_content_fit" *ngIf="tab_4">
+    
+          
+        <div class="div-content">
+          <div class="row">
+            <div class="form__control">
+              <label>{{"DatainHexta" | translate }}</label>
+              <textarea  [(ngModel)]="dataHex" ></textarea>
+            </div>
+          </div>
+
+          <div class="row div-btn">
+            <button class="btn btn-primary" (click)="messageParcerSid()" >{{"Parse" | translate }}</button>
+
+          </div>
+
+        </div>
+
+
+        <div>
+          <h3>{{"DetailsDataTable" | translate }}</h3>
+            <table class="table">
+              <thead>
+                <th>{{"DataElement" | translate }} </th>
+                <th>{{"Value" | translate }}</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data_parser ">
+                  <td>{{item.id}}</td>
+                  <td>{{item.value}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="box_of_content_fit" *ngIf="tab_5">
+    
+          
+        <div class="div-content">
+          <div class="row">
+            <div class="form__control">
+              <label>{{"DatainHexta" | translate }}</label>
+              <textarea  [(ngModel)]="dataHex" ></textarea>
+            </div>
+          </div>
+
+          <div class="row div-btn">
+            <button class="btn btn-primary" (click)="messageParcerSid()" >{{"Parse" | translate }}</button>
+
+          </div>
+
+        </div>
+
+
+        <div>
+          <h3>{{"DetailsDataTable" | translate }}</h3>
+
+            <table class="table">
+              <thead>
+                <th>{{"DataElement" | translate }} </th>
+                <th>{{"Value" | translate }}</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data_parser ">
+                  <td>{{item.id}}</td>
+                  <td>{{item.value}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+
+
+      </div>
+
+      </div>
+  </div>
+</div>
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>

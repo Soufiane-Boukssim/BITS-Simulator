@@ -1,0 +1,1173 @@
+<div class="container">
+  <div class="tabs__containerCard tabs__ex" >
+    <div class="tabs" style="margin-top: 20px;">
+      <!-- cards -->
+      <div class="box_of_content" *ngIf="tab_1">
+        <div class="side__list">
+          <div class="header">
+            <div class="form__control" style="margin-block: 0.5rem">
+              <input
+                type="text"
+                placeholder="search"
+                [(ngModel)]="searchCard"
+              />
+            </div>
+          </div>
+          <button (click)="clear()"  class="add__btn btn btn-secondary" >{{'label.NewCard' | translate}}</button>
+          <ul>
+            <li
+              *ngFor="let item of cards | search : searchCard  |  paginate : { itemsPerPage: 14, currentPage: pCard }  "
+              (click)="selectCardRecord(item.id)"
+            >
+              <div class="icon">
+                <img src="assets/icons/atm-card.png" height="25" alt="" />
+              </div>
+              <span>{{ item.cardDesc }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="DflexPaginationV2">
+          <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                               (pageChange)="pCard = $event"
+          ></pagination-controls>
+        </div>
+        <div class="side__content">
+          <div class="tabs__container tabs__ex">
+            <div class="tab__buttons">
+              <a [className]="tab_4 ? 'active' : ''" (click)="open_tab2(0)"
+              >  {{'label.general' | translate}}</a               >
+              <a [className]="tab_5 ? 'active' : ''" (click)="open_tab2(1)"
+              >  {{'label.CardHolder' | translate}}</a
+              >
+              <a
+                *ngIf="cardPGeneralForm.get('cardType')?.value == 'IC'"
+                [className]="tab_ICC ? 'active' : ''"
+                (click)="open_tab2(3)"
+              >  {{'label.ICC' | translate}}</a
+              >
+            </div>
+            <div class="tabs">
+              <div class="tab" *ngIf="tab_4">
+                <div class="form" [formGroup]="cardPGeneralForm">
+
+                  <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>Identification</h2></legend>
+                    <div class="row">
+
+                      <div class="form__control">
+                        <label> {{'label.CardN°' | translate}}</label>
+                        <input type="text" formControlName="cardNumber" [readonly]="isDelete"  />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('cardNumber')?.invalid &&
+                            (cardPGeneralForm.get('cardNumber')?.dirty ||
+                              cardPGeneralForm.get('cardNumber')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('cardNumber')?.errors?.['required']"
+                          >{{'error.Cardnumber' | translate}} </small
+                          >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('cardNumber')?.errors?.['minlength']"
+                          >
+                            {{'error.Cardnumbermust' | translate}}
+                          </small>
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('cardNumber')?.errors?.['maxlength']"
+                          >
+                            {{'error.Cardnumbermustbetween' | translate}}
+                          </small
+                          >
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>  {{'label.CardName' | translate}}</label>
+                        <input type="text" formControlName="cardDesc" />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('cardDesc')?.invalid &&
+                            (cardPGeneralForm.get('cardDesc')?.dirty ||
+                              cardPGeneralForm.get('cardDesc')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('cardDesc')?.errors?.['required']"
+                          >
+
+                            {{'error.Cardname' | translate}}
+                          </small
+                          >
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>Card Medium</label>
+                        <div class="select__box">
+                          <select formControlName="cardType">
+                            <option value="MG">Magnetic</option>
+                            <option value="IC">ICC</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </fieldset>
+                  <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>Issuer information</h2></legend>
+
+                    <div class="row">
+                      <div class="form__control">
+                        <label>Code</label>
+                        <input type="text" formControlName="issuerCode" />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('issuerCode')?.invalid &&
+                            (cardPGeneralForm.get('issuerCode')?.dirty ||
+                              cardPGeneralForm.get('issuerCode')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('issuerCode')?.errors?.['required']"
+                          >Issuer code is required.</small
+                          >
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>Name</label>
+                        <input type="text" formControlName="issuerName" />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('issuerName')?.invalid &&
+                            (cardPGeneralForm.get('issuerName')?.dirty ||
+                              cardPGeneralForm.get('issuerName')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('issuerName')?.errors?.['required']"
+                          >Issuer name is required.</small
+                          >
+                        </div>
+                      </div>
+
+                      <div class="form__control">
+                        <label>  Bin</label>
+                        <input type="text" formControlName="bin" />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('bin')?.invalid &&
+                            (cardPGeneralForm.get('bin')?.dirty ||
+                              cardPGeneralForm.get('bin')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('bin')?.errors?.['required']"
+                          >Bin is required.</small
+                          >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('bin')?.errors?.['maxlength']"
+                          >Bin must be 3 characters long.</small
+                          >
+                        </div>
+                      </div>
+
+                    </div>
+
+               
+                  </fieldset>
+
+                  <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>Issuer information</h2></legend>
+
+
+                    <div class="row">
+
+                      <div class="form__control">
+                        <label>Expiry date</label>
+                        <input type="month" formControlName="cardExpiry" />
+                        <div
+                          *ngIf="
+                          cardPGeneralForm.get('cardExpiry')?.invalid &&
+                          (cardPGeneralForm.get('cardExpiry')?.dirty ||
+                            cardPGeneralForm.get('cardExpiry')?.touched)
+                        "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('cardExpiry')?.errors?.['required']"
+                          >Card expiry date is required.</small
+                          >
+                        </div>
+                      </div>
+
+
+                      <div class="form__control">
+                        <label>PIN</label>
+                        <input type="number" formControlName="pin" />
+                        <div
+                          *ngIf="
+                          cardPGeneralForm.get('pin')?.invalid &&
+                          (cardPGeneralForm.get('pin')?.dirty ||
+                            cardPGeneralForm.get('pin')?.touched)
+                        "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('pin')?.errors?.['required']"
+                          >PIN is required.</small
+                          >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('pin')?.errors?.['pattern']"
+                          >Invalid PIN format. Only numbers are allowed.</small
+                          >
+                        </div>
+                      </div>
+                      <div class="form__control">
+                      </div>
+
+
+                    </div>
+
+
+
+
+
+                  </fieldset>
+
+
+                  <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>Account information</h2></legend>
+
+                    <div class="row">
+                      <div class="form__control">
+                        <label>Currency</label>
+                        <!-- <input type="text" formControlName="accountCurr" /> -->
+                        <span class="select__box" style="margin-bottom: 20px">
+                          <select formControlName="accountCurr">
+                            <option value="">-- select --</option>
+                            <option
+                              *ngFor="let item of currencyList"
+                              value="{{ item.id }}"
+                            >
+                              {{ item.ccyDesc }}
+                            </option>
+                          </select>
+                        </span>
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('accountCurr')?.invalid &&
+                            (cardPGeneralForm.get('accountCurr')?.dirty ||
+                              cardPGeneralForm.get('accountCurr')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('accountCurr')?.errors?.['required']"
+                          >Account currency is required.</small
+                          >
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>Type</label>
+                        <div class="select__box">
+                          <select formControlName="accountType">
+                            <option value="">-- select --</option>
+                            <option
+                              *ngFor="let item of accounts"
+                              [value]="item.id.accCode"
+                            >
+                              {{ item.accDesc }}
+                            </option>
+                          </select>
+                        </div>
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('accountType')?.invalid &&
+                            (cardPGeneralForm.get('accountType')?.dirty ||
+                              cardPGeneralForm.get('accountType')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('accountType')?.errors?.['required']"
+                          >Account type is required.</small
+                          >
+                        </div>
+                      </div>
+
+                      <div class="form__control">
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                      <div class="form__control">
+                        <label>Account Balance</label>
+                        <input type="number" formControlName="accAmount" />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('accAmount')?.invalid &&
+                            (cardPGeneralForm.get('accAmount')?.dirty ||
+                              cardPGeneralForm.get('accAmount')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('accAmount')?.errors?.['required']"
+                          >Account balance is required.</small
+                          >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('accAmount')?.errors?.['pattern']"
+                          >Invalid balance format. Only numbers are
+                            allowed.</small
+                          >
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>Available Balance</label>
+                        <input type="number" formControlName="available" />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('available')?.invalid &&
+                            (cardPGeneralForm.get('available')?.dirty ||
+                              cardPGeneralForm.get('available')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('available')?.errors?.['required']"
+                          >Available balance is required.</small
+                          >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('available')?.errors?.['pattern']"
+                          >Invalid balance format. Only numbers are
+                            allowed.</small
+                          >
+                        </div>
+                      </div>
+
+                      <div class="form__control">
+                      </div>
+                    </div>
+
+
+                  </fieldset>
+
+
+
+                  <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>CVN </h2></legend>
+                    <div class="row">
+                      <div class="form__control">
+                        <label>Value</label>
+                        <input type="text" formControlName="cvnVal" />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('cvnVal')?.invalid &&
+                            (cardPGeneralForm.get('cvnVal')?.dirty ||
+                              cardPGeneralForm.get('cvnVal')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('cvnVal')?.errors?.['required']"
+                          >CVN value is required.</small
+                          >
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>Value 2</label>
+                        <input type="text" formControlName="cvn2Val" />
+                        <div
+                          *ngIf="
+                            cardPGeneralForm.get('cvn2Val')?.invalid &&
+                            (cardPGeneralForm.get('cvn2Val')?.dirty ||
+                              cardPGeneralForm.get('cvn2Val')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="cardPGeneralForm.get('cvn2Val')?.errors?.['required']"
+                          >CVN2 value is required.</small
+                          >
+                        </div>
+                      </div>
+                      <div class="row">
+                        <!-- Additional controls if needed -->
+                      </div>
+                    </div>
+
+                  </fieldset>
+
+
+
+
+
+
+                  <!-- <div class="row f_right">
+                    <button
+                      class="btn btn-primary"
+                      type="submit"
+                      (click)="openSavePopUpCard()"
+                    >
+                      Save
+                    </button>
+                    <button
+                      class="btn btn-danger"
+                      *ngIf="isDelete"
+                      (click)="openDeletePopUpCard()"
+                    >
+                      delete
+                    </button>
+                  </div> -->
+
+                  <div class="row p-block-1 f_right" style="justify-content: flex-end" >
+                    <div class="Dflex">
+
+                      <div class="DflexButton">
+                        <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUpCard()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUpCard()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUpCard()">{{ "label.update" | translate }}</button>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+
+
+                </div>
+              </div>
+              <div class="tab" *ngIf="tab_5">
+                <div class="form" [formGroup]="magneticForm">
+
+
+                  <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>Card Holder Information </h2></legend>
+                    <div class="row">
+                      <div class="form__control">
+                        <label for="firstName">First Name</label>
+                        <input
+                          type="text"
+                          formControlName="firstName"
+                          id="firstName"
+                        />
+                        <div
+                          *ngIf="
+                              magneticForm.get('firstName')?.invalid &&
+                              (magneticForm.get('firstName')?.dirty ||
+                                magneticForm.get('firstName')?.touched)
+                            "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="magneticForm.get('firstName')?.errors?.['required']"
+                          >First name is required.</small
+                          >
+                        </div>
+                      </div>
+
+                      <div class="form__control">
+                        <label for="lastName">Last Name</label>
+                        <input
+                          type="text"
+                          formControlName="lastName"
+                          id="lastName"
+                        />
+                        <div
+                          *ngIf="
+                              magneticForm.get('lastName')?.invalid &&
+                              (magneticForm.get('lastName')?.dirty ||
+                                magneticForm.get('lastName')?.touched)
+                            "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="magneticForm.get('lastName')?.errors?.['required']"
+                          >Last name is required.</small
+                          >
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                    <div class="row">
+                      <div class="form__control">
+                        <label for="mobile">Mobile</label>
+                        <input
+                          type="text"
+                          formControlName="mobile"
+                          id="mobile"
+                          placeholder="#"
+                        />
+                        <div
+                          *ngIf="
+                              magneticForm.get('mobile')?.invalid &&
+                              (magneticForm.get('mobile')?.dirty ||
+                                magneticForm.get('mobile')?.touched)
+                            "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="magneticForm.get('mobile')?.errors?.['required']"
+                          >Mobile number is required.</small
+                          >
+                          <small
+                            class="error"
+                            *ngIf="magneticForm.get('mobile')?.errors?.['pattern']"
+                          >Invalid mobile number format.</small
+                          >
+                        </div>
+                      </div>
+
+                      <div class="form__control">
+                      </div>
+                    </div>
+
+
+
+
+                  </fieldset>
+
+                  <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>Identifier Track</h2></legend>
+
+                    <div class="row">
+                      <div class="form__control">
+                        <label for="track1">Track1</label>
+                        <input type="text" formControlName="track1" id="track1" class="large-input"  />
+                        <div *ngIf="magneticForm.get('track1')?.invalid && (magneticForm.get('track1')?.dirty || magneticForm.get('track1')?.touched)">
+                          <small class="error" *ngIf="magneticForm.get('track1')?.errors?.['required']">Track1 is required.</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form__control">
+                        <label for="track2">Track2</label>
+                        <input type="text" formControlName="track2" id="track2" class="large-input" />
+                        <div *ngIf="magneticForm.get('track2')?.invalid && (magneticForm.get('track2')?.dirty || magneticForm.get('track2')?.touched)">
+                          <small class="error" *ngIf="magneticForm.get('track2')?.errors?.['required']">Track2 is required.</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form__control">
+                        <label for="track3">Track3</label>
+                        <input type="text" formControlName="track3" id="track3" class="large-input" />
+                        <div *ngIf="magneticForm.get('track3')?.invalid && (magneticForm.get('track3')?.dirty || magneticForm.get('track3')?.touched)">
+                          <small class="error" *ngIf="magneticForm.get('track3')?.errors?.['required']">Track3 is required.</small>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </fieldset>
+
+                  <div class="row f_right">
+                    <button
+                      class="btn btn-primary"
+                      type="submit"
+                      (click)="openSavePopUpCard()"
+                    >
+                      Save
+                    </button>
+                    <button
+                      class="btn btn-danger"
+                      *ngIf="isDelete"
+                      (click)="openDeletePopUpCard()"
+                    >
+                      delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="tab" *ngIf="tab_ICC">
+                <div class="form f_b" [formGroup]="iccForm">
+
+                  <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>Key managment</h2></legend>
+
+                    <div class="row">
+                      <div class="form__control">
+                        <label for="icAid">Aid</label>
+                        <input type="text" formControlName="icAid" id="icAid" />
+                      </div>
+                      <div class="form__control">
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="form__control">
+                        <label for="cfType">Certificate Type</label>
+                        <input type="text" formControlName="cfType" id="cfType" />
+                        <div
+                          *ngIf="
+                            magneticForm.get('cfType')?.invalid &&
+                            (magneticForm.get('cfType')?.dirty ||
+                              magneticForm.get('cfType')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="magneticForm.get('cfType')?.errors?.['required']"
+                            >Certificate type is required.</small
+                          >
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label for="cfNo">Certificate N°</label>
+                        <input type="text" formControlName="cfNo"  />
+                        <div
+                          *ngIf="
+                            magneticForm.get('cfNo')?.invalid &&
+                            (magneticForm.get('cfNo')?.dirty ||
+                              magneticForm.get('cfNo')?.touched)
+                          "
+                        >
+                          <small
+                            class="error"
+                            *ngIf="magneticForm.get('cfNo')?.errors?.['required']"
+                            >Certificate number is required.</small
+                          >
+                        </div>
+                      </div>
+                      
+                    </div>
+                 
+
+
+                    <div class="row row-Top">
+
+                      <div class="form__control" style="width: 377px;">
+                        <label for="icMkAc">Authen Crypthorgrame key</label>
+                        <input type="text" formControlName="icMkAc" id="icMkAc" class="input-key"  style="width: 377px;"
+                            (input)="encryptKey($event,'icMkAc')"
+                        />
+                      </div>
+                      <div class="form__control">
+                        <label for="" class="key-color">'</label>
+                        <p  *ngIf="checkicMkAc" class="p-key">{{checkicMkAc}}</p>
+                       
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+                      <div class="form__control" style="width: 377px;">
+                        <label for="icMkSmc">Secure Mess code key</label>
+                        <input
+                          type="text"
+                          formControlName="icMkSmc"
+                          style="width: 377px;"
+                          id="icMkSmc"
+                          class="input-key"
+                          (input)="encryptKey($event,'icMkSmc')"
+                        />
+                      </div>
+
+                      <div class="form__control">
+                        <label for="" class="key-color">'</label>
+                        <p  *ngIf="checkicMkSmc" class="p-key">{{checkicMkSmc}}</p>
+                     
+                      </div>
+                      
+                    </div>
+
+                    <div class="row">
+                      <div class="form__control" style="width: 377px;">
+                        <label for="icMkSmi">Secure Mess integration Key</label>
+                        <input
+                          type="text"
+                          style="width: 377px;"
+                          formControlName="icMkSmi"
+                          id="icMkSmi"
+                          class="input-key"
+                          (input)="encryptKey($event,'icMkSmi')"
+                        />
+                      </div>
+
+                      <div class="form__control">
+                        <label for="" class="key-color" >'</label>
+                        <p  *ngIf="checkicMkSmi" class="p-key">{{checkicMkSmi}}</p>
+                      
+                      </div>
+
+                    </div>
+
+                  </fieldset>
+
+
+                  <div class="form">
+                    <div class="d-flex">
+                      <button class="btn btn-secondary" (click)="openModal()">
+                        Add Tag
+                      </button>
+  
+                      <button class="btn btn-secondary" >
+                         Read Card
+                      </button>
+                    </div>
+
+                    
+                    
+                    <table class="table">
+                      <thead>
+                        <th>Code</th>
+                        <th>Libelle</th>
+                        <th>Value</th>
+                        <th></th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of icProfiles">
+                          <td>{{ item.id.icTag }}</td>
+                          <td>{{ item.icTagDesc }}</td>
+                          <td>{{ item.icTagValue }}</td>
+                      
+                          
+                          <td>
+                            <div class="row__sb s-gap">
+                              <img
+                                class="action"
+                                (click)="openModalUpdate(item.id.icTag)"
+                                src="assets/icons/edit.png"
+                                height="20"
+                                alt="Icon"
+                              />
+                              <img
+                                class="action"
+                                (click)="deleteTagRecord(item.id)"
+                                src="assets/icons/delete.png"
+                                height="18"
+                                alt="Icon"
+                              />
+                            </div>
+                          </td> 
+                        </tr>
+                      </tbody>
+                    </table>
+                   
+                  </div>
+                  
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_of_content" *ngIf="tab_2">
+        <div class="rowGeneral">
+          <div class="form ">
+            <div class="search">
+              <div class="form__control">
+                <input
+                  type="text"
+                  placeholder="type to search"
+                  [(ngModel)]="searchMerchant"
+                />
+              </div>
+            </div>
+            <div class="table ">
+              <table cellspacing="0">
+                <thead>
+                <th>Merchant Code</th>
+                <th>Merchant Name</th>
+                <th>MCC</th>
+                <th>Country Code</th>
+                <th>City</th>
+                </thead>
+                <tbody>
+                <tr
+                  *ngFor="
+                        let item of merchantList
+                        | search : searchMerchant
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                          
+                      "
+                  (click)="selectMerchantRecord(item)"
+                >
+                  <td>{{ item.id.merCode }}</td>
+                  <td>{{ item.merName }}</td>
+                  <td>{{ item.mcc }}</td>
+                  <td>{{ item.countryCode }}</td>
+                  <td>{{ item.city }}</td>
+                </tr>
+                </tbody>
+              </table>
+
+              <p class="no_data" *ngIf="merchantList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                                     (pageChange)="p = $event"
+                ></pagination-controls>
+
+                <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div  class="form f_b bg form_white ">
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>Merchant Code</label>
+                <input type="text" [(ngModel)]="merCode" [disabled]="showBtnDelete"  />
+              </div>
+              <div class="form__control">
+                <label>Merchant Name</label>
+                <input type="text"  [(ngModel)]="merName" />
+              </div>
+            </div>
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>MCC</label>
+                <div class="select__box">
+                  <select  [(ngModel)]="mcc">
+                    <option value="">-- select --</option>
+                    <option
+                      *ngFor="let item of mccList"
+                      value="{{ item.id.mccCode }}"
+                    >
+                      {{ item.mccDesc }}
+                    </option>
+                  </select>
+
+                </div>
+              </div>
+              <div class="div-code">
+                {{mcc}}
+              </div>
+
+              <div class="form__control">
+                <label>Country</label>
+                <div class="select__box">
+                  <select [(ngModel)]="countryCode">
+                    <option value="">-- select --</option>
+                    <option
+                      *ngFor="let item of countryList"
+                      value="{{ item.id }}"
+                    >
+                      {{ item.countryDesc }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="div-code">
+                {{countryCode}}
+              </div>
+            </div>
+
+            <div class="row p-block-1" style="justify-content: flex-end">
+
+              <div class="form__control">
+                <label>City</label>
+                <!-- <input type="text" [(ngModel)]="city" /> -->
+                <div class="select__box">
+                  <select [(ngModel)]="city">
+                    <option value="">-- select --</option>
+                    <option
+                      *ngFor="let item of cityList"
+                      value="{{item.cityCode }}"
+                    >
+                      {{ item.wording }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="div-code">
+                {{city}}
+              </div>
+              <div class="form__control">
+                <p></p>
+              </div>
+            </div>
+
+
+
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="Dflex">
+                <div class="button-clear">
+                  <button class="btn btn-danger clearBtn" (click)="initMerchant()" *ngIf="showBtnDelete" > {{ "label.Clear" | translate}}</button>
+                </div>
+                <div class="DflexButton">
+                  <button  type="submit" class="btn btn-danger btn-delete" *ngIf="showBtnDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="!showBtnDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="showBtnDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                </div>
+              </div>
+
+            </div>
+          </div >
+        </div>
+      </div>
+
+
+
+      <div class="box_of_content p-1 " *ngIf="tab_3">
+        <div class="rowGeneral">
+          <div class="form">
+            <div class="search">
+              <div class="form__control">
+                <input
+                  type="text"
+                  placeholder="Type to search"
+                  [(ngModel)]="searchTerminal"
+                />
+              </div>
+            </div>
+            <div class="table" >
+              <table cellspacing="0">
+                <thead>
+                <th>Terminal Code</th>
+                <th>Terminal Location</th>
+                <th>Capabilities</th>
+                <th>Type</th>
+                <th>Transaction Count</th>
+                <th>VER Result</th>
+                <th>Application VER</th>
+                </thead>
+                <tbody>
+                <tr
+                  *ngFor="
+                    let item of terminalList
+                      | search : searchTerminal
+                      | paginate : { itemsPerPage: itemsPerPageSelctProfile, currentPage: pProfile }
+                     
+                  "
+                  (click)="selectTerminalRecord(item)"
+                >
+                  <td>{{ item.id.termCode }}</td>
+                  <td>{{ item.termLocation }}</td>
+                  <td>{{ item.termCapabilities }}</td>
+                  <td>{{ item.termType }}</td>
+                  <td>{{ item.tranCount }}</td>
+                  <td>{{ item.termVerResult }}</td>
+                  <td>{{ item.applicationVerNum }}</td>
+                </tr>
+                </tbody>
+              </table>
+              <p class="no_data" *ngIf="terminalList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                                     (pageChange)="pProfile = $event"
+                ></pagination-controls>
+
+                <select [(ngModel)]="itemsPerPageSelctProfile" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <!-- <form
+            [formGroup]="terminalForm"
+            class="form f_b bg"
+            (ngSubmit)="submitTerminal()"
+          > -->
+
+          <div  class="form f_b bg form_white">
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>Terminal Code</label>
+                <input type="text" [(ngModel)]="termCode"   />
+              </div>
+              <div class="form__control">
+                <label>Terminal Location</label>
+                <input type="text" [(ngModel)]="termLocation" />
+              </div>
+            </div>
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>Terminal Capabilities</label>
+                <input type="text" [(ngModel)]="termCapabilities" />
+              </div>
+              <div class="form__control">
+                <label>Terminal Type</label>
+                <input type="text" [(ngModel)]="termType" />
+              </div>
+            </div>
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>Transaction Count</label>
+                <input type="number" [(ngModel)]="tranCount" />
+              </div>
+              <div class="form__control">
+                <label>Terminal VER Result</label>
+                <input type="text" [(ngModel)]="termVerResult" />
+              </div>
+            </div>
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="form__control">
+                <label>Application VER Num</label>
+                <input type="text" [(ngModel)]="applicationVerNum" />
+              </div>
+            </div>
+
+            <!-- <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="buttons">
+                <button class="btn btn-primary">Save</button>
+                <button
+                  class="btn btn-danger"
+                  *ngIf="isDelete"
+                  (click)="deleteTerminalRecord()"
+                >
+                  Delete
+                </button>
+              </div>
+            </div> -->
+
+            <div class="row p-block-1" style="justify-content: flex-end">
+              <div class="Dflex">
+                <div class="button-clear">
+                  <button class="btn btn-danger clearBtn" (click)="initTerProfil()" *ngIf="showBtnDeleteProfile" > {{ "label.Clear" | translate}}</button>
+                </div>
+                <div class="DflexButton button-container">
+                  <button  type="submit" class="btn btn-danger btn-delete" *ngIf="showBtnDeleteProfile" (click)="openDeletePopUpProfile()">{{ "label.delete" | translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="!showBtnDeleteProfile"   (click)="openSavePopUpProfile()">{{ "label.save" | translate }}</button>
+                  <button type="submit" class="btn btn-primary" *ngIf="showBtnDeleteProfile"   (click)="openSavePopUpProfile()">{{ "label.update" | translate }}</button>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<dialog class="modal" #modal>
+  <div class="header">
+    <div class="title">{{ "label.actionPanel" | translate}}</div>
+    <div class="close" (click)="closeModal()">&times;</div>
+  </div>
+  <div class="form">
+    <h2>Add Tag</h2>
+    <div class="row" style="gap: 1rem">
+      <div class="form__control">
+        <div class="label">Name</div>
+        <div class="select__box">
+          <select [(ngModel)]="icTag" [disabled]="isUpdate">
+            <option value="">-- select --</option>
+            <option
+              *ngFor="let item of getFilteredTags()"
+              [value]="item.subfldDefinitionId.subfldId"
+            >
+            {{ item.subfldDefinitionId.subfldId }}-{{ item.subfldDescr }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form__control">
+        <label for="">Value</label>
+        <input type="text" [(ngModel)]="tagVal" />
+      </div>
+    </div>
+    <div class="row button-container" style="margin-top: 10px;">
+      <button class="btn btn-primary" (click)="addicProfiles()">Save</button>
+    </div>
+  </div>
+</dialog>
+
+
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+
+
+
+
+
+<dialog class="modal" #modalGlobal>
+  <div class="header">
+    <div class="title">{{ "label.actionPanel" | translate}}</div>
+    <div class="close" (click)="closeModalGlobal()">&times;</div>
+  </div>
+  <div class="form">
+    <div class="row">
+      <label class="lbl" for="">{{ message }}</label>
+
+    </div>
+    <div class="row button-container" *ngIf="userDeleteActive">
+      <button id="deleteBtnUser" class="btn btn-danger"  (click)="deleteMerchantRecord()">{{ "label.delete" | translate}}</button>
+      <button id="cancelDelete" class="btn btn-primary" (click)="closeModalGlobal()">{{ "label.cancel" | translate}}</button>
+    </div>
+
+    <div class="row button-container" *ngIf="userSaveActive">
+      <button id="deleteBtnUser" class="btn btn-primary"  *ngIf="!showBtnDelete" (click)="submitMerchant()">{{ "label.save" | translate}}</button>
+      <button id="deleteBtnUser" class="btn btn-primary" *ngIf="showBtnDelete"  (click)="submitMerchant()">{{ "label.update" | translate}}</button>
+      <button id="cancelDelete" class="btn btn-danger" (click)="closeModalGlobal()">{{ "label.cancel" | translate}}</button>
+    </div>
+  </div>
+
+</dialog>
+
+
+
+<dialog class="modal" #modalProfile>
+  <div class="header">
+    <div class="title">{{ "label.actionPanel" | translate}}</div>
+    <div class="close" (click)="closeModalProfile()">&times;</div>
+  </div>
+  <div class="form">
+    <div class="row">
+      <label class="lbl" for="">{{ message }}</label>
+
+    </div>
+    <div class="row button-container" *ngIf="userDeleteActiveProfile">
+      <button id="deleteBtnUser" class="btn btn-danger"  (click)="deleteTerminalRecord()">{{ "label.delete" | translate}}</button>
+      <button id="cancelDelete" class="btn btn-primary" (click)="closeModalProfile()">{{ "label.cancel" | translate}}</button>
+    </div>
+
+    <div class="row button-container" *ngIf="userSaveActiveProfile">
+      <button id="deleteBtnUser" class="btn btn-primary"  *ngIf="!showBtnDeleteProfile" (click)="submitTerminal()">{{ "label.save" | translate}}</button>
+      <button id="deleteBtnUser" class="btn btn-primary" *ngIf="showBtnDeleteProfile"  (click)="submitTerminal()">{{ "label.update" | translate}}</button>
+      <button id="cancelDelete" class="btn btn-danger" (click)="closeModalProfile()">{{ "label.cancel" | translate}}</button>
+    </div>
+  </div>
+
+</dialog>
+
+<dialog class="modal" #modalCard>
+  <div class="header">
+    <div class="title">{{ "label.actionPanel" | translate}}</div>
+    <div class="close" (click)="closeModalCard()">&times;</div>
+  </div>
+  <div class="form">
+    <div class="row">
+      <label class="lbl" for="">{{ message }}</label>
+
+    </div>
+    <div class="row button-container" *ngIf="userDeleteActiveCard">
+      <button id="deleteBtnUser" class="btn btn-danger"  (click)="deleteCard()">{{ "label.delete" | translate}}</button>
+      <button id="cancelDelete" class="btn btn-primary" (click)="closeModalCard()">{{ "label.cancel" | translate}}</button>
+    </div>
+
+    <div class="row button-container" *ngIf="userSaveActiveCard">
+      <button id="deleteBtnUser" class="btn btn-primary"  *ngIf="!showBtnDeleteProfile" (click)="saveCard()">{{ "label.save" | translate}}</button>
+      <button id="deleteBtnUser" class="btn btn-primary" *ngIf="showBtnDeleteProfile"  (click)="saveCard()">{{ "label.update" | translate}}</button>
+      <button id="cancelDelete" class="btn btn-danger" (click)="closeModalCard()">{{ "label.cancel" | translate}}</button>
+    </div>
+  </div>
+
+</dialog>

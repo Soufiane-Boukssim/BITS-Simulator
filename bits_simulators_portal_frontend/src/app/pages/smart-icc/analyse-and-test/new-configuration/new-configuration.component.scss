@@ -1,0 +1,35 @@
+/* styles.css (ou dans le même fichier HTML avec la balise <style>) */
+.centered-container {
+  background-color: rgb(222, 239, 255);
+ 
+  margin-top: -840px;
+
+
+  /* Pour centrer le contenu horizontalement si nécessaire */
+}
+
+
+/* styles.css (ou dans le même fichier HTML avec la balise <style>) */
+.text-container {
+  background-color: rgb(212, 230, 248);
+  padding: 5px;
+  height: 35px;
+  
+}
+
+.container{
+  background-color:rgb(222, 239, 255);
+}
+
+.custom-btn {
+  background-color: rgb(222, 239, 255);
+  border-color: rgb(222, 239, 255);
+  color: #000; /* Couleur du texte, vous pouvez ajuster cela selon vos préférences */
+}
+
+// .text-container,
+// .image-container {
+//   background-color: white;
+//   padding: 10px;
+//   /* Vous pouvez ajouter d'autres styles nécessaires */
+// }

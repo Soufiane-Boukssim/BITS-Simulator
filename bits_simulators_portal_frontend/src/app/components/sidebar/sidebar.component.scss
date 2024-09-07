@@ -1,0 +1,237 @@
+nav{
+  width: 250px;
+  // width: ;
+  border-right: 1px solid #C9C9C9;
+  height: 100%;
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  z-index: 22222;
+  .logo{
+    margin-bottom: 1rem;
+    img{
+      margin: auto;
+    }
+  }
+  ul{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    .mother{
+      width: 100%;
+      padding: .4rem 1rem;
+      border-radius: 9px;
+      transition:all .3s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      img{
+        margin-right: 10px;
+      }
+      .motherDiv{
+        display: flex;
+        width: 100%;
+      }
+      .img-icon{
+        margin-top: 4px;
+        height: 10px;
+        margin-right: 10px;
+        color: blue;
+      }
+
+    }
+    .sub{
+      width: 95%;
+      padding: .4rem 1rem;
+      border-radius: 9px;
+      transition:all .3s ease-in-out;
+      margin-left: 10px;
+
+      cursor: pointer;
+      img{
+        filter: invert(50%);
+        margin-right: 10px;
+        height: 11px;
+      }
+
+      a{
+        display: flex;
+        padding: 6px;
+        //background-color: red;
+        gap: 0rem;
+        height: 17px;
+        margin-top: -5px;
+        margin-bottom: 5px;
+        width: 100%;
+        .motherDiv{
+          display: flex;
+          width: 100%;
+        }
+        .img-icon{
+          margin-top: 1px;
+          height: 13px;
+          margin-right: 10px;
+        }
+      }
+      &:hover{
+        transition:all .3s ease-in-out;
+        background-color: #f7f7f7;
+
+      }
+    }
+
+
+    .subFidelety{
+      width: 90%;
+      padding: .4rem 1rem;
+      border-radius: 9px;
+      transition:all .3s ease-in-out;
+      margin-left: 20px;
+
+      cursor: pointer;
+      img{
+        filter: invert(50%);
+        margin-right: 10px;
+        height: 15px;
+      }
+      a{
+        display: flex;
+        padding: 6px;
+        //background-color: red;
+        gap: 0rem;
+        height: 17px;
+        margin-top: -5px;
+        margin-bottom: 5px;
+      }
+      &:hover{
+        transition:all .3s ease-in-out;
+        background-color: #f7f7f7;
+
+      }
+    }
+  }
+  p{
+    line-height: 30px;
+    color: #AAAAAA;
+    max-width: 25ch;
+    margin-left: 1rem;
+  }
+
+  .sub{
+    //background-color: green;
+    font-size: 13px;
+    width: 100%;
+    color: #96daff;
+  }
+
+
+
+  .active {
+    background-color: #62DE94;
+    color: white;
+    // color: blue;
+    img{
+      filter: invert(100%);
+    }
+  }
+
+  .activeV2 {
+    // background-color: #b1ebc8;
+    color: white;
+    img{
+      filter: invert(100%);
+    }
+  }
+
+  .subActive{
+    background-color: rgb(224, 224, 224);
+    a{
+      .text{
+        color: #23914f;
+      }
+    }
+  }
+}
+.terminal{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.script{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+
+/* Media Queries for Responsive Design */
+
+/* iPad */
+@media (max-width: 768px) {
+  nav {
+      display: none;
+      width: 200px;
+      padding: 0.5rem;
+      transition: all .5s ease;
+      top: 50px;
+      height: 100%;
+  }
+  nav ul .mother {
+      padding: 0.3rem 0.8rem;
+  }
+  nav ul .sub, nav ul .subFidelety {
+      padding: 0.3rem 0.8rem;
+  }
+  nav p {
+      font-size: 0.9rem;
+  }
+
+  // .logo{
+  //   display: none;
+  // }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  nav {
+     display: none;
+     width: 200px;
+      height: auto;
+      // position: relative;
+      border-right: none;
+      border-bottom: 1px solid #C9C9C9;
+      transition: all .5s ease;
+      top: 50px;
+      height: 100%;
+    //   .content_div {
+    //     display: none;
+    // }
+
+    // .logo{
+    //   display: none;
+    // }
+  }
+  nav ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+  }
+  nav ul .mother, nav ul .sub, nav ul .subFidelety {
+      width: 100%;
+      padding: 0.5rem;
+      margin-left: 0;
+  }
+  nav p {
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
+  }
+}
+
+.icon-close{
+  width: 100%;
+  img{
+    position: absolute;
+    right: 4%;
+  }
+}

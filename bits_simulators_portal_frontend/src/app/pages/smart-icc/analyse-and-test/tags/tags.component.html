@@ -1,0 +1,116 @@
+<style>
+    .tags-section {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .tags-section label {
+        width: 100px;
+        margin-right: 10px;
+    }
+
+    .tags-section select,
+    .tags-section input[type="text"] {
+        width: 200px;
+        margin-right: 10px;
+    }
+
+    .tags-section button {
+        width: 60px;
+    }
+
+    .tags-table-container {
+        margin-top: 20px;
+        max-height: 300px; /* Ajustez la hauteur maximale selon vos besoins */
+        overflow-y: auto; /* Ajoute une barre de défilement vertical */
+    }
+
+    .tags-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .tags-table th, .tags-table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .tags-table th:nth-child(1) {
+        width: 60%;
+    }
+
+    .tags-table th:nth-child(2) {
+        width: 40%;
+    }
+
+    .delete-btn {
+        margin-top: 20px;
+        margin-left: 0px;
+        width: 170px;
+    }
+</style>
+
+<div class="container mt-10" style="background-color: white; height: 482px; width: 834px; top: 40px; border: 1px solid black; padding: 20px; margin-top: 20px;">
+    <div class="tags-section">
+        <label for="tagsList">Tags List:</label>
+        <select id="tagsList" class="form-control">
+            <!-- Options de la liste des tags -->
+            <option value="tag1">Tag 1</option>
+            <option value="tag2">Tag 2</option>
+            <option value="tag3">Tag 3</option>
+        </select>
+        <input type="text" id="newTag" class="form-control" placeholder="Enter Tag">
+        <button id="addTag" class="btn btn-primary">Add</button>
+    </div>
+    
+    <div class="tags-table-container">
+        <table class="tags-table">
+            <thead>
+                <tr>
+                    <th>Tags</th>
+                    <th>Label</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Ajoutez des lignes au tableau avec les données des tags et labels -->
+                <!-- ... Ajoutez d'autres lignes si nécessaire -->
+                <tr>
+                    <td>Tag 1</td>
+                    <td>Label 1</td>
+                </tr>
+                <tr>
+                    <td>Tag 2</td>
+                    <td>Label 2</td>
+                </tr>
+                <tr>
+                    <td>Tag 1</td>
+                    <td>Label 1</td>
+                </tr>
+                <tr>
+                    <td>Tag 2</td>
+                    <td>Label 2</td>
+                </tr>
+                <tr>
+                    <td>Tag 1</td>
+                    <td>Label 1</td>
+                </tr>
+                <tr>
+                    <td>Tag 2</td>
+                    <td>Label 2</td>
+                </tr>
+                <tr>
+                    <td>Tag 1</td>
+                    <td>Label 1</td>
+                </tr>
+                <tr>
+                    <td>Tag 2</td>
+                    <td>Label 2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="btn btn-danger delete-btn">Delete Selected Item</button>
+</div>

@@ -1,0 +1,264 @@
+<div class="container">
+    <div class="row__3">
+        <div class="form f_b">
+            <div class="form__control">
+                <label>Full Name</label>
+                <input type="text">
+            </div>
+            <div class="form__control">
+                <label>Email</label>
+                <input type="text">
+            </div>
+            <div class="form__control">
+                <label>Mobile Number</label>
+                <input type="text">
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </div>
+        <div class="buttons">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-p-outlined">p-outlined</button>
+            <button class="btn btn-s-outlined">s-outlined</button>
+        </div>
+        <table class="table">
+            <thead>
+                <th>ID</th>
+                <th>Field1</th>
+                <th>Field2</th>
+                <th>Field3</th>
+                <th>Field4</th>
+                <th>Field5</th>
+                <th>Field6</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>a</td>
+                    <td>b</td>
+                    <td>c</td>
+                    <td>d</td>
+                    <td>e</td>
+                    <td>f</td>
+                    <td>g</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>b</td>
+                    <td>c</td>
+                    <td>d</td>
+                    <td>e</td>
+                    <td>f</td>
+                    <td>g</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>b</td>
+                    <td>c</td>
+                    <td>d</td>
+                    <td>e</td>
+                    <td>f</td>
+                    <td>g</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>b</td>
+                    <td>c</td>
+                    <td>d</td>
+                    <td>e</td>
+                    <td>f</td>
+                    <td>g</td>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>b</td>
+                    <td>c</td>
+                    <td>d</td>
+                    <td>e</td>
+                    <td>f</td>
+                    <td>g</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row__3">
+        <div class="alerts">
+            <app-alert [status]="'OK'" [message]="'Success message if success'"></app-alert>
+            <app-alert [status]="'NOK'" [message]="'Error message if error'"></app-alert>
+        </div>
+        <!-- tab__component -->
+        <div class="tabs__container">
+            <div class="tab__buttons">
+                <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)">Active</a>
+                <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)">Inactive</a>
+                <a [className]="tab_3 ? 'active':''" (click)="open_tab(2)">Inactive</a>
+            </div>
+            <div class="tabs">
+                <div class="tab" *ngIf="tab_1">Active</div>
+                <div class="tab" *ngIf="tab_2">Inactive</div>
+                <div class="tab" *ngIf="tab_3">Inactive</div>
+            </div>
+        </div>
+        <!-- end tab component -->
+    </div>
+    <div class="row" style="align-items: center;">
+        <app-checkbox></app-checkbox>
+        <app-switch></app-switch>
+        <app-checkbox-square [text]="'Morning'"></app-checkbox-square>
+    </div>
+    <div class="row__3" style="margin-top: 2rem;">
+        <div class="module__box orange">
+            <div class="number">1</div>
+            <div class="box__content">
+                <img src="assets/icons/iso.png" height="60" alt="">
+                <div class="title">ISO Switch</div>
+                <p>ISO8583 payment simulator</p>
+            </div>
+        </div>
+        <div class="module__box blue">
+            <div class="number">1</div>
+            <div class="box__content">
+                <img src="assets/icons/iso.png" height="60" alt="">
+                <div class="title">ISO Switch</div>
+                <p>ISO8583 payment simulator</p>
+            </div>
+        </div>
+        <div class="module__box red">
+            <div class="number">1</div>
+            <div class="box__content">
+                <img src="assets/icons/iso.png" height="60" alt="">
+                <div class="title">ISO Switch</div>
+                <p>ISO8583 payment simulator</p>
+            </div>
+        </div>
+        <!-- <div class="module__box purple">
+            <div class="number">1</div>
+            <div class="box__content">
+                <img src="assets/icons/iso.png" height="60" alt="">
+                <div class="title">ISO Switch</div>
+                <p>ISO8583 payment simulator</p>
+            </div>
+        </div> -->
+    </div>
+    <div class="row" style="margin-block: 2rem;">
+        <div class="box__square">
+            <div class="box__content">
+                <div class="user__name">Yassine Sebai</div>
+                <div class="dep">Department</div>
+                <div class="timestamp">The request on :</div>
+                <div class="t_value">
+                    12-10-2023
+                </div>
+            </div>
+            <div class="status__circle"></div>
+        </div>
+        <div class="box__square">
+            <div class="box__content">
+                <div class="user__name">Yassine Sebai</div>
+                <div class="dep">Department</div>
+                <div class="timestamp">The request on :</div>
+                <div class="t_value">
+                    12-10-2023
+                </div>
+            </div>
+            <div class="status__circle"></div>
+        </div>
+        <div class="box__square">
+            <div class="box__content">
+                <div class="user__name">Yassine Sebai</div>
+                <div class="dep">Department</div>
+                <div class="timestamp">The request on :</div>
+                <div class="t_value">
+                    12-10-2023
+                </div>
+            </div>
+            <div class="status__circle"></div>
+        </div>
+        <div class="box__square">
+            <div class="box__content">
+                <div class="user__name">Yassine Sebai</div>
+                <div class="dep">Department</div>
+                <div class="timestamp">The request on :</div>
+                <div class="t_value">
+                    12-10-2023
+                </div>
+            </div>
+            <div class="status__circle"></div>
+        </div>
+    </div>
+    <div class="row" style="margin-block: 2rem;">
+        <div class="box__rect">
+            <div class="box__content">
+                <div class="user__name">Mohammed JOUBBA</div>
+                <div class="dep">Admin</div>
+                <div class="timestamp">Last Activity :</div>
+                <div class="t_value">
+                    12-10-2023
+                </div>
+            </div>
+            <div class="status__circle"></div>
+        </div>
+        <div class="box__rect">
+            <div class="box__content">
+                <div class="user__name">Hamza JOUBBA</div>
+                <div class="dep">Editor</div>
+                <div class="timestamp">Last Activity :</div>
+                <div class="t_value">
+                    12-10-2023
+                </div>
+            </div>
+            <div class="status__circle"></div>
+        </div>
+        <div class="box__rect">
+            <div class="box__content">
+                <div class="user__name">Anas Tahri</div>
+                <div class="dep">Editor</div>
+                <div class="timestamp">Last Activity :</div>
+                <div class="t_value">
+                    12-10-2023
+                </div>
+            </div>
+            <div class="status__circle"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form f_br">
+            <span class="title">Title Here</span>
+            <div class="form__control">
+                <label>Full Name</label>
+                <div class="select__box">
+                    <select>
+                        <option value="">-- select --</option>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form__control">
+                <label>Email</label>
+                <div class="select__box">
+                    <select>
+                        <option value="">-- select --</option>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form__control">
+                <label>Mobile Number</label>
+                <div class="select__box">
+                    <select>
+                        <option value="">-- select --</option>
+                        <option value=""></option>
+                    </select>
+                </div>
+               </div>
+            <div class="form__control">
+                <label>Amount</label>
+                <div class="input__group">
+                    <input type="text">
+                    <span class="input__group_text">NPL</span>
+                </div>
+               </div>
+            <button class="btn btn-primary">Submit</button>
+        </div>
+        <app-access-management [owned]="owned" [not_owned]="not_owned" owned_title="owned habilitations" not_owned_title="all habilitations"></app-access-management>
+    </div>
+</div>

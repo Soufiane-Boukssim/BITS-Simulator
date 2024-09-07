@@ -1,0 +1,596 @@
+<div class="tabs__container tabs__ex" style="height: 800px;">
+  <div class="tabs">
+  </div>
+
+  <!-- scenarios -->
+  <div class="box_of_content scenarios" style="min-height: 80vh; top: 0; left: 0; right: 0;margin: 0; width: 100%; height: 80%;
+              overflow-y: visible;">
+
+
+
+    <div class="side__list">
+      <div style="margin: 20px">
+        <button class="btn btn-primary" (click)="open()" *ngIf="!isConnected">
+          <div *ngIf="loading" class="lds-dual-ring"></div>
+          <div *ngIf="!loading">{{ "button.Connect" | translate }}</div>
+        </button>
+        <button class="btn btn-danger" (click)="disconnect()" *ngIf="isConnected"  >{{ "button.Disconnect" | translate }}</button>
+      </div>
+      <fieldset class="fieldset_Aria1" style="min-height: 95%">
+
+        <legend class="legend1"><h2>{{ "legend.Scenarios" | translate }}</h2></legend>
+
+        <div class="form__control" style="margin-block: 0.5rem">
+          <input type="text" placeholder="search" [(ngModel)]="searchscenarios" />
+        </div>
+        
+        <ul class="ul_scena">
+          <div *ngFor="let scenario of scenarios | search: searchscenarios | paginate: { itemsPerPage: 10, currentPage: pS ,id:'1'}">
+            <li class="row__sb" (click)="selectSenario(scenario.id)" style="padding: 14px;" 
+            #tooltip="matTooltip"
+            matTooltip={{scenario.libelle}} matTooltipPosition="right"
+            >
+              <div class="icon" (click)="retrieveScenarios(scenario.id); $event.stopPropagation();">
+                <img src="assets/icons/scenario.png" height="15" alt="" />
+              </div>
+              <span class="widh-desc-scenario">
+                {{ scenario.libelle }}
+              </span>
+              <div class="img__div" (click)="toggleScenario(scenario.id); $event.stopPropagation();">
+                <img class="img" src="assets/icons/down-arrow.png" alt="" *ngIf="!expandedScenarios[scenario.id]" height="10">
+                <img class="img" src="assets/icons/upload.png" alt="" *ngIf="expandedScenarios[scenario.id]" height="10">
+              </div>
+            </li>
+            <div *ngIf="expandedScenarios[scenario.id]" >
+                <li *ngFor="let script of scenario.senarioScripts" (click)="selectScript(script)">
+                  <div class="icon li-case"  style="margin-left: 20px">
+                    <img src="assets/icons/edit.png" height="15" alt="" />
+                  </div>
+                  <span>{{ script.libelle }}</span>
+                </li>
+            </div>
+          </div>
+        </ul>
+        
+
+        
+
+        <!-- <div class="div-loader">
+          <span class="loader" *ngIf="isLoading"></span>
+        </div> -->
+      </fieldset>
+    </div>
+
+    <div class="DflexPaginationV3" >
+      <pagination-controls nextLabel="" previousLabel=""
+       (pageChange)="pS = $event"
+      [id]="'1'"></pagination-controls> 
+  
+    </div>
+
+
+    <div  class="div-loader" >
+      <span class="loader"  *ngIf="isLoadingSena" ></span>
+    </div>
+
+
+    
+  
+
+    <div class="side__content">
+      <div  style="display: flex;">
+        <div style="width:200px;padding-right: 50px;">
+          <fieldset class="fieldset_Aria2" style="height: 300px;margin-top: -10px;">
+            <legend class="legend1">
+              <h2>{{"Identification" | translate}}</h2>
+            </legend>
+    
+            <div [formGroup]="scenarioExecutionForm">
+              <div class="column">
+    
+                <div class="row">
+                  <div class="form__control">
+                    <label>{{"label.Title"  | translate}}</label>
+                    <div class="d-flex custom-class" *ngIf="!isScriptSelected">
+                      <p> {{ "text.SelectedScenario" | translate }} </p>
+                      <img src="assets/icons/scenario.png" height="15" alt="" />
+                      <h2>{{ selectedLibelle }}</h2>
+                    </div>
+                    <input *ngIf="isScriptSelected" formControlName="libelle" type="text">
+                  </div>
+                </div>
+                <div class="row" *ngIf="isScriptSelected">
+                  <div class="form__control">
+                    <label>Card Profile</label>
+                    <div class="select__box">
+                      <select formControlName="cardProfileIssuerCode">
+                        <option disabled selected value="">-- select --</option>
+                        <option *ngFor="let c of cards" [value]="c.id.cardNo">{{ c.cardDesc }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="isScriptSelected" style="display: flex; justify-content: space-between;">
+                  <div class="form__control">
+                    <label>{{"label.Amount" |translate}}</label>
+                    <input type="number" formControlName="amount">
+                  </div>
+                  <div class="row" *ngIf="isScriptSelected">
+                    <div class="form__control">
+                      <label>{{ "label.Currency" | translate }}</label>
+                      <div class="select__box">
+                        <select formControlName="currency" readonly>
+                          <option *ngFor="let item of currencyList" value="{{ item.id }}">{{ item.ccyDesc }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bottom__form">
+                  <span class="send" style="margin-right: 5px">
+                    <label class="label">{{ "label.Send" | translate }}</label>
+                    <label class="value">{{ sendCount }}</label>
+                  </span>
+                  <span class="receive" style="margin-right: 10px">
+                    <label class="label">{{ "label.receive" | translate }}</label>
+                    <label class="value">{{logsDataFiltered.length}}</label>
+                  </span>
+                  <button type="submit" class="btn btn-primary" (click)="onClickButton()">{{ "label.Send" | translate
+                    }}</button>
+                </div>
+    
+              </div>
+            </div>
+    
+          </fieldset>
+        </div>
+    
+        <div  style="padding-left: 50px; width: 78%;">
+          <fieldset class="fieldset_Aria1" style="height: 300px;margin-top: -10px;">
+            <legend class="legend1">
+              <h2>Logs</h2>
+            </legend>
+            <div class="row ">
+              <div class="table">
+                <table cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>{{ 'label.header.tableLog_Operation_Date_Send' | translate }}</th>
+                      <th>{{ 'label.header.tableLog_Operation_Sended_Data' | translate }}</th>
+                      <th>{{ 'label.header.tableLog_Operation_Date_Received' | translate }}</th>
+                      <th>{{ 'label.header.tableLog_Operation_Data_Received' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let log of logsDataFiltered | paginate: { itemsPerPage: 5, currentPage: p,id:'2' }"
+                      (click)="showData(log)">
+                      <td>{{ log.logEDate }}</td>
+                      <td>{{ cleanUnicode(log.logEData) | slice: 0: 15 }}</td>
+                      <td>{{ log.logRDate }}</td>
+                      <td>{{ cleanUnicode(log.logRData) | slice: 0: 15 }}</td>
+                    </tr>
+                    <!-- <p style="margin: auto; width: fit-content; padding: .5rem;">
+                      {{ 'label.No_data' | translate }}
+                    </p> -->
+                  </tbody>
+                </table>
+                <div class="DflexPagination">
+                  <pagination-controls (pageChange)="onPageChange($event)" nextLabel="{{ 'label.next' | translate }}"
+                  [id]="'2'"
+                    previousLabel="{{ 'label.previous' | translate }}"></pagination-controls>
+                  
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+    
+    
+    
+    
+      </div>
+
+
+
+    
+
+    </div>
+
+    <div class="tabs__container" style="width: 960px ; margin-left: 220px">
+      <div class="tab__buttons">
+        <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)">{{'label.send' | translate}} </a>
+        <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)">{{'label.receive' | translate}}</a>
+        <a [className]="tab_3 ? 'active':''" (click)="open_tab(2)">{{'label.advice' | translate}}</a>
+        <a [className]="tab_4 ? 'active':''" (click)="open_tab(3)"> {{'label.Detail' | translate}}</a>
+      </div>
+      <div class="tabs">
+        <div class="tab-content" *ngIf="tab_1">
+          <div class="box_details boxDetait"  style="width: 90%;margin-top: 4px;">
+
+            <ng-container *ngFor="let item of mergedArray">
+              <div class="row">
+                <div class="col col-2">
+                  {{ item.label }}
+                </div>
+                <div class="col col-6">
+                  {{ item.HexUtil }}
+                </div>
+                <div class="col col-4">
+                  {{ item.HexUtilV2 }}
+                </div>
+              </div>
+            </ng-container>
+
+          </div>
+        </div>
+        <div class="tab-content" *ngIf="tab_2" >
+          <div class="box_details boxDetait" style="width: 90%;margin-top: 4px;">
+            <ng-container *ngFor="let item of mergedArrayReceive">
+              <div class="row">
+                <div class="col col-2">
+                  {{ item.label }}
+                </div>
+                <div class="col col-6">
+                  {{ item.HexUtil }}
+                </div>
+                <div class="col col-4">
+                  {{ item.HexUtilV2 }}
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="tab-content" *ngIf="tab_3">
+          <div class="box_details boxDetait" style="width: 90%;margin-top: 4px;"> 
+            <ng-container *ngFor="let item of mergedArrayAdvice">
+              <div class="row">
+                <div class="col col-2">
+                  {{ item.label }}
+                </div>
+                <div class="col col-6">
+                  {{ item.HexUtil }}
+                </div>
+                <div class="col col-4">
+                  {{ item.HexUtilV2 }}
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="tab-content" *ngIf="tab_4">
+          <div class="box_details boxDetait" style="width: 90%;margin-top: 4px;">
+
+            <div *ngIf="showDetails">
+
+              <div class="tabs__container">
+                <div class="tab__buttons">
+                  <a [className]="tab_MsgOUT ? 'active':''" (click)="open_tabInfo(0)">{{'label.messageOut' | translate}}</a>
+                  <a [className]="tab_MsgIN ? 'active':''" (click)="open_tabInfo(1)">{{'label.Message_IN' | translate}} </a>
+                  <a [className]="tab_MsgRendue ? 'active':''" (click)="open_tabInfo(2)">{{'label.Compte_Rendue' | translate}}</a>
+                </div>
+                <div class="tabs">
+                  <div class="tab-content" *ngIf="tab_MsgOUT">
+                    <div>
+                      <div *ngIf="messageClasse">
+                        <div class="row" >
+                          <div class="col col-8">
+                            <p>{{'label.messageClassess' | translate}}</p>
+                          </div>
+                          <div class="col col-4"> {{ messageClasse }}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Message_Sub_Class' | translate}}  </p>
+                          </div>
+                          <div class="col col-4"> {{ messageSubClass  }}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Logical_Unit_Number' | translate}}</p>
+                          </div>
+                          <div class="col col-4">: {{luno}}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Time_Variant_Number' | translate}}</p>
+                          </div>
+                          <div class="col col-4"> {{timeVariantNumber}}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Top_of_Receipt_Transaction_Flag' | translate}} </p>
+                          </div>
+                          <div class="col col-4"> {{topOfReceiptTransactionFlag}}</div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Message_C_Ordination_Number' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            {{messageCoOrdinationNumber}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Track_2_Data' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            {{track2Data}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Track_3_Data' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            {{track3Data}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Operationç_Code_Data' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            {{operationCodeData}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Amount_Entry' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            {{amountEntry}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.PIN_Buffer' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            {{pinBuffer}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.General_Purpose_Buffer_B' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            {{generalPurposeBufferB}}
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.General_Purpose_Buffer_C' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            {{generalPurposeBufferC}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Track_1_Data' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            {{track1Data}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Last_Transaction_Status' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            {{lastTransactionStatus}}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="!messageClasse">
+                        <p> {{'label.Message_Non_Valide' | translate}}.</p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="tab-content" *ngIf="tab_MsgIN">
+                    <div>
+
+                      <div *ngIf="messageClasseIN">
+
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.messageClassess' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{messageClasseIN}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Logical_Unit_Number' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{logicalUnitNumber}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Message_Sequence_Number' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{messageSequenceNumber}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Next_State_ID_Data' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{nextStateIDData}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Note_Distribuer' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{noteDistribuer}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Transaction_Serial_Number' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{transactionSerialNumber}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Function_ID' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{functionID}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Screen_Number' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{screenNumber}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Screen_Update_data' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{screenUpdateData}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Message_Co_Ordination_Number' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{messageCoOrdinationNumberIN}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col col-8">
+                            <p> {{'label.Card_Return_Retain_Flag' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{cardReturnRetainFlag}}</p>
+                          </div>
+                        </div>
+
+                        <div class="row" *ngIf="printerFlag">
+                          <div class="col col-8">
+                            <p> {{'label.Printer_Flag' | translate}} </p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{printerFlag}}</p>
+                          </div>
+                        </div>
+
+                        <div class="row" *ngIf="printerData">
+                          <div class="col col-8">
+                            <p> {{'label.Printer_Data' | translate}}</p>
+                          </div>
+                          <div class="col col-4">
+                            <p>{{printerData}}</p>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div *ngIf="!messageClasseIN">
+                        <p> {{'label.Message_Non_Valide' | translate}} .</p>
+                      </div>
+
+
+                    </div>
+                  </div>
+                  <div class="tab-content" *ngIf="tab_MsgRendue">
+                    <div>
+                      <div class="row">
+                        <div class="col col-8">
+                          <p> {{'label.messageClassess' | translate}} </p>
+                        </div>
+                        <div class="col col-4">
+                          <p>{{messageClasseRendue}}</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col col-8">
+                          <p> {{'label.Message_Sub_Class' | translate}} </p>
+                        </div>
+                        <div class="col col-4">
+                          <p>{{messageSubClassRendue}}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col col-8">
+                          <p> {{'label.Logical_Unit_Number' | translate}}</p>
+                        </div>
+                        <div class="col col-4">
+                          <p>{{logicalUnitNumberRendue}}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col col-8">
+                          <p> {{'label.Status_Descriptor' | translate}} </p>
+                        </div>
+                        <div class="col col-4">
+                          <p>{{statusDescription}}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col col-8">
+                          <p> {{'label.Status_Information' | translate}} </p>
+                        </div>
+                        <div class="col col-4">
+                          <p>{{statusInfo}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+
+<dialog class="modal" #modalAleart>
+  <div class="header">
+    <div class="title">{{ "label.actionPanel" | translate}}</div>
+    <div class="close" (click)="closemodalAleart()">&times;</div>
+  </div>
+  <div class="form">
+    <div class="row">
+      <label class="lbl" >{{ "text.InstallationPrompt" | translate }}</label>
+
+    </div>
+    <div class="row">
+      <button class="btn btn-danger"  (click)="closemodalAleartInstall()">Install</button>
+      <button class="btn btn-primary"  (click)="closemodalAleart()">{{ "label.ok" | translate}}</button>
+
+    </div>
+
+
+  </div>
+
+</dialog>
+

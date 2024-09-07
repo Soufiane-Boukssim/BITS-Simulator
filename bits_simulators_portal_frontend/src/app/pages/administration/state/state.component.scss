@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400;600&display=swap');
+
+body {
+  font-family: sans-serif; // Default font for the body
+}
+
+.form-container {
+  padding: 10px; // Further reduced padding
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 6px; // Reduced border-radius
+  max-width: 60%; // Make the form 40% smaller
+  margin: 0 auto;
+  background-color: #f8f8f8;
+
+  .block {
+    margin-bottom: 12px; // Further reduced margin-bottom
+    padding: 8px; // Further reduced padding
+    border-radius: 5px; // Reduced border-radius
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    &.title {
+      font-size: 14px; // Further reduced font-size
+      font-weight: 600;
+      border-bottom: 1px solid #62DE94; // Updated border color
+      padding-bottom: 6px; // Reduced padding-bottom
+      margin-bottom: 8px; // Reduced margin-bottom
+      font-family: 'Mukta', sans-serif; // Apply Mukta font to titles
+    }
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; // Further reduced gap
+    margin-bottom: 10px; // Reduced margin-bottom
+  }
+
+  .form-group {
+    flex: 1;
+    min-width: 150px; // Adjusted min-width
+    margin-bottom: 10px; // Further reduced margin-bottom
+
+    &.half-width {
+      flex: 1 1 45%;
+    }
+
+    &.full-width {
+      flex: 1 1 100%;
+    }
+
+    label {
+      display: block;
+      font-size: 12px; // Further reduced font-size
+      margin-bottom: 4px; // Reduced margin-bottom
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 4px; // Further reduced padding
+      border: 1px solid #ddd;
+      border-radius: 3px; // Reduced border-radius
+      font-size: 12px; // Further reduced font-size
+      box-sizing: border-box;
+    }
+
+    select {
+      height: auto;
+      background-color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 8px; // Further reduced padding
+      border: none;
+      border-radius: 3px; // Reduced border-radius
+      background-color: #62DE94;
+      color: white;
+      font-size: 13px; // Adjusted font-size
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #62DE94;
+      }
+    }
+  }
+
+  .form-choices {
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); // Responsive grid layout
+      gap: 8px; // Space between checkboxes
+      label {
+        display: flex;
+        align-items: center;
+        font-size: 12px; // Further reduced font-size
+        color: #555;
+        input[type="checkbox"] {
+          margin-right: 4px; // Reduced space between checkbox and label
+        }
+      }
+    }
+  }
+}

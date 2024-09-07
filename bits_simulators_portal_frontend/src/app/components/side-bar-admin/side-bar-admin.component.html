@@ -1,0 +1,196 @@
+<nav [ngStyle]="{'display': isVisibleMenu ? 'block' : 'none'}">
+  <div class="icon-close"> 
+    <img style="cursor: pointer;" (click)="hideMenu()" src="assets/icons/close.png" height="14px" alt="Close Menu">
+  </div>
+
+  <div class="logo" (click)="ReturnHome()">
+    <img src="assets/logo.jpeg" height="90" alt="Logo">
+  </div>
+
+  <ul>
+    <!-- Management -->
+    <li class="mother" (click)="toggleSubMenusManagement()" [class.active]="showManagSubMenus">
+      <div class="motherDiv">
+        <span class="icon">
+          <img src="assets/icons/management.png" height="17px" alt="Management Icon">
+        </span>
+        <span class="text">{{ 'menu.management' | translate }}</span>
+      </div>
+      <div>
+        <span class="icon">
+          <img src="assets/icons/next.png" class="img-icon" alt="Expand Icon" *ngIf="!showManagSubMenus">
+        </span>
+        <span class="icon">
+          <img src="assets/icons/down-arrow.png" class="img-icon" alt="Collapse Icon" *ngIf="showManagSubMenus">
+        </span>
+      </div>
+    </li>
+      <!-- Management/User -->
+      <ul *ngIf="showManagSubMenus">
+      <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]" [routerLink]="['/administration/management']">
+        <a>
+          <span class="icon">
+            <img src="assets/icons/user.png" height="15" alt="User Icon">
+          </span>
+          <span class="text">{{ 'menu.user' | translate }}</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Parameters -->
+    <li class="mother" (click)="toggleSubMenuParam()" [class.active]="showParamSubMenus">
+      <div class="motherDiv">
+        <span class="icon">
+          <img src="assets/icons/adjustment.png" height="17" alt="Parameters Icon">
+        </span>
+        <span class="text">{{ 'label.parameter' | translate }}</span>
+      </div>
+      <div>
+        <span class="icon">
+          <img src="assets/icons/next.png" class="img-icon" alt="Expand Icon" *ngIf="!showParamSubMenus">
+        </span>
+        <span class="icon">
+          <img src="assets/icons/down-arrow.png" class="img-icon" alt="Collapse Icon" *ngIf="showParamSubMenus">
+        </span>
+      </div>
+    </li>
+      <!-- Parameters/General -->
+      <ul *ngIf="showParamSubMenus">
+      <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]" [routerLink]="['/administration/general-options-admin']">
+        <a>
+          <span class="icon">
+            <img src="assets/icons/settings.png" height="15" alt="Settings Icon">
+          </span>
+          <span class="text">{{ 'label.general' | translate }}</span>
+        </a>
+      </li>
+      <!-- Parameters/Bank -->
+      <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]" [routerLink]="['/administration/bank']">
+        <a>
+          <span class="icon">
+            <img src="assets/icons/bank.png" height="15" alt="Bank Icon">
+          </span>
+          <span class="text">{{ 'label.bank' | translate }}</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Smart ATM -->
+    <li class="mother" (click)="toggleSubMenuSmartAtm()" [class.active]="showSmartAtmSubMenus">
+      <div class="motherDiv">
+        <span class="icon">
+          <img src="assets/icons/SmartATM.png" height="17" alt="Smart ATM Icon">
+        </span>
+        <span class="text">{{ 'menu.smartAtm' | translate }}</span>
+      </div>
+      <div>
+        <span class="icon">
+          <img src="assets/icons/next.png" class="img-icon" alt="Expand Icon" *ngIf="!showSmartAtmSubMenus">
+        </span>
+        <span class="icon">
+          <img src="assets/icons/down-arrow.png" class="img-icon" alt="Collapse Icon" *ngIf="showSmartAtmSubMenus">
+        </span>
+      </div>
+    </li>
+      <!-- Smart ATM/Profile -->
+      <ul *ngIf="showSmartAtmSubMenus">
+      <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]" [routerLink]="['/administration/profile']">
+        <a>
+          <span class="icon">
+            <img src="assets/icons/profile.png" height="15" alt="Profile Icon">
+          </span>
+          <span class="text">{{ 'menu.profile' | translate }}</span>
+        </a>
+      </li>
+        <!-- Smart ATM/NDC -->
+
+          <li class="mother ndc" (click)="toggleNDCMenu()"  [class.active]="showMenuNDC" style="width: 95% !important;">
+           
+            <div class="motherDiv">
+              <span class="icon"><img src="assets/icons/NDC.png" height="15" alt=""></span>
+              <span class="text">{{ 'menu.ndc' | translate }}</span>
+            </div>
+            <div>
+              <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showMenuNDC"
+                  style="padding-right: 12px"></span>
+              <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+                  *ngIf="showMenuNDC"></span>
+            </div>
+          </li>
+
+
+          <ul *ngIf="showMenuNDC">
+        <!-- Smart ATM/NDC/State -->
+        <li class="sub state" (click)="toggle(3)" [class.subActive]="colorizeSubMenu[3]" [routerLink]="['/administration/state']">
+            <a>
+              <span class="icon"><img src="assets/icons/writing.png"  height="15" alt=""></span>
+              <span class="text">{{'menu.state' | translate}}</span>
+            </a>
+        </li>
+        <!-- Smart ATM/NDC/Screen -->
+        <li class="sub Screen" (click)="toggle(4)" [class.subActive]="colorizeSubMenu[4]" [routerLink]="['/administration/screen']">
+          <a>
+            <span class="icon"><img src="assets/icons/screen.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.screen' | translate}}</span>
+          </a>
+        </li>
+        <!-- Smart ATM/NDC/FIT -->
+        <li class="sub FIT" (click)="toggle(5)" [class.subActive]="colorizeSubMenu[5]" [routerLink]="['/administration/fit']">
+          <a>
+            <span class="icon"><img src="assets/icons/FIT.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.fit' | translate}}</span>
+          </a>
+        </li>
+        <!-- Smart ATM/NDC/Configuration Parameters  -->
+        <li class="mother conf" (click)="toggleConfigurationMenu()" [class.active]="showMenuConfiguration" style="width: 95% !important;">
+          <div class="motherDiv">
+            <span class="icon"><img src="assets/icons/configuration.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.Configuration' | translate}}</span>
+          </div>
+          <div>
+            <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showMenuConfiguration"
+                style="padding-right: 12px"></span>
+            <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+                *ngIf="showMenuConfiguration"></span>
+          </div>
+        </li>
+
+        <ul *ngIf="showMenuConfiguration">
+          <li class="sub TIMERS" (click)="toggle(6)" [class.subActive]="colorizeSubMenu[6]" [routerLink]="['/administration/timers']">
+            <a>
+              <span class="icon"><img src="assets/icons/timer.png"  height="15" alt=""></span>
+              <span class="text">{{'menuConfiguration.timers' | translate}}</span>
+            </a>
+          </li>
+
+          <li class="sub EMV" (click)="toggle(7)" [class.subActive]="colorizeSubMenu[7]" [routerLink]="['/administration/emv']">
+            <a>
+              <span class="icon"><img src="assets/icons/timer.png"  height="15" alt=""></span>
+              <span class="text">{{'menuConfiguration.ConfigurationEMV' | translate}}</span>
+            </a>
+          </li>
+
+
+          <li class="sub Conf2" (click)="toggle(8)" [class.subActive]="colorizeSubMenu[8]" [routerLink]="['/administration/config']">
+            <a>
+              <span class="icon"><img src="assets/icons/timer.png"  height="15" alt=""></span>
+              <span class="text">{{'menuConfiguration.Configuration' | translate}}</span>
+            </a>
+          </li>
+
+            </ul>
+
+
+
+
+      
+
+
+
+
+
+      </ul>
+       
+    </ul>
+  </ul>
+</nav>

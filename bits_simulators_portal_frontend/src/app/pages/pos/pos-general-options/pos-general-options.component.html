@@ -1,0 +1,1026 @@
+<div class="box_of_content">
+  <div class="container">
+    <div class="tabs__container">
+      <div class="tab__buttons">
+     
+        <!-- <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)">Exchange</a> -->
+        <a [className]="tab_4 ? 'active' : ''" (click)="open_tab(3)">Response</a>
+        <a [className]="tab_5 ? 'active' : ''" (click)="open_tab(4)">MCC</a>
+        <a [className]="tab_8 ? 'active' : ''" (click)="open_tab(7)">Account</a>
+        <a [className]="tab_6 ? 'active' : ''" (click)="open_tab(5)">{{ "label.MTI" | translate }}</a>
+        <a [className]="tab_7 ? 'active' : ''" (click)="open_tab(6)">{{ "label.TAG" | translate }}</a>
+        <a [className]="tab_9 ? 'active' : ''" (click)="open_tab(8)">{{ "label.Function" | translate }}</a>
+        <a [className]="tab_10 ? 'active' : ''" (click)="open_tab(9)">{{ "label.Processing" | translate }}</a>
+        
+      </div>
+    
+  
+      <div class="tabs">
+        <div class="box_of_content_fit" *ngIf="tab_1">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"    [(ngModel)]="searchCurrnecy" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>Currency Code</th>
+                  <th>Description</th>
+                  <th>Alpha</th>
+                  <th>Exponent</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of currencyList
+                        | search : searchCurrnecy 
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                        
+                    "
+                    (click)="selectCurrencyRecord(item.id)"
+                  >
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.ccyDesc }}</td>
+                    <td>{{ item.ccyAlpha }}</td>
+                    <td>{{ item.ccyExponent }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <p class="no_data" *ngIf="currencyList.length == 0">{{ "error.Nodata" | translate }}</p>
+                  <div class="DflexPagination">
+                           <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                           (pageChange)="p = $event"
+                           ></pagination-controls> 
+                      
+                           <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                               <option value="5">5</option>
+                               <option value="10">10</option>
+                               <option value="15">15</option>
+                               <option value="20">20</option>
+                           </select>
+                  </div>
+                </div>
+            </div>
+            <form
+              class="form f_b_General "
+              [formGroup]="currencyForm"
+            
+            >  
+            <!-- (ngSubmit)="submitCurrency()" -->
+              <div class="row  ">
+                <div class="form__control">
+                  <label>Currency Code</label>
+                  <input type="text" formControlName="id" [readonly]="isDelete"  />
+                </div>
+                <div class="form__control">
+                  <label>Description</label>
+                  <input type="text" formControlName="ccyDesc" />
+                </div>
+              </div>
+  
+  
+              <div class="row" >
+                <div class="form__control">
+                  <label>Alpha</label>
+                  <input type="text" formControlName="ccyAlpha" />
+                </div>
+                <div class="form__control">
+                  <label>Exponent</label>
+                  <input type="number" formControlName="ccyExponent" />
+                </div>
+              </div>
+  
+  
+              <div class="row " >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                        <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                            <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                            <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                        </div>
+                     </div>
+            
+             </div>
+  
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_2">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchCountry" />
+                </div>
+              </div>
+              
+              <div  class="table">
+              <table cellspacing="0">
+                <thead>
+                  <th>Country Code</th>
+                  <th>Description</th>
+                  <th>Alpha2</th>
+                  <th>Alpha3</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of countryList
+                      | search : searchCountry
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                       
+                    "
+                    (click)="selectCountryRecord(item.id)"
+                  >
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.countryDesc }}</td>
+                    <td>{{ item.countryAlpha2 }}</td>
+                    <td>{{ item.countryAlpha3 }}</td>
+                  </tr>
+                </tbody>
+              </table>
+           
+              <p class="no_data" *ngIf="countryList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                       (pageChange)="p = $event"
+                       ></pagination-controls> 
+                  
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                           <option value="5">5</option>
+                           <option value="10">10</option>
+                           <option value="15">15</option>
+                           <option value="20">20</option>
+                       </select>
+              </div>
+            </div>
+            </div>
+  
+            
+            <form
+              class="form f_b_General "
+              [formGroup]="countryForm"
+            >
+              <div class="row  "  >
+                <div class="form__control">
+                  <label>Country Code</label>
+                  <input type="text" formControlName="id"   [readonly]="isDelete" />
+                </div>
+                <div class="form__control">
+                  <label>Description</label>
+                  <input type="text" formControlName="countryDesc" />
+                </div>
+              </div>
+              <div class="row  "  >
+                <div class="form__control">
+                  <label>Alpha2</label>
+                  <input type="text" formControlName="countryAlpha2" />
+                </div>
+                <div class="form__control">
+                  <label>Alpha3</label>
+                  <input type="text" formControlName="countryAlpha3" />
+                </div>
+              </div>
+  
+    
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-secondary clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+            
+             </div>
+  
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_3">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchExchange" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>{{ "label.BaseCurrency" | translate }}</th>
+                  <th>{{ "label.Currency" | translate }}</th>
+                  <th>{{ "label.BuyRate" | translate }}</th>
+                  <th>{{ "label.MidRate" | translate }}</th>
+                  <th>Sell Rate</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of exchangeList
+                      | search : searchExchange
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                       
+                    "
+                    (click)="selectExchangeRecord(item.id)"
+                  >
+                    <!-- <td>{{ item.id.baseCcy }}</td> -->
+                    <td>{{ getCurrencyDescBase(item.id.baseCcy) }}</td>
+                    <td>{{ item.id.rateStartDate }}</td>
+                    <!-- <td>{{ item.id.currCode }}</td> -->
+                    <td>{{ getCurrencyDesc(item.id.currCode) }}</td>
+                    <td>{{ item.buyRate }}</td>
+                    <td>{{ item.midRate }}</td>
+                    <!-- <td>{{ item.sellRate }}</td> -->
+                  </tr>
+                </tbody>
+              </table>
+              
+              <p class="no_data" *ngIf="exchangeList.length == 0">{{ "error.Nodata" | translate }}</p>
+                  <div class="DflexPagination">
+                           <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                           (pageChange)="p = $event"
+                           ></pagination-controls> 
+                      
+                           <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                               <option value="5">5</option>
+                               <option value="10">10</option>
+                               <option value="15">15</option>
+                               <option value="20">20</option>
+                           </select>
+                  </div>
+                </div>
+            </div>
+            <form
+              class="form f_b_General "
+              [formGroup]="exchangeForm"
+            >
+  
+            <div class="row">
+              <div class="form__controlV2">
+                <label>{{ "label.Currency" | translate }} </label>
+                </div>
+                <div class="form__controlV2">
+                  <label>{{ "label.BaseCurrency" | translate }}</label>
+                </div>
+  
+            </div>
+              <div
+                class="row  "
+                 
+                [formGroup]="idExchange"
+              >
+  
+              
+            
+                <div class="form__controlV2">
+                  <!-- <label>Currency </label> -->
+                  <div class="select__box">
+                    <select formControlName="currCode"    >
+                      <option value="">-- select --</option>
+                      <option
+                        *ngFor="let item of currencyList"
+                        value="{{ item.id }}"
+                      >
+                        {{ item.ccyDesc }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="div-code" *ngIf="idExchange.value.currCode !=null && idExchange.value.currCode!=''">
+                    {{idExchange.value.currCode}}
+                 </div>
+                </div>
+                
+              
+                <div class="form__controlV2">
+                  <!-- <label>Base Currency</label> -->
+                  <div class="select__box">
+                    <select formControlName="baseCcy">
+                      <option value="">-- select --</option>
+                      <option
+                        *ngFor="let item of currencyList"
+                        value="{{ item.id }}"
+                      >
+                        {{ item.ccyDesc }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="div-code"  *ngIf="idExchange.value.baseCcy!='' && idExchange.value.baseCcy!=null ">
+                    {{idExchange.value.baseCcy}}
+                   </div>
+                </div>
+                
+              </div>
+  
+  
+              <div class="row  "  >
+                <div class="form__control" [formGroup]="idExchange">
+                  <label>{{ "label.RateStartDate" | translate }}</label>
+                  <input type="date" formControlName="rateStartDate" />
+                </div>
+                <div class="form__control">
+                  <label>{{ "label.BuyRate" | translate }}</label>
+                  <input type="number" formControlName="buyRate" />
+                </div>
+              </div>
+              <div class="row  "  >
+                <div class="form__control">
+                  <label>{{ "label.MidRate" | translate }}</label>
+                  <input type="number" formControlName="midRate" />
+                </div>
+                <div class="form__control">
+                  <label>{{ "label.SellRate" | translate }}</label>
+                  <input type="number" formControlName="sellRate" />
+                </div>
+              </div>
+  
+  
+             
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+            
+             </div>
+  
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_4">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchResponse" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>{{ "label.Code" | translate }}</th>
+                  <th>{{ "label.Description" | translate }}</th>
+                  <th>{{ "label.Action" | translate }}</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of responseList
+                        | search : searchResponse
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                      
+                    "
+                    (click)="selectResponseRecord(item.id)"
+                  >
+                    <td>{{ item.id.respCode }}</td>
+                    <td>{{ item.respDesc }}</td>
+                    <td>
+                      <ng-container *ngIf="item.respAction === 'A'; else declined">
+                        {{ "label.Approved" | translate }}
+                      </ng-container>
+                      <ng-template #declined>
+                          <ng-container *ngIf="item.respAction === 'D'; else pickUp">
+                            {{ "label.Declined" | translate }}
+                          </ng-container>
+                          <ng-template #pickUp>
+                              <ng-container *ngIf="item.respAction === 'P'">
+                                {{ "label.PickUp" | translate }}
+                              </ng-container>
+                          </ng-template>
+                      </ng-template>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+         
+              <p class="no_data" *ngIf="responseList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                       (pageChange)="p = $event"
+                       ></pagination-controls> 
+                  
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                           <option value="5">5</option>
+                           <option value="10">10</option>
+                           <option value="15">15</option>
+                           <option value="20">20</option>
+                       </select>
+              </div>
+            </div>
+            </div>
+            <form
+              class="form f_b_General "
+              [formGroup]="responseForm"
+            >
+              <div class="row  "  >
+                <div class="form__control" [formGroup]="idResponse">
+                  <label>{{ "label.Code" | translate }}</label>
+                  <input type="text" formControlName="respCode" [readonly]="isDelete" />
+                </div>
+                <div class="form__control">
+                  <label>{{ "label.Description" | translate }}</label>
+                  <input type="text" formControlName="respDesc" />
+                </div>
+              </div>
+              <div class="row  "  >
+                <div class="form__control">
+                  <label>{{ "label.Action" | translate }}</label>
+                  <div class="select__box">
+                    <select formControlName="respAction">
+                      <option value="">-- select --</option>
+                      <option value="A">{{ "label.Approved" | translate }}</option>
+                      <option value="D">{{ "label.Declined" | translate }}</option>
+                      <option value="P">{{ "label.PickUp" | translate }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form__control"></div>
+              </div>
+  
+  
+             
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+            
+             </div>
+  
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_5">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchMCC" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>{{ "label.Code" | translate }}</th>
+                  <th>{{ "label.Description" | translate }}</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of mccList
+                      | search : searchMCC
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+  
+                    "
+                    (click)="selectMccRecord(item.id)"
+                  >
+                    <td>{{ item.id.mccCode }}</td>
+                    <td>{{ item.mccDesc }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            
+              <p class="no_data" *ngIf="mccList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                       (pageChange)="p = $event"
+                       ></pagination-controls> 
+                  
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                           <option value="5">5</option>
+                           <option value="10">10</option>
+                           <option value="15">15</option>
+                           <option value="20">20</option>
+                       </select>
+              </div>
+            </div>
+            </div>
+            <form
+              class="form f_b_General "
+              [formGroup]="mccForm"
+            >
+              <div class="row  "    >
+                <div class="form__control" [formGroup]="idMcc"  >
+                  <label>{{ "label.Code" | translate }}</label>
+                  <input type="text" formControlName="mccCode" [readonly]="isDelete" />
+                </div>
+                <div class="form__control">
+                  <label>{{ "label.Description" | translate }}</label>
+                  <input type="text" formControlName="mccDesc" />
+                </div>
+              </div>
+  
+              
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+            
+             </div>
+  
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_6">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchMCC" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>MTI Code</th>
+                  <th>Description</th>
+                  <th>Mti Direction</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of mtiList
+                      | search : searchMCC
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                       
+                    "
+                    (click)="selectMtiRecord(item.id.mtiCode)"
+                  >
+                    <td>{{ item.id.mtiCode }}</td>
+                    <td>{{ item.mtiDesc }}</td>
+                    <td>{{ item.mtiDirection }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            
+              <p class="no_data" *ngIf="mtiList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                       (pageChange)="p = $event"
+                       ></pagination-controls> 
+                  
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                           <option value="5">5</option>
+                           <option value="10">10</option>
+                           <option value="15">15</option>
+                           <option value="20">20</option>
+                       </select>
+              </div>
+            </div>
+          </div>
+            <form
+              [formGroup]="this.mtiForm"
+              class="form f_b_General "
+           
+            >
+              <div class="row  "  >
+                <div class="form__control" [formGroup]="idMti">
+                  <label>MTI Code</label>
+                  <input type="text" formControlName="mtiCode" [readonly]="isDelete" />
+                </div>
+                <div class="form__control">
+                  <label>MTI mtiDirection</label>
+                  <div class="select__box">
+                    <select formControlName="mtiDirection">
+                      <option value="">-- select --</option>
+                      <option value="res">Response</option>
+                      <option value="req">Request</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row  "  >
+                <div class="form__control">
+                  <label>Description</label>
+                  <input type="text" formControlName="mtiDesc" />
+                </div>
+                <div class="form__control"></div>
+              </div>
+  
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+            
+             </div>
+  
+  
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_7">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchMCC" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>Tag Code</th>
+                  <th>Tag Name</th>
+                  <th>Field</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of tagList
+                        | search : searchMCC
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                       
+                    "
+                    (click)="selectTagRecord(item.subfldDefinitionId)"
+                  >
+                    <td>{{ item.subfldDefinitionId.subfldId }}</td>
+                    <td>{{ item.subfldDescr }}</td>
+                    <td>{{ getFieald(item.subfldType) }}</td>
+                  </tr>
+                </tbody>
+              </table>
+           
+              <p class="no_data" *ngIf="tagList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                       (pageChange)="p = $event"
+                       ></pagination-controls> 
+                  
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                           <option value="5">5</option>
+                           <option value="10">10</option>
+                           <option value="15">15</option>
+                           <option value="20">20</option>
+                       </select>
+                </div>
+            </div>
+          </div>
+            <form
+              [formGroup]="this.tagForm"
+              class="form f_b_General "
+            >
+              <div class="row  "  >
+                <div class="form__control" [formGroup]="this.idTag">
+                  <label>Tag Code</label>
+                  <input type="text" formControlName="subfldId" [readonly]="isDelete" />
+                </div>
+                <div class="form__control">
+                  <label>Tag Name</label>
+                  <input type="text" formControlName="subfldDescr" />
+                </div>
+              </div>
+              <div class="row  "  >
+                <div class="form__control">
+                  <label>Max Length</label>
+                  <input type="number" formControlName="subfldLengthMax" />
+                </div>
+                <div class="form__control">
+                  <label>field number</label>
+                  <!-- <input type="text" formControlName="subfldType" /> -->
+                  <div class="select__box">
+                    <select formControlName="subfldType"    >
+                      <option value="">-- select --</option>
+                      <option
+                        *ngFor="let item of list_Fields"
+                        value="{{ item.id.fieldId }}"
+                      >
+                      {{ item.id.fieldId  }} -{{ item.fieldName  }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+            
+             </div>
+  
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_8">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchAccount" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>{{ "label.Code" | translate }}</th>
+                  <th>{{ "label.Action" | translate }}</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of accountList
+                        | search : searchAccount
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                      
+                    "
+                    (click)="selectAccountRecord(item.id)"
+                  >
+                    <td>{{ item.id.accCode }}</td>
+                    <td>{{ item.accDesc }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <p class="no_data" *ngIf="accountList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                       (pageChange)="p = $event"
+                       ></pagination-controls> 
+                  
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                           <option value="5">5</option>
+                           <option value="10">10</option>
+                           <option value="15">15</option>
+                           <option value="20">20</option>
+                       </select>
+            </div>
+          </div>
+            </div>
+            <form
+              [formGroup]="this.accountForm"
+              class="form f_b_General "
+            >
+              <div class="row  "  >
+                <div class="form__control" [formGroup]="this.idAccount">
+                  <label>{{ "label.Code" | translate }}</label>
+                  <input type="text" formControlName="accCode"  [readonly]="isDelete" />
+                </div>
+                <div class="form__control">
+                  <label>{{ "label.Action" | translate }}</label>
+                  <input type="text" formControlName="accDesc" />
+                </div>
+              </div>
+  
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+  
+              </div>
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_9">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchFunction" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>Function Code</th>
+                  <th>Description</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of functionList
+                        | search : searchFunction
+                        | paginate : { itemsPerPage:itemsPerPageSelct, currentPage: p }
+                      
+                    "
+                    (click)="selectfunctionRecord(item.id)"
+                  >
+                    <td>{{ item.id.fctCode }}</td>
+                    <td>{{ item.fctDesc }}</td>
+                  </tr>
+                </tbody>
+              </table>
+             
+              <p class="no_data" *ngIf="functionList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                       (pageChange)="p = $event"
+                       ></pagination-controls> 
+                  
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                           <option value="5">5</option>
+                           <option value="10">10</option>
+                           <option value="15">15</option>
+                           <option value="20">20</option>
+                       </select>
+              </div>
+            </div>
+            </div>
+            <form
+              [formGroup]="this.functionForm"
+              class="form f_b_General "
+            >
+              <div class="row  "  >
+                <div class="form__control" [formGroup]="this.idFunction">
+                  <label>Function Code</label>
+                  <input type="text" formControlName="fctCode"  [readonly]="isDelete"/>
+                </div>
+                <div class="form__control">
+                  <label>Description</label>
+                  <input type="text" formControlName="fctDesc" />
+                </div>
+              </div>
+  
+  
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+            
+             </div>
+  
+  
+            </form>
+          </div>
+        </div>
+        <div class="box_of_content_fit" *ngIf="tab_10">
+          <div class="rowGeneral">
+            <div class="form">
+              <div class="search">
+                <div class="form__control">
+                  <input type="text" placeholder="type to search"  [(ngModel)]="searchProcessing" />
+                </div>
+              </div>
+              <div class="table">
+                <table cellspacing="0">
+                <thead>
+                  <th>Processing Code</th>
+                  <th>Description</th>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of processingList
+                        | search : searchProcessing
+                        | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+                       
+                    "
+                    (click)="selectprocessingRecord(item.id)"
+                  >
+                    <td>{{ item.id.procCode }}</td>
+                    <td>{{ item.procDesc }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            
+              <p class="no_data" *ngIf="processingList.length == 0">{{ "error.Nodata" | translate }}</p>
+              <div class="DflexPagination">
+                       <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                       (pageChange)="p = $event"
+                       ></pagination-controls> 
+                  
+                       <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                           <option value="5">5</option>
+                           <option value="10">10</option>
+                           <option value="15">15</option>
+                           <option value="20">20</option>
+                       </select>
+              </div>
+            </div>
+            </div>
+            <form
+              [formGroup]="this.processingForm"
+              class="form f_b_General "
+             
+            >
+              <div class="row  "  >
+                <div class="form__control" [formGroup]="this.idProcessing">
+                  <label>Processing Code</label>
+                  <input type="text" formControlName="procCode" />
+                </div>
+                <div class="form__control">
+                  <label>Description</label>
+                  <input type="text" formControlName="procDesc" />
+                </div>
+              </div>
+  
+              
+              <div class="row  "  >
+                <div class="Dflex">
+                    <div class="button-clear">
+                    <button class="btn btn-outlined clearBtn" (click)="init()" *ngIf="isDelete" > {{ "label.Clear" | translate}}</button>
+                    </div>
+                    <div class="DflexButton">
+                    <button  type="submit" class="btn btn-danger btn-delete" *ngIf="isDelete" (click)="openDeletePopUp()">{{ "label.delete" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="!isDelete"   (click)="openSavePopUp()">{{ "label.save" | translate }}</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="isDelete"   (click)="openSavePopUp()">{{ "label.update" | translate }}</button>
+                    </div>
+                </div>
+            
+             </div>
+  
+              
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  
+  
+  
+  <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+  
+  
+  
+  
+  <dialog class="modal" #modal>
+    <div class="header">
+        <div class="title">{{ "label.actionPanel" | translate}}</div>
+        <div class="close" (click)="closemodal()">&times;</div>
+    </div>
+    <div class="form">
+        <div class="row">
+              <label class="lbl" for="">{{ message }} </label>
+  
+        </div>
+        <div class="row" *ngIf="userDeleteActive">
+          <button id="deleteBtnUser" class="btn btn-danger"  (click)="deleteGlobal()">{{ "label.delete" | translate}}</button>
+          <button id="cancelDelete" class="btn btn-primary" (click)="closemodal()">{{ "label.cancel" | translate}}</button>
+        </div>
+  
+        <div class="row" *ngIf="userSaveActive">
+          <button id="deleteBtnUser" class="btn btn-primary"  *ngIf="!isDelete" (click)="SaveGlobal()">{{ "label.save" | translate}}</button>
+          <button id="deleteBtnUser" class="btn btn-primary" *ngIf="isDelete"  (click)="SaveGlobal()">{{ "label.update" | translate}}</button>
+          <button id="cancelDelete" class="btn btn-danger" (click)="closemodal()">{{ "label.cancel" | translate}}</button>
+        </div>
+    </div>
+  
+  </dialog>
+  

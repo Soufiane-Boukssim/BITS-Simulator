@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="box_of_content_fit" >
+    <form [formGroup]="commuicationForm" (ngSubmit)="add()">
+      <fieldset class="fieldset_Aria1">
+        <legend class="legend1"><h2>{{"HeaderMessage" |  translate}}</h2></legend>
+        <div class="row al_f_end  p-1">
+          <div class="form__control">
+            <label> {{"HeaderMessage" |  translate}}</label>
+            <div class="select__box">
+              <select formControlName="headerComm">
+                <option value=""> {{"label.select" |  translate}}</option>
+                <option value="0">0Byte</option>
+                <option value="2">2Byte</option>
+                <option value="4">4Byte</option>
+              </select>
+            </div>
+          </div>
+          <div class="form__control">
+            <label>{{"ReconnectionTime" |  translate}}</label>
+            <input type="text" formControlName="timeOutComms">
+          </div>
+          <div class="form__control">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset_Aria1">
+        <legend class="legend1 legend-DFlex">
+          <label>
+            <input value="S" type="radio" formControlName="commType" (change)="handleComModeChange()">
+             {{"Server" |  translate}}
+          </label>
+          <label>
+            <input value="C" type="radio" formControlName="commType" (change)="handleComModeChange()">
+            Client
+          </label>
+        </legend>
+        <div class="row al_f_end  p-1">
+          <div class="form__control">
+            <label>{{"label.ipAddress" |  translate}}</label>
+            <input type="text" formControlName="commIp" [readonly]="commuicationForm.get('isClientChecked')?.value" (change)="checkIpFormat('remote')">
+            <span class="error">{{errFieldReIp}}</span>
+          </div>
+          <div class="form__control">
+            <label>Port</label>
+            <input type="text" formControlName="commPort" [readonly]="commuicationForm.get('isClientChecked')?.value || commuicationForm.get('isServerChecked')?.value" (change)="checkPortFormat()">
+            <span class="error">{{errField}}</span>
+          </div>
+          <div class="form__control ">
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="row p-block-1" style="justify-content: flex-end ; margin-top: 10px">
+        <div class="DflexButton">
+          <button class="btn btn-primary" type="submit">Save</button>
+          <button style="margin-left: 15px " class="btn btn-danger" *ngIf="isDelete" (click)="deleteCommunication()">Delete</button>
+        </div>
+      </div>
+
+      <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+    </form>
+  </div>
+</div>

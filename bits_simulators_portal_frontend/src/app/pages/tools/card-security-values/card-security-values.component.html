@@ -1,0 +1,384 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">CAVV Calculator</a>
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">CVV Calculator</a>
+      <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)">CAVV Decoder</a>
+      <a [className]="tab_4 ? 'active' : ''" (click)="open_tab(3)">SPA AAV Calculator</a>
+      <a [className]="tab_5 ? 'active' : ''" (click)="open_tab(4)">DCVV Calculator</a>
+    </div>
+    <div class="tabs">
+      <div class="box_of_content_fit" *ngIf="tab_1">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="one_cols">
+                    <div class="details">
+                      <div class="two-cols">
+
+                        <div class="form__control">
+
+                          <label>PAN</label>
+                          <input type="text" style="min-width: 250px" class="input" [(ngModel)]="pan">
+                        </div>
+
+                        <div class="form__control">
+
+                          <label>Authentication Result Code</label>
+                          <div class="select__box">
+                            <select class="input" style="min-width: 250px" [(ngModel)]="authcode">
+                              <option value="0">--Select--</option>
+                              <option value="1">XOR</option>
+                              <option value="2">AND</option>
+                              <option value="3">OR</option>
+                              <option value="3">NOT</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form__control">
+
+                          <label>Authentication Methode</label>
+                          <div class="select__box">
+                            <select class="input" [(ngModel)]="authmetd">
+                              <option value="0">--Select--</option>
+                              <option value="1">XOR</option>
+                              <option value="2">AND</option>
+                              <option value="3">OR</option>
+                              <option value="3">NOT</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form__control">
+
+                          <label>CAVV Key Set</label>
+                          <div class="select__box">
+                            <select class="input" [(ngModel)]="keyset">
+                              <option value="0">--Select--</option>
+                              <option value="1">XOR</option>
+                              <option value="2">AND</option>
+                              <option value="3">OR</option>
+                              <option value="3">NOT</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form__control">
+
+                          <label>ECI</label>
+                          <div class="select__box">
+                            <select class="input" [(ngModel)]="eci">
+                              <option value="0">--Select--</option>
+                              <option value="1">XOR</option>
+                              <option value="2">AND</option>
+                              <option value="3">OR</option>
+                              <option value="3">NOT</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form__control">
+
+                          <label>Seed</label>
+                          <input type="number" max="9999" class="input" [(ngModel)]="seed">
+
+                        </div>
+                      </div>
+                      <div class="two-cols">
+
+                        <div class="form__control">
+
+                          <label>Transaction Date</label>
+                          <input type="date" class="input" style="min-width: 250px" [(ngModel)]="transdate">
+                        </div>
+
+                        <div class="form__control">
+                          <label>Amount</label>
+                          <div class="two-cols_icon">
+
+                            <input type="text" style="min-width: 250px" class="input" [(ngModel)]="amount">
+
+                            <mat-icon aria-hidden="false"
+                                      matTooltip="Info about the action"
+                                      [matTooltipPosition]="after.value!"
+                                      aria-label="Example home icon" fontIcon="home"></mat-icon>
+                          </div>
+                        </div>
+
+
+                        <div class="form__control">
+
+                          <label>Currency Code</label>
+                          <input type="text" class="input" [(ngModel)]="currcode">
+                        </div>
+
+
+                        <div class="form__control">
+
+                          <label>Protocol Version</label>
+                          <div class="select__box">
+                            <select class="input" [(ngModel)]="protocolv">
+                              <option value="0">--Select--</option>
+                              <option value="1">XOR</option>
+                              <option value="2">AND</option>
+                              <option value="3">OR</option>
+                              <option value="3">NOT</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form__control">
+
+                          <label>CAVV Key</label>
+                          <input type="numerique" class="input" [(ngModel)]="key">
+                        </div>
+                        <div class="form__control">
+
+                          <label>CAVV</label>
+                          <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="result">
+                        </div>
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                        <div class="buttons">
+                          <button class="btn btn-primary" (click)="changeOperation()">Decode</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_2">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="one_cols">
+                    <div class="details">
+
+                      <!-- <span (click)="toggleContent()" class="toggle-ico">{{ contentVisible ? '&#x24D8;' : '&#9432;' }}</span> -->
+                      <div class="form__control">
+                        <label>PAN</label>
+                        <input type="text" style="min-width:250px" class="input" [(ngModel)]="pan">
+                      </div>
+                      <div class="form__control">
+                        <label>Expiration Date</label>
+                        <div class="two-cols_icon">
+                          <input type="text" class="input" [(ngModel)]="expdate">
+                          <mat-icon aria-hidden="false"
+                                    matTooltip="Info about the action"
+                                    aria-label="Example home icon" fontIcon="home"></mat-icon>
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>Service Code</label>
+                        <div class="two-cols_icon">
+                          <input type="text" class="input" [(ngModel)]="servcode">
+                          <mat-icon aria-hidden="false"
+                                    matTooltip="Info about the action"
+                                    [matTooltipPosition]="after.value!"
+                                    aria-label="Example home icon" fontIcon="home"></mat-icon>
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>CVK<sub>A</sub></label>
+                        <input type="text" class="input" [(ngModel)]="cvka">
+                      </div>
+                      <div class="form__control">
+                        <label>CVK<sub>B</sub></label>
+                        <input type="text" class="input" [(ngModel)]="cvkb">
+                      </div>
+                      <div class="form__control">
+                        <label>CVC/CVV</label>
+                        <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="Result">
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                        <div class="buttons">
+                          <button class="btn btn-primary" (click)="changeOperation()">Add</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_3">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="two-cols-content">
+                    <div class="details">
+                      <span (click)="toggleContent()" class="toggle-ico">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                      </span>
+                      <br>
+                      <!-- <span (click)="toggleContent()" class="toggle-ico">{{ contentVisible ? '&#x24D8;' : '&#9432;' }}</span> -->
+                      <div class="form__control">
+                        <label>CAVV</label>
+                        <input type="text" class="input" [(ngModel)]="cavv">
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                        <div class="buttons">
+                          <button class="btn btn-primary" (click)="changeOperation()">Decode</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-box">
+                      <!-- <span (click)="toggleContent()" class="toggle-icon">{{ contentVisible ? '✕' : '' }}</span> -->
+
+                      <div class="con" *ngIf="contentVisible">
+                        <p>Select Operation and provide data in hex </p>
+                        <p>
+                          <span>Operands can be of arbitrary length up to 8 Bytes (16 hex character).</span>
+                          <span> The only condition is that the operands must be of the same length</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_4">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="one_cols">
+                    <div class="details">
+                      <div class="form__control">
+                          <label>Merchant Name</label>
+                          <input type="text" class="input" [(ngModel)]="merchname">
+                      </div>
+                      <div class="form__control">
+                          <label>PAN</label>
+                          <input type="text" class="input" [(ngModel)]="pan">
+                      </div>
+                      <div class="form__control">
+                          <label>Mode</label>
+                        <div class="select__box">
+                          <select class="input" [(ngModel)]="mode">
+                            <option value="0">--Select--</option>
+                            <option value="1">XOR</option>
+                            <option value="2">AND</option>
+                            <option value="3">OR</option>
+                            <option value="3">NOT</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form__control">
+                          <label>ACS ID</label>
+                          <input type="number" class="input" [(ngModel)]="acsid">
+                      </div>
+
+                      <div class="form__control">
+                          <label>Authentication Methode</label>
+                        <div class="select__box">
+                          <select class="input" [(ngModel)]="authmetd">
+                            <option value="0">--Select--</option>
+                            <option value="1">XOR</option>
+                            <option value="2">AND</option>
+                            <option value="3">OR</option>
+                            <option value="3">NOT</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form__control">
+                          <label>Sequence Number</label>
+                          <input type="number" class="input" [(ngModel)]="sequencenum">
+                      </div>
+                      <div class="form__control">
+                          <label>Key Identifier</label>
+                          <input type="numerique" class="input" [(ngModel)]="keyid">
+                      </div>
+                      <div class="form__control">
+                          <label>Key</label>
+                          <input type="numerique" class="input" [(ngModel)]="key">
+                      </div>
+                      <div class="form__control">
+                          <label>AVV</label>
+                          <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="avv">
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                          <div class="buttons">
+                            <button class="btn btn-primary" (click)="changeOperation()">Calculate</button>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_5">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="one_cols">
+                    <div class="details">
+                      <div class="form__control">
+                          <label>PAN</label>
+                          <input type="text" style="min-width: 250px" class="input" [(ngModel)]="pan">
+                      </div>
+                        <div class="form__control">
+                          <label>Expiration Date </label>
+                          <input type="month" class="input" [(ngModel)]="expdate" placeholder="YY-MM">
+                      </div>
+
+                      <div class="form__control">
+                          <label>Service Code </label>
+                          <input type="number" class="input" [(ngModel)]="servicecode">
+                      </div>
+
+
+                        <div class="form__control">
+                          <label>ATC</label>
+                          <input type="number" class="input" [(ngModel)]="atc">
+                      </div>
+                        <div class="form__control">
+                          <label>MDK</label>
+                          <input type="numerique" class="input" [(ngModel)]="mdk">
+                      </div>
+                        <div class="form__control">
+                          <label>dCVV</label>
+                          <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="dcvv">
+                        </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                          <div class="buttons">
+                            <button class="btn btn-primary" (click)="changeOperation()">Calculate</button>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,182 @@
+<div class="container">
+    <form [formGroup]="financialForm" (ngSubmit)="onSubmit()" class="form-content">
+      <h2>Financial Institution Table</h2>
+  
+      <!-- Specification Block -->
+      <div class="block">
+        <h3>Specification</h3>
+        <div class="sub-block">
+          <label for="profile">Profile</label>
+          <input id="profile" formControlName="profile" />
+        </div>
+        <div class="sub-block">
+          <label for="code">Code</label>
+          <input id="code" formControlName="code" />
+        </div>
+        <div class="sub-block">
+          <label for="libelle">Libelle</label>
+          <input id="libelle" formControlName="libelle" />
+        </div>
+      </div>
+  
+      <!-- Detail Block -->
+      <div class="block">
+        <h3>Detail</h3>
+        <div class="sub-block">
+          <label for="institutionIndex">Institution Index (PIDDX)</label>
+          <input id="institutionIndex" formControlName="institutionIndex" />
+        </div>
+        <div class="sub-block">
+          <label for="identifiantInstitution">Identifiant de l'institution (PFIID)</label>
+          <input id="identifiantInstitution" formControlName="identifiantInstitution" />
+        </div>
+        <div class="sub-block">
+          <label for="algoNumberIndex">Algo Number Index (PAGDX)</label>
+          <input id="algoNumberIndex" formControlName="algoNumberIndex" />
+        </div>
+  
+        <!-- Pan Sub-Block -->
+        <div class="sub-block">
+          <h4>Pan</h4>
+          <div>
+            <label for="panIndex">Index</label>
+            <input id="panIndex" formControlName="panIndex" />
+          </div>
+          <div>
+            <label for="panLength">Length</label>
+            <input id="panLength" formControlName="panLength" />
+          </div>
+          <div>
+            <label for="panPadCharacter">Pad Character</label>
+            <input id="panPadCharacter" formControlName="panPadCharacter" />
+          </div>
+        </div>
+  
+        <!-- PSTDX Sub-Block -->
+        <div class="sub-block">
+          <h4>PSTDX</h4>
+          <label for="pstdx">Index de l'Indirect - Next-State</label>
+          <select id="pstdx" formControlName="pstdx">
+            <option *ngFor="let option of pstdxOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+  
+        <!-- Verification Sub-Block -->
+        <div class="sub-block">
+          <h4>Verification</h4>
+          <div>
+            <label for="pinCheckLength">PIN-Check Length (PCKLN)</label>
+            <select id="pinCheckLength" formControlName="pinCheckLength">
+              <option *ngFor="let option of pinCheckLengthOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+          <div>
+            <label for="authMethod">Authentification</label>
+            <select id="authMethod" formControlName="authMethod">
+              <option *ngFor="let option of authMethodOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+          <div>
+            <label for="authLength">Longueur</label>
+            <input id="authLength" formControlName="authLength" />
+          </div>
+        </div>
+  
+        <!-- PMXPN Sub-Block -->
+        <div class="sub-block">
+          <h4>PMXPN</h4>
+          <div>
+            <label for="maxPinEntryDigits">Maximum PIN Entry Digits</label>
+            <select id="maxPinEntryDigits" formControlName="maxPinEntryDigits">
+              <option *ngFor="let option of maxPinEntryDigitsOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+          <div>
+            <label for="pmxpnLength">Longueur</label>
+            <input id="pmxpnLength" formControlName="pmxpnLength" />
+          </div>
+        </div>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="buttons">
+        <button type="button" (click)="showSecurityForm()">Securite</button>
+        <button type="button" (click)="showIndexPinForm()">Index Pin/Piste</button>
+      </div>
+  
+      <!-- Security Form -->
+      <div *ngIf="showSecurity" class="security-form show">
+        <h3>Securite</h3>
+        <div class="sub-block">
+          <label for="paddingCharacter">Caractere de padding du PIN (PINPD)</label>
+          <input id="paddingCharacter" formControlName="paddingCharacter" />
+        </div>
+        <div class="sub-block">
+          <label for="hex">Hex</label>
+          <input id="hex" formControlName="hex" />
+        </div>
+        <div class="sub-block">
+          <label for="encryptionType">Type cryptage</label>
+          <input id="encryptionType" formControlName="encryptionType" />
+        </div>
+        <div class="sub-block">
+          <label for="key1">Cle 1 utilisee</label>
+          <input id="key1" formControlName="key1" />
+        </div>
+        <div class="sub-block">
+          <label for="key2">Cle 2 utilisee</label>
+          <input id="key2" formControlName="key2" />
+        </div>
+        <div class="sub-block">
+          <label for="utilisNoCoord">Utilis no coord</label>
+          <select id="utilisNoCoord" formControlName="utilisNoCoord">
+            <option *ngFor="let option of utilisNoCoordOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div class="sub-block">
+          <label for="padCharacter">Caractere de pad</label>
+          <input id="padCharacter" formControlName="padCharacter" />
+        </div>
+        <div class="sub-block">
+          <label for="encryptedPinKey">Encrypted PIN key (PEKEY)</label>
+          <input id="encryptedPinKey" formControlName="encryptedPinKey" />
+        </div>
+        <div class="sub-block">
+          <label for="codeLanguage">Code Language (PLNDX)</label>
+          <input id="codeLanguage" formControlName="codeLanguage" />
+        </div>
+      </div>
+      
+  
+      <div *ngIf="showIndexPin" class="index-pin-form">
+        <h3>Index Pin/Piste</h3>
+        <div class="data-track-locator">
+          <h4>Data Track Locator (PINDX)</h4>
+          <div *ngFor="let field of dataTrackFields" class="data-track-row">
+            <label [for]="field.id">{{ field.label }}</label>
+            <input [id]="field.id" [formControlName]="field.controlName" />
+          </div>
+          <div class="form-group">
+            <label for="pinRetryCount">Pin Retry Count Index (PRCNT)</label>
+            <input id="pinRetryCount" formControlName="pinRetryCount" />
+          </div>
+          <div class="form-group">
+            <label for="offsetNumberIndex">Offset number index (POFDX)</label>
+            <input id="offsetNumberIndex" formControlName="offsetNumberIndex" />
+          </div>
+          <div class="form-group">
+            <label for="decimalizationTable">Decimalization table (PDCTB)</label>
+            <input id="decimalizationTable" formControlName="decimalizationTable" />
+          </div>
+        </div>
+      </div>
+      
+      
+      <!-- Submit Button -->
+      <div class="buttons">
+        <button type="submit">Submit</button>
+      </div>
+      
+    </form>
+  </div>
+  

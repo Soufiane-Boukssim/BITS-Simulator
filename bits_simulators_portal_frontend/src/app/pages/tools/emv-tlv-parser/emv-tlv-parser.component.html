@@ -1,0 +1,76 @@
+<div class="box_of_content">
+  <div class="container">
+    <div class="tabs__container">
+
+      <div class="header">
+        <!-- <div class="title bold">{{ "title.TagsAnalyzer" | translate }}</div> -->
+    </div>
+    <div class="form mx__2">
+        <div class="row gap">
+            <div class="form__control">
+                <label for="">{{ "label.Tag" | translate }}</label>
+                <div class="select__box">
+                    <select (change)="onTagSelected($event)">
+                        <option value="" disabled selected>-- Select a tag --</option>
+                        <option *ngFor="let t of specialTags" [value]="t.shortName">{{ t.shortName + " ( Tage "+t.tag+")" }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form__control">
+                <label for="">{{ "label.HexaValue" | translate }}</label>
+                <input disabled readonly [(ngModel)]="hexValue" type="text">
+            </div>
+        </div>
+        <div class="value row__sb">
+            <div class="row__sb gap">
+                <div class="form__control" *ngFor="let byte of bytes; let i = index">
+                    <input type="text" maxlength="2" [(ngModel)]="bytes[i].byte" (keyup)="updateHexValue()">
+                </div>
+            </div>
+            <div class="d-flex">
+                <button (click)="analyze()" class="btn btn-secondary">
+                    {{ "button.Analyze" | translate }}
+                </button>
+            </div>
+        </div>
+        <div class="tabs__container">
+            <div class="tab__buttons">
+                <a [className]="selectedTab === tabButton ? 'active' : ''" (click)="open_tab(tabButton)"
+                    *ngFor="let tabButton of tabButtons">Byte {{ tabButton }}</a>
+            </div>
+            <div class="tabs">
+                <div *ngFor="let tab of tabButtons">
+                    <div class="d__hor__2" *ngIf="selectedTab === tab">
+                        <div class="box not__owned">
+                            <div class="list__box">
+                              <div class="scroll__list">
+                                <div class="item" *ngFor="let item of results.slice((tab - 1) * 8, (tab - 1) * 8 + 4)">
+                                  <div class="text">{{item.resultName}}</div>
+                                  <app-checkbox [checked]="item.checked"></app-checkbox>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                  
+                          <!-- Second box not__owned -->
+                          <div class="box not__owned">
+                            <div class="list__box">
+                              <div class="scroll__list">
+                                <div class="item" *ngFor="let item of results.slice((tab - 1) * 8 + 4, tab * 8)">
+                                  <div class="text">{{item.resultName}}</div>
+                                  <app-checkbox [checked]="item.checked"></app-checkbox>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+  </div>
+</div>

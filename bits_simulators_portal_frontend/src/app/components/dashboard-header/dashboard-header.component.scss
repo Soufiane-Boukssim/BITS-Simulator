@@ -1,0 +1,120 @@
+header{
+    position: fixed !important;
+    z-index: 22222;
+    top: 0;
+    left: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 50px;
+    background-color: #f4f4f4;
+    width: calc(100% - 250px);
+    gap: .5rem;
+    color: #333;
+    div{
+        display: flex;
+        align-items: center;
+        gap: .3rem;
+    }
+    .user__name,.login__time{
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        float: right;
+        margin-inline: 1rem;
+    }
+    .tool__tip{
+        align-items: start;
+        color: #333;
+        span{
+            width: 100%;
+        }
+    }
+
+    // .current_protocol{
+    //   margin-left:250px !important;
+    // }
+    
+}
+
+.LanguageImg{
+  position: relative;
+  background-color: red;
+  border-radius: 100%;
+  height: 15px;
+  width: 15px;
+  overflow: hidden;
+}
+
+
+
+/* Media Queries for Responsive Design */
+
+/* iPad */
+@media (max-width: 768px) {
+    header {
+        left: 0;
+        width: 100%;
+
+        
+        //  .current_protocol {
+        //     display: none;
+        // }
+    }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+    header {
+        left: 0;
+        width: 100%;
+        //  .current_protocol {
+        //     display: none;
+        // }
+    }
+}
+
+
+.icon_menu{
+    margin-left: 13%;
+    cursor: pointer;
+    // position: absolute;
+
+}
+
+
+
+
+.show_Menu{
+    width: 100px;
+    position: absolute;
+    padding-left: 10px;
+    left: 0;
+    .tool__tip{
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 120%;
+      left: 10%;
+      padding: .5rem;
+      background-color: #fff;
+      border-radius: 7px;
+      width: 200px;
+      box-shadow: 1px 1px 7px #dcdcdc;
+      p{
+        cursor: pointer;
+      }
+      span{
+        padding: .5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+        span:not(:last-child){
+        border-bottom: 1px solid #d2d2d2;
+      }
+      
+    }
+  }
+  

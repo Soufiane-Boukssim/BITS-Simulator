@@ -1,0 +1,204 @@
+/* Container styling */
+.container {
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  height: 10px;
+}
+
+/* Profile Form styling */
+.profile-form {
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.profile-form h2 {
+  margin-bottom: 10px;
+}
+
+.profile-form form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-form div {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-form label {
+  margin-bottom: 5px;
+}
+
+.profile-form input,
+.profile-form select {
+  padding: 5px;
+  width: 200px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.profile-form button {
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  background-color: grey;
+}
+
+.profile-form button:not(:disabled) {
+  background-color: #62DE94;
+}
+
+@media (max-width: 768px) {
+  .profile-form form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-form div, .profile-form input, .profile-form select, .profile-form button {
+    width: 100%;
+  }
+}
+
+/* Profile List styling */
+.profile-list {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.profile-list h2 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.profile-list .search-bar {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.profile-list .search-bar input {
+  padding: 5px;
+  width: 290px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.profile-list .table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.profile-list table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.profile-list thead th {
+  background-color: #e6e6e6;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+
+.profile-list tbody tr:nth-child(even) {
+  background-color: white;
+}
+
+.profile-list tbody tr:nth-child(odd) {
+  background-color: #e6e6e6;
+}
+
+.profile-list tbody td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.profile-list .action-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  // border: none !important;
+  border-right: 1px solid #ccc;
+}
+
+.profile-list .edit-button,
+.profile-list .del-button {
+  padding: 6px 10px;
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  min-width: 60px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.profile-list .edit-button {
+  background-color: #fec104;
+}
+
+.profile-list .del-button {
+  background-color: #e13541;
+}
+
+.profile-list .pagination,
+.profile-list .page-list {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.profile-list .pagination button,
+.profile-list .page-list button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.profile-list .page-list button.active {
+  background-color: #62DE94;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Add spacing between form buttons */
+.profile-form button.cancel-button {
+  margin-left: 10px; /* Adjust value as needed */
+}
+
+.success-message {
+  color: green;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: green;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+
+

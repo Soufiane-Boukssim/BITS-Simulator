@@ -1,0 +1,630 @@
+<div class="box_of_content">
+    <div class="tabs__container tabs__ex">
+        <div class="w-95">
+            <div class="tab__buttons">
+                <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)">{{ "label.Cases" | translate }}</a>
+                <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)">{{ "label.Scenarios" | translate }}
+                </a>
+            </div>
+        </div>
+        <div class="tabs">
+            <!-- cases -->
+            <div class="box_of_content" *ngIf="tab_1" >
+                <div class="side__list">
+                    <div class="header">
+                        <div class="form__control" style="margin-block: .5rem;">
+                            <input [(ngModel)]="searchCase" type="text" placeholder="search">
+                        </div>
+                    </div>
+    
+                    <button (click)="newCase()"  class="add__btn btn btn-secondary" >New</button>
+    
+                    <!-- <ul>
+                        <li (click)="newCase()">
+                            <div class="icon"><img src="assets/icons/add-document.png" height="25"
+                                    alt=""></div>
+                            <span>New Case</span>
+                        </li>
+                    </ul> -->
+                    <ul>
+                        <li (click)="retriveCase(item.caseNo)" *ngFor="let item of cases | search: searchCase |  paginate : { itemsPerPage: 10, currentPage: p } ">
+                            <div class="icon"><img src="assets/icons/research.png" height="15" alt=""></div>
+                            <span style="font-size: 9px;">{{item.caseDesc}}</span>
+                        </li>
+                    </ul>
+                </div>
+                  <div  class="div-loader" >
+                    <span class="loader"  *ngIf="isLoading" ></span>
+                  </div>
+    
+                <div class="DflexPaginationV2 ">
+                    <pagination-controls nextLabel="" previousLabel=""
+                    (pageChange)="p = $event"
+                    ></pagination-controls> 
+               
+               </div>
+    
+               
+                <div class="side__content">
+                    <div class="tabs__container tabs__ex">
+                        <div class="">
+                            <div class="tab__buttons">
+                                <a [className]="inTab ? 'active':''" (click)="open_tab(2)">{{ "label.Request" | translate }} </a>
+                                <a [className]="outTab ? 'active':''" (click)="open_tab(3)">{{ "label.Response" | translate }}</a>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <div *ngIf="inTab">
+                                <div [formGroup]="caseInForm" class="column">
+    
+    
+                                    <fieldset class="fieldset_Aria1">
+                                        <legend class="legend1"><h2>{{ "label.Identification" | translate }}</h2></legend>
+                                        
+                                        <div class="row">
+    
+    
+                                            <div class="form__control">
+                                                <label>{{ "label.Name" | translate }}</label>
+                                                <input formControlName="caseDesc" type="text">
+                                            </div>
+        
+                                            <div class="form__control">
+                                                <div class="radio__box">
+                                                    <div class="d-flex">
+                                                        <!-- (change)="filterMtisByDirection('in', 'res')" -->
+                                                        <input
+                                                            formControlName="caseDirection" value="req" type="radio"   > 
+                                                            <label for="">{{ "label.OUT" | translate }}</label> <!-- [checked]="true" -->
+                                                          
+                                                        </div>
+    
+                                                    <div class="d-flex">
+                                                        <!-- (change)="filterMtisByDirection('in', 'req')" -->
+                                                        <input 
+                                                            formControlName="caseDirection" value="res" type="radio">
+                                                            <label for="">{{ "label.IN" | translate }}</label>
+                                                        </div>
+    
+                                                    <div class="form__control">
+                                                        <label>{{ "label.MessageType" | translate }}</label>
+                                                        <div class="select__box" style="max-width: 100%;">
+                                                            <select formControlName="caseMti">
+                                                                <option disabled selected value="">-- select --</option>
+                                                                <option *ngFor="let m of mtisOut " [value]="m.id.mtiCode">
+                                                                    {{m.id.mtiCode}}-{{m.mtiDesc}}
+                                                            </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="code-show"  *ngIf="caseInForm.get('caseMti')?.value !=''">
+                                                        {{caseInForm.get("caseMti")?.value}}
+                                                     </div>
+                                                </div>
+        
+                                            </div>
+        
+                                            
+                                        </div>
+    
+                                        <div class="row">
+    
+                                            <div class="form__control">
+                                                <label>{{ "label.CardProfile" | translate }}</label>
+                                                <div class="select__box">
+                                                    <select formControlName="caseCardRef">
+                                                        <option disabled selected value="">-- select --</option>
+                                                        <option *ngFor="let c of cards" [value]="c.id.cardNo">{{ c.cardDesc }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form__control">
+                                                <label>{{ "label.MerchantProfile" | translate }}</label>                                            <div class="select__box">
+                                                    <select formControlName="caseMerchantPrf">
+                                                        <option disabled selected value="">-- select --</option>
+                                                        <option *ngFor="let m of merchants" [value]="m.id.merCode">{{ m.merName
+                                                            }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                      
+                                        <div class="row">
+                                            <div class="form__control">
+                                                <label>{{ "label.TerminalProfile" | translate }}</label>
+                                                <div class="select__box">
+                                                    <select formControlName="caseTerminalPrf">
+                                                        <option disabled selected value="">-- select --</option>
+                                                        <option *ngFor="let t of terminals" [value]="t.id.termCode">{{
+                                                            t.termLocation }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+    
+                                            <div class="form__control">
+                                                <label>{{ "label.ChooseAction" | translate }}</label>
+                                                <div class="select__box">
+                                                    <select formControlName="caseAction" >
+                                                        <option disabled selected value="">-- select --</option>
+                                                        <option value="ET">{{ "option.EchoTest" | translate }}</option>
+                                                        <option value="RP">{{ "option.ResetPINKey" | translate }}</option>
+                                                        <option value="RM">{{ "option.ResetMACKey" | translate }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+                                        
+    
+    
+                                    </fieldset>
+    
+                                    <div class="d_grid_r250">
+                                      
+    
+    
+                                      
+                                     
+                                    </div>
+                                    <div class="row">
+                                       
+                                       
+                                    </div>
+                                    <button (click)="openModal('')" class="add__btn btn btn-secondary">Add a field</button>
+    
+                                    
+                                    <div class="fields__area">
+                                        <!-- <button (click)="open_tab(3)" class="btn btn-secondary">Next</button> -->
+                                        <div class="fields">
+                                            <div *ngFor="let item of inFields; let i = index">
+                                                <div class="field">
+                                                    <p *ngIf="item.details && item.details.length > 0  && item.value!='From Response'
+                                                       && item.value!='From Request' && item.value!='From Merchant'  && item.value!='From Terminal'  && item.value!='From Card Profile'">
+    
+                                                        <img src="assets/icons/more.png" height="20" alt=""
+                                                            (click)="toggleCollapse('in', item.fieldDef.id.fieldId)">
+                                                    </p>
+                                                    <p *ngIf="item.details && item.details.length > 0 &&(   item.value==='From Response'
+                                                        || item.value==='From Request' || item.value==='From Merchant'  || item.value==='From Terminal'  || item.value==='From Card Profile')">                                                    
+                                                     </p>
+                                                    <p *ngIf="!item.details || item.details.length === 0">
+                                                        
+                                                    </p>
+                                                    <div class="title">
+                                                        <span>{{item.fieldDef.id.fieldId}}</span>
+                                                        <p>{{item.fieldDef.fieldName}}</p>
+                                                    </div>
+                                                    <div class="value">
+                                                        <div class="text">
+    
+                                                            {{item.value | slice:0:50}}
+                                                            <!-- <span *ngIf="item.value.length > 50">...</span> -->
+                                                        </div>
+                                                        <div class="row__sb s-gap">
+                                                            <img class="action" (click)="editField(item)"
+                                                                src="assets/icons/edit.png" height="20" alt="">
+                                                            <img class="action" (click)="deleteField(item.fieldDef.id)"
+                                                                src="assets/icons/delete.png" height="18" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ng-container *ngIf="item.details && item.details.length > 0 && item.collapsed === false">
+                                                    <div class="subfield" *ngFor="let s of item.details">
+                                                        <div></div>
+                                                        <div class="title">
+                                                            {{ (item.fieldDef.id.fieldId === 48 || item.fieldDef.id.fieldId === 55) ? (s.name | subFieldName | async) : s.name }}
+                                                        </div>
+                                                        <div class="value">
+                                                            {{s.value}}
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                        <div class="row__sb">
+    
+                                            <div class="DflexButton  DflexButtonTop">
+                                                <button type="submit" class="btn btn-secondary btn-delete" *ngIf="editMode" (click)="duplicate()">Duplicate</button>
+                                                <button type="submit" class="btn btn-danger btn-delete" *ngIf="editMode" (click)="deleteCase()">{{
+                                                    "label.delete" | translate }}</button>
+                                                <button type="submit" class="btn btn-primary" (click)="open_tab(3)" >Next</button>
+                                        
+                                            </div>
+                                            <!-- <button *ngIf="editMode" (click)="deleteCase()" class="next__btn btn btn-red">
+                                                <img src="assets/icons/bin.png" alt="" width="14px">
+                                                Delete
+                                            </button>
+                                            <button (click)="open_tab(3)" class="next__btn btn btn-primary">
+                                                Next
+                                                <img src="assets/icons/right.png" alt="" width="14px">
+                                            </button> -->
+                                        </div>
+    
+    
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="outTab">
+                                <div [formGroup]="caseOutForm" class="column">
+    
+                                    <fieldset class="fieldset_Aria1">
+                                        <legend class="legend1"><h2>{{ "label.Identification" | translate }}</h2></legend>
+    
+                                        <div class="row">
+    
+                                            <div class="form__control">
+                                                <label>{{ "label.Name" | translate }}</label>
+                                                <input readonly formControlName="caseDesc" type="text">
+                                            </div>
+    
+    
+                                            <div class="form__control">
+                                                <div class="radio__box">
+                                                    <div class="d-flex">
+                                                        <!-- (change)="filterMtisByDirection('out', 'res')" -->
+                                                        <input 
+                                                            formControlName="caseDirection" value="req" type="radio">
+                                                            <label for="">{{ "label.OUT" | translate }}</label>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <!-- (change)="filterMtisByDirection('out', 'req')"# -->
+                                                        <input 
+                                                            formControlName="caseDirection" value="res" type="radio">
+                                                            <label for="">{{ "label.IN" | translate }}</label>
+                                                        
+                                                    </div>
+                                                    <div class="form__control">
+                                                        <label>{{ "label.MessageType" | translate }}</label>
+                                                        <div class="select__box " style="max-width: 100%;">
+                                                            <select formControlName="caseMti">
+                                                                <option disabled selected value="">-- select --</option>
+                                                                <option *ngFor="let m of mtisIn" [value]="m.id.mtiCode">
+                                                                    {{m.id.mtiCode+' - ' +m.mtiDesc}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="code-show"  *ngIf="caseOutForm.get('caseMti')?.value !=''">
+                                                        {{caseOutForm.get("caseMti")?.value}}
+                                                     </div>
+                                                </div>
+                                            </div>
+    
+    
+                                        </div>
+    
+                                        <div class="row">
+                                            
+                                            <div class="form__control">
+                                                <label>{{ "label.CardProfile" | translate }}</label>
+                                                <div class="select__box">
+                                                    <select readonly formControlName="caseCardRef">
+                                                        <option disabled selected value="">-- select --</option>
+                                                        <option *ngFor="let c of cards" [value]="c.id.cardNo">{{ c.cardDesc }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form__control">
+                                                <label>{{ "label.MerchantProfile" | translate }}</label>
+                                                <div class="select__box">
+                                                    <select readonly formControlName="caseMerchantPrf">
+                                                        <option disabled selected value="">-- select --</option>
+                                                        <option *ngFor="let m of merchants" [value]="m.id.merCode">{{ m.merName
+                                                            }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="row">
+                                            <div class="form__control">
+                                                <label>{{ "label.TerminalProfile" | translate }}</label>
+                                                <div class="select__box">
+                                                    <select readonly formControlName="caseTerminalPrf">
+                                                        <option disabled selected value="">-- select --</option>
+                                                        <option *ngFor="let t of terminals" [value]="t.id.termCode">{{
+                                                            t.termLocation }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form__control">
+                                                <label>{{ "label.ChooseAction" | translate }}</label>
+                                                <div class="select__box">
+                                                    <select readonly formControlName="caseAction"  >
+                                                        <option disabled selected value="">-- select --</option>
+                                                        <option value="ET">{{ "option.EchoTest" | translate }}</option>
+                                                        <option value="RP">{{ "option.ResetPINKey" | translate }}</option>
+                                                        <option value="RM">{{ "option.ResetMACKey" | translate }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+    
+    
+                                    </fieldset>
+    
+    
+                                    <div class="d_grid_r250">
+    
+                                        
+                                        
+                                    
+                                    </div>
+                                    <div class="row caseMti">
+                                        
+                                    </div>
+                                    <button (click)="openModal('')" class="add__btn btn btn-secondary">{{ "label.AddField" | translate }}</button>
+                                    <div class="fields__area">
+                                        <div class="fields">
+                                            <div *ngFor="let item of outFields; let i = index">
+                                                <div class="field">
+                                                    <p *ngIf="item.details && item.details.length > 0 && item.value!='From Response'
+                                                        && item.value!='From Request' && item.value!='From Merchant'  && item.value!='From Terminal'  && item.value!='From Card Profile' ">
+                                                         
+                                                        <img src="assets/icons/more.png" height="20" alt=""
+                                                            (click)="toggleCollapse('out', item.fieldDef.id.fieldId)">
+                                                    </p>
+                                                    <p *ngIf="item.details && item.details.length > 0 &&(   item.value==='From Response'
+                                                        || item.value==='From Request' || item.value==='From Merchant'  || item.value==='From Terminal'  || item.value==='From Card Profile')">                                                    
+                                                     </p>
+                                                    <p *ngIf="item.details && item.details.length > 0  && item.value==='From Response'
+                                                        && item.value==='From Request' && item.value==='From Merchant'  && item.value==='From Terminal'  && item.value==='From Card Profile'">
+     
+                                                         test
+                                                     </p>
+                                                    <p *ngIf="!item.details || item.details.length === 0">
+                                                    </p>
+                                                    <div class="title">
+                                                        <span>{{item.fieldDef.id.fieldId}}</span>
+                                                        <p>{{item.fieldDef.fieldName}}</p>
+                                                    </div>
+                                                    <div class="value">
+                                                        <div class="text">
+    
+                                                            {{item.value | slice:0:50}}
+                                                            <!-- <span *ngIf="item.value.length > 50">...</span> -->
+                                                        </div>
+                                                        <div class="row__sb s-gap">
+                                                            <img class="action" (click)="editField(item)"
+                                                                src="assets/icons/edit.png" height="20" alt="">
+                                                            <img class="action" (click)="deleteField(item.fieldDef.id)"
+                                                                src="assets/icons/delete.png" height="18" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ng-container *ngIf="item.details && item.details.length > 0 && item.collapsed === false">
+                                                    <div class="subfield" *ngFor="let s of item.details">
+                                                        <div></div>
+                                                        <div class="title">
+                                                            <!-- {{ item.fieldDef.id.fieldId }} -->
+                                                            {{ (item.fieldDef.id.fieldId === 48 || item.fieldDef.id.fieldId === 55 || item.fieldDef.id.fieldId === 62) ? (s.name | subFieldName | async) : s.name }}
+                                                        </div>
+                                                        <div class="value">
+                                                            {{s.value}}
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                        <div class="row__sb">
+                                        
+                                            <div class="DflexButton  DflexButtonTop">
+                                                <button type="submit" class="btn btn-secondary btn-delete" *ngIf="editMode" (click)="duplicate()">Duplicate</button>
+                                                <button type="submit" class="btn btn-danger btn-delete" *ngIf="editMode" (click)="deleteCase()">{{
+                                                    "label.delete" | translate }}</button>
+                                                <button type="submit" class="btn btn-primary" (click)="submit()">{{ "label.save" | translate }}</button>
+                                        
+                                            </div>
+                                        </div>
+    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- scenarios -->
+            <div class="box_of_content scenarios" *ngIf="tab_2">
+                <div class="side__list">
+                    <div class="header">
+                        <div class="form__control" style="margin-block: .5rem;">
+                            <input [(ngModel)]="searchScenario" type="text" placeholder="search">
+                        </div>
+                    </div>
+                    <button (click)="newScenario()"  class="add__btn btn btn-secondary" >New</button>
+                    <!-- <ul>
+                        <li (click)="newScenario()">
+                            <div class="icon"><img src="assets/icons/add.png" height="25" alt=""></div>
+                            <span>New Scenario</span>
+                        </li>
+                    </ul> -->
+    
+                    <ul>
+                        <li class="hide_desc" (click)="retrieveScenario(item.id)" *ngFor="let item of scenarios | search: searchScenario |  paginate : { itemsPerPage: 10, currentPage: pSen } ">
+                            <div class="icon d-flex div-scenario" #tooltip="matTooltip" matTooltip={{item.caseSetDesc}} matTooltipPosition="right">
+                                <img src="assets/icons/scenario.png" height="15" alt="">
+                                <span class="truncate-text" style="font-size: 9px;">{{item.caseSetDesc}}</span>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                </div>
+    
+                  <div  class="div-loader" >
+                    <span class="loader"  *ngIf="isLoadingSena" ></span>
+                  </div>
+    
+    
+                <div class="DflexPaginationV2 ">
+                    <pagination-controls nextLabel="" previousLabel=""
+                    (pageChange)="pSen = $event"
+                    ></pagination-controls> 
+               
+               </div>
+               
+                <div [formGroup]="scenarioForm" class="side__content">
+                    <div class="column">
+                        <div class="d-flex">
+                            <div class="form__control">
+                                <label>Title</label>
+                                <input formControlName="caseSetDesc" type="text" style="width: 300px;">
+                            </div>
+                        </div>
+                        <app-pos-cases-management [owned_title]="'Owned cases'" [not_owned_title]="'All Cases'"
+                            [not_owned]="not_owned_cases" [owned]="owned_cases" (confirm)="handleCasesConfirmed($event)">
+                        </app-pos-cases-management>
+                        <div class="row btns">
+                            <button (click)="saveScenario()" class="btn btn-primary">save</button>
+                            <button *ngIf="scenarioMode === 'edit'" (click)="deleteScenario()" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+    <dialog class="modal" #modal>
+        <div class="header">
+            <div class="title">{{ "label.AddEditField" | translate }}</div>
+            <div class="close" (click)="closeModal()">&times;</div>
+        </div>
+    
+    
+    
+        <div class="form  modal-Filed">
+    
+    
+           
+    
+    
+                <div class="definition row__sb">
+    
+                    <div class="left">
+                        <fieldset class="fieldset_Aria1">
+                            <legend class="legend1"><h2>{{ "label.FieldInformation" | translate }}</h2></legend>
+    
+                                <div class="row gap">
+                                    <div class="form__control">
+                                        <label for="">{{ "label.Field" | translate }}</label>
+                                        <div class="select__box  select__box_Filed">
+                                            <select [disabled]="fieldModalMode === 'edit'" [(ngModel)]="fieldId"
+                                                (change)="selectFieldDef($event)">
+                                                <option value="" disabled selected>-- Select a field --</option>
+                                                <option *ngFor="let f of fieldsDef" [value]="f.id.fieldId">{{ f.id.fieldId + ' - ' + f.fieldName }}</option>
+                                                <!-- <option *ngFor="let f of fieldsDef" [value]="f.id.fieldId">{{f.fieldName }}</option> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                     <div class="div-codeFiled" *ngIf="selectedFieldDef?.id?.fieldId!=null && selectedFieldDef?.id?.fieldId!=''">
+                                        {{selectedFieldDef?.id?.fieldId}}
+                                     </div>
+    
+                                    <!-- <div class="form__control">
+                                        <label for="">Code</label>
+                                        <input [value]="selectedFieldDef?.id?.fieldId" disabled type="text">
+                                    </div> -->
+    
+                                    <div class="form__control">
+                                        <label for="">{{ "label.Type" | translate }}</label>
+                                        <input [value]="selectedFieldDef?.fieldType === 'F' ? 'Fix' : (selectedFieldDef?.fieldType === 'L' ? 'LLVAR' : '')" disabled type="text">
+                                        <!-- <input [value]="selectedFieldDef?.fieldType" disabled type="text"> -->
+                                    </div>
+                                </div>
+                                <div class="row gap">
+                                    <div class="form__control">
+                                        <label for="">{{ "label.Format" | translate }}</label>
+                                        <input [value]="selectedFieldDef?.fieldFormatCheck" disabled type="text">
+                                    </div>
+                                    <div class="form__control">
+                                        <label for="">{{ "label.Length" | translate }}</label>
+                                        <input [value]="selectedFieldDef?.fieldLengthMax" disabled type="text">
+                                    </div>
+                                </div>
+                                <div class="form__control w-full">
+                                    <label for="">{{ "label.Description" | translate }}</label>
+                                    <textarea [value]="selectedFieldDef?.fieldDesc" disabled readonly name="" id="" cols="30"
+                                        rows="3"></textarea>
+                                </div>
+                       </fieldset>
+                    </div>
+    
+    
+                    <div class="right"   *ngIf="selectedValueSource === 'Literal value'">
+                        
+                        <ng-container *ngIf="selectedValueSource === 'Literal value'">
+                            <app-pos-value-definer *ngIf="fieldId && spcialFields.includes(fieldId)" [fieldId]="fieldId" [status]="fieldModalMode"
+                            [details]="details" (detailsConfirmed)="handleDetailsConfirmed($event)"></app-pos-value-definer>
+                            <app-pos-value-builder *ngIf="fieldId === '48' || fieldId === '62' || fieldId === '55'" [fieldId]="fieldId" [details]="details"
+                            (detailsConfirmed)="handleDetailsConfirmed($event)"></app-pos-value-builder>
+                        </ng-container>
+                    </div>
+                </div>
+           
+            
+    
+    
+    
+            <div class="field__value">
+                <div class="row gap">
+                    <div class="form__control">
+                        <label for="">{{ "label.ValueSource" | translate }}</label>
+                        <div class="select__box">
+                            <select [(ngModel)]="selectedValueSource">
+                                <option value="" disabled selected>-- Select--</option>
+                                <option *ngFor="let source of poplist" [value]="source">{{ source }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form__control">
+                        <label for="">Value</label>
+                        <!-- <input [disabled]="selectedValueSource !== 'Literal value'" type="text" [(ngModel)]="fieldValue"> -->
+                        <input   [value]="selectedValueSource !== 'Literal value' ? selectedValueSource : ''"
+                        [disabled]="selectedValueSource !== 'Literal value' || (fieldId === '48' || fieldId === '62' || fieldId === '55' || fieldId === '3' || fieldId === '24' 
+                                                                                    || fieldId === '39' || fieldId === '18' || fieldId === '19' || fieldId === '21'|| fieldId === '18' || fieldId === '49' 
+                                                                                    || fieldId === '50'  || fieldId === '51' || fieldId === '55' || fieldId === '54'|| fieldId === '22' || fieldId === '35' || fieldId === '35'  )" 
+                                                                                    type="text" [(ngModel)]="fieldValue">
+    
+                    </div>
+                </div>
+            </div>
+            <div class="footer__btn">
+                <div class="row" style="justify-content: space-between;">
+                    <button   (click)="closeModal()" class="btn btn-outlined">{{ "button.Cancel" | translate }}</button>
+                    <button (click)="addEditField()" class="btn btn-primary">{{ "button.Save" | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    
+    
+    
+    
+    
+    <dialog class="modal" #confirmModal>
+        <div class="header">
+            <div class="title">Confirm</div>
+            <div class="close" (click)="closeConfirmModal()">&times;</div>
+        </div>
+        <div class="confirm">
+            <p>{{ "message.DeleteConfirmation" | translate }}</p>
+            <div class="footer__btn">
+                <div class="btns">
+                    <button  (click)="closeConfirmModal()"  class="btn btn-outlined">{{ "button.No" | translate }}</button>
+                    <button (click)="deleteCaseConfirm()" class="btn btn-primary">{{ "button.Yes" | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <app-alert *ngIf="isAlertVisible" [status]="status" [message]="msg" [isAlertVisible]="isAlertVisible"></app-alert>

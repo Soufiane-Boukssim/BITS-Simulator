@@ -1,0 +1,97 @@
+<div class="tabs__container tabs__ex" style="height: 800px;">
+  <div class="tabs">
+  </div>
+
+  <!-- scenarios -->
+  <div class="box_of_content scenarios" style="height: 50px">
+    <div class="side__list">
+      <div class="header">
+        <div class="form__control" style="margin-block: .5rem;">
+          <input [(ngModel)]="searchScenario" type="text" placeholder="search">
+        </div>
+      </div>
+      <button (click)="newScenario()"  class=" add__btn btn btn-secondary" >{{"New" | translate }}</button>
+
+      <!-- <ul>
+        <li (click)="newScenario()">
+          <div class="icon"><img src="assets/icons/add.png" height="20" alt=""></div>
+          <span>New</span>
+        </li>
+      </ul> -->
+
+      <ul>
+        <li (click)="retrieveScenario(item.id)" *ngFor="let item of scenarios | search: searchScenario |  paginate : { itemsPerPage: 8, currentPage: pSen } ">
+          <div class="icon"><img src="assets/icons/traiter.png" height="20" alt=""></div>
+          <span>{{item.libelle}}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div  class="div-loader" >
+      <span class="loader"  *ngIf="isLoadingSena" ></span>
+    </div>
+
+
+    <div class="DflexPaginationV2 ">
+      <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                           (pageChange)="pSen = $event"
+      ></pagination-controls>
+
+    </div>
+
+
+    <div [formGroup]="scenarioForm" class="side__content">
+      <div class="column">
+
+
+          <fieldset class="fieldset_Aria1" style="width: 620px">
+            <legend class="legend1"><h2>Identification</h2></legend>
+            <div class="row">
+              <div class="form__control">
+                <label>{{"label.Title" | translate }}</label>
+                <input formControlName="libelle" type="text"
+                [ngStyle]="{'pointer-events': scenarioMode==='edit' ? 'none' : 'auto'}"
+                >
+              </div>
+              <div formGroupName="atmCardProfilDto" class="form__control">
+                <label>Card Profile</label>
+                <div class="select__box" formGroupName="id">
+                  <select formControlName="cardNo">
+                    <option disabled selected value="">-- select --</option>
+                    <option *ngFor="let c of cards" [value]="c.id.cardNo">{{ c.cardDesc }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        <app-atm-management [owned_title]="'Owned cases'" [not_owned_title]="'All Cases'"
+                              [not_owned]="not_owned_cases" [owned]="owned_cases" (confirm)="handleCasesConfirmed($event)">
+        </app-atm-management>
+        <div class="row btns">
+          <button *ngIf="scenarioMode !== 'edit'" (click)="saveScenario()" class="btn btn-primary">{{"label.save" | translate }}</button>
+          <button *ngIf="scenarioMode == 'edit'" (click)="updateScenario()" class="btn btn-primary"> {{"Update" | translate }}</button>
+          <button *ngIf="scenarioMode === 'edit'" (click)="openModal()" class="btn btn-danger"> {{"label.delete" | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<dialog class="modal" #confirmModal>
+  <div class="header">
+    <div class="title">Confirm</div>
+    <div class="close" (click)="closeConfirmModal()">&times;</div>
+  </div>
+  <div class="confirm">
+    <p>Are you sure you want to delete this operation ?</p>
+    <div class="footer__btn">
+      <div class="btns">
+        <button (click)="closeConfirmModal()" class="btn btn-outlined">No</button>
+        <button (click)="deleteScenariosConfirmed() ; closeConfirmModal()" class="btn btn-red">Yes</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<app-alert *ngIf="isAlertVisible" [status]="status" [message]="msg" [isAlertVisible]="isAlertVisible"></app-alert>
