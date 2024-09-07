@@ -1,0 +1,398 @@
+.side__lg {
+    width: 400px;
+    padding: 1rem;
+    // ul{
+    //     li{
+    //       display: flex;
+    //       gap: 1rem;
+    //       align-items: center;
+    //       border-bottom: 1px solid #BCBCBC;
+
+    //       padding: .8rem .5rem;
+    //       cursor: pointer;
+    //       &:hover{
+    //         background-color: #f7f7f7;
+    //       }
+    //     }
+    //   }
+}
+.right__side {
+    border-left: 1px solid #BCBCBC;
+    padding: 0rem 1rem;
+    width: 100%;
+    .form {
+        margin-top: .6rem;
+        width: 60%;
+        .form__control {
+            padding-top: .4rem;
+            grid-template-columns: 1fr 2fr;
+            textarea {
+                width: 100%;
+            }
+        }
+    }
+    .tools {
+        width: 40%;
+        .buttons {
+            margin: 3rem 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .btn {
+                width: 180px;
+            }
+            .btn-red {
+                background-color: #df1b1b;
+            }
+            .btn__icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: .5rem;
+            }
+        }
+    }
+}
+.logs {
+    overflow-x: auto;
+    // white-space: nowrap;
+    // max-height: 570px;
+    height: 100%;
+}
+.inputResult{
+  border: none;
+  width: 100%;
+    border-radius: 5px;
+}
+
+.logs__table {
+    width: 100%;
+    border-collapse: collapse;
+    th {
+        border-bottom: 1px solid #d7d7d7;
+        background-color: #f2f2f2;
+    }
+    thead th { position: sticky; top: 0; }
+
+    th, td {
+        padding: .6rem;
+        font-size: 12px;
+        text-align: start;
+        // border-right: 1px solid #BCBCBC;
+    }
+
+}
+
+.tab {
+    border-top: 1px solid #BCBCBC;
+    border-right: 1px solid #BCBCBC;
+    border-left: 1px solid #BCBCBC;
+}
+
+// ::-webkit-scrollbar {
+//     width: 6px;
+//     height: 6px;
+//     overflow-y: visible;
+//     box-shadow: inset 0 0 4px #707070;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background: #b2b2b2;
+//     border-radius: 10px;
+// }
+
+.example-tree {
+  width: 280px;
+  // min-height: 720px;
+  // height: auto;
+  overflow-y: visible;
+  
+}
+
+.example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  
+  /*
+   * This padding sets alignment of the nested nodes.
+   */
+  .example-tree .mat-nested-tree-node div[role=group] {
+    padding-left: 20px;
+  }
+  
+  /*
+   * Padding for leaf nodes.
+   * Leaf nodes need to have padding so as to align with other non-leaf nodes
+   * under the same parent.
+   */
+  .example-tree div[role=group] > .mat-tree-node {
+    padding-left: 20px;
+  }
+
+  .mat-tree-node {
+    font-size: 11px;
+    border-bottom: 1px solid #ccc; 
+    padding-bottom: 5px; 
+    margin-bottom: 5px;
+  }
+  
+  textarea{
+    width: 100%;
+      border-radius: 7px;
+      min-height: 60px;
+      border: 1px solid #BCBCBC;
+    // height: max-content;
+    // min-height: 250px;
+    font-size: 0.8rem;
+    scrollbar-width: none;
+    width: 91%;
+  
+  }
+  .mat-icon {
+    overflow:visible;
+
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  input[type=radio]::after {
+    border: none !important;
+  }
+
+  .save-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .save-button:hover {
+    background-color: #2980b9;
+  }
+  .tab__buttons {
+    display: flex;
+    justify-content: space-between; /* Pour aligner les éléments sur les extrémités */
+}
+
+.button-container {
+    margin-left: auto; /* Pousse le bouton "Sauvegarder" à droite */
+}
+
+.logs__table th.narrow-column,
+.logs__table td.narrow-column {
+  width: 10%; /* Ajustez la valeur pour obtenir la largeur souhaitée */
+}
+
+.tab__buttons {
+    display: flex;
+    align-items: center;
+    /* Cela aligne les éléments verticalement au centre */
+}
+
+.tab__buttons > div:first-child {
+    display: flex;
+    gap: 20px; /* Espacement entre "Output" et "Commands Tracer" */
+    /* Vous pouvez ajuster cet espacement selon vos préférences */
+}
+
+.save-buttons {
+    display: flex;
+    gap: 10px; /* Espacement entre les boutons */
+    /* Vous pouvez ajuster cet espacement selon vos préférences */
+}
+
+
+
+
+.box_of_contentEMV{
+  position: absolute;
+  width:98%;
+  height: 100%;
+  min-height: 80vh;
+  top: 3rem;
+  left: 1rem;
+  border-radius: 10px;
+  //overflow-y: visible;
+  // overflow-x: hidden !important;
+  background-color: #fff;
+  //background-color: red;
+  border: 1px solid #BCBCBC;
+  font-size: 12px;
+  // overflow-y: visible;
+  margin: auto;
+  &::-webkit-scrollbar{
+    //display: none;
+  }
+
+  .example-tree{
+
+    overflow-x: hidden !important;
+    overflow-y: visible;
+    height: 77vh;
+   
+  }
+ 
+  .side__list{
+    position: absolute;
+    border-right: 1px solid #BCBCBC;
+    // min-height: 850px;
+    height: 100%;
+    width: 220px;
+    .header{
+      padding:.5rem;
+      margin-bottom: .5rem;
+      .btn{
+        font-size: 12px;
+      }
+    }
+    .add__btn{
+      margin-left: 5%;
+      bottom: 20px;
+      display: flex;
+      
+    }
+    ul{
+      margin-top: 15px;
+      display: grid;
+      li{
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        border-bottom: 1px solid #BCBCBC;
+        padding-left:1rem;
+        height: 40px;
+        cursor: pointer;
+        &:hover{
+          background-color: #f7f7f7;
+        }
+      }
+    }
+  }
+  .side__content{
+   
+    position: relative;
+    left: 220px;
+    padding-left: .5rem;
+    width: calc(100% - 230px);
+  }
+  
+}
+
+
+  /* Ajoutez ces styles à votre fichier CSS pour positionner les boutons */
+  .modal-container {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    // overflow-y: hidden !important;
+    .btn-lg {
+      margin-top: 1rem;
+    }
+  }
+  
+  .modal-content {
+    border-radius: 8px;
+    border: 1px solid #d8d8d8;
+    background-color: #fff;
+    width: 70%; /* Ajustez la largeur selon vos besoins */
+    padding: 20px;
+    height: 70%;
+    border-radius: 5px;
+    // position: relative;
+    overflow-y: visible;
+    &::-webkit-scrollbar{
+    
+    }
+    &::-webkit-scrollbar-thumb{
+    
+    }
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Alignez à droite */
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #FF6A6A;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    
+  }
+  
+  
+ 
+
+.checkbox-wrapper {
+  margin-top: 1rem;
+  label {
+    margin-left: .4rem;
+  }
+}
+
+.modal-body {
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 1rem 0;
+}
+
+
+
+
+
+.tabs__container .tabs .tab {
+  // min-height: 620px;
+  height: -moz-fit-content;
+  height: auto;
+  width: 100%;
+  font-size: 14px;
+  padding: 0.5rem;
+  border-radius: 12px;
+  // overflow-y: visible;
+  border-bottom: 1px solid #BCBCBC;
+  height: 360px;
+}
+
+.table_output{
+  font-size: 12px;
+  height: 340px;
+  // width: 100%;
+}
+
+.buttonSend{
+  display: flex;
+  justify-content: flex-end;
+  #BtnSend{
+    right: 0;
+  }
+}
+

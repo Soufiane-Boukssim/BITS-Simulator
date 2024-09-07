@@ -1,0 +1,221 @@
+<!-- 
+<div class="row mt-3" style="border: 1px solid black;">
+    <div class="col-md-12 white-background" style="border: 1px solid black;">
+      <h3>type</h3>
+      <div class="row align-items-center">
+        <div class="col-md-2" style="border: 1px solid black;">
+          <div class="type-section">
+            <div class="form-group">
+              <input type="checkbox" id="label1">
+              <label for="label1" style="padding-left: 10px;">Label 1</label>
+            </div>
+            <div class="form-group">
+              <input type="checkbox" id="label2">
+              <label for="label2" style="padding-left: 10px;">Label 2</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 offset-md-5 mt-2" style="border: 1px solid black; top: -30px;">
+          <div class="checkbox-section">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="option1">
+              <label class="form-check-label" for="option1" style="padding-right: 5px;">Label 1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="option2">
+              <label class="form-check-label" for="option2" style="padding-right: 5px;">Label 2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="option3">
+              <label class="form-check-label" for="option3" style="padding-right: 5px;">Label 3</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->
+
+   <div class="container mt-10" style="background-color: white; height: 482px; width: 834px; top: 40px; border: 1px solid black; padding: 20px; margin-top: 20px; display: flex; flex-direction: column;">
+
+    <!-- Premier div (30%) -->
+    <div style="flex: 25%; padding: 10px; border: 1px solid black; margin-bottom: 10px;">
+    
+    
+      <!-- Deux labels avec des cases à cocher verticales -->
+      <div style="display: flex; flex-direction: column;">
+        <label>
+          <input type="checkbox"> On-line
+        </label>
+    
+        <label>
+          <input type="checkbox"> Of-line
+        </label>
+      </div>
+    
+    
+      <div style="border: 1px solid black; padding: 10px; display: flex; width: 350px; margin-left: auto; position: relative; top: -20px;">
+        <label style="margin-left: 10px;">
+          <input type="checkbox"> Atm
+        </label>
+      
+        <label style="margin-left: 20px;">
+          <input type="checkbox"> CardHolder
+        </label>
+      
+        <label style="margin-left: 20px;">
+          <input type="checkbox"> Merchant
+        </label>
+      </div>
+      
+      
+      
+      
+    </div>
+    
+    
+    
+  
+    <!-- Deuxième div (20%) -->
+    <div style="flex: 20%; padding: 10px; border: 1px solid black; margin-bottom: 10px; display: flex; align-items: center;">
+
+      <label style="margin-right: 10px;">Country</label>
+      <select>
+        <!-- Options de la liste déroulante -->
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+    
+     
+      <input type="text" style="width: 30px;height: 25px; margin-left: 10px; background-color: rgb(158, 156, 156);">
+    
+      <label style="margin-left: 20px; margin-right: 10px; ">Currency</label>
+      <select>
+        <!-- Options de la liste déroulante -->
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+    
+      
+      <input type="text" style="width: 30px; height: 25px; margin-left: 10px; background-color: rgb(158, 156, 156);">
+    
+    </div>
+    
+  
+    <!-- Troisième div (50%) -->
+    <div style="flex: 50%;  padding: 5px; border: 1px solid black; margin-bottom: 5px; display: flex; flex-direction: column;">
+
+      <!-- Première partie (70%) -->
+      <div style="flex: 70%;  padding: 5px;">
+
+        <div style="flex: 50%; display: flex; flex-direction: column; margin-right: 10px;">
+
+          <!-- Label 1 avec case à cocher -->
+          <label>
+            <input type="checkbox"> based on Emv Methode
+          </label>
+      
+          <!-- Label 2 avec case à cocher -->
+          <label style="margin-top: 15px;">
+            <input type="checkbox"> Based On statistics
+          </label>
+      
+        </div>
+        
+      </div>
+
+      
+
+      <!-- <div style="flex: 50%; border: 1px solid black; padding: 5px; display: flex; flex-direction: column;"> -->
+
+        <!-- Div avec bordure contenant 3 labels et 6 inputs -->
+        <div style="border: 1px solid black; padding: 5px; margin-bottom: 10px; display: flex; flex-direction: column; width: 350px; position: absolute; left: 450px;">
+    
+          <!-- Label 1 avec 6 inputs -->
+          <label style="display: flex; align-items: center;">
+            Default
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px; background-color: rgb(158, 156, 156);">
+          </label>
+    
+          <!-- Label 2 avec 6 inputs -->
+          <label style="display: flex; align-items: center; margin-top: 5px;">
+            Denial
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px; background-color: rgb(158, 156, 156);">
+          </label>
+    
+          <!-- Label 3 avec 6 inputs -->
+          <label style="display: flex; align-items: center; margin-top: 5px;">
+            On-line
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px; ">
+            <input type="text" style="width: 33px; margin-left: 10px; height: 20px;  background-color: rgb(158, 156, 156);">
+          </label>
+    
+        </div>
+    
+      </div>
+
+
+    
+      <!-- Deuxième partie (30%) -->
+      <div style="flex: 30%; border: 1px solid black; padding: 5px; display: flex; flex-direction: row;">
+
+        <!-- Partie à gauche -->
+        <div style="flex: 50%; display: flex; flex-direction: column; margin-right: 10px;">
+      
+          <!-- Label 1 avec input de type nombre -->
+          <label>
+            MIN Target %
+            <input type="number" value="0" step="1">
+          </label>
+      
+          <!-- Label 2 avec input de type nombre -->
+          <label style="margin-top: 5px;">
+            MAX Target %
+            <input type="number" value="0" step="1">
+          </label>
+      
+        </div>
+      
+        <!-- Partie à droite -->
+        <div style="flex: 50%; display: flex; flex-direction: column;">
+      
+          <!-- Label 3 avec input de type nombre -->
+          <label>
+            Threshold Value
+            <input type="number" value="0" step="1">
+          </label>
+      
+          <!-- Label 4 avec input de type nombre -->
+          <label style="margin-top: 5px;">
+            Terminale floor limit
+            <input type="number" value="0" step="1">
+          </label>
+      
+        </div>
+      
+      </div>
+      
+      
+    
+    </div>
+    
+  
+  <!-- </div> -->
+  
+   

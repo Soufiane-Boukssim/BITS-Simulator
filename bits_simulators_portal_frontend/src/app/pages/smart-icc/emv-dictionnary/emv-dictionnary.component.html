@@ -1,0 +1,189 @@
+<div class="box_of_content">
+    <div class="container">
+      <div class="tabs__container">
+
+    <div class="mx-d">
+        <p class="dis">{{ "text.ExploreTagsDetails" | translate }}</p>
+        <div class="row__sb items__end">
+            <div class="form__control">
+                <input type="text" [(ngModel)]="searchText" placeholder="search for a tag . . .">
+                <img src="assets/icons/search.png" height="18" class="icon" alt="">
+            </div>
+            <div class="analyze">
+                <button (click)="openAnalyzeModal()" class="bold btn-lg btn btn-primary">
+                    {{ "button.Tags" | translate }}
+                </button>
+            </div>
+        </div>
+        
+
+        <div class="table">
+            <table cellspacing="0">
+                <thead>
+                    <th>{{ "label.Tag" | translate }}</th>
+                    <th>{{ "label.Name" | translate }}</th>
+                    <th>{{ "label.Description" | translate }}</th>
+                    <th>{{ "label.Length" | translate }}</th>
+                    <th>{{ "label.Format" | translate }}</th>
+                    <th>{{ "label.Template" | translate }}</th>
+                    <th>{{ "label.Source" | translate }}</th>
+                    <th>{{ "label.Action" | translate }}</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of tags  | search: searchText | paginate: { itemsPerPage:itemsPerPageSelct , currentPage: p }">
+                        <td class="highlighted bold">{{ t.tag | emptyData }}</td>
+                        <td>{{ t.name | emptyData }}</td>
+                        <td>
+                            {{ t.description | slice:0:40 | emptyData }}<span *ngIf="t.description.length > 40"
+                                class="bold">...</span>
+                        </td>
+                        <td>{{ t.length | emptyData }}</td>
+                        <td>{{ t.format | emptyData }}</td>
+                        <td>{{ t.template | emptyData }}</td>
+                        <td>{{ t.source | emptyData }}</td>
+                        <td>
+                            <button (click)="openModal(t)" class="btn btn-secondary">View</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="DflexPagination">
+                <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                (pageChange)="p = $event"
+                ></pagination-controls> 
+           
+                <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+       </div>
+        </div>
+
+        
+
+        <!-- modals -->
+        <dialog class="modal" #modal>
+            <div class="header">
+                <div class="title bold">Element "{{ selectedTag?.tag }}" Details</div>
+                <div class="close" (click)="closeModal()">&times;</div>
+
+            </div>
+            <div class="form">
+                <div class="row gap">
+                    <div class="form__control">
+                        <label for="">{{ "label.Name" | translate }}</label>
+                        <input readonly type="text" [value]="selectedTag?.name">
+                    </div>
+                    <div class="form__control">
+                        <label for="">{{ "label.ShortName" | translate }}</label>
+                        <input readonly type="text" [value]="selectedTag?.shortName">
+                    </div>
+                </div>
+                <div class="row gap">
+                    <div class="form__control">
+                        <label for="">{{ "label.Format" | translate }}</label>
+                        <input readonly type="text" [value]="selectedTag?.format">
+                    </div>
+                    <div class="form__control">
+                        <label for="">{{ "label.Length" | translate }}</label>
+                        <input readonly type="text" [value]="selectedTag?.length">
+                    </div>
+                </div>
+                <div class="row gap">
+                    <div class="form__control">
+                        <label for="">{{ "label.Source" | translate }}</label>
+                        <input readonly type="text" [value]="selectedTag?.source">
+                    </div>
+                    <div class="form__control">
+                        <label for="">{{ "label.Template" | translate }}</label>
+                        <input readonly type="text" [value]="selectedTag?.template">
+                    </div>
+                </div>
+                <div class="form__control w-full">
+                    <label for="">{{ "label.Timeout" | translate }}</label>
+                    <textarea readonly [value]="selectedTag?.description" name="" id="" cols="30" rows="4"></textarea>
+                </div>
+            </div>
+        </dialog>
+        <!-- modal -->
+
+        <!-- modal 2 -->
+        <dialog class="modal" #analyzeModal>
+            <div class="header">
+                <div class="title bold">{{ "title.TagsAnalyzer" | translate }}</div>
+                <div class="close" (click)="closeAnalyzeModal()">&times;</div>
+            </div>
+            <div class="form mx__2">
+                <div class="row gap">
+                    <div class="form__control">
+                        <label for="">{{ "label.Tag" | translate }}</label>
+                        <div class="select__box">
+                            <select (change)="onTagSelected($event)">
+                                <option value="" disabled selected>-- Select a tag --</option>
+                                <option *ngFor="let t of specialTags" [value]="t.shortName">{{ t.shortName }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form__control">
+                        <label for="">{{ "label.HexaValue" | translate }}</label>
+                        <input disabled readonly [(ngModel)]="hexValue" type="text">
+                    </div>
+                </div>
+                <div class="value row__sb">
+                    <div class="row__sb gap">
+                        <div class="form__control" *ngFor="let byte of bytes; let i = index">
+                            <input type="text" maxlength="2" [(ngModel)]="bytes[i].byte" (keyup)="updateHexValue()">
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <button (click)="analyze()" class="btn btn-secondary">
+                            {{ "button.Analyze" | translate }}
+                        </button>
+                    </div>
+                </div>
+                <div class="tabs__container">
+                    <div class="tab__buttons">
+                        <a [className]="selectedTab === tabButton ? 'active' : ''" (click)="open_tab(tabButton)"
+                            *ngFor="let tabButton of tabButtons">Byte {{ tabButton }}</a>
+                    </div>
+                    <div class="tabs">
+                        <div *ngFor="let tab of tabButtons">
+                            <div class="d__hor__2" *ngIf="selectedTab === tab">
+                                <div class="box not__owned">
+                                    <div class="list__box">
+                                      <div class="scroll__list">
+                                        <div class="item" *ngFor="let item of results.slice((tab - 1) * 8, (tab - 1) * 8 + 4)">
+                                          <div class="text">{{item.resultName}}</div>
+                                          <app-checkbox [checked]="item.checked"></app-checkbox>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                          
+                                  <!-- Second box not__owned -->
+                                  <div class="box not__owned">
+                                    <div class="list__box">
+                                      <div class="scroll__list">
+                                        <div class="item" *ngFor="let item of results.slice((tab - 1) * 8 + 4, tab * 8)">
+                                          <div class="text">{{item.resultName}}</div>
+                                          <app-checkbox [checked]="item.checked"></app-checkbox>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </dialog>
+        <!-- modal 2 -->
+    </div>
+</div>
+    </div>
+</div>

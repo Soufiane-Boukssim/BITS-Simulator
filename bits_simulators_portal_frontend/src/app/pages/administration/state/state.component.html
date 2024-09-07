@@ -1,0 +1,69 @@
+<div class="form-container">
+    <!-- Specification Block -->
+    <div class="block title">Specification</div>
+    <div class="block">
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="numeroEtape">Numero etape:</label>
+          <input type="text" id="numeroEtape" name="numeroEtape">
+        </div>
+        <div class="form-group half-width">
+          <label for="libelle">Libelle:</label>
+          <input type="text" id="libelle" name="libelle">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Detail Block -->
+    <div class="block title">Detail</div>
+    <div class="block">
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="numeroEcran">Numero ecran:</label>
+          <input type="text" id="numeroEcran" name="numeroEcran">
+        </div>
+        <div class="form-group half-width">
+          <label for="erreur">Erreur:</label>
+          <input type="text" id="erreur" name="erreur">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full-width">
+          <div class="sub-block title">Condition de lecture</div>
+          <div class="form-choices">
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="conditionLecture" value="piste1"> Piste 1</label>
+              <label><input type="checkbox" name="conditionLecture" value="piste2"> Piste 2</label>
+              <label><input type="checkbox" name="conditionLecture" value="piste3"> Piste 3</label>
+              <label><input type="checkbox" name="conditionLecture" value="donneesPuce"> Donnees Puce</label>
+              <label><input type="checkbox" name="conditionLecture" value="reserver"> Reserver</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="etapeSuivante">Etape suivante:</label>
+          <select id="etapeSuivante" name="etapeSuivante">
+            <option value="select">Select</option>
+            <option value="typeCarteInexistant">Type carte inexistant</option>
+            <option value="lectureCorrecte">Lecture correcte</option>
+          </select>
+        </div>
+        <div class="form-group half-width">
+          <label for="cardReturnFlag">Card return flag:</label>
+          <select id="cardReturnFlag" name="cardReturnFlag">
+            <option value="select">Select</option>
+            <option value="ordreServeur">Ordre de serveur</option>
+            <option value="ejectionImmediate">Ejection Immediate</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full-width">
+          <button id="submitBtn" type="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>

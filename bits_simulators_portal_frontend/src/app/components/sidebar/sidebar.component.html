@@ -1,0 +1,662 @@
+<nav [ngStyle]="{'display': isVisibleMenu ? 'block' : 'none'}">
+
+  <div class="icon-close">
+    <img style="cursor: pointer;" (click)="hideMenu()" src="assets/icons/close.png" height="14px" alt="">
+  </div>
+
+
+  <div class="content_div">
+
+    <div [routerLink]="['/user']" class="logo">
+      <img src="assets/logo.jpeg" height="90" alt="">
+    </div>
+    <!-- //// ISO ***************************************************************************************** -->
+    <ul *ngIf="this.module == 'iso'" class="mother">
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuOptions()" [class.active]="showbMenusOptions">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/adjustment.png" height="17" alt=""></span>
+          <span class="text">{{ 'label.parameter' | translate }}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showbMenusOptions"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusOptions"></span>
+        </div>
+      </li>
+
+      <ul *ngIf="showbMenusOptions">
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/iso/parameter-general']">
+          <a>
+            <span class="icon"><img src="assets/icons/settings.png"  height="15" alt=""></span>
+            <span class="text">{{ "label.general" | translate}}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/iso/global-params']">
+          <a>
+            <span class="icon"><img src="assets/icons/setting.png"  height="15" alt=""></span>
+            <span class="text"> {{ "label.Institution" | translate}}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(2)" [class.subActive]="colorizeSubMenu[2]" [routerLink]="['/user/iso']">
+          <a>
+            <span class="icon"><img src="assets/icons/user.png"  height="15" alt=""></span>
+            <span class="text"> {{ "label.Profiles" | translate}}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(3)" [class.subActive]="colorizeSubMenu[3]"
+          [routerLink]="['/user/iso/cases-scenarios']">
+          <a>
+            <span class="icon"><img src="assets/icons/movie.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.casesScenarios' | translate}}</span>
+          </a>
+        </li>
+
+
+
+      </ul>
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuTestingExecution()"
+        [class.active]="showbMenusTestingExecution">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/thunder.png" height="17" alt=""></span>
+          <span class="text">{{'menu.testingExecution' | translate}}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showbMenusOptions"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusOptions"></span>
+        </div>
+      </li>
+
+
+
+
+      <ul *ngIf="showbMenusTestingExecution">
+
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/iso/testing-execution']">
+          <a>
+            <span class="icon"><img src="assets/icons/thunder.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.testingExecution' | translate}}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/iso/testing-result']">
+          <a>
+            <span class="icon"><img src="assets/icons/notepad.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.testingResult' | translate}}</span>
+          </a>
+        </li>
+
+
+
+      </ul>
+
+    </ul>
+
+
+    <!-- POS***************************************************************************************** -->
+    <ul *ngIf="this.module == 'pos'" class="mother">
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuOptions()" [class.active]="showbMenusOptions">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/adjustment.png" height="17" alt=""></span>
+          <span class="text">{{ 'label.parameter' | translate }}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showbMenusOptions"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusOptions"></span>
+        </div>
+      </li>
+
+      <ul *ngIf="showbMenusOptions">
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/pos/parameter-general']">
+          <a>
+            <span class="icon"><img src="assets/icons/settings.png"  height="15" alt=""></span>
+            <span class="text">General</span>
+          </a>
+        </li>
+
+        <!-- <li class="sub" (click)="toggle(4)" [class.subActive]="colorizeSubMenu[4]"
+          [routerLink]="['/user/pos/parameter-options']">
+          <a>
+            <span class="icon"><img src="assets/icons/settings_Options.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.options' | translate}}</span>
+          </a>
+        </li> -->
+
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/pos/global-params']">
+          <a>
+            <span class="icon"><img src="assets/icons/setting.png"  height="15" alt=""></span>
+            <span class="text">Institution</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(2)" [class.subActive]="colorizeSubMenu[2]" [routerLink]="['/user/pos']">
+          <a>
+            <span class="icon"><img src="assets/icons/user.png"  height="15" alt=""></span>
+            <span class="text"> Profiles</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(3)" [class.subActive]="colorizeSubMenu[3]"
+          [routerLink]="['/user/pos/cases-scenarios']">
+          <a>
+            <span class="icon"><img src="assets/icons/movie.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.casesScenarios' | translate}}</span>
+          </a>
+        </li>
+
+
+
+      </ul>
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuTestingExecution()"
+        [class.active]="showbMenusTestingExecution">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/thunder.png" height="17" alt=""></span>
+          <span class="text">{{'menu.testingExecution' | translate}}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="showbMenusOptions"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="!showbMenusOptions"></span>
+        </div>
+      </li>
+
+
+
+
+      <ul *ngIf="showbMenusTestingExecution">
+
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/pos/testing-execution']">
+          <a>
+            <span class="icon"><img src="assets/icons/thunder.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.testingExecution' | translate}}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/pos/testing-result']">
+          <a>
+            <span class="icon"><img src="assets/icons/notepad.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.testingResult' | translate}}</span>
+          </a>
+        </li>
+
+
+
+      </ul>
+
+
+    </ul>
+
+
+
+    <!-- ATM ****************************************************************************************** -->
+
+
+    <ul *ngIf="this.module == 'atm'">
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuOptions()" [class.active]="showbMenusOptions">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/adjustment.png"  height="15" alt=""></span>
+          <span class="text">{{ 'label.parameter' | translate }}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showbMenusOptions"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusOptions"></span>
+        </div>
+      </li>
+
+      <ul *ngIf="showbMenusOptions">
+
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]" [routerLink]="['/user/atm']">
+          <a>
+            <span class="icon"><img src="assets/icons/user.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.cardProfile' | translate}}</span>
+          </a>
+        </li>
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/atm/communication']">
+          <a>
+            <span class="icon"><img src="assets/icons/network.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.communication' | translate}}</span>
+          </a>
+        </li>
+
+        <li class="mother script" (click)="toggleSubMenuNewMenu()" [class.active]="showbMenusNewMenu" style="width: 95% !important;">
+          <div class="motherDiv">
+            <span class="icon"><img src="assets/icons/atm.png" height="15" alt=""></span>
+            <span class="text">{{'menu.script' | translate}}</span>
+          </div>
+          <div>
+            <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showbMenusNewMenu"
+                style="padding-right: 12px"></span>
+            <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+                *ngIf="showbMenusNewMenu"></span>
+          </div>
+        </li>
+
+        <ul *ngIf="showbMenusNewMenu">
+
+          <li class="sub" (click)="toggle(6)" [class.subActive]="colorizeSubMenu[6]"
+            [routerLink]="['/user/atm/cases-senario']">
+            <a>
+              <span class="icon"><img src="assets/icons/writing.png"  height="15" alt=""></span>
+              <span class="text">{{'menu.definition' | translate}}</span>
+            </a>
+          </li>
+
+          <li class="sub" (click)="toggle(3)" [class.subActive]="colorizeSubMenu[3]"
+            [routerLink]="['/user/atm/operation']">
+            <a>
+              <span class="icon"><img src="assets/icons/setting.png"  height="15" alt=""></span>
+              <span class="text">{{'menu.operation' | translate}}</span>
+            </a>
+          </li>
+          <li class="sub" (click)="toggle(4)" [class.subActive]="colorizeSubMenu[4]"
+            [routerLink]="['/user/atm/senario-execution']">
+            <a>
+              <span class="icon"><img src="assets/icons/movie.png"  height="15" alt=""></span>
+              <span class="text">{{'menu.scenario' | translate}}</span>
+            </a>
+          </li>
+
+        </ul>
+
+        <li class="mother terminal" (click)="toggleSubMenuTerminal()" [class.active]="showbMenusTerminal" style="width: 95% !important;">
+          <div class="motherDiv">
+            <span class="icon"><img src="assets/icons/terminal.png" height="15" alt=""></span>
+            <span class="text">{{'menu.terminal' | translate}}</span>
+          </div>
+          <div>
+            <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showbMenusTerminal"
+                style="padding-right: 12px"></span>
+            <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+                *ngIf="showbMenusTerminal"></span>
+          </div>
+        </li>
+
+
+
+        <ul *ngIf="showbMenusTerminal" style="margin-left: 8px;">
+
+          <li class="sub" (click)="toggle(5)" [class.subActive]="colorizeSubMenu[5]"
+            [routerLink]="['/user/atm/definition']">
+            <a>
+              <span class="icon"><img src="assets/icons/writing.png"  height="15" alt=""></span>
+              <span class="text">{{'menu.definition' | translate}}</span>
+            </a>
+          </li>
+
+          <li class="sub" (click)="toggle(6)" [class.subActive]="colorizeSubMenu[6]"
+            [routerLink]="['/user/atm/evenement']">
+            <a>
+              <span class="icon"><img src="assets/icons/calendar.png"  height="15" alt=""></span>
+              <span class="text">{{'menu.evenement' | translate}}</span>
+            </a>
+          </li>
+
+          <li class="sub" (click)="toggle(7)" [class.subActive]="colorizeSubMenu[7]"
+            [routerLink]="['/user/atm/rejets']">
+            <a>
+              <span class="icon"><img src="assets/icons/file.png"  height="15" alt=""></span>
+              <span class="text">{{'menu.rejets' | translate}}</span>
+            </a>
+          </li>
+
+        </ul>
+
+
+      </ul>
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuTestingResult()" [class.active]="showbMenusTestingResult">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/notepad.png" height="17" alt=""></span>
+          <span class="text">{{'menu.testingResult' | translate}}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt=""
+              *ngIf="!showbMenusTestingResult"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusTestingResult"></span>
+        </div>
+      </li>
+
+      <ul *ngIf="showbMenusTestingResult">
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]" [routerLink]="['/user/atm/logs']">
+          <a>
+            <span class="icon"><img src="assets/icons/log-file.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.logs' | translate}}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/atm/logs-params']">
+          <a>
+            <span class="icon"><img src="assets/icons/folder.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.logsParams' | translate}}</span>
+          </a>
+        </li>
+
+      </ul>
+      <li class="mother" #motherMenu (click)="toggleSubMenuTestingExecution()"
+        [class.active]="showbMenusTestingExecution">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/thunder.png" height="17" alt=""></span>
+          <span class="text">{{'menu.testingExecution' | translate}}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt=""
+              *ngIf="!showbMenusTestingExecution"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusTestingExecution"></span>
+        </div>
+      </li>
+
+      <ul *ngIf="showbMenusTestingExecution">
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/atm/scenario']">
+          <a>
+            <span class="icon"><img src="assets/icons/atm-card-outlined.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.scenario' | translate}}</span>
+          </a>
+        </li>
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/atm/execution-script']">
+          <a>
+            <span class="icon"><img src="assets/icons/movie.png"  height="15" alt=""></span>
+            <span class="text">{{'menu.excution' | translate}}</span>
+          </a>
+        </li>
+
+
+
+      </ul>
+
+    </ul>
+
+   
+    <!-- / ICC  ********************************************************************************************               -->
+
+
+
+    <ul *ngIf="this.module == 'icc'" class="mother">
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuSmartCardICC()" [class.active]="showbMenusSmartCardICC">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/card.png" height="17" alt=""></span>
+          <span class="text"> Smart Card </span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt=""
+              *ngIf="!showbMenusSmartCardICC"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusSmartCardICC"></span>
+        </div>
+      </li>
+
+
+
+
+      <ul *ngIf="showbMenusSmartCardICC">
+
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/icc/emv-dictionnary']">
+          <a>
+            <span class="icon"><img src="assets/icons/dictionary.png"  height="15" alt=""></span>
+            <span class="text">EMV Dictionary</span>
+
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/icc/card-explorer']">
+          <a>
+            <span class="icon"><img src="assets/icons/loupe.png"  height="15" alt=""></span>
+            <span class="text">EMV Card Explorer</span>
+          </a>
+        </li>
+
+
+
+
+      </ul>
+
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuCardAnalyzeICC()" [class.active]="showbMenusCardAnalyzeICC">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/card.png" height="17" alt=""></span>
+          <span class="text">Card Analyze </span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt=""
+              *ngIf="showbMenusSmartCardICC"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="!showbMenusSmartCardICC"></span>
+        </div>
+      </li>
+
+      <ul *ngIf="showbMenusCardAnalyzeICC">
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/icc/card-analyzer']">
+          <a>
+            <span class="icon"><img src="assets/icons/test.png"  height="15" alt=""></span>
+            <span class="text">EMV Card</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/icc/cpa-analyzer']">
+          <a>
+            <span class="icon"><img src="assets/icons/test.png"  height="15" alt=""></span>
+            <span class="text">EMV CPA</span>
+          </a>
+        </li>
+      </ul>
+
+
+
+    </ul>
+
+
+
+
+    <!--  TOOLS   -->
+
+
+
+    <!--  TOOLS   -->
+
+
+    <ul *ngIf="this.module == 'tools'">
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuCLIUtilsTOOLS()" [class.active]="showbMenusCLIUtilsTOOLS">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/cli-utils.png" height="17" alt=""></span>
+          <span class="text">{{"label.FileParser" | translate}}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt=""
+              *ngIf="!showbMenusCLIUtilsTOOLS"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusCLIUtilsTOOLS"></span>
+        </div>
+      </li>
+      <ul *ngIf="showbMenusCLIUtilsTOOLS">
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/tools/cli-utils']">
+          <a>
+            <span class="icon"><img src="assets/icons/cli-utils.png"  height="15" alt=""></span>
+            <span class="text">{{"label.FileParser" | translate}}</span>
+          </a>
+        </li>
+
+      </ul>
+
+
+
+
+      <li class="mother" #motherMenu (click)="toggleSubMenuEMVTag()" [class.active]="showbMenusEMVTag">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/emv-tlv.png" height="17" alt=""></span>
+          <span class="text">{{"label.EMVTag" | translate}} </span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt="" *ngIf="!showbMenusEMVTag"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenusEMVTag"></span>
+        </div>
+      </li>
+      <ul *ngIf="showbMenusEMVTag">
+
+        <li class="sub" (click)="toggle(3)" [class.subActive]="colorizeSubMenu[3]"
+          [routerLink]="['/user/tools/emv-tlv-parser']">
+          <a>
+            <span class="icon"><img src="assets/icons/emv-tlv.png"  height="15" alt=""></span>
+            <span class="text"> {{"label.EMVTAGDecoders" | translate}} </span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]" [routerLink]="['/user/tools']">
+          <a>
+            <span class="icon"><img src="assets/icons/crypto.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.emvTlvParser' | translate }}</span>
+          </a>
+        </li>
+      </ul>
+
+
+
+
+
+      <li class="mother" #motherMenu (click)="toggleSubMenucryptoCalculators()"
+        [class.active]="showbMenuscryptoCalculators">
+        <div class="motherDiv">
+          <span class="icon"><img src="assets/icons/crypto.png" height="17" alt=""></span>
+          <span class="text"> {{ 'menu.Calculators' | translate }}</span>
+        </div>
+        <div>
+          <span class="icon"><img src="assets/icons/next.png" class="img-icon" alt=""
+              *ngIf="!showbMenuscryptoCalculators"></span>
+          <span class="icon"><img src="assets/icons/down-arrow.png" class="img-icon" alt=""
+              *ngIf="showbMenuscryptoCalculators"></span>
+        </div>
+      </li>
+      <ul *ngIf="showbMenuscryptoCalculators">
+
+        <li class="sub" (click)="toggle(0)" [class.subActive]="colorizeSubMenu[0]"
+          [routerLink]="['/user/tools/iso-8583-bitmap']">
+          <a>
+            <span class="icon"><img src="assets/icons/iso.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.iso8583Bitmap' | translate }}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(9)" [class.subActive]="colorizeSubMenu[9]"
+          [routerLink]="['/user/tools/des-calculators']">
+          <a>
+            <span class="icon"><img src="assets/icons/encryption.png"  height="15" alt=""></span>
+            <span class="text"> {{ 'menu.DESCalculators' | translate }}</span>
+          </a>
+        </li>
+
+
+        <li class="sub" (click)="toggle(1)" [class.subActive]="colorizeSubMenu[1]"
+          [routerLink]="['/user/tools/converters']">
+          <a>
+            <span class="icon"><img src="assets/icons/convert.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.converters' | translate }}</span>
+          </a>
+        </li>
+        <li class="sub" (click)="toggle(6)" [class.subActive]="colorizeSubMenu[6]"
+          [routerLink]="['/user/tools/pin-block-calculators']">
+
+          <a>
+            <span class="icon"><img src="assets/icons/protected.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.pin' | translate }}</span>
+          </a>
+        </li>
+        <li class="sub" (click)="toggle(4)" [class.subActive]="colorizeSubMenu[4]"
+          [routerLink]="['/user/tools/luhn-algorithm']">
+          <a>
+            <span class="icon"><img src="assets/icons/neural.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.luhnAlgorithm' | translate }}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(3)" [class.subActive]="colorizeSubMenu[3]"
+          [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}" [routerLink]="['/user/tools/card-security-values']">
+          <a>
+            <span class="icon"><img src="assets/icons/card.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.cardSecurityValues' | translate }}</span>
+          </a>
+        </li>
+
+
+        <li class="sub" (click)="toggle(5)" [class.subActive]="colorizeSubMenu[5]"
+          [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}" [routerLink]="['/user/tools/arqc-calculators']">
+
+          <a>
+            <span class="icon"><img src="assets/icons/quantum.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.arqcCalculators' | translate }}</span>
+          </a>
+        </li>
+
+
+
+        <li class="sub" (click)="toggle(7)" [class.subActive]="colorizeSubMenu[7]"
+          [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}" [routerLink]="['/user/tools/key-block-decoder']">
+          <a>
+            <span class="icon"><img src="assets/icons/blocked.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.keyBlockDecoder' | translate }}</span>
+          </a>
+        </li>
+
+        <li class="sub" (click)="toggle(8)" [class.subActive]="colorizeSubMenu[8]"
+          [ngStyle]="{'pointer-events': true ? 'none' : 'auto'}" [routerLink]="['/user/tools/env-misc']">
+          <a>
+            <span class="icon"><img src="assets/icons/check-list.png"  height="15" alt=""></span>
+            <span class="text">{{ 'menu.envMisc' | translate }}</span>
+          </a>
+        </li>
+
+
+      </ul>
+
+
+
+
+
+    </ul>
+
+
+    <p *ngIf="this.module == ''">
+      {{"menu.modulesAccessInfo" | translate}}
+    </p>
+
+  </div>
+</nav>

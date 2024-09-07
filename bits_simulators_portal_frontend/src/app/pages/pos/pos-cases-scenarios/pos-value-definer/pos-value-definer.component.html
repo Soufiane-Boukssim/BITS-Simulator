@@ -1,0 +1,343 @@
+<div class="form__control">
+  <!-- <label for="">Value builder</label> -->
+
+  <fieldset class="fieldset_Aria1">
+      <legend class="legend1"><h2>Value builder</h2></legend>
+
+      <div class="row gap" *ngIf="fieldId=='22'|| fieldId=='35' || fieldId=='53'" >
+          <input [readOnly]="!allowEdit" [disabled]="!allowEdit" #editInput placeholder="edit value" [(ngModel)]="editingDetail.value" />
+          <button class="btn btn-secondary" (click)="allowEdit ? saveDetail() : ''">Save</button>
+      </div>
+      <table class="builder table" *ngIf="fieldId=='22' || fieldId=='35' || fieldId=='53' ">
+          <thead>
+            <th>{{ "label.Name" | translate }}</th>
+            <th>{{ "label.Value" | translate }}</th>
+          </thead>
+          <tbody>
+              <tr *ngIf="details?.length === 0">
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr *ngFor="let detail of details" (click)="editDetail(detail)" >
+                  <td>{{ detail.name }}</td>
+                  <!-- <td>{{ detail.value ? detail.value : 'Default value' }}</td> -->
+                  <td><input type="text" [value]="detail.value ? detail.value : '0'" readonly></td>
+              </tr>
+          </tbody>
+      </table> 
+
+
+      <table class="builder table" *ngIf="fieldId=='3'">
+          <thead>
+            <th>{{ "label.Name" | translate }}</th>
+            <th>{{ "label.Value" | translate }}</th>
+          </thead>
+          <tbody>
+             <tr>
+                <td>
+                  <label>Procossing :</label>
+                  <div class="select__box">
+                    <select    (change)="updateDetails($event)"  [(ngModel)]="processingCode" >
+                      <option disabled selected value="">-- select --</option>
+                      <option *ngFor="let p of processingList" [value]="p.id.procCode">{{ p.procDesc }}</option>
+                    </select>
+                  </div>
+                </td>
+                
+                <td style="padding-top: 20px;">
+                      <input type="text" [value]="details[0]?.value" readonly>
+
+                  </td>
+             </tr>
+
+             <tr>
+                <td>
+                  <label>{{ "label.Source" | translate }}</label>                    <div class="select__box">
+                    <select    (change)="updateDetailsSelectAccount($event)" [(ngModel)]="accountCode">
+                      <option disabled selected value="">-- select --</option>
+                      <option *ngFor="let p of accountList" [value]="p.id.accCode">{{ p.accDesc }}</option>
+                    </select>
+                  </div>
+                </td>
+                <td style="padding-top: 20px;">
+                  <input type="text" [value]="details[1]?.value" readonly>
+
+                </td>
+             </tr>
+              <tr>
+                  <td>
+                    <label>{{ "label.Destination" | translate }}</label>                    <div class="select__box">
+                      <select    (change)="updateDetailsSelectAccountDestination($event)" [(ngModel)]="accountCodedesination">
+                      <option disabled selected value="">-- select --</option>
+                      <option *ngFor="let p of accountList" [value]="p.id.accCode">{{ p.accDesc }}</option>
+                      </select>
+                  </div>
+                  </td>
+                <td style="padding-top: 20px;">
+                      <input type="text" [value]="details[2]?.value" readonly>
+
+              </td>
+          </tr>
+
+          </tbody>
+      </table>
+
+
+      <table class="builder table" *ngIf="fieldId=='24'">
+          <thead>
+            <th>{{ "label.Name" | translate }}</th>
+            <th>{{ "label.Value" | translate }}</th>
+          </thead>
+          <tbody>
+             <tr>
+                <td>
+                  <label>{{ "label.function" | translate }}</label>
+                  <div class="select__box">
+                    <select    (change)="updateDetailsFunction($event)" [(ngModel)]="functionCode" >
+                      <option disabled selected value="">-- select --</option>
+                      <option *ngFor="let f of functionList" [value]="f.id.fctCode">{{ f.fctDesc }}</option>
+                    </select>
+                  </div>
+                </td>
+                
+                <td style="padding-top: 20px;">
+                          <input type="text" [value]="details && details.length > 0 ? details[0]?.value : ''" readonly>
+                  
+                  </td>
+             </tr>
+          </tbody>
+      </table>
+
+
+      <table class="builder table" *ngIf="fieldId=='39'">
+          <thead>
+            <th>{{ "label.Name" | translate }}</th>
+            <th>{{ "label.Value" | translate }}</th>
+          </thead>
+          <tbody>
+             <tr>
+                <td>
+                  <label>{{ "label.response" | translate }}</label>
+                  <div class="select__box">
+                    <select    (change)="updateDetailsResponse($event)" [(ngModel)]="responseCode">
+                      <option disabled selected value="">-- select --</option>
+                      <option *ngFor="let r of responseList" [value]="r.id.respCode">{{ r.respDesc }}</option>
+                    </select>
+                  </div>
+                </td>
+                
+                <td style="padding-top: 20px;">
+                      <input type="text" [value]="details && details.length > 0 ? details[0]?.value : ''" readonly>
+                  </td>
+             </tr>
+          </tbody>
+      </table>
+
+      <table class="builder table" *ngIf="fieldId=='18'">
+          <thead>
+            <th>{{ "label.Name" | translate }}</th>
+            <th>{{ "label.Value" | translate }}</th>
+          </thead>
+          <tbody>
+             <tr>
+                <td>
+                  <label>{{ "label.mcc" | translate }}</label>
+                  <div class="select__box">
+                    <select    (change)="updateDetailsMcc($event)"  [(ngModel)]="mccCode">
+                      <option disabled selected value="">-- select --</option>
+                      <option *ngFor="let mcc of mccList" [value]="mcc.id.mccCode">{{ mcc.mccDesc }}</option>
+                    </select>
+                  </div>
+                </td>
+                
+                <td style="padding-top: 20px;">
+                      <input type="text" [value]="details && details.length > 0 ? details[0]?.value : ''" readonly>
+                  </td>
+             </tr>
+          </tbody>
+      </table>
+
+
+      <table class="builder table" *ngIf="fieldId=='19' || fieldId=='21' ">
+          <thead>
+            <th>{{ "label.Name" | translate }}</th>
+            <th>{{ "label.Value" | translate }}</th>
+            
+          </thead>
+          <tbody>
+             <tr>
+                <td>
+                  <label>{{ "label.Contry" | translate }}</label>
+                  <div class="select__box">
+                    <select    (change)="updateDetailsCountry($event)" [(ngModel)]="countryCode">
+                      <option disabled selected value="">-- select --</option>
+                      <option *ngFor="let c of countryList" [value]="c.id">{{ c.countryDesc }}</option>
+                    </select>
+                  </div>
+                </td>
+                
+                  <td style="padding-top: 20px;">
+                      <input type="text" [value]="details && details.length > 0 ? details[0]?.value : ''" readonly>
+                  </td>
+             </tr>
+          </tbody>
+      </table>
+
+      <table class="builder table" *ngIf="fieldId=='49' || fieldId=='50' || fieldId=='51' ">
+          <thead>
+            <th>{{ "label.Name" | translate }}</th>
+            <th>{{ "label.Value" | translate }}</th>
+            
+          </thead>
+          <tbody>
+             <tr>
+                <td>
+                  <label>{{ "label.Currency" | translate }}</label>
+                  <div class="select__box">
+                    <select    (change)="updateDetailsCurrency($event)" [(ngModel)]="currencyCode">
+                      <option disabled selected value="">-- select --</option>
+                      <option *ngFor="let c of currencyList" [value]="c.id">{{ c.ccyDesc }}</option>
+                    </select>
+                  </div>
+                </td>
+                
+                  <td style="padding-top: 10px;">
+                      <input type="text" [value]="details && details.length > 0 ? details[0]?.value : ''" 
+                      readonly class="input-show-value">
+                  </td>
+             </tr>
+          </tbody>
+      </table>
+
+
+
+       <button class="btn btn-secondary" type="submit" *ngIf="fieldId=='54' "  (click)="add()" >Add</button>
+
+       <div *ngIf="showForm" >
+          <div class="row  "  >
+              <div class="form__control" >
+                <label>{{ "label.AccountType" | translate }}</label>
+              </div>
+              <div class="form__control">
+                  <div class="select__box">
+                      <select  [(ngModel)]="selectedTypeCompte">
+                        <option disabled selected value="">-- select --</option>
+                        <option *ngFor="let p of accountList" [value]="p.id.accCode">{{ p.accDesc }}</option>
+                    
+                        
+                      </select>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row   m-top"  >
+              <div class="form__control" >
+                <label>{{ "label.AccountType.Single" | translate }}</label>
+              </div>
+              <div class="form__control">
+                  <div class="radio__box">
+                      <div class="d-flex">
+                          <input
+                                [(ngModel)]="selectedSinge"
+                              value="C" type="radio">
+                              <label for="">{{ "label.AccountType.Credit" | translate }}</label>
+                      </div>
+
+                      <div class="d-flex">
+                          <input 
+                          [(ngModel)]="selectedSinge"
+                              value="D" type="radio">
+                              <label for="">{{ "label.AccountType.Debit" | translate }}</label>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+          <div class="row m-top"  >
+              <div class="form__control" >
+                <label> {{ "label.AmountType" | translate }}</label>
+              </div>
+              <div class="form__control">
+                  <div class="select__box">
+                      <select [(ngModel)]="selectedTypeMontant">
+                        <option disabled selected value="">-- select --</option>
+                        <option value="01">{{ "option.Balance" | translate }}</option>
+                        <option value="02">{{ "option.AvailableBalance" | translate }}</option>
+                        <option value="99">{{ "option.NotApplicable" | translate }}</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <div class="row  m-top "  >
+              <div class="form__control" >
+                <label>{{ "label.CurrencyCode" | translate }}</label>
+              </div>
+              <div class="form__control">
+                  <div class="select__box">
+                      <select [(ngModel)]="selectedCodeMonnaie">
+                        <option disabled selected value="">-- select --</option>
+                        <option *ngFor="let c of currencyList" [value]="c.id">{{ c.ccyDesc }}</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row   m-top"  >
+              <div class="form__control" >
+                <label>{{ "label.Amount" | translate }}</label>
+              </div>
+              <div class="form__control">
+               <input type="number"  [(ngModel)]="montant" >
+              </div>
+          </div>
+
+
+          <div class="row   m-top"  >
+             <div class="d-flex">
+                   <button class="btn btn-danger" (click)="cancelAdd()">{{ "button.Cancel" | translate }}</button>
+                  <button class="btn btn-primary" (click)="SaveUpdatedetailsMontantSup()">{{ "button.Save" | translate }}</button>
+             
+             </div>
+          </div>
+         
+
+       </div>
+
+      <div  *ngIf="fieldId=='54' && !showForm ">
+          <table class="builder table">
+              <thead>
+                  <th>{{ "label.TACC" | translate }}</th>
+                  <th>{{ "label.TMnt" | translate }}</th>
+                  <th>{{ "label.Currency" | translate }}</th>
+                  <th>{{ "label.Sign" | translate }}</th>
+                  <th>{{ "label.Amount" | translate }}</th>
+                  <th></th>
+              </thead>
+              <tbody>
+  
+                    <tr *ngFor="let detail of detailsMontantSup">
+                      <td>{{ detail['Type compte'] }}</td>
+                      <td>{{ detail['Type montant'] }}</td>
+                      <td>{{ detail['Code monnaie'] }}</td>
+                      <td>{{ detail['Singe'] }}</td>
+                      <td>{{ detail['Montant'] }}</td>
+                      <td class="d-flex">
+                          <img class="action" (click)="editdetailsMontantSupById(detail)" src="assets/icons/edit.png" height="20" alt="">
+                          <img class="action" (click)="deleteeditdetailsMontantSupByID(detail)" src="assets/icons/delete.png" height="18" alt="">
+                        </td>
+                      
+                    </tr>
+                 
+              </tbody>
+          </table>
+          <button class="btn btn-primary" (click)="confirmdetailsMontantSup()">Confirm</button>
+      </div>
+      
+      
+      
+
+
+      <button class="btn btn-primary" (click)="confirmDetails()" *ngIf="fieldId!='54' ">Confirm</button>
+
+  </fieldset>
+</div>

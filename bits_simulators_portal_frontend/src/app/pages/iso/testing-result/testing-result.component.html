@@ -1,0 +1,224 @@
+<div class="box_of_content">
+
+
+
+<div class="box-global"  *ngIf="!isLoading">
+  <div class="form">
+    <div class="col">
+
+      <div
+      class="row"
+      style="margin-block: 0.5rem; width: 700px; align-items: flex-end ;margin-left:6%;"
+    >
+      <div class="form__control">
+        <label for="">{{"label.DateFrom" | translate}}</label>
+        <input type="Date" [(ngModel)]="dateFromSearch" />
+      </div>
+      <div class="form__control">
+        <label for="">{{"label.DateTo" | translate}}</label>
+        <input type="Date" [(ngModel)]="dateToSearch" />
+      </div>
+      <div class="form__control">
+        <button class="btn btn-primary" (click)="getMessagesSearch()">
+          {{  "label.search"| translate }}
+        </button>
+      </div>
+      
+    </div>
+
+      
+      <div class="table">
+        <table cellspacing="0">
+        <thead>
+          <th>Time</th>
+          <th>Reference</th>
+          <th>MTI</th>
+          <th>Case Name</th>
+          <th>Card Profile</th>
+          <!-- <th>Amount</th> -->
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let item of messages
+                | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }
+            "
+            (click)="selectMessageRecord(item.authoMsgLogId)"
+          >
+            <td>{{ item.authoMsgLogId.autDateTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{ item.autReference }}</td>
+            <td>{{ item.mtiRes }} / {{ item.mtiReq }}  </td>
+            <td>{{ item.autCaseNo }}</td>
+            <td>{{ item.autCaseCardPrf }}</td>
+            <!-- <td>{{ item.autCaseNo }}</td> -->
+          </tr>
+        </tbody>
+      </table>
+    
+      <!-- <p class="no_data" *ngIf="messages.length == 0">{{ "error.Nodata" | translate }}</p> -->
+      <div class="DflexPagination">
+               <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+               (pageChange)="p = $event"
+               ></pagination-controls> 
+          
+               <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                   <option value="5">5</option>
+                   <option value="10">10</option>
+                   <option value="15">15</option>
+                   <option value="20">20</option>
+               </select>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- tab__component -->
+  <div class="tabs__container tabs__ex" >
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)"
+        >Fields Details</a
+      >
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">Hex Test</a>
+      <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)"
+        >Transaction Log Test</a
+      >
+    </div>
+    <div class="tabs">
+      <div class="tab" *ngIf="tab_1">
+        <div class="logs">
+          <div class="log">
+            <textarea
+              readonly="true"
+              [value]="reqXml"
+            ></textarea>
+          </div>
+          <div class="log">
+            <textarea readonly="true" [value]="resXml"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="tab" *ngIf="tab_2">
+        <div class="logs">
+          <div class="log">
+            <textarea readonly="true" [value]="hexReq"></textarea>
+          </div>
+          <div class="log">
+            <textarea readonly="true" [value]="hexResp"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="tab" *ngIf="tab_3">
+        <div class="logs">
+          <div class="log">
+            <table class="fl-table">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>field name</th>
+                  <th>value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of reqFields">
+                  <td>
+                    {{ item.id }}
+                  </td>
+                  <td>
+                    {{ item.fieldName }}
+                  </td>
+                  <td>
+                    {{ item.value }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="log">
+            <table class="fl-table">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>field name</th>
+                  <th>value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of respFields">
+                  <td>
+                    {{ item.id }}
+                  </td>
+                  <td>
+                    {{ item.fieldName }}
+                  </td>
+                  <td>
+                    {{ item.value }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+  <!-- end tab component -->
+
+
+
+
+  <div  class="div-loader" >
+    <span class="loader-page"  *ngIf="isLoading" ></span>
+  </div>
+
+
+</div>
+<!-- <dialog class="modal" #modal>
+    <div class="form">
+        <div class="close" (click)="closeModal()">&times;</div>
+        <div class="title">Action Panel</div>
+        <div class="row">
+            <app-checkbox-square class="check__square" [text]="'Block on Error'"></app-checkbox-square>
+            <div class="form__control">
+                <label for="">Time out</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="row">
+            <app-checkbox-square class="check__square" [text]="'Echo Test Auto Reply'"></app-checkbox-square>
+            <div class="row">
+                <app-checkbox-square class="check__square" [text]="'Loop'"></app-checkbox-square>
+                <div class="form__control">
+                    <label for="">Time out</label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <app-checkbox-square class="check__square" [text]="'Auto Reply All'"></app-checkbox-square>
+            <div class="form__control">
+                <label>Response Code</label>
+                <div class="select__box">
+                    <select>
+                        <option value="">-- select --</option>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <app-checkbox-square class="check__square" [text]="'Echo Test Periodic'"></app-checkbox-square>
+            <div class="form__control">
+                <label for="">Period</label>
+                <input type="text" placeholder="sec">
+            </div>
+        </div>
+    </div>
+</dialog> -->
+
+
+

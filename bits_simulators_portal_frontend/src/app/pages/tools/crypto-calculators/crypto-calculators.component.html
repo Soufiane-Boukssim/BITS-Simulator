@@ -1,0 +1,185 @@
+<div class="container">
+  <div class="tabs__container">
+    
+    <div class="tabs">
+      <div class="box_of_content" *ngIf="tab_1">
+       
+        <div class="div-content">
+          <div class="row">
+            <div class="form__control">
+              <label>{{"DatainHexta" | translate}}</label>
+              <textarea  [(ngModel)]="hexData"></textarea>
+            </div>
+          </div>
+
+          <div class="row div-btn">
+            <button class="btn btn-primary" (click)="parceData()"> {{"Parse" | translate}}</button>
+
+          </div>
+
+        </div>
+   
+
+        <div>
+          <div  class="table">
+            <table cellspacing="0">
+              <thead>
+                <th>{{ "label.Tag" | translate }}</th>
+                <th>{{ "label.Name" | translate }}</th>
+                <th>{{ "Length" | translate }}</th>
+                <th>{{ "Value" | translate }}</th>
+                <th></th>
+    
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data_resulter  | paginate : { itemsPerPage: itemsPerPageSelct, currentPage: p }">
+                  <td>{{ item.tag }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.length }}</td>
+                  <td>{{ item.value }}</td>
+                  <td >
+                    <button *ngIf=" item.tag==='82' ||  item.tag==='95' || item.tag=='9F33'" 
+                        class="btn btn-secondary"  (click)="openModalAleart(item.tag )">Show</button>
+                  </td>
+                 
+                </tr>
+              </tbody>
+            </table>
+            <div class="DflexPagination">
+                  <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+                  (pageChange)="p = $event"
+                  ></pagination-controls> 
+            
+                  <select [(ngModel)]="itemsPerPageSelct" name="itemsPerPage" id="itemsPerPage" class="pagination-select">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                  </select>
+            </div>
+          </div>
+
+        </div>
+             
+
+
+      </div>
+
+
+
+      <dialog class="modal" #modalAleart>
+        <div class="header">
+          <div class="title">{{ "label.actionPanel" | translate}}</div>
+          <div class="close" (click)="closemodalAleart()">&times;</div>
+        </div>
+        <div class="form">
+          <div class="row">
+            <label class="lbl" for="">Details</label>
+          </div>
+      
+          <div class="row">
+            <div class="tab__buttons">
+              <ng-container *ngFor="let byte of getUniqueAipBytes()">
+                <a [className]="isTabActive(byte) ? 'active' : ''" (click)="open_tabDailog(byte)">{{ 'Byte' + byte }}</a>
+              </ng-container>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div *ngIf="selectedByte !== null">
+              <div *ngFor="let item of data_tag">
+                <div class="form__control">
+                  <div class="d-flex list__box" *ngIf="item.aipByte === selectedByte">
+                    <label>{{ item.meaning }}</label>
+                    <app-checkbox [checked]="item.present === 'true'" [isDisabled]="false"></app-checkbox>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="row">
+          <button id="cancelDelete" class="btn btn-primary" (click)="closemodalAleart()">{{ "label.ok" | translate}}</button>
+        </div>
+      </dialog>
+      
+      <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+
+
+
+      <div class="box_of_content_fit" *ngIf="tab_2">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="two-cols-content">
+                    <div class="details">
+
+              <span (click)="toggleContent()" class="toggle-ico">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              </span>
+                      <br>
+
+                      <!-- <span (click)="toggleContent()" class="toggle-ico">{{ contentVisible ? '&#x24D8;' : '&#9432;' }}</span> -->
+                      <div class="form__control">
+                        <label>Operation</label>
+                        <div class="select__box">
+                          <select class="input" [(ngModel)]="operation">
+                            <option value="0">--Select--</option>
+                            <option value="1">XOR</option>
+                            <option value="2">AND</option>
+                            <option value="3">OR</option>
+                            <option value="3">NOT</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form__control">
+                        <label>Data Block A</label>
+                        <input type="text" class="input" [(ngModel)]="BlockA">
+                      </div>
+
+                      <div class="form__control">
+                        <label>Data Block B</label>
+                        <input type="text" class="input" [(ngModel)]="BlockB">
+
+                      </div>
+                      <div class="form__control">
+                        <label>Result</label>
+                        <input type="text" [readOnly]="true" class="input readonly-input" [(ngModel)]="Result">
+
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                        <div class="buttons">
+                          <button class="btn btn-primary" (click)="changeOperation()">Add</button>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="content-box">
+                      <!-- <span (click)="toggleContent()" class="toggle-icon">{{ contentVisible ? '✕' : '' }}</span> -->
+
+                      <div class="con" *ngIf="contentVisible">
+                        <p>Select Operation and provide data in hex </p>
+                        <p>
+                          <span>Operands can be of arbitrary length up to 8 Bytes (16 hex character).</span>
+                          <span> The only condition is that the operands must be of the same length</span>
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

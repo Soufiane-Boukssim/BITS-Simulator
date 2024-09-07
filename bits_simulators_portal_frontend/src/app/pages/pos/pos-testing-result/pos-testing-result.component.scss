@@ -1,0 +1,329 @@
+
+
+//---------------------  animation table --------------------//
+
+
+
+
+$primary-clr-500:#3894bc;
+$secondary-clr-100:#F0F0F0;
+$neutral-clr-100:#ffff;
+$neutral-clr-800:#333;
+$neutral-clr-900:#222;
+$success-clr:#3EC67C;
+$danger-clr:#c61c52;
+
+
+$ff-primary :'Mukta', sans-serif;
+
+$ff-body:$ff-primary;
+$ff-heading:$ff-primary;
+
+$fw-thin:300;
+$fw-regular:400;
+$fw-semi-bold:500;
+$fw-bold:800;
+
+$fs-200:.775rem;
+$fs-300:.8125rem;
+$fs-400:.875rem;
+$fs-500:1rem;
+$fs-600:1.875rem;
+$fs-700:2.5rem;
+
+/**tabs**/
+$tab-primary-bg:$primary-clr-500;
+$tab-primary-clr:$neutral-clr-100;
+
+$tab-secondary-bg:$neutral-clr-100;
+$tab-secondary-clr:$primary-clr-500;
+
+/**buttons**/
+$btn-primary-bg:$primary-clr-500;
+$btn-primary-clr:$neutral-clr-100;
+
+$btn-success-bg:$success-clr;
+$btn-success-clr:$neutral-clr-100;
+
+$btn-secondary-bg:$neutral-clr-100;
+$btn-secondary-clr:$primary-clr-500;
+
+$btn-danger-bg:$danger-clr;
+$btn-danger-clr:$btn-primary-clr;
+
+
+.table{
+ margin-left: 6%;
+  box-shadow: 1px 1px 8px  #7b7b7b47;
+  background-color: $neutral-clr-100;
+  width: fit-content;
+  border-radius: 7px;
+  text-align: left;
+  font-size: 10px;
+  min-width: 1020px;
+  margin-block: .5rem;
+  table{
+    width: 100%;
+    margin-bottom: .5rem;
+    thead{
+      tr{
+        font-size: $fs-300;
+        font-weight: $fw-semi-bold;
+      }
+    }
+    td,th{
+      padding: .3rem 1rem;
+
+    }
+    td + td, th + th{
+      border-left: 1px solid #efefef;
+    }
+    tbody{
+      tr{
+        font-size: $fs-200;
+        cursor: pointer;
+        transition: .3s ease;
+        color: $neutral-clr-800;
+        &:hover{
+          scale: 1.02;
+        }
+      }
+      tr:nth-child(odd){
+        background-color: #e1e1e1;
+      }
+      tr:nth-child(even){
+        background-color: $neutral-clr-100;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+$primary-clr-500:#3894bc;
+$secondary-clr-100:#fdfdfd;
+$neutral-clr-100:#ffff;
+$neutral-clr-800:#333;
+$neutral-clr-900:#222;
+
+$ff-primary :'Mukta', sans-serif;
+
+$ff-body:$ff-primary;
+$ff-heading:$ff-primary;
+
+$fw-regular:400;
+$fw-semi-bold:500;
+$fw-bold:800;
+
+$fs-300:.8125rem;
+$fs-400:.875rem;
+$fs-500:1rem;
+$fs-600:1.875rem;
+$fs-700:2.5rem;
+
+/**tabs**/
+$tab-primary-bg:$primary-clr-500;
+$tab-primary-clr:$neutral-clr-100;
+
+$tab-secondary-bg:$neutral-clr-100;
+$tab-secondary-clr:$primary-clr-500;
+
+/**buttons**/
+$btn-primary-bg:$primary-clr-500;
+$btn-primary-clr:$neutral-clr-100;
+
+$btn-secondary-bg:$neutral-clr-100;
+$btn-secondary-clr:$primary-clr-500;
+
+.content{
+  position: absolute;
+  top:40px;
+  left: 0;
+  min-height:calc(90vh - 40px);
+  width:calc(100vw - 215px);
+  display: grid;
+  gap: 1rem;
+  padding-inline: 1rem;
+  .box{
+    background-color:$neutral-clr-100;
+    box-shadow:2px 4px 11px 4px rgba(0, 0, 0, 0.14);
+    border-radius: 7px;
+    padding: .5rem;
+    overflow: hidden;
+    position: relative;
+    .box-top{
+      border-bottom: 1px solid #8e8e8e44;
+      padding-block: 1rem;
+    }
+    .box-middle{
+      position: relative;
+      padding-block: 1rem;
+      min-height: 300px;
+      .box-header{
+        display: flex;
+        position: relative;
+        top: 20%;
+        left: 0;
+        width: 100%;
+        border-bottom: 1px solid #c3c3c379;
+        .tab{
+          font-size: $fs-400;
+          padding:.5rem;
+          box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          cursor: pointer;
+        }
+        .active-tab{
+          box-shadow: inset 0 -5px 0px 0px $primary-clr-500;
+        }
+      }
+      .box-body{
+        .tab-content{
+          position: relative;
+          padding: .5rem;
+          .two-cols{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            .details{
+              width: max-content;
+              padding: 1rem;
+              background-color: #fafafa;
+              border-radius: 7px;
+              border:1px solid  #d8d8d8;
+              .field{
+                position: relative;
+                margin: .2rem;
+                .code{
+                  position: absolute;
+                  right:0;
+                  transform: translateX(120%);
+                  top: 50%;
+                  color: #3894bc;
+                }
+              }
+              img{
+                border-radius: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.div-table app-table {
+  /* Votre style personnalisé ici */
+  width: 80%; /* Par exemple, pour forcer la largeur à 100% */
+  font-size: 8px; /* Taille de police plus grande */
+  /* Ajoutez d'autres styles personnalisés selon vos besoins */
+}
+
+///////////////////////////*************************************************************************
+.fl-table {
+  // margin-top: 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  th {
+      border-bottom: 1px solid #d7d7d7;
+      background-color: #f2f2f2;
+  }
+  thead th { position: sticky; top: 0; }
+
+  th, td {
+      padding: .6rem;
+      font-size: 12px;
+      text-align: start;
+      // border-right: 1px solid #BCBCBC;
+  }
+
+}
+
+
+
+.loader-page {
+  width: 60px;
+  aspect-ratio: 1;
+  display: grid;
+}
+.loader-page::before,
+.loader-page::after {    
+  content:"";
+  grid-area: 1/1;
+  --c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
+  background: 
+    var(--c) 50%  0, 
+    var(--c) 50%  100%, 
+    var(--c) 100% 50%, 
+    var(--c) 0    50%;
+  background-size: 12px 12px;
+  animation: l12 1s infinite;
+}
+.loader-page::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 8px 8px;
+  animation-timing-function: linear
+}
+
+@keyframes l12 { 
+  100%{transform: rotate(.5turn)}
+}
+
+
+
+
+ .div-loader{
+  position: absolute;
+  padding-top: 20%;
+  width: 50px;
+  width: 100%;
+  z-index: 266;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+.box-global {
+  // position: relative;
+}
+
+.box-global.disabled {
+  pointer-events: none;
+}
+
+.box-global.disabled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Couleur de fond transparente */
+  z-index: 9999; /* Assure que la superposition est au-dessus de tous les autres éléments */
+}
+
+.box-global.disabled::after {
+  content: 'Chargement en cours...';
+  position: absolute;
+  // top: 50%;
+  // left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #333; /* Couleur du texte */
+  z-index: 10000; /* Assure que le texte est au-dessus de la superposition */
+}
+
+
+

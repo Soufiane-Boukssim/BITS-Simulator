@@ -1,0 +1,26 @@
+<!-- src/app/page/smart-icc/analyse-and-tester/analyse-and-tester.component.html -->
+<!-- <section> -->
+
+  <div class="tabs__containerV1">
+    <div class="tab__buttons">
+        <!-- <a class="a_Config" [className]="tab1 ? 'active':''" (click)="openTab(0)">Card analyzer</a> -->
+        <a class="a_Config" [className]="tab1 ? 'active':''" (click)="openTab(0)">Configuration</a>
+        <a class="a_Config" [className]="tab2 ? 'active':''" (click)="openTab(1)"> Scenario Card analyser</a>
+
+    </div>
+    <div >
+      <div *ngIf="tab1">
+           <app-navbar></app-navbar>
+      </div>
+    </div>
+
+    <div >
+      <div *ngIf="tab2">
+          <app-menu > </app-menu>
+      </div>
+    </div>
+
+      
+  
+  
+   

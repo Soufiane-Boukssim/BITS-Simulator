@@ -1,0 +1,90 @@
+
+
+<!-- new-configuration.component.html -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-2">
+      <div class="centered-container">
+        <div class="text-container">
+          <p>project configuration</p>
+        </div>
+        <div class="image-container d-flex align-items-center">
+          <img src="assets/Chip.bmp" class="mr-2" width="30" height="30">
+          <h2>Configuration</h2>
+        </div>
+
+        <div class="container mt-3" *ngIf="showGeneralSettings">
+          <div class="row">
+            <div class="col-md-12" style="border: 1px solid black; padding: 20px; background-color: white;">
+              <h2>Propriété Générale</h2>
+              <form>
+                <div class="form-group row">
+                  <label for="profil" class="col-md-2 col-form-label">Profil</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" id="profil" name="profil" placeholder="Saisissez le profil">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="nom" class="col-md-2 col-form-label">Nom</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" id="nom" name="nom" placeholder="Saisissez le nom">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="description" class="col-md-2 col-form-label">Description</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Saisissez la description">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="dateCreationModif" class="col-md-2 col-form-label">Date Création/Modif</label>
+                  <div class="col-md-4">
+                    <input type="date" class="form-control" id="dateCreationModif" name="dateCreationModif" placeholder="Saisissez la date">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-6 offset-md-9"> <!-- Ajustez offset-md-4 pour un décalage de 4 colonnes à droite -->
+                    <button type="button" class="btn" style="background-color: blue;">Delete Selected Profil</button>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-12" *ngIf="!showGeneralSettings">
+       <app-emvparameters></app-emvparameters>
+        </div>
+       
+
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn custom-btn d-flex align-items-center" (click)="toggleView()">
+                <img src="assets/eReader.ico" alt="Propriété Générale" class="mr-2" width="30" height="30">
+                Propriété Générale
+              </button>
+              <button type="button" class="btn custom-btn d-flex align-items-center" (click)="toggleView()">
+                <img src="assets/Chip.bmp" alt="EMV Paramètre" class="mr-2" width="30" height="30">
+                EMV Paramètre
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="row mt-3" style="padding: 20px;">
+          <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-primary mr-2">Ok</button>
+            <button type="button" class="btn btn-secondary">Annuler</button>
+          </div>
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+

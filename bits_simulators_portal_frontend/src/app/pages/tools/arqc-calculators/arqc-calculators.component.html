@@ -1,0 +1,336 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">CVN 10</a>
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">CVN 18</a>
+
+    </div>
+    <div class="tabs">
+      <div class="box_of_content_fit" *ngIf="tab_1">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+
+
+                  <div class="two-cols-content">
+                    <div class="details">
+                            <span (click)="toggleContent()" class="toggle-ico">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+
+                            </span>
+                      <br>
+                      <div class="two-cols">
+
+                        <div class="form__control">
+
+                            <label>Sequence Number / PAN</label>
+                            <div class="two-cols_icon-reverse">
+                              <input type="number" style="width: 30px" class="input num1" [(ngModel)]="seq">
+                              <input type="text" class="input num2" [(ngModel)]="pan">
+                            </div>
+
+                        </div>
+
+                        <div class="form__control">
+
+                            <label>Amount, Authorized </label>
+                            <label class="lab"  >Tag 9F02</label>
+                            <div class="two-cols_icon">
+                            <input type="text" class="input" [(ngModel)]="amountauth">
+                            <mat-icon aria-hidden="false"
+                                      matTooltip="Info about the action"
+                                      aria-label="Example home icon" fontIcon="home"></mat-icon>
+
+                          </div>
+                        </div>
+
+                        <div class="form__control">
+
+                            <label>Amount, Other</label>
+                            <label class="lab"  >Tag 9F03</label>
+                            <input type="text" class="input" [(ngModel)]="amountoth">
+
+                        </div>
+                        <div class="form__control">
+
+                            <label>Country Code</label>
+                            <label class="lab"  >Tag 9F1A</label>
+                            <input type="text" class="input" [(ngModel)]="ccode">
+
+                        </div>
+                        <div class="form__control">
+
+                            <label>TVR</label>
+                            <label class="lab"  >Tag 95</label>
+                            <input type="text" class="input" [(ngModel)]="tvr">
+
+                        </div>
+                        <div class="form__control">
+                          <div class="">
+                            <label>Currency Code</label>
+                            <label class="lab"  >Tag 5F2A</label>
+                            <input type="text" class="input" [(ngModel)]="cucode">
+                          </div>
+                        </div>
+                        <div class="form__control">
+
+                            <label>Transaction Date</label>
+                            <label class="lab"  >Tag 9A</label>
+                            <input type="date" class="input" [(ngModel)]="transdate">
+
+                        </div>
+                        <div class="form__control">
+
+                            <label>Transaction Type </label>
+                            <label class="lab"  >Tag 9C</label>
+                            <input type="text" class="input" [(ngModel)]="transtype">
+
+                        </div>
+
+
+                        <div class="form__control">
+
+                            <label>Unpredictable Number</label>
+                            <label class="lab"  >Tag 9F37</label>
+                            <input type="text" class="input" [(ngModel)]="Unprenum">
+
+                        </div>
+                        <div class="form__control">
+
+                            <label>AIP</label>
+                          <label class="lab"  >Tag 82</label>
+                            <input type="text" class="input" [(ngModel)]="aip">
+
+                        </div>
+                        <div class="form__control">
+
+                            <label>ATC</label>
+                          <label class="lab"  >Tag 9F36</label>
+                            <input type="text" class="input" [(ngModel)]="atc">
+
+                        </div>
+                        <div class="form__control">
+                            <label>CVR</label>
+                          <label class="lab"  >part of IAD,Tag 9F10</label>
+                          <div class="two-cols_icon">
+                            <input type="text" class="input" [(ngModel)]="cvr">
+                            <div class="tooltip">
+                              <mat-icon aria-hidden="false"
+                                        matTooltip="Info about the action"
+                                        aria-label="Example home icon" fontIcon="home"></mat-icon>
+                        </div>
+                          </div>
+                        </div>
+                        <div class="form__control">
+                            <label>Response Code</label>
+                            <input type="text" class="input" [(ngModel)]="resp">
+                        </div>
+                        <div class="form__control">
+                            <label>IMK</label>
+                            <input type="text" class="input" [(ngModel)]="imk">
+                        </div>
+                        <div class="form__control">
+                            <label>ARQC</label>
+                            <input type="text" [readOnly]="true" class="input readonly-input"
+                                   [(ngModel)]="arqc">
+                        </div>
+                        <div class="form__control">
+                            <label>ARPC</label>
+                            <input type="text" [readOnly]="true" class="input readonly-input"
+                                   [(ngModel)]="arpc">
+                        </div>
+                      </div>
+
+
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                          <div class="buttons">
+                            <button class="btn btn-primary"
+                                    (click)="changeOperation()">Decode</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-box">
+                      <!-- <span (click)="toggleContent()" class="toggle-icon">{{ contentVisible ? '✕' : '' }}</span> -->
+                      <div class="con" *ngIf="contentVisible">
+                        <p>Select Operation and provide data in hex </p>
+                        <p>
+                          <span>Operands can be of arbitrary length up to 8 Bytes (16 hex character).</span>
+                          <span> The only condition is that the operands must be of the same length</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_2">
+        <div class="content">
+          <div class="box">
+            <div class="box-middle">
+              <div class="box-body">
+                <div class="tab-content note">
+                  <div class="two-cols-content">
+                    <div class="details">
+                            <span (click)="toggleContent()" class="toggle-ico">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+
+                            </span>
+                      <br>
+                      <div class="two-cols">
+
+                        <div class="form__control">
+                            <label>Sequence Number / PAN</label>
+                            <div class="two-cols_icon-reverse">
+                              <input type="number" class="input num1" [(ngModel)]="seq">
+                              <input type="text" class="input num2" [(ngModel)]="pan">
+                            </div>
+                        </div>
+
+                        <div class="form__control">
+                            <label>Amount, Authorized </label>
+                          <div class="two-cols_icon">
+                            <input type="text" class="input" [(ngModel)]="amountauth">
+                            <div class="tooltip">
+                              <mat-icon aria-hidden="false"
+                                        matTooltip="Info about the action"
+                                        aria-label="Example home icon" fontIcon="home"></mat-icon>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form__control">
+                            <label>Amount, Other</label>
+                            <input type="text" class="input" [(ngModel)]="amountoth">
+                        </div>
+                        <div class="form__control">
+
+                            <label>Country Code</label>
+                            <input type="text" class="input" [(ngModel)]="ccode">
+
+                        </div>
+                        <div class="form__control">
+
+                            <label>TVR</label>
+                            <input type="text" class="input" [(ngModel)]="tvr">
+
+                        </div>
+                        <div class="form__control">
+
+                            <label>Currency Code</label>
+                            <input type="text" class="input" [(ngModel)]="cucode">
+
+                        </div>
+                        <div class="form__control">
+                            <label>Transaction Date</label>
+                            <input type="date" class="input" [(ngModel)]="transdate">
+                        </div>
+                        <div class="form__control">
+                            <label>Transaction Type </label>
+                            <input type="text" class="input" [(ngModel)]="transtype">
+                        </div>
+                        <div class="form__control">
+                            <label>Unpredictable Number</label>
+                            <input type="text" class="input" [(ngModel)]="Unprenum">
+                        </div>
+                        <div class="form__control">
+                            <label>AIP</label>
+                            <input type="text" class="input" [(ngModel)]="aip">
+                        </div>
+                        <div class="form__control">
+
+                          <label>ATC</label>
+                          <label class="lab"  >Tag 9F36</label>
+                            <input type="text" class="input" [(ngModel)]="atc">
+
+                        </div>
+
+                        <div class="form__control">
+                            <label> IAD</label>
+                            <input type="text" class="input" [(ngModel)]="iad">
+                        </div>
+                        <div class="form__control">
+                            <label>CSU</label>
+                            <label class="lab"  >Tag 9F10</label>
+                          <div class="two-cols_icon">
+                            <input type="text" class="input" [(ngModel)]="csu">
+                            <div class="tooltip">
+                              <mat-icon aria-hidden="false"
+                                        matTooltip="Info about the action"
+                                        aria-label="Example home icon" fontIcon="home"></mat-icon>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form__control">
+
+                            <label>IMK</label>
+                            <input type="text" class="input" [(ngModel)]="imk">
+
+                        </div>
+                        <div class="form__control">
+                            <label>ARQC</label>
+                            <input type="text" [readOnly]="true" class="input readonly-input"
+                                   [(ngModel)]="arqc">
+                        </div>
+                        <div class="form__control">
+                            <label>ARPC</label>
+                            <input type="text" [readOnly]="true" class="input readonly-input"
+                                   [(ngModel)]="arpc">
+                        </div>
+                      </div>
+                      <div class="row p-block-1" style="justify-content: flex-end">
+                          <div class="buttons">
+                            <button class="btn btn-primary"
+                                    (click)="changeOperation()">Decode</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-box">
+                      <!-- <span (click)="toggleContent()" class="toggle-icon">{{ contentVisible ? '✕' : '' }}</span> -->
+
+                      <div class="con" *ngIf="contentVisible">
+                        <p>Select Operation and provide data in hex </p>
+                        <p>
+                          <span>Operands can be of arbitrary length up to 8 Bytes (16 hex character).</span>
+                          <span> The only condition is that the operands must be of the same length</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_3">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_4">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_5">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_6">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_7">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_8">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_9">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_10">
+
+      </div>
+    </div>
+  </div>
+</div>

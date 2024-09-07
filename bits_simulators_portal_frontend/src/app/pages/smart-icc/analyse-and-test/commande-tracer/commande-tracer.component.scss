@@ -1,0 +1,89 @@
+/* styles.css (ou dans le même fichier HTML avec la balise <style>) */
+.centered-container {
+    background-color: rgb(222, 239, 255);
+   
+    margin-top: -840px;
+  
+  
+    /* Pour centrer le contenu horizontalement si nécessaire */
+  }
+  
+  
+  /* styles.css (ou dans le même fichier HTML avec la balise <style>) */
+  .text-container {
+    background-color: rgb(212, 230, 248);
+    padding: 5px;
+    height: 35px;
+    
+  }
+  
+  .container{
+    background-color:rgb(222, 239, 255);
+  }
+  
+  .custom-btn {
+    background-color: rgb(222, 239, 255);
+    border-color: rgb(222, 239, 255);
+    color: #000; /* Couleur du texte, vous pouvez ajuster cela selon vos préférences */
+  }
+  
+ /* commande-tracer.component.css */
+
+/* commande-tracer.component.css */
+
+.button-container {
+    background-color: white;
+    display: flex;
+  }
+  
+  .custom-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+
+  /* commande-tracer.component.css */
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+  }
+  
+  .icon-container img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px; /* Ajustez la marge entre les images selon vos préférences */
+  }
+
+
+  /* commande-tracer.component.css */
+
+.details-container {
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2; /* Couleur de fond pour les en-têtes */
+  }
+  
+  
+  

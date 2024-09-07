@@ -1,0 +1,331 @@
+<div class="tabs__container tabs__ex" style="height: 800px;">
+  <div class="w-95">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)">{{"TRANSACTIONMESSAGE" | translate }}</a>
+      <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)">{{"READYMESSAGE" | translate }}</a>
+    </div>
+  </div>
+  <div class="tabs">
+    <!-- cases -->
+    <div class="box_of_content" *ngIf="tab_1" style="margin-left: 5px;max-resolution: 5px; width: 98%;">
+      <div class="side__list">
+        <div class="header">
+          <div class="form__control" style="margin-block: .5rem;">
+            <input [(ngModel)]="searchCase" type="text" placeholder="search">
+          </div>
+        </div>
+
+        <button (click)="newCase()" class="add__btn btn btn-secondary" > {{"New" | translate }}</button>
+        <ul>
+          <ul>
+            <li *ngFor="let case of cases | search: searchCase|  paginate : { itemsPerPage: 10, currentPage: p }" (click)="selectCase(case)">
+              <div class="icon"><img src="assets/icons/research.png" height="20" alt=""></div>
+              <span>{{ case.libelle }}</span>
+            </li>
+          </ul>
+        </ul>
+      </div>
+      <div  class="div-loader" >
+        <span class="loader"  *ngIf="isLoading" ></span>
+      </div>
+
+      <div class="DflexPaginationV2 ">
+        <pagination-controls nextLabel="" previousLabel=""
+                             (pageChange)="p = $event"
+        ></pagination-controls>
+
+      </div>
+      <div class="side__content">
+        <div class="tabs__container tabs__ex">
+          <div class="tabs">
+            <div>
+              <div [formGroup]="caseInForm" class="column">
+                <fieldset class="fieldset_Aria1">
+                  <legend class="legend1"><h2>{{"Identification" | translate }}</h2></legend>
+                  <div class="row">
+                    <div class="form__control">
+                      <label> {{"Name" | translate }}</label>
+                      <input formControlName="libelle" type="text"
+                       [value]="selectedCase?.libelle"    
+                       [ngStyle]="{'pointer-events': selectedCase ? 'none' : 'auto'}">
+                    </div>
+                    <div class="form__control">
+                        <label>{{"label.CardProfile" | translate }} </label>
+
+                        <div class="select__box">
+                          <select formControlName="cardProfileIssuerCode">
+                            <option disabled selected value="">-- select --</option>
+                            <option *ngFor="let c of cards" [value]="c.id.cardNo" [selected]="c.id.cardNo === selectedCase?.idCardProfil?.cardNo">{{ c.cardDesc }}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form__control">
+                      </div>
+                  </div>
+                  
+                </fieldset>
+
+                <div class="d_grid_r250">
+
+                </div>
+                <div class="row">
+
+
+                </div>
+                <button (click)="openModal()" class="btn btn-secondary" >Add</button>
+
+
+                <div class="fields__area">
+                  <div class="fields">
+                    <!-- List of FieldCasesDto -->
+                    <div *ngFor="let item of scriptCasesDefinition.fieldCases; let i = index">
+                      <div class="field">
+                        <div class="title">
+                          <span style="color:#ffffff; font-size: 10px">{{item.atmField[0]?.idATMfield}}</span>
+                        </div>
+                        <div class="value">
+                          <div class="text">
+                            {{item.value | slice:0:50}}
+                            <span *ngIf="item.value && item.value.length > 50">...</span>
+                          </div>
+                          <div class="row__sb s-gap">
+                            <img class="action" (click)="editField(item)"
+                                 src="assets/icons/edit.png" height="20" alt="">
+                            <img class="action" (click)="deleteField(i)"
+                                 src="assets/icons/delete.png" height="18" alt="">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row__sb">
+                    <div class="DflexButton  DflexButtonTop">
+                      <div class="DflexButton  DflexButtonTop">
+                        <button type="submit" class="btn btn-danger btn-delete" *ngIf="selectedCase" (click)="openConfirmModal()">Delete</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="selectedCase" (click)="openUpdateConfirmModal()">Update</button>
+                        <button type="submit" class="btn btn-primary" (click)="saveScriptCasesDefinition()" *ngIf="!selectedCase && addMode && !editMode">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box_of_content" *ngIf="tab_2" style="margin-left: 5px;max-resolution: 5px; width: 98%;">
+      <div class="side__list">
+        <div class="header">
+          <div class="form__control" style="margin-block: .5rem;">
+            <input [(ngModel)]="searchCase" type="text" placeholder="search">
+          </div>
+        </div>
+        <button (click)="newCase()" class="add__btn btn btn-secondary" >{{"New" | translate}}</button>
+        <ul>
+          <ul>
+            <li *ngFor="let case of cases  | search: searchCase|  paginate : { itemsPerPage: 10, currentPage: p }" (click)="selectCase(case)">
+              <div class="icon"><img src="assets/icons/research.png" height="20" alt=""></div>
+              <span>{{ case.libelle }}</span>
+            </li>
+          </ul>
+        </ul>
+      </div>
+      <div  class="div-loader" >
+        <span class="loader"  *ngIf="isLoading" ></span>
+      </div>
+
+      <div class="DflexPaginationV2 ">
+        <pagination-controls nextLabel="" previousLabel=""
+                             (pageChange)="p = $event"
+        ></pagination-controls>
+
+      </div>
+      <div class="side__content">
+        <div class="tabs__container tabs__ex">
+          <div class="tabs">
+            <div>
+              <div [formGroup]="caseInForm" class="column">
+                <fieldset class="fieldset_Aria1">
+                  <legend class="legend1">
+                    <h2>{{"Identification" | translate}}</h2>
+                  </legend>
+                  <div class="row">
+                    <div class="form__control">
+                      <label> {{"Name" | translate}}</label>
+                      <input formControlName="libelle" type="text" 
+                      [value]="selectedCase?.libelle"
+                      [ngStyle]="{'pointer-events': selectedCase ? 'none' : 'auto'}"
+                      >
+                    </div>
+                    <div class="form__control">
+                      <label>{{"label.CardProfile" | translate }} </label>
+                        <!-- <div class="select__box">
+                          <select formControlName="cardProfileIssuerCode">
+                            <option disabled selected value="">-- select --</option>
+                            <option *ngFor="let c of cards" [value]="c.issuerCode" [selected]="c.issuerCode === selectedCase?.cardProfileIssuerCode">{{ c.issuerCode }}</option>
+                          </select>
+                        </div> -->
+
+                        <div class="select__box">
+                          <select formControlName="cardProfileIssuerCode">
+                            <option disabled selected value="">-- select --</option>
+                            <option *ngFor="let c of cards" [value]="c.id.cardNo" [selected]="c.id.cardNo === selectedCase?.idCardProfil?.cardNo">{{ c.cardDesc }}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form__control">
+                      </div>
+                  </div>
+                </fieldset>
+
+              
+                <div class="row">
+
+
+                </div>
+                <button (click)="openModal()" class="add__btn btn btn-secondary">Add</button>
+                <div class="fields__area">
+                  <div class="fields">
+                    <!-- List of FieldCasesDto -->
+                    <div *ngFor="let item of scriptCasesDefinition.fieldCases; let i = index">
+                      <div class="field">
+                        <div class="title">
+                          <span style="color:#ffffff; width: 140px ; font-size: 10px">{{item.atmField[0].description}}</span>
+                        </div>
+                        <div class="value">
+                          <div class="text" style="min-width: 140px;">
+                            {{item.value | slice:0:50}}
+                            <span *ngIf="item.value && item.value.length > 50">...</span>
+                          </div>
+                          <div class="row__sb s-gap">
+                            <img class="action" (click)="editField(item)"
+                                 src="assets/icons/edit.png" height="20" alt="">
+                            <img class="action" (click)="deleteField(i)"
+                                 src="assets/icons/delete.png" height="18" alt="">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row__sb">
+                    <div class="DflexButton  DflexButtonTop">
+                      <div class="DflexButton  DflexButtonTop">
+                        <button type="submit" class="btn btn-danger btn-delete" *ngIf="selectedCase" (click)="openConfirmModal()">Delete</button>
+                        <button type="submit" class="btn btn-primary" *ngIf="selectedCase" (click)="openUpdateConfirmModal()">Update</button>
+                        <button type="submit" class="btn btn-primary" (click)="saveScriptCasesDefinition()" *ngIf="!selectedCase && addMode && !editMode">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<dialog class="modal" #modal style="min-width: 500px;">
+  <div class="header">
+    <div class="title">Add / Edit field</div>
+    <div class="close" (click)="closeModal()">&times;</div>
+  </div>
+
+
+
+  <div class="form  modal-Filed">
+
+
+
+
+
+    <div class="">
+
+      <div >
+        <fieldset class="" >
+          <legend class="legend1">
+            <h2>{{  "label.FieldInformation" | translate }}</h2>
+          </legend>
+
+          <div class="row ">
+            <div class="form__control" >
+              <label for=>{{"ATMfield" | translate }}</label>
+              <div class="select__box " style="width: 100%;">
+                <select [disabled]="fieldModalMode === 'edit'" [(ngModel)]="fieldId"
+                        (ngModelChange)="selectFieldDef(fieldId)">
+                  <option value="" disabled selected>-- Select a field --</option>
+                  <option *ngFor="let f of fieldsDef " [value]="f.id">{{ f.description }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </fieldset>
+      </div>
+      <div class="right" *ngIf="selectedValueSource === PopularList.Literal_Value">
+      </div>
+    </div>
+    <div class="field__value">
+      <div class="row gap">
+        <div class="form__control">
+          <label >{{"PopularList" |  translate}}</label>
+          <div class="select__box">
+            <select [(ngModel)]="selectedValueSource"  (ngModelChange)="onSelectedValueSourceChange($event)" >
+              <option value="" disabled selected>-- select --</option>
+              <option *ngFor="let source of poplist" [value]="source">{{ source }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form__control">
+          <label >{{"Value" | translate}}</label>
+          <input [disabled]="selectedValueSource !== PopularList.Literal_Value"
+                 [value]="selectedValueSource !== PopularList.Literal_Value ? selectedValueSource : fieldValue"
+                 type="text" [(ngModel)]="fieldValue">
+        </div>
+      </div>
+    </div>
+    <div class="footer__btn">
+      <div class="btns">
+        <button (click)="closeModal()" class="btn btn-outlined"> {{ "label.cancel" | translate }}</button>
+        <button (click)="addEditField(); closeModal()" class="btn btn-primary"> {{ "label.save" | translate }}</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+<dialog class="modal" #confirmModal>
+  <div class="header">
+    <div class="title">{{ "button.Confirm" | translate}}</div>
+    <div class="close" (click)="closeConfirmModal()">&times;</div>
+  </div>
+  <div class="confirm">
+    <p>Are you sure you want to delete this case ?</p>
+    <div class="footer__btn">
+      <div class="btns">
+        <button (click)="closeConfirmModal()" class="btn btn-outlined">No</button>
+        <button (click)="deleteCase(id) ; closeConfirmModal()" class="btn btn-red">Yes</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal" #updateConfirmModal>
+  <div class="header">
+    <div class="title">Confirm</div>
+    <div class="close" (click)="closeUpdateConfirmModal()">&times;</div>
+  </div>
+  <div class="confirm">
+    <p>Are you sure you want to update this case ?</p>
+    <div class="footer__btn">
+      <div class="btns">
+        <button  id="cancelDelete" (click)="closeUpdateConfirmModal()" class="btn btn-outlined">{{ "button.Cancel" | translate }}</button>
+        <button (click)="updateCase(id, scriptCasesDefinition)" class="btn btn-primary">{{ "button.Save" | translate }}</button>
+        
+      </div>
+    </div>
+  </div>
+</dialog>
+<app-alert *ngIf="isAlertVisible" [status]="status" [message]="msg" [isAlertVisible]="isAlertVisible"></app-alert>

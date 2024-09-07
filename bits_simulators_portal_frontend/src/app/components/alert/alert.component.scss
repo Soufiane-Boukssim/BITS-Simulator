@@ -1,0 +1,32 @@
+.alert{
+    margin-top: 40px;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 1px 1px 7px #cfcfcf;
+    padding: 1rem;
+    border-radius: 7px;
+    width: 300px;
+    background-color: #fff;
+    pointer-events: none;
+    .text{
+        .title{
+            font-weight: 500;
+        }
+        .message{
+            font-size: 14px;
+            color: #888;
+        }
+    }
+    .close{
+        font-size: 20px;
+        position: absolute;
+        top: .2rem;
+        right: .5rem;
+        color: #8d8d8d;
+        cursor: pointer;
+    }
+}

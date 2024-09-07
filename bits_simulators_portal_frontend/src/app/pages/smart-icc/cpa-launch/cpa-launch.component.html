@@ -1,0 +1,99 @@
+<div class="col col-8 container-tabs">
+  <div class="tabs">
+
+    <div class="box_of_contentV2">
+
+      <div class="side__list">
+        <div class="header">
+          <div class="form__control" style="margin-block: 0.5rem">
+            <input type="text" placeholder="search" [(ngModel)]="searchProfil" />
+          </div>
+        </div>
+
+        <ul>
+          <li
+            *ngFor="let item of data_cpa | search : searchProfil |  paginate : { itemsPerPage: 14, currentPage: p_profile }   "
+            (click)="selectProfil(item.profile_code)">
+            <div class="icon">
+              <img src="assets/icons/credit-card.png" height="18" width="18" alt="" />
+            </div>
+            <span>{{ item.wording }}</span>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="DflexPaginationV2">
+        <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+          (pageChange)="p_profile = $event"></pagination-controls>
+
+      </div>
+
+      <div class="side__content rowDetails">
+        <div class="row row-btn">
+          <div class="d-flex">
+            <button class="btn btn-primary">Ex ALL </button>
+            <button class="btn btn-secondary">Excute</button>
+          </div>
+        </div>
+        
+        <div class="panel">
+
+          <!--                
+              <div>   
+              
+                       <input type="checkbox">   
+              </div>      -->
+
+
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let testCase of data_test_cases">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <input type="checkbox" (change)="gererCoche(testCase.test_case)">
+                  {{ testCase.test_case }}:{{ testCase.wording }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <table>
+                <tbody>
+                  <tr *ngFor="let global of testCase.global">
+                    <td class="td-table-launch">{{ global.sub_case }}</td>
+                    <td>{{ global.description }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+
+            </mat-expansion-panel>
+          </mat-accordion>
+
+        </div>
+
+        <fieldset class="fieldset_Aria1">
+          <legend class="legend1"><h2>Logs</h2></legend>
+          <div class="row">
+            <div class="d-flex">
+              <button class="btn btn-danger">{{ "label.Clear" | translate}}</button>
+              <button class="btn btn-secondary">{{ "label.save" | translate}}</button>
+            </div>
+
+          </div>
+
+          <div class="row row-logs">
+
+          </div>
+
+        </fieldset>
+
+
+
+        <div class="height-div">
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

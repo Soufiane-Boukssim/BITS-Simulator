@@ -1,0 +1,9 @@
+<div  class="alert" [@fadeInOut]="isAlertVisible ? 'open':'close'" [style.border-left]="status == '000' ? '8px solid #62DE94':'8px solid #EA1E4F'">
+    <img [src]="status == '000' ? 'assets/icons/success.png':'assets/icons/error.png'" height="35" alt="">
+    <div class="text">
+        <p class="title">{{status =='000' ? 'Success':'Error'}}</p>
+        <p class="message">{{message}}</p>
+    </div>
+    <div class="close" (click)="closeAlert()">&times;</div>
+</div>
+

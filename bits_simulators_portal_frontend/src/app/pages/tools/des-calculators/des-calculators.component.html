@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="tabs__container">
+      
+      <div class="tabs">
+        <div class="box_of_content" >
+         
+          <div class="div-content">
+            <div class="row">
+              <div class="form__control">
+                <label>{{ "DatainHexta" | translate }}</label>
+                <textarea  [(ngModel)]="data"></textarea>
+              </div>
+            </div>
+            <div class="row">
+                <div class="form__control">
+                  <label>Key in Hex	</label>
+                    <input type="text" [(ngModel)]="key">
+                </div>
+              </div>
+  
+            <div class="row div-btn">
+              <button class="btn btn-primary" (click)="process()" >{{ "Parse" | translate }}</button>
+  
+            </div>
+
+            <div class="row">
+                <div class="form__control">
+                  <label>{{ "CipheredOutput" | translate }}</label>
+                  <textarea  [(ngModel)]="cipheredData" readonly></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form__control">
+                  <label>{{ "DecipheredOutput" | translate }}</label>
+                  <textarea   [(ngModel)]="decipheredData" readonly></textarea>
+                </div>
+              </div>
+  
+          </div>
+     
+  
+         
+  
+  
+        </div>
+  
+  
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,1490 @@
+<div class="container">
+    <div class="box_of_content_Envenment" >
+        <div class="side__list">
+            <ul>
+                <li [class]="tab1 ? 'active' : ''" (click)="openTab(1)">{{ 'label.evenement.Time_of_day_Clock' | translate }}</li>
+                <li [class]="tab2 ? 'active' : ''" (click)="openTab(2)">{{ 'label.evenement.Card_Reader_Writer' | translate }}</li>
+                <li [class]="tab3 ? 'active' : ''" (click)="openTab(3)">{{ 'label.evenement.Cash_Handler' | translate }}</li>
+                <li [class]="tab4 ? 'active' : ''" (click)="openTab(4)">{{ 'label.evenement.Depository' | translate }}</li>
+                <li [class]="tab5 ? 'active' : ''" (click)="openTab(5)">{{ 'label.evenement.Receipt_Printer' | translate }}</li>
+                <li [class]="tab6 ? 'active' : ''" (click)="openTab(6)">{{ 'label.evenement.Journal_Printer' | translate }}</li>
+                <li [class]="tab7 ? 'active' : ''" (click)="openTab(7)">{{ 'label.evenement.Encryptor' | translate }}</li>
+                <li [class]="tab8 ? 'active' : ''" (click)="openTab(8)">{{ 'label.evenement.Night_Safe_Depository' | translate }}</li>
+                <li [class]="tab9 ? 'active' : ''" (click)="openTab(9)">{{ 'label.evenement.Camera_Door_Access_Touch_Screen' | translate }}</li>
+                <li [class]="tab10 ? 'active' : ''" (click)="openTab(10)">{{ 'label.evenement.Sensors' | translate }}</li>
+                <li [class]="tab11 ? 'active' : ''" (click)="openTab(11)">{{ 'label.evenement.Statement_Printer' | translate }}</li>
+                <li [class]="tab12 ? 'active' : ''" (click)="openTab(12)">{{ 'label.evenement.Bunch_Note_Acceptor' | translate }}</li>
+                <li [class]="tab13 ? 'active' : ''" (click)="openTab(13)">{{ 'label.evenement.Envelope_Dispenser' | translate }}</li>
+                <li [class]="tab14 ? 'active' : ''" (click)="openTab(14)">{{ 'label.evenement.Cheque_Processing' | translate }}</li>
+              </ul>
+
+        </div>
+        <div class="side__content p-1">
+            <div class="tab" *ngIf="tab1">
+                <div class="details__container">
+                    <div class="header">
+
+                        <label for="">{{ 'label.device_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="a" value="0" (change)="handleChangeVal()" [(ngModel)]="timeDayObject.deviceStatus">
+                                    <label for="">{{ 'label.clock_reset_but_running' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="a" value="1" (change)="handleChangeVal()" [(ngModel)]="timeDayObject.deviceStatus">
+                                    <label for="">{{ 'label.clock_has_stopped' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+
+                        <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="b" value="2" (change)="handleChangeVal()" [(ngModel)]="timeDayObject.errorSeverity">
+                                    <label for="">{{ 'label.warning_clock_reset' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="b" value="3" (change)="handleChangeVal()" [(ngModel)]="timeDayObject.errorSeverity">
+                                    <label for="">{{ 'label.fatal_clock_malfunction' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab2">
+                <div class="details__container">
+                    <div class="header">
+                        <label>{{ 'label.device_status_mcrw' | translate }}</label>
+
+
+
+
+
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="0"  (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+                                    <label for="">{{ 'label.no_transaction_exception' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="1" (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+                                    <label for="">{{ 'label.cardholder_did_not_take_his_card' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="2" (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+                                    <label for="">{{ 'label.mechanism_failed_to_eject_the_card' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="3" (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+                                    <label for="">{{ 'label.mechanism_failed_to_update_track' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="4"  (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+                                    <label for="">{{ 'label.invalid_track_data' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="5"  (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+
+                                    <label for="">{{ 'label.cim86_malfunction' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="6"  (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+                                    <label for="">{{ 'label.error_in_track_data' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="7"  (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+                                    <label for="">{{ 'label.communications_error_with_com86' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="c" value="8" (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus">
+                                    <label for="">{{ 'label.cim_interface_pcb_malfunction' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label>{{ 'label.device_status_scrw' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="d" value="F"  (change)="handleChangeVal()"[(ngModel)]="cardReaderWriterObject.deviceStatus2">
+                                    <label for="">{{ 'label.good' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="d" value="B"  (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus2">
+                                    <label for="">{{ 'label.smart_card_command_error' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="d" value="T" (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus2">
+                                    <label for="">{{ 'label.no_smart_card_present' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="d" value="P" (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus2">
+                                    <label for="">{{ 'label.fatal_smart_card_interface' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="d" value="M" (change)="handleChangeVal()"  [(ngModel)]="cardReaderWriterObject.deviceStatus2">
+                                    <label for="">{{ 'label.scif_warning' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="d" value="J" (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.deviceStatus2">
+                                    <label for="">{{ 'label.scif_encryptor_error' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="d" value="R" (change)="handleChangeVal()"   [(ngModel)]="cardReaderWriterObject.deviceStatus2">
+                                    <label for="">{{ 'label.card_not_in_scrw_position' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label>{{ 'label.error_severity' | translate }}</label>
+
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+                              <select ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.errorSeverity">
+                                <option value="">--{{ 'select_option.select' | translate }}--</option>
+                                <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                              </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label>{{ 'label.supply_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.paper' | translate }}</label>
+                                <div class="select__box">
+                                    <select   ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.supplyStatus.paper">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.ribbon' | translate }}</label>
+                                <div class="select__box">
+                                    <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.supplyStatus.ribbon">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                    <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.print_head' | translate }}</label>
+
+                                <div class="select__box">
+                                    <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.supplyStatus.printHead">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.knife' | translate }}</label>
+                                <div class="select__box">
+                                    <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="cardReaderWriterObject.supplyStatus.knife">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab3">
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.device_status_dispense_operation' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="e" value="1" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispenseOp">
+                                    <label for="">{{ 'label.successful_operation' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="e" value="2" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispenseOp">
+                                    <label for="">{{ 'label.short_dispense' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="e" value="3" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispenseOp">
+                                    <label for="">{{ 'label.no_notes_dispensed' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="e" value="4" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispenseOp">
+                                    <label for="">{{ 'label.notes_dispensed_unknown' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="e" value="5" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispenseOp">
+                                    <label for="">{{ 'label.some_notes_retracted' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="e" value="6" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispenseOp">
+                                    <label for="">{{ 'label.no_notes_dispensed_or_card_not_ejected' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                       <label for="">{{ 'label.cassette_1' | translate }}</label>
+
+
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.dispense_count' | translate }}</label>
+                              <input type="number" name="" id="" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispC1">
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.error_severity' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.errorSeverity.err1">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+
+                                <label>{{ 'label.supplies_status' | translate }}</label>
+
+
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.supplyStatus.supplyStatus1">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        {{ 'label.cassette_2' | translate }}
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+
+                                <label>{{ 'label.dispense_count' | translate }}</label>
+
+
+                              <input type="number" name="" id="" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispC2">
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.error_severity' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.errorSeverity.err2">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.supplies_status' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.supplyStatus.supplyStatus2">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+
+                        <label for="">{{ 'label.cassette_3' | translate }}</label>
+
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                             <label>{{ 'label.dispense_count' | translate }}</label>
+                              <input type="number" name="" id="" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispC3">
+                            </div>
+                            <div class="form__control">
+                               <label>{{ 'label.error_severity' | translate }}</label>
+
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.errorSeverity.err3">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                               <label>{{ 'label.supplies_status' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.supplyStatus.supplyStatus3">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.cassette_4' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                             <label>{{ 'label.dispense_count' | translate }}</label>
+                              <input type="number" name="" id="" (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.deviceStatus.dispC4">
+                            </div>
+                            <div class="form__control">
+                               <label>{{ 'label.error_severity' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.errorSeverity.err4">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                               <label>{{ 'label.supplies_status' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.supplyStatus.supplyStatus4">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content p-1">
+                    <div class="row">
+                        <div class="form__control">
+                            <label>{{ 'label.complete_severity_info' | translate }}</label>
+
+
+
+                            <div class="select__box">
+                                <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.errorSeverity.completeSevInfo">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                 <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form__control">
+                            <label>{{ 'label.reject_bin' | translate }}</label>
+                            <div class="select__box">
+                                <select (change)="handleChangeVal()"  [(ngModel)]="cashHandlerObject.supplyStatus.rejectBin">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab4">
+                <div class="details__container">
+                    <div class="header"> <label for=""><label for="">{{ 'label.device_status_deposit_operation' | translate }}</label></label></div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio"  value="0" name="f" (change)="handleChangeVal()" [(ngModel)]="depositoryObject.deviceStatus">
+                                    <label for="">{{ 'label.successful_operation' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" value="1" name="f" (change)="handleChangeVal()" [(ngModel)]="depositoryObject.deviceStatus">
+                                    <label for="">{{ 'label.timeout_in_cardholder_deposit' | translate }}</label>
+
+
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" value="2" name="f"  (change)="handleChangeVal()" [(ngModel)]="depositoryObject.deviceStatus">
+                                    <label for="">{{ 'label.failure_to_enable_mechanism_for_deposit' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" value="3" name="f" (change)="handleChangeVal()" [(ngModel)]="depositoryObject.deviceStatus">
+                                    <label for="">{{ 'label.envelope_document_jam_or_failed_deposit' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                       <label for="">{{ 'label.error_severity' | translate }}</label>
+
+
+
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+                                <select  (change)="handleChangeVal()"  [(ngModel)]="depositoryObject.errorSeverity">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                    <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                    <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                    <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                    <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.supply_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.clock_has_stopped' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="depositoryObject.supplyStatus">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_envelope_deposit' | translate }}</option>
+                                      <option value="1">{{ 'select_option.no_overfill_condition' | translate }}</option>
+                                      <option value="4">{{ 'select_option.overfill_detected' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab5">
+                <div class="details__container">
+                    <div class="header">
+                        <label>{{ 'label.device_status_print_operation' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="g" value="0" (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.successful_operation' | translate }}</label>
+
+
+
+
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="g" value="1" (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.print_operation_not_completed' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="g" value="2" (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.deviceStatus">
+                                   <label for="">{{ 'label.device_not_configured' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="g" value="3" (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.cancel_key_pressed_during_sideways_receipt_print' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+
+
+
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+                                <select (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.errorSeverity">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                  <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                  <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                  <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                  <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.supply_status' | translate }}</label>
+
+
+
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.paper' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.supplyStatus.paper">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                               <label>{{ 'label.ribbon' | translate }}</label>
+
+
+
+
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.supplyStatus.ribbon">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.print_head' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.supplyStatus.printHead">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.knife' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="receiptPrinterObject.supplyStatus.knife">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab6">
+                <div class="details__container">
+                    <div class="header">
+                        <label>{{ 'label.device_status_print_operation' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="h" value="1" (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.deviceStatus">
+                                        <label for="">{{ 'label.successful_print' | translate }}</label>
+
+
+
+
+
+
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="h" value="2" (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.print_operation_not_completed' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="h" value="3" (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.deviceStatus">
+                                   <label for="">{{ 'label.journal_printer_backup_activated' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="h" value="4" (change)="handleChangeVal()" [(ngModel)]="journalPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.journal_printer_backup_and_reprint_terminated' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="h" value="5" (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.journal_printer_backup_reprint_started' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="h" value="6" (change)="handleChangeVal()" [(ngModel)]="journalPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.journal_printer_backup_halted' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="h" value="7" (change)="handleChangeVal()" [(ngModel)]="journalPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.journal_printer_backup_log_security_error' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="h" value="8"  (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.deviceStatus">
+
+                                    <label for="">{{ 'label.journal_printer_backup_reprint_halted' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+                                <select (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.errorSeverity">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                  <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                  <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                  <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                  <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.supply_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.paper' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.supplyStatus.paper">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                               <label>{{ 'label.ribbon' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.supplyStatus.ribbon">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.print_head' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.supplyStatus.printHead">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.knife' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="journalPrinterObject.supplyStatus.knife">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                       <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab7">
+                <div class="details__container">
+                    <div class="header">
+                        <label>{{ 'label.device_status_print_operation' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="i" value="0" (change)="handleChangeVal()"  [(ngModel)]="encryptorObject.deviceStatus" >
+
+                                    <label for="">{{ 'label.encryptor_error' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="i" value="1" (change)="handleChangeVal()"  [(ngModel)]="encryptorObject.deviceStatus">
+
+                                    <label for="">{{ 'label.encryptor_not_configured' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="i" value="2" (change)="handleChangeVal()"  [(ngModel)]="encryptorObject.deviceStatus">
+                                    <label for="">{{ 'label.ekc_tampering_detected' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="i" value="3" (change)="handleChangeVal()"  [(ngModel)]="encryptorObject.deviceStatus">
+                                    <label for="">{{ 'label.ekc_keyspace_illegal_setup' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="i" value="4" (change)="handleChangeVal()"  [(ngModel)]="encryptorObject.deviceStatus">
+                                    <label for="">{{ 'label.ekc_communications_failure' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+                                <select (change)="handleChangeVal()"  [(ngModel)]="encryptorObject.errorSeverity">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                  <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                  <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                  <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                  <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab8">
+                <div class="details__container">
+                    <div class="header"> <label for="">{{ 'label.device_status_deposit_operation' | translate }}</label></div>
+
+
+
+
+
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="j" value="0" (change)="handleChangeVal()"  [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                    <label for="">{{ 'label.tenth_consecutive_customer_did_not_attempt_a_deposit' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="j" value="1" (change)="handleChangeVal()"  [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                    <label for="">{{ 'label.undetected_deposit_or_bag_detection_switch_blocked_before_enable' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+                                <select (change)="handleChangeVal()"  [(ngModel)]="nightSafeDepositoryObject.errorSeverity">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                  <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                  <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                  <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                  <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.supply_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.clock_has_stopped' | translate }}</label>
+                                <div class="select__box">
+                                    <select (change)="handleChangeVal()"  [(ngModel)]="nightSafeDepositoryObject.supplyStatus">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_envelope_deposit' | translate }}</option>
+                                      <option value="1">{{ 'select_option.no_overfill_condition' | translate }}</option>
+                                      <option value="4">{{ 'select_option.overfill_detected' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="tab" *ngIf="tab9">
+                <div class="details__container">
+                    <div class="header">
+                        {{ 'label.device_status' | translate }}
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                               <label>{{ 'label.camera' | translate }}</label>
+                                <div class="select__box">
+                                    <select  ngDefaultControl  (change)="handleChangeVal()" [(ngModel)]="cameraObject.deviceStatus">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                        <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                        <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                        <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                        <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                 <label>{{ 'label.door_access' | translate }}</label>
+
+
+                                <div class="select__box">
+                                    <select  ngDefaultControl  (change)="handleChangeVal()"  [(ngModel)]="doorAccessObject.deviceStatus">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                      <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                      <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                      <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                      <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.touch_screen_keyboard' | translate }}</label>
+
+                                <div class="select__box">
+                                    <select   (change)="handleChangeVal()"  [(ngModel)]="touchScreenObject.deviceStatus">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                        <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                        <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                        <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                        <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                               <label>{{ 'label.camera' | translate }}</label>
+                                <div class="select__box">
+                                    <select ngDefaultControl   (change)="handleChangeVal()"  [(ngModel)]="cameraObject.errorSeverity">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                    <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                    <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                    <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                    <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                 <label>{{ 'label.door_access' | translate }}</label>
+                                <div class="select__box">
+                                    <select ngDefaultControl (change)="handleChangeVal()"  [(ngModel)]="doorAccessObject.errorSeverity">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                      <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                      <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                      <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                      <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.touch_screen_keyboard' | translate }}</label>
+                                <div class="select__box">
+                                    <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="touchScreenObject.errorSeverity">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                      <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                      <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                      <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                      <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.supply_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+
+                                <label>{{ 'label.status_of_the_camera_film' | translate }}</label>
+                                <div class="select__box">
+                                    <select ngDefaultControl (change)="handleChangeVal()"  [(ngModel)]="cameraObject.supplyStatus">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.no_film' | translate }}</option>
+                                      <option value="1">{{ 'select_option.film_ok' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab10">
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.no_transaction_error_condition' | translate }}</label>
+                    </div>
+
+
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="row">
+                                    <app-checkbox-square [text]="'Vibration end/or heat sensor'" [isChecked]="sensorsObject.deviceStatus.vibrationHeat=='1'" (checkboxChange)="changeCheckBox('vibrationHeat',$event)"></app-checkbox-square>
+                                <app-checkbox-square [text]="'Door contact sensor'" [isChecked]="sensorsObject.deviceStatus.doorContact=='1'" (checkboxChange)="changeCheckBox('doorContact',$event)"></app-checkbox-square>
+                                <app-checkbox-square [text]="'Silent signal sensor'" [isChecked]="sensorsObject.deviceStatus.silentSignal=='1'" (checkboxChange)="changeCheckBox('silentSignal',$event)"></app-checkbox-square>
+                                </div>
+                                <div class="row">
+                                    <app-checkbox-square [text]="'Electronics enclosure sensor'" [isChecked]="sensorsObject.deviceStatus.electronicsEnclosure=='1'" (checkboxChange)="changeCheckBox('electronicsEnclosure',$event)"></app-checkbox-square>
+                                <app-checkbox-square [text]="'Deposit bin'" [isChecked]="sensorsObject.deviceStatus.deposit=='1'" (checkboxChange)="changeCheckBox('deposit',$event)"></app-checkbox-square>
+                                <app-checkbox-square [text]="'Currency reject bin'" [isChecked]="sensorsObject.deviceStatus.currencyRejectBin=='1'" (checkboxChange)="changeCheckBox('currencyRejectBin',$event)"></app-checkbox-square>
+                                </div>
+                                <div class="row">
+                                    <app-checkbox-square [text]="'Card Bin'" [isChecked]="sensorsObject.deviceStatus.cardBin=='1'" (checkboxChange)="changeCheckBox('cardBin',$event)"></app-checkbox-square>
+                                <app-checkbox-square [text]="'Currency cassette in position 1 (top)'" [isChecked]="sensorsObject.deviceStatus.currencyCassette1=='1'" (checkboxChange)="changeCheckBox('currencyCassette1',$event)"></app-checkbox-square>
+                                <app-checkbox-square [text]="'Currency cassette in position 2 (second)'" [isChecked]="sensorsObject.deviceStatus.currencyCassette2=='1'" (checkboxChange)="changeCheckBox('currencyCassette2',$event)"></app-checkbox-square>
+                                </div>
+                                <div class="row">
+                                    <app-checkbox-square [text]="'Currency cassette in position 3 (third)'" [isChecked]="sensorsObject.deviceStatus.currencyCassette3=='1'" (checkboxChange)="changeCheckBox('currencyCassette3',$event)"></app-checkbox-square>
+                                <app-checkbox-square [text]="'Currency cassette in position 4 (bottom)'" [isChecked]="sensorsObject.deviceStatus.currencyCassette4=='1'" (checkboxChange)="changeCheckBox('currencyCassette4',$event)"></app-checkbox-square>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab11">
+                <div class="details__container">
+                    <div class="header">
+                        <label>{{ 'label.device_status_print_operation' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="k" value="0" [(ngModel)]="statementPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.no_transaction_error_condition' | translate }}</label>
+
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="k" value="1" (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.print_cut_not_successful' | translate }}</label>
+
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="k" value="2" (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.deviceStatus">
+                                   <label for="">{{ 'label.device_not_configured' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="k" value="3" (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.statement_present_in_transport' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="k" value="4" (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.deviceStatus">
+                                    <label for="">{{ 'label.cardholder_pressed_cancel_during_print_statement_and_wait_function' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+                                <select ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.errorSeverity">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                  <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                  <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                  <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                  <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.supply_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.paper' | translate }}</label>
+                                <div class="select__box">
+                                    <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.supplyStatus.paper">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                               <label>{{ 'label.ribbon' | translate }}</label>
+                                <div class="select__box">
+                                    <select ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.supplyStatus.ribbon">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form__control">
+                                <label>{{ 'label.print_head' | translate }}</label>
+                                <div class="select__box">
+                                    <select ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.supplyStatus.printHead">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__control">
+                                <label>{{ 'label.knife' | translate }}</label>
+                                <div class="select__box">
+                                    <select ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="statementPrinterObject.supplyStatus.knife">
+                                      <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                      <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                      <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab12">
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.device_status' | translate }}</label>
+                     </div>
+
+
+
+
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="title">
+                                    <label for="">{{ 'label.bna_operation' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="bnaDS" value="0" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.bnaOperation">
+                                    <label for="">{{ 'label.successful_operation' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="l" value="1" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.bnaOperation">
+                                    <label for="">{{ 'label.print_operation_not_completed' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="l" value="2" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.bnaOperation">
+                                   <label for="">{{ 'label.device_not_configured' | translate }}</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="l" value="3" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.bnaOperation">
+                                    <label for="">{{ 'label.cancel_key_pressed_during_sideways_receipt_print' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-1 w-fit">
+                            <div class="form__control key">
+                                <label for="">{{ 'label.escrow_counts' | translate }}</label>
+                                <input type="text" (change)="handleChangeVal()"  [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.escrowCounts">
+                            </div>
+                            <div class="form__control sm">
+                                <label for="">{{ 'label.escrow_number' | translate }}</label>
+                                <input type="text" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.escrowNumber">
+                            </div>
+                        </div>
+                        <div class="row p-1 w-fit">
+                            <div class="form__control key">
+                                <label for="">{{ 'label.vaulted_counts' | translate }}</label>
+                                <input type="text" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.vaultedCounts">
+                            </div>
+                            <div class="form__control sm">
+                                <label for="">{{ 'label.vaulted_number' | translate }}</label>
+                                <input type="text" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.vaultedNumber">
+                            </div>
+                        </div>
+                        <div class="row p-1 w-fit">
+                            <div class="form__control key">
+                                <label for="">{{ 'label.returned_counts' | translate }}</label>
+                                <input type="text" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.returnedCounts">
+                            </div>
+                            <div class="form__control sm">
+                                <label for="">{{ 'label.returned_number' | translate }}</label>
+                                <input type="text" (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.deviceStatus.returnedNumber">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+
+                          <div class="select__box">
+                            <select ngDefaultControl (change)="handleChangeVal()"  [(ngModel)]="bunchNoteAcceptorObject.errorSeverity">
+                              <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                              <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                              <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                              <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                              <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                              <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              <div class="details__container">
+                <div class="header">
+                  <label for="">{{ 'label.supply_status' | translate }}</label>
+                </div>
+                <div class="content p-1">
+                  <div class="row">
+                    <div class="form__control">
+                        <label>{{ 'label.paper' | translate }}</label>
+                      <div class="select__box">
+                        <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.supplyStatus.paper">
+                          <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                          <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                                       <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form__control">
+                        <label>{{ 'label.ribbon' | translate }}</label>
+                      <div class="select__box">
+                        <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.supplyStatus.ribbon">
+                          <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                          <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                          <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form__control">
+                        <label>{{ 'label.print_head' | translate }}</label>
+                      <div class="select__box">
+                        <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.supplyStatus.printHead">
+                          <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                          <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                          <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form__control">
+                        <label>{{ 'label.knife' | translate }}</label>
+                      <div class="select__box">
+                        <select  ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="bunchNoteAcceptorObject.supplyStatus.knife">
+                          <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                          <option value="0">{{ 'select_option.not_set_yet' | translate }}</option>
+                          <option value="1">{{ 'select_option.paper_exhausted' | translate }}</option>
+                        </select>
+                      </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab13">
+                <div class="details__container">
+                    <label for="">{{ 'label.device_status' | translate }}</label>
+                    <div class="content p-1">
+                        <div class="radio__box">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <input type="radio" name="m" value="0"  (change)="handleChangeVal()" [(ngModel)]="envelopeDispenserObject.deviceStatus">
+                                    <label for="">{{ 'label.envelope_presented_satisfactory' | translate }}</label>
+
+
+                                </div>
+                                <div class="d-flex">
+                                    <input type="radio" name="m" value="1" (change)="handleChangeVal()" [(ngModel)]="envelopeDispenserObject.deviceStatus">
+                                    <label for="">{{ 'label.failure_envelope_not_presented_or_retracted' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+                                <select ngDefaultControl (change)="handleChangeVal()"  [(ngModel)]="envelopeDispenserObject.errorSeverity">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                  <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                  <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                  <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                  <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                        <label for="">{{ 'label.supply_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.bin_containing' | translate }}</label>
+                            <div class="select__box">
+                                <select ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="envelopeDispenserObject.supplyStatus">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_envelope_deposit' | translate }}</option>
+                                    <option value="1">{{ 'select_option.no_overfill_condition' | translate }}</option>
+                                    <option value="4">{{ 'select_option.overfill_detected' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab14">
+                <div class="details__container">
+                    <div class="header">
+                        <label> {{ 'label.device_status' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="col">
+                            <div class="radio__box">
+                                <div class="col">
+                                    <div class="title">
+                                        {{ 'label.error_cpm_position' | translate }}
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" name="n" value="0" (change)="handleChangeVal()" [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                        <label for="">{{ 'label.non_hardware_status' | translate }}</label>
+
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" name="n" value="1" (change)="handleChangeVal()" [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                        <label for="">{{ 'label.cheque_entry_reentry_error' | translate }}</label>
+
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" name="n" value="2" (change)="handleChangeVal()" [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                        <label for="">{{ 'label.image_lifting_error' | translate }}</label>
+
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" name="n" value="3" (change)="handleChangeVal()" [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                        <label for="">{{ 'label.eject_error' | translate }}</label>
+
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex">
+                                        <input type="radio" name="n" value="4" (change)="handleChangeVal()" [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                        <label for="">{{ 'label.capture_error' | translate }}</label>
+
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" name="n" value="5"  (change)="handleChangeVal()" [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                        <label for="">{{ 'label.endorse_error' | translate }}</label>
+
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" name="n" value="6" (change)="handleChangeVal()" [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                        <label for="">{{ 'label.power_fail_error_last_cheque_endorsed' | translate }}</label>
+
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" name="n" value="7" (change)="handleChangeVal()"  [(ngModel)]="nightSafeDepositoryObject.deviceStatus">
+                                        <label for="">{{ 'label.power_fail_error_last_cheque_not_endorsed' | translate }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="radio__box">
+                                <div class="col">
+                                    <div class="title">{{ 'label.error_cpm_position' | translate }}</div>
+                                    <div class="d-flex">
+                                        <input type="radio" value="A" name="checkprDS2" (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.deviceStatus.errorCPM2Position">
+                                        <label for="">{{ 'label.successful_operation' | translate }}</label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" value="B" name="checkprDS2" (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.deviceStatus.errorCPM2Position">
+                                        <label for="">{{ 'label.cancel_selected_timeout' | translate }}</label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" value="C" name="checkprDS2" (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.deviceStatus.errorCPM2Position">
+                                        <label for="">{{ 'label.cpm_failure' | translate }}</label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" value="D" name="checkprDS2" (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.deviceStatus.errorCPM2Position">
+                                        <label for="">{{ 'label.cpm_failure' | translate }}</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex">
+                                        <input type="radio" value="E" name="checkprDS2" (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.deviceStatus.errorCPM2Position">
+                                        <label for="">{{ 'label.error_no_access' | translate }}</label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" value="F" name="checkprDS2" (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.deviceStatus.errorCPM2Position">
+                                        <label for="">{{ 'label.cheque_jam' | translate }}</label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" value="G" name="checkprDS2" (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.deviceStatus.errorCPM2Position">
+                                        <label for="">{{ 'label.cheque_jam_no_access' | translate }}</label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <input type="radio" value="H" name="checkprDS2" (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.deviceStatus.errorCPM2Position">
+                                        <label for="">{{ 'label.not_used' | translate }}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="details__container">
+                    <div class="header">
+                         <label for="">{{ 'label.error_severity' | translate }}</label>
+                    </div>
+                    <div class="content p-1">
+                        <div class="form__control">
+                            <label>{{ 'label.error_code' | translate }}</label>
+                            <div class="select__box">
+
+                                <select class="input" ngDefaultControl (change)="handleChangeVal()" [(ngModel)]="chequeProcessingObject.errorSeverity">
+                                  <option value="">-- {{ 'select_option.select' | translate }} --</option>
+                                  <option value="0">{{ 'select_option.no_error' | translate }}</option>
+                                  <option value="1">{{ 'select_option.routine_errors' | translate }}</option>
+                                  <option value="2">{{ 'select_option.warning_conditions' | translate }}</option>
+                                  <option value="3">{{ 'select_option.suspend' | translate }}</option>
+                                  <option value="4">{{ 'select_option.fatal_error' | translate }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+</div>
+<div class="box-footer">
+    <div class="row">
+      <div class="form__control" *ngIf="!tab9">
+        <label for="">{{ 'label.message' | translate }}</label>
+        <input type="text" [(ngModel)]="message">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form__control" *ngIf="tab9">
+        <label>{{ 'label.camera' | translate }}</label>
+        <input type="text" [(ngModel)]="cameraMessage">
+      </div>
+      <div class="form__control" *ngIf="tab9">
+        <label>{{ 'label.door_access' | translate }}</label>
+        <input type="text" [(ngModel)]="doorAccessMessage">
+      </div>
+      <div class="form__control" *ngIf="tab9">
+        <label>{{ 'label.touch_screen_keyboard' | translate }}</label>
+        <input type="text" [(ngModel)]="touchScreenMessage">
+      </div>
+    </div>
+    <button class="btn btn-success fs-400" (click)="saveChanges()">{{ 'label.save' | translate }}</button>
+  </div>
+
+

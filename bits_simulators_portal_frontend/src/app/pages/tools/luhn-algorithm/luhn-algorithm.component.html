@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="tabs__container">
+    <!-- <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">luhn Algorithm</a>
+
+    </div> -->
+    <div class="tabs">
+      <div class="box_of_content_fit" >
+        <div class="content">
+          
+                    <div class="row">
+                      <div class="form__control">
+                          <div class="row">
+                            <label>PAN </label>
+                            <input type="text" class="input" [(ngModel)]="pan">
+                            <p style="color: red;" *ngIf="!isValid">{{msg}}</p>
+                            <p style="color: green;" *ngIf="isValid">{{msg}}</p>
+                          </div>
+                          <div class="row">
+                           
+                              <label class="label_select"> </label>
+                              <div class="select__box">
+                                <select [(ngModel)]="selectedOption" class="input">
+                                  <option value="Validate">Validate</option>
+                                  <option value="Generate">Generate</option>
+                                </select>
+                              </div>
+                            
+                          </div>
+                          <div class="row">
+                            <div class="buttons">
+                                  <button class="btn btn-primary"   (click)="generate()" >{{ selectedOption}}</button>
+                             </div>
+                          </div>
+
+                       </div>
+
+                       <div class="form__control">
+                        <div class="content-box">
+                   
+                          <div class="con" *ngIf="contentVisible">
+                            <p>{{"textAlgorithmeLuhn" | translate}}</p>
+                          </div>
+                        </div>
+                       </div>
+
+                    </div>
+
+                 
+                    
+
+                   
+                   
+                     
+
+                    
+
+
+                
+         
+      

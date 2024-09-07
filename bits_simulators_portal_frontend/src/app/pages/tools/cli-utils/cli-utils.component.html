@@ -1,0 +1,359 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">{{"label.IPMParser" | translate}}</a>
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">{{"label.LISParser" | translate}}</a>
+      <!-- <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)">Visa Parser</a> -->
+
+    </div>
+    <div class="tabs">
+      
+
+      <div class="box_of_content_fit" *ngIf="tab_1">
+        <div class="file-upload">
+          <input type="file" #fileInput hidden (change)="onFilesSelected()" multiple>
+          <button (click)="fileInput.click()" class="btn btn-primary">{{"label.Choose" |translate }}</button>
+          <button [disabled]="!fileName"  (click)="uploadFilesLis()" class="btn btn-primary">{{"label.Upload" | translate}}</button>
+          <button [disabled]="!fileName" (click)="cancelUpload()" class="btn btn-primary">{{"label.cancel" | translate}}</button>
+          <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <p *ngIf="!fileName">{{"Draganddropfilehere" | translate }}</p>
+            <div *ngIf="fileName">{{ fileName }}</div>
+          </div>
+        </div>
+        <hr>
+        <h1>{{"label.LISFileContent" | translate }}</h1>
+        <div class="form">
+          <div class="search">
+            <!-- <div class="form__control">
+              <input type="text" placeholder="type to search" />
+            </div> -->
+          </div>
+          <table class="table">
+            <thead>
+            <th>{{"Line" | translate }}</th>
+            <th>{{"Data" | translate }}</th>
+            <th></th>
+            </thead>
+           <tbody>
+            <tr *ngFor="let item of data_parser  | paginate : { itemsPerPage: 5, currentPage: p }">
+              <td>{{ item.lineNumber }}</td>
+              <td>{{ item.part }}</td>
+              <td >
+                <button 
+                    class="btn btn-secondary" (click)="show_detailsLis(item.part)">Show</button>
+              </td>
+             
+            </tr>
+           </tbody>
+           
+          </table>
+          <pagination-controls
+            (pageChange)="p = $event"
+          ></pagination-controls>
+         
+         
+        </div>
+        <br>
+        <hr>
+        <h1> {{"LISRecordDetails" | translate }}</h1>
+        <div class="form">
+          <div class="search">
+            <!-- <div class="form__control">
+              <input type="text" placeholder="type to search" />
+            </div> -->
+          </div>
+          <table class="table">
+            <thead>
+              <th>{{ "id" | translate }}</th>
+              <th>{{ "description" | translate }}</th>
+              <th>{{ "position" | translate }}</th>
+              <th>{{ "length" | translate }}</th>
+              <th>{{ "value" | translate }}</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of details_parcer">
+                <td>{{item.id}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.position}}</td>
+                <td>{{item.length}}</td>
+                <td>{{item.value}}</td>
+              </tr>
+            </tbody>
+          </table>
+        
+        </div>
+      </div>
+
+
+      <div class="box_of_content_fit" *ngIf="tab_2">
+        <div class="file-upload">
+          <input type="file" #fileInput hidden (change)="onFilesSelected()" multiple>
+          <button (click)="fileInput.click()" class="btn btn-primary"> {{"label.Choose" | translate }}</button>
+          <button [disabled]="!fileName"  (click)="uploadFiles()" class="btn btn-primary">{{"label.Upload" | translate }}</button>
+          <button [disabled]="!fileName" (click)="cancelUpload()" class="btn btn-primary">{{"label.cancel" | translate }}</button>
+          <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <p *ngIf="!fileName">{{"Draganddropfilehere" | translate }}</p>
+            <div *ngIf="fileName">{{ fileName }}</div>
+          </div>
+        </div>
+        <hr>
+        <h1>IPM File Content</h1>
+        <div class="form">
+          <div class="search">
+            <!-- <div class="form__control">
+              <input type="text" placeholder="type to search" />
+            </div> -->
+          </div>
+          <table class="table">
+            <thead>
+            <th>Line</th>
+            <th>Data</th>
+            <th></th>
+            </thead>
+           <tbody>
+            <tr *ngFor="let item of data_parser  | paginate : { itemsPerPage: 5, currentPage: p }">
+              <td>{{ item.lineNumber }}</td>
+              <td>{{ item.part }}</td>
+              <td >
+                <button 
+                    class="btn btn-secondary" (click)="showDetails(item.part)">Show</button>
+              </td>
+             
+            </tr>
+           </tbody>
+           
+          </table>
+          <pagination-controls
+            (pageChange)="p = $event"
+          ></pagination-controls>
+         
+         
+        </div>
+        <br>
+        <hr>
+        <h1>IPM Record Details</h1>
+        <div class="form">
+          <div class="search">
+            <!-- <div class="form__control">
+              <input type="text" placeholder="type to search" />
+            </div> -->
+          </div>
+          <table class="table">
+            <thead>
+          
+            <th>{{ "id" | translate }}</th>
+            <th>{{ "description" | translate }}</th>
+            <th>{{ "length" | translate }}</th>
+            <th>{{ "value" | translate }}</th>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of details_parcer" >
+                <td>{{item.id}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.length}}</td>
+                <td>{{item.value}}</td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <!--<p class="no_data" *ngIf="mccList.length == 0">No data</p>-->
+          <!-- <pagination-controls
+            (pageChange)="pV2 = $event"
+          ></pagination-controls> -->
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_3">
+        <div class="file-upload">
+          <input type="file" #fileInput hidden (change)="onFilesSelected()" multiple>
+          <button (click)="fileInput.click()" class="btn btn-primary">Choose</button>
+          <button [disabled]="!fileName"  (click)="uploadFiles()" class="btn btn-primary">Upload</button>
+          <button [disabled]="!fileName" (click)="cancelUpload()" class="btn btn-primary">Cancel</button>
+          <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <p *ngIf="!fileName">Drag and drop file here</p>
+            <div *ngIf="fileName">{{ fileName }}</div>
+          </div>
+        </div>
+        <hr>
+        <h1>LIS File Content</h1>
+        <div class="form">
+          <div class="search">
+            <div class="form__control">
+              <input type="text" placeholder="type to search" />
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+            <th>Line</th>
+            <th>Data</th>
+            </thead>
+            <tbody>
+            <tr>
+              <td>data</td>
+              <td>ineData410500004110109231422182074907403245000003420270490740002000000634110471335000000000146074000000146074000000000000040923040923000000000000000324413534482000000949952000000000000000000000000000000000000000000001000000001 </td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+            </tr>
+            <!--<tr
+              *ngFor="
+                    let item of mccList
+                      | paginate : { itemsPerPage: 1, currentPage: p }
+                  "
+              (click)="selectMccRecord(item.id)"
+            >
+              <td>{{ item.id.mccCode }}</td>
+              <td>{{ item.mccDesc }}</td>
+            </tr>-->
+            </tbody>
+          </table>
+          <!--<p class="no_data" *ngIf="mccList.length == 0">No data</p>-->
+          <pagination-controls
+            (pageChange)="p = $event"
+          ></pagination-controls>
+        </div>
+        <br>
+        <hr>
+        <h1>LIS File Content</h1>
+        <div class="form">
+          <div class="search">
+            <div class="form__control">
+              <input type="text" placeholder="type to search" />
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Position</th>
+            <th>Length</th>
+            <th>Value</th>
+            </thead>
+            <tbody>
+            <tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr><tr>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+              <td>data</td>
+            </tr>
+            <!--<tr
+              *ngFor="
+                    let item of mccList
+                      | paginate : { itemsPerPage: 1, currentPage: p }
+                  "
+              (click)="selectMccRecord(item.id)"
+            >
+              <td>{{ item.id.mccCode }}</td>
+              <td>{{ item.mccDesc }}</td>
+            </tr>-->
+            </tbody>
+          </table>
+          <!--<p class="no_data" *ngIf="mccList.length == 0">No data</p>-->
+          <pagination-controls
+            (pageChange)="p = $event"
+          ></pagination-controls>
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_4">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_5">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_6">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_7">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_8">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_9">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_10">
+
+      </div>
+    </div>
+  </div>
+</div>

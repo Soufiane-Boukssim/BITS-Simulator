@@ -1,0 +1,29 @@
+/* styles.css (ou dans le même fichier HTML avec la balise <style>) */
+.white-background {
+    background-color: white;
+    padding: 20px; /* Ajoutez d'autres styles de mise en page si nécessaire */
+  }
+/* styles.css (ou dans le même fichier HTML avec la balise <style>) */
+/* Ajoutez ces styles pour styliser les cases à cocher */
+.checkbox-section .form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+  }
+  
+  .checkbox-section .form-check-label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-section .form-check-input:checked {
+    background-color: #ccc;
+  }
+  
+  /* Ajoutez d'autres styles de mise en page si nécessaire */
+  
+  
+  /* Ajoutez d'autres styles de mise en page si nécessaire */
+    

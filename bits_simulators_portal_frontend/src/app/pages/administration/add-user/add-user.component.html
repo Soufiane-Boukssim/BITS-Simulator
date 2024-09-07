@@ -1,0 +1,149 @@
+<div class="container">
+
+
+  <div class="horizontal__scroll">
+    <div class="title">
+        <img src="assets/icons/setting.png" height="25" alt="">
+        <div class="text">{{ 'label.AddNewUser' | translate}}</div>
+    </div>
+    <div class="addUserForm">
+      <div class="row">
+        <!--<app-checkbox-square class="check__square" [text]="'Block on Error'"></app-checkbox-square>-->
+        <div class="form__control" >
+          <label for="">{{ 'label.userCode' | translate}}</label>
+          <input type="text" [(ngModel)]="user.userCode" name="uCode" maxlength="8" required>
+          <div class="errorValid" *ngIf="userEmpty">{{ 'label.should not be empty' | translate}}</div>
+          <div class="isValid" *ngIf="user.userCode && user.userCode.length === 8">{{ 'label.maxLenghtReached' | translate}}</div>
+        </div>
+        <div class="form__control" >
+        </div>
+
+      </div>
+      <div class="row">
+        <!--<app-checkbox-square class="check__square" [text]="'Block on Error'"></app-checkbox-square>-->
+
+        <div class="form__control">
+            <label for="userName" >{{ 'label.userName' | translate}}</label>
+            <input name="userName" type="text" [(ngModel)]="user.userName" >
+            <div class="errorValid" *ngIf="userNameEmpty">{{ 'label.should not be empty' | translate}}</div>
+        </div>
+        <div class="form__control">
+          <label for="">{{ 'label.email' | translate}}</label>
+          <input type="mail" [(ngModel)]="user.email" >
+          <div class="errorValid" *ngIf="userEmailEmpty">{{ 'label.should not be empty' | translate}}</div>
+          <div class="errorValid" *ngIf="!emailValid">Invalid Syntaxe</div>
+          <div class="isValid" *ngIf="emailValid && user.email.length > 0">valid email</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__control">
+            <label for="">{{ 'label.address' | translate}}</label>
+            <input type="text" [(ngModel)]="user.address" >
+        </div>
+        <div class="form__control">
+          <label for="">{{ 'label.approval' | translate}}</label>
+          <div class="select__box">
+            <select [(ngModel)]="user.status" >
+                <option value="">{{ 'label.select' | translate}}</option>
+                <option value="A">{{ 'label.Approved' | translate}}</option>
+                <option value="P">{{ 'label.Pending' | translate}}</option>
+            </select>
+        </div>
+        <div class="errorValid" *ngIf="userStatusEmpty">{{ "error.ShouldBeSelected" | translate }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__control">
+            <label for="">{{ 'label.mobileNumber' | translate}}</label>
+            <input type="text" [(ngModel)]="user.mobileNumber" >
+        </div>
+        <div class="form__control">
+          <label>{{ 'label.userType' | translate}}</label>
+              <div class="select__box">
+                  <select [(ngModel)]="user.userType" >
+                    <option value="">{{ 'label.select' | translate}}</option>
+                      <option value="USER">{{ 'label.user' | translate}}</option>
+                      <option value="ADMIN">{{ 'label.admin' | translate}}</option>
+                  </select>
+              </div>
+              <div class="errorValid" *ngIf="userTypeEmpty">{{ "error.ShouldBeSelected" | translate }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__control">
+            <label for="">{{ 'label.nbOfTriesAllowed' | translate}}</label>
+            <input type="text" [(ngModel)]="user.numberOfTriesAllowed" >
+            <div class="errorValid" *ngIf="userNbTryEmpty">{{ 'label.should not be empty' | translate}}</div>
+        </div>
+        <div class="form__control">
+          <label for="">{{ 'label.language' | translate}}</label>
+          <div class="select__box">
+            <select [(ngModel)]="user.languageCode" >
+                <option value="">{{ 'label.select' | translate}}</option>
+                <option value="en">{{ 'label.english' | translate}}</option>
+                <option value="fr">{{ 'label.frensh' | translate}}</option>
+                <option value="sp">{{ 'label.spanish' | translate}}</option>
+            </select>
+        </div>
+        <div class="errorValid" *ngIf="userLangEmpty">{{ "error.ShouldBeSelected" | translate }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__control">
+          <label>{{ 'label.bank' | translate}}</label>
+              <div class="select__box">
+                  <select [(ngModel)]="user.userBankCode" >
+                      <option value="">{{ 'label.select' | translate}}</option>
+                      <option *ngFor="let item of bankList" value="{{item.id}}">{{ item.wording }}</option>
+                  </select>
+              </div>
+              <div class="errorValid" *ngIf="userBankEmpty">{{ "error.ShouldBeSelected" | translate }}</div>
+        </div>
+        <div class="form__control">
+          <label>{{ 'label.userStatus' | translate}}</label>
+          <div class="checkbox-wrapper-4">
+            <input type="checkbox" id="cbx-4" [checked]="userBlocked" (change)="onCheckboxChange()" />
+            <label for="cbx-4" class="toggle"><span></span></label>
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__control">
+          <label for="" class="lbl">{{ "label.startingLicenseDate" | translate }}</label>
+          <input type="date" [(ngModel)]="user.dateStartPass">
+          <div class="errorValid" *ngIf="dateStartEmpty">{{ 'label.should not be empty' | translate}}</div>
+          <!--<div class="errorValid" *ngIf="userIpAdress">should not be empty</div>-->
+        </div>
+        <div class="form__control">
+          <label for="" class="lbl">{{ "label.expirationDate" | translate }}</label>
+          <input type="date" [(ngModel)]="user.dateEndPass">
+          <div class="errorValid" *ngIf="dateEndEmpty">{{ 'label.should not be empty' | translate}}</div>
+          <!--<div class="errorValid" *ngIf="userIpAdress">should not be empty</div>-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__control">
+          <div style="margin-left: 80%;">
+            <button class="btn btn-primary" (click)="save()">{{ 'label.save' | translate}}</button>
+
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<dialog class="modal" #modal>
+  <div class="header">
+      <div class="title">{{ 'label.actionPanel' | translate}}</div>
+  </div>
+  <div class="form">
+      <div class="row">
+          <label for="">{{ message }}</label>
+      </div>
+      <div class="row">
+        <button  class="btn btn-primary" style="width: 100px;" (click)="closeModal()">{{ btnMsg }}</button>
+      </div>
+  </div>
+
+</dialog>
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>

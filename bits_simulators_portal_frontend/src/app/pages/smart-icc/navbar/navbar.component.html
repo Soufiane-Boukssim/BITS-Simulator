@@ -1,0 +1,854 @@
+
+
+<div class="tabs__containerV2">
+
+
+   <!--<nav>
+    <div class="tabs__container">
+     <div class="tab__buttons">
+  
+   
+    <a  [className]="tab_1 ? 'active':''" (click)="open_tab(0)"  >{{ "text.NewConfiguration" | translate }}</a>
+
+    <a [className]="tab_3 ? 'active':''" (click)="open_tab(2)" >{{ "text.ShowTVR" | translate }}</a>
+    <a [className]="tab_4 ? 'active':''" (click)="open_tab(3)" >{{ "text.ShowTSI" | translate }}</a>
+
+
+        </div>
+    </div>
+   
+  </nav> -->
+
+
+  <div  class="box_of_contentV2 ">
+
+
+    <!-- <div *ngIf="tab_1"> -->
+<div >
+
+    <div class="side__list">
+        <div class="header">
+          <div class="form__control" style="margin-block: 0.5rem">
+            <input
+              type="text"
+              placeholder="search"
+              [(ngModel)]="searchProfil"
+            />
+          </div>
+        </div>
+
+
+        <button   class="add__btn btn btn-secondary"  (click)="init()">{{"New" | translate }}</button>
+
+      
+        <ul>
+            <li
+              *ngFor="let item of data_profilAll | search : searchProfil |  paginate : { itemsPerPage: 14, currentPage: p_profile }   "
+              (click)="selectProfil(item.codeProfile)"
+            >
+              <div class="icon">
+                <img src="assets/icons/credit-card.png" height="18" width="18"  alt="" />
+              </div>
+              <span>{{ item.wording }}</span>
+            </li>
+          </ul>
+      </div>
+
+
+      <div class="DflexPaginationV2">
+        <pagination-controls nextLabel="{{ 'label.next' | translate}}" previousLabel="{{ 'label.previous' | translate}}"
+        (pageChange)="p_profile = $event"
+        ></pagination-controls> 
+   
+    </div>
+  
+     <div class="side__content">
+      <div class="tabs " >
+        <div   class="tabs-Content">
+
+           
+                
+                <div class="row">
+                    <div class="form__control">
+                        <fieldset class="fieldset_Aria1">
+                            <legend class="legend1"><h2>{{ "legend.IssuerConfiguration" | translate }}</h2></legend>
+                            <div class="row">
+
+                            <div class="form__control">
+                                <label>{{ "label.Profile" | translate }}</label>
+                                <input   type="text" placeholder="code profile"    [(ngModel)]="codeProfil" [disabled]="isUpdating">
+                                <!-- <input   type="text" placeholder="code profile"    [(ngModel)]="codeProfil" (input)="onCodeInserted()"> -->
+                            </div>
+                            <div class="form__control">
+                                <label>{{ "label.Name" | translate }}</label>
+                                <input type="text" [(ngModel)]="wording" [disabled]="isUpdating"  />
+                             </div>
+                        </div>
+                       <div class="row">
+                            <div class="form__control">
+                                <label>{{ "label.Description" | translate }}</label>
+                                <textarea   [(ngModel)]="description" ></textarea> 
+                            </div>
+                            <div class="form__control">
+                                <label>{{ "label.DateCreationModification" | translate }}</label>
+                                <input type="date" [(ngModel)]="dateCreate" />
+                            </div>
+                       </div>
+                     </fieldset>
+
+                    </div>
+                    <div class="form__control">
+                        <fieldset class="fieldset_Aria1">
+                            <legend class="legend1"><h2>{{ "legend.Type" | translate }}</h2></legend>
+                            <div class="row">
+                                <div class="form__control">
+                                 
+                                        <div class="d-flex">
+                                            <input type="radio" name="ON" value="ON"  [(ngModel)]="terminalConfig" >
+                                            <label for="">{{ "text.Online" | translate }}</label>
+                                        </div>
+                                    
+                                </div>
+                                <div class="form__control">
+                                    <div class="d-flex">
+                                        <input type="radio" name="OF" value="OF"  [(ngModel)]="terminalConfig">
+                                        <label for="">{{ "text.Offline" | translate }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row TypeContent">
+                                <div class="form__control">
+
+                                </div>
+                                <div class="form__control">
+                                    
+                                </div>
+                            </div>
+                            <div class="row TypeContentRadio">
+                                <div class="form__control">
+                                    <div class="radio-container"> 
+                                        <input type="radio" id="online" name="type" value="A" [(ngModel)]="terminalControlledBy">
+                                        <label for="online">ATM</label>
+                                   
+                                        <input type="radio" id="offline" name="type" value="C" [(ngModel)]="terminalControlledBy">
+                                        <label for="offline">CardHolder</label>
+                                    
+                                        <input type="radio" id="offline" name="type" value="M" [(ngModel)]="terminalControlledBy">
+                                        <label for="offline">Mercahant</label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                           
+
+                        </fieldset>
+                        
+                       
+                       
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form__control">
+                        <fieldset class="fieldset_Aria1">
+                            <legend class="legend1"><h2>Transaction Configuration</h2></legend>
+                            <div class="row">
+                               <div class="form__control">
+                                    <label for="" class="label-Content">Transaction type</label>
+                                    <div class="select__box">
+                                        <select name="" class="issuer-input"  [(ngModel)]="trxType" (change)="onCountrySelect()" >
+                                            <option value="">--select--</option>
+                                            <option *ngFor="let cbtrxType of cBTrxType" [value]="cbtrxType.value">{{ cbtrxType.label }}</option>
+                                        </select>
+                                    </div>    
+                               </div>    
+                               <div class="form__control">
+                                
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label for="" class="label-Content">Pin Code</label>
+                                      <input type="number"   min="0"  [(ngModel)]="trxPin"  >
+                                  </div>
+                            </div>
+                            <div class="form__control">
+                                <label for="" class="label-Content">Amount</label>
+                                <input type="number"   min="0" [(ngModel)]="trxAmt" >
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form__control">
+                        <fieldset class="fieldset_Aria1" style="height: 169.1px;">
+                            <legend class="legend1"><h2>Risk Management</h2></legend>
+                            <div class="row" >
+                                <div class="form__control">
+                                    <div class="d-flex">
+                                        <input type="radio" name="M" value="M" [(ngModel)]="terminalBaseEmv" >
+                                        <label for="">Based EMV Method</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form__control">
+                                    <div class="d-flex">
+                                        <input type="radio" name="S" value="S" [(ngModel)]="terminalBaseEmv" >
+                                        <label for="">Based On statistics</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row input_tag " style="margin-top: 5px;">
+                              
+                                <div class="form__control">
+                                    <label for="" style="width: 35px;" >Default</label>
+                                </div>
+                                <div class="form__control " *ngFor="let byte of bytes; let i = index">
+                                    <input type="text"  maxlength="2" [(ngModel)]="bytes[i].byte" (keyup)="updateHexValue()"   >
+                                  
+                                </div>
+                                <div class="form__control">
+                                    <button  (click)="openAnalyzeModalDefault()" class="btn btn-secondary">View</button>
+                                    
+                                </div>
+
+                            </div>
+                            <div class="row input_tag"  style="margin-top: 5px;">
+                                <div class="form__control">
+                                    <label for=""  style="width: 35px;"  >Denial</label>
+                                </div>
+                              
+                                <div class="form__control"  *ngFor="let byte of bytesDenial; let i = index">
+                                     <input type="text" maxlength="2" [(ngModel)]="bytesDenial[i].byte" (keyup)="updateHexValueDenial()" >
+                                </div>
+                                <div class="form__control">
+                                    <button (click)="openAnalyzeModalDenial()" class="btn btn-secondary">View</button>
+                                </div>
+
+                            </div>
+                            <div class="row input_tag"  style="margin-top: 5px;">
+                                <div class="form__control">
+                                    <label for="" style="width: 35px;" >On-line</label>
+                                </div>
+                               
+                                <div class="form__control" *ngFor="let byte of bytesOnline; let i = index">
+                                        <input type="text" maxlength="2" [(ngModel)]="bytesOnline[i].byte" (keyup)="updateHexValueOnline()" >
+                                </div>
+                                <div class="form__control">
+                                    <button class="btn btn-secondary" (click)="openAnalyzeModalOnline()" >View</button>
+                                    
+                                </div>
+
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form__control">
+                        <fieldset class="fieldset_Aria1">
+                            <legend class="legend1"><h2>{{ "legend.GeneralProperties" | translate }}</h2></legend>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label for="">{{ "label.Cryptogram" | translate }}</label>
+                                    <div class="select__box">
+                                        <select name="" id=""    [(ngModel)]="cryptogram" (change)="onCountrySelect()">
+                                            <option value="">--select--</option>
+                                            <option *ngFor="let cryptogram of cryptograms" [value]="cryptogram.value">{{ cryptogram.label }}</option>
+                                        </select>
+        
+                                    </div>
+        
+                                </div>
+                                <div class="form__control">
+                                    
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="form__control">
+                                    <label for="" >Paiment key</label>
+                                    <input type="text"    [(ngModel)]="paymentKey" 
+                                     (input)="encryptKey($event,'payment_Key')" >
+                                </div>
+                                <div class="form__control">
+                                    <label for="" class="checkValue"> </label>
+                                    <p class="checkValueInput" *ngIf="cvKp">{{cvKp}}</p>
+                                    <!-- <input type="text" name="" id="" class="checkValueInput" readonly value={{cvKp}}> -->
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label for="">MAC key</label>
+                                    <input type="text"     [(ngModel)]="macKey" (input)="encryptKey($event,'mac_Key')">
+                                </div>
+                                <div class="form__control">
+                                    <label for="" class="checkValue"></label>
+                                    <p class="checkValueInput" *ngIf="cvMac">{{cvMac}}</p>
+                                    <!-- <input type="text" name="" id=""  class="checkValueInput" readonly value={{cvMac}}> -->
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form__control">
+                                    <label for="" >Encryption key</label>
+                                    <input type="text"     [(ngModel)]="encryptionKey" (input)="encryptKey($event,'enc_Key')" >
+                                </div>
+                                <div class="form__control">
+                                    <label for="" class="checkValue"></label>
+                                    <p class="checkValueInput" *ngIf="cvKe">{{cvKe}}</p>
+
+                                    <!-- <input type="text" name="" id=""  class="checkValueInput" readonly value={{cvKe}}> -->
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    </div>
+
+
+                <fieldset class="fieldset_Aria1">
+                    <legend class="legend1"><h2>Location && On-Line Frequency</h2></legend>
+                    <div class="row">
+                        <div class="form__control">
+                            <label >Country </label>
+                            <div  style="display: flex;">
+                                <div class="select__box" >
+                                    <select [(ngModel)]="terminalCountry" >
+                                        <option value="">select</option>
+                                        <option *ngFor="let country of countryList" [value]="country.id">{{ country.countryDesc }}</option>
+                                    </select>
+                                </div>
+                                <p class="show_code" *ngIf="terminalCountry"               
+                                >{{terminalCountry}}</p>
+                            </div>
+                        
+                            
+
+                        </div>
+                        <div class="form__control">
+                            <label  >Currency </label>
+
+                            <div  style="display: flex;">
+
+                                <div class="select__box">
+                                    <select   [(ngModel)]="terminalCurrency" (change)="onCountrySelect()">
+                                        <option value="">-- select--</option>
+                                        <option *ngFor="let currency of currencyList" [value]="currency.id">{{ currency.ccyDesc }}</option>
+                                    </select>
+                                </div>
+                                <p class="show_code" *ngIf="terminalCurrency"               
+                                >{{terminalCurrency}}</p>
+                            </div>
+                                    
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form__control">
+                            <label for="">MIN Target %</label>
+                            <input type="number"    value="0"  min="0" [(ngModel)]="terminalMin">
+                        </div>
+                        <div class="form__control">
+                            <label for="">MAX Target %</label>
+                            <input type="number"   value="0" min="0" [(ngModel)]="terminalMax">
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="form__control">
+                            <label for=""  >Threshold Value</label>
+                            <input type="number"  value="0" min="0" [(ngModel)]="terminalValue" >
+                        </div>
+                        <div class="form__control">
+                            <label for="">Terminal floor limit</label>
+                            <input type="number" value="0" min="0" [(ngModel)]="terminalFloor" >
+                        </div>
+                        
+                    </div>
+
+                </fieldset>
+
+
+                <div class="row">
+                  
+                    <div class="form__control">
+                        <fieldset class="fieldset_Aria1">
+                            <legend class="legend1"><h2>Tags</h2></legend>
+                            
+                            <div class="row">
+                                <div class="form__control">
+                                    <label for="" class="label-Content">Tags Liste</label>
+                                    <div  style="display: flex;">
+                                        <div class="select__box">
+                                            <select name="" class="Tags-input" [(ngModel)]="selectedTag" (change)="onTagSelectionChange()">
+                                                <option value="">--select--</option>
+                                                <option *ngFor="let tag of tags" [value]="tag.tag">{{ tag.tag }} - {{ tag.name }}</option>
+                                            </select>
+                                        </div>
+                                        <p class="show_code" *ngIf="selectedTag"               
+                                        >{{selectedTag}}</p>
+                                    </div>
+
+                                  
+                                </div>
+                                <div class="form__control">
+                                    <label for="">Action</label>
+                                    <button class="btn btn-secondary"  (click)="addTag()">Add</button>
+                                </div>
+        
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form__control">
+                                    <div  class="table">
+                                        <table cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <!-- <input type="checkbox" class="checkbox"
+                                                     (change)="selectAll($event)"> -->
+                                                </th>
+                                                <th>Tag</th>
+                                                <th>Labelle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let tag of data_TagDefinition">
+                                                <td><input class="checkbox" type="checkbox" [(ngModel)]="tag.selected" (change)="selectOne()"></td>
+                                                <td>{{ tag.tagId }}</td>
+                                                <td>{{tag.tagName }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+                            <div class="row btn-delete">
+                                <button class="btn btn-danger"  (click)="deleteTagDefinition()">Delete</button>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                        
+                </div>
+                
+           
+
+            <div class="container-button">
+
+                <div class="div-button">
+                    <div *ngIf="respCode !== '000'; else saveButton">
+                        <div class="btn-dFlex">
+                            <button class="btn btn-primary btn-margin" (click)="SaveUpdate()">{{"label.update" | translate}}</button>
+                            <button class="btn btn-danger btn-margin" (click)="deleteProfileFunction()">{{"label.delete" | translate}}</button>
+                        </div>
+                      
+                      </div>
+                      <ng-template #saveButton>
+                        <button class="btn btn-primary" (click)="SaveUpdate()">{{"label.save" | translate}}</button>
+                      </ng-template>
+                </div>
+
+               
+                   
+                <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+            </div>
+
+            <div class="tabs">
+                <div class="tab-content" *ngIf="tabConfig_2">
+                    <p>tabConfig_2</p>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="tab-content" *ngIf="tabConfig_3">
+                    <p>tabConfig_3</p>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="tab-content" *ngIf="tabConfig_4">
+                    <p>tabConfig_4</p>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="tab-content" *ngIf="tabConfig_5">
+                    <p>tabConfig_5</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+  <!-- /********************************************************************************************************************** -->
+
+
+
+
+
+
+
+
+      <div class="tabs">
+            <div class="tab-content" *ngIf="tab_3">
+
+                   <div>
+                   
+                        <div class="header">
+                            <h1>Tags Analyzer</h1>
+                          
+                        </div>
+                        <div class="form mx__2">
+                            <div class="row gap">
+                                <div class="form__control">
+                                    <label for="">Hex value</label>
+                                    <input disabled readonly [(ngModel)]="hexValueTVR" type="text">
+                                </div>
+                            </div>
+                            <div class="value row__sb">
+                                <div class="row__sb gap">
+                                    <div class="form__control" *ngFor="let byte of bytesTVR; let i = index">
+                                        <input type="text" maxlength="2" [(ngModel)]="bytesTVR[i].byte" (keyup)="updateHexValueTVR()">
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button (click)="analyzeTVR()" class="btn btn-primary semi-bold btn-lg">
+                                        Analyze
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="tabs__container">
+                                <div class="tab__buttons">
+                                    <a [className]="selectedTab === tabButton ? 'active' : ''" (click)="open_tabTVR(tabButton)"
+                                        *ngFor="let tabButton of tabButtons">Byte {{ tabButton }}</a>
+                                </div>
+                                <div class="tabs">
+                                    <div *ngFor="let tab of tabButtons">
+                                        <div class="d__hor__2" *ngIf="selectedTab === tab">
+                                            <div class="box not__owned">
+                                                <div class="list__box">
+                                                  <div class="scroll__list">
+                                                    <div class="item" *ngFor="let item of resultsTVR.slice((tab - 1) * 8, (tab - 1) * 8 + 4)">
+                                                      <div class="text">{{item.resultName}}</div>
+                                                      <app-checkbox [checked]="item.checked"></app-checkbox>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                      
+                                              <!-- Second box not__owned -->
+                                              <div class="box not__owned">
+                                                <div class="list__box">
+                                                  <div class="scroll__list">
+                                                    <div class="item" *ngFor="let item of resultsTVR.slice((tab - 1) * 8 + 4, tab * 8)">
+                                                      <div class="text">{{item.resultName}}</div>
+                                                      <app-checkbox [checked]="item.checked"></app-checkbox>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+            
+            
+                        </div>
+                
+                   </div>
+               
+            </div>
+        </div>
+
+
+        <div  *ngIf="tab_2">
+               <div class="component-emv-card">
+                    <app-emv-card-explorer class="cardExplorer" ></app-emv-card-explorer>  
+               </div>
+        </div>
+      
+      
+
+
+        <div class="tabs">
+            <div class="tab-content" *ngIf="tab_4">
+
+                <div>  
+                    <div class="header">
+                        <h1>Tags Analyzer</h1>
+                      
+                    </div>
+                    <div class="form mx__2">
+                        <div class="row gap">
+                            <div class="form__control">
+                                <label for="">Hex value</label>
+                                <input disabled readonly [(ngModel)]="hexValueTSI" type="text">
+                            </div>
+                        </div>
+                        <div class="value row__sb">
+                            <div class="row__sb gap">
+                                <div class="form__control" *ngFor="let byte of bytesTSI; let i = index">
+                                    <input type="text" maxlength="2" [(ngModel)]="bytesTSI[i].byte" (keyup)="updateHexValueTSI()">
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <button (click)="analyzeTSI()" class="btn btn-primary semi-bold btn-lg">
+                                    Analyze
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tabs__container">
+                            <div class="tab__buttons">
+                                <a [className]="selectedTab === tabButton ? 'active' : ''" (click)="open_tabTVR(tabButton)"
+                                    *ngFor="let tabButton of tabButtons">Byte {{ tabButton }}</a>
+                            </div>
+                            <div class="tabs">
+                                <div *ngFor="let tab of tabButtons">
+                                    <div class="d__hor__2" *ngIf="selectedTab === tab">
+                                        <div class="box not__owned">
+                                            <div class="list__box">
+                                              <div class="scroll__list">
+                                                <div class="item" *ngFor="let item of resultsTSI.slice((tab - 1) * 8, (tab - 1) * 8 + 4)">
+                                                  <div class="text">{{item.resultName}}</div>
+                                                  <app-checkbox [checked]="item.checked"></app-checkbox>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                  
+                                          <!-- Second box not__owned -->
+                                          <div class="box not__owned">
+                                            <div class="list__box">
+                                              <div class="scroll__list">
+                                                <div class="item" *ngFor="let item of resultsTSI.slice((tab - 1) * 8 + 4, tab * 8)">
+                                                  <div class="text">{{item.resultName}}</div>
+                                                  <app-checkbox [checked]="item.checked"></app-checkbox>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+        
+        
+                    </div>
+            
+               </div>
+            </div>
+        </div>
+        <div class="tabs">
+            <div class="tab-content" *ngIf="tab_5">
+                <div>
+                   
+                    <div class="header">
+                        <h1>Tags Analyzer</h1>
+                      
+                    </div>
+                    <div class="form mx__2">
+                        <div class="row gap">
+                            <div class="form__control">
+                                <label for="">Hex value</label>
+                                <input disabled readonly [(ngModel)]="hexValueCVR" type="text">
+                            </div>
+                        </div>
+                        <div class="value row__sb">
+                            <div class="row__sb gap">
+                                <div class="form__control" *ngFor="let byte of bytesTVR; let i = index">
+                                    <input type="text" maxlength="2" [(ngModel)]="bytesCVR[i].byte" (keyup)="updateHexValueCVR()">
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <button (click)="analyzeCVR()" class="btn btn-primary semi-bold btn-lg">
+                                    Analyze
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tabs__container">
+                            <div class="tab__buttons">
+                                <a [className]="selectedTab === tabButton ? 'active' : ''" (click)="open_tabCVR(tabButton)"
+                                    *ngFor="let tabButton of tabButtons">Byte {{ tabButton }}</a>
+                            </div>
+                            <div class="tabs">
+                                <div *ngFor="let tab of tabButtons">
+                                    <div class="d__hor__2" *ngIf="selectedTab === tab">
+                                        <div class="box not__owned">
+                                            <div class="list__box">
+                                              <div class="scroll__list">
+                                                <div class="item" *ngFor="let item of resultsCVR.slice((tab - 1) * 8, (tab - 1) * 8 + 4)">
+                                                  <div class="text">{{item.resultName}}</div>
+                                                  <app-checkbox [checked]="item.checked"></app-checkbox>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                  
+                                        
+                                          <div class="box not__owned">
+                                            <div class="list__box">
+                                              <div class="scroll__list">
+                                                <div class="item" *ngFor="let item of resultsCVR.slice((tab - 1) * 8 + 4, tab * 8)">
+                                                  <div class="text">{{item.resultName}}</div>
+                                                  <app-checkbox [checked]="item.checked"></app-checkbox>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+        
+        
+                    </div>
+            
+               </div>
+            </div>
+        </div>
+
+
+
+ <!--   dialog  -->
+
+
+ <dialog class="modal" #analyzeModal>
+    <div class="header">
+        <div class="title bold">Data Element Coding</div>
+        <div class="close" (click)="closeAnalyzeModal()">&times;</div>
+    </div>
+    <div class="form mx__2">
+      
+        <div *ngIf="isDefaultModal">
+            <div class="value row__sb">
+                <div class="row__sb gap radio-container">
+                    <label for="">Value</label>
+                    <div class="form__control input__Data__Element " *ngFor="let byte of bytes; let i = index">
+                        <input type="text" maxlength="2" [(ngModel)]="bytes[i].byte" (keyup)="updateHexValue()">
+                        
+                    </div>
+                    <div class="form__control  hexa_Data__Elemnet radio-container">
+                        <input disabled readonly [(ngModel)]="hexValue" type="text">
+                        <label for="">Hex value</label>
+                    </div>
+                    <div class="d-flex">
+                        <button (click)="analyze()" class="btn btn-primary emi-bold btn-lg">
+                            Analyze
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+        <div *ngIf="isDenialModal">
+            <div class="value row__sb">
+                <div class="row__sb gap radio-container">
+                    <label for="">Value</label>
+                    <div class="form__control input__Data__Element " *ngFor="let byte of bytesDenial; let i = index">
+                        <input type="text" maxlength="2" [(ngModel)]="bytesDenial[i].byte" (keyup)="updateHexValueDenial()">
+                        
+                    </div>
+                    <div class="form__control  hexa_Data__Elemnet radio-container">
+                        <input disabled readonly [(ngModel)]="hexValueDenial" type="text">
+                        <label for="">Hex value</label>
+                    </div>
+               
+                    <div class="d-flex">
+                        <button (click)="analyzeDenial()" class="btn btn-secondary semi-bold btn-lg">
+                            Analyze value
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="isOnlineModal">
+            <div class="value row__sb">
+                <div class="row__sb gap radio-container">
+                    <label for="">Value</label>
+                    <div class="form__control input__Data__Element " *ngFor="let byte of bytesOnline; let i = index">
+                        <input type="text" maxlength="2" [(ngModel)]="bytesOnline[i].byte" (keyup)="updateHexValueOnline()">
+                        
+                    </div>
+                    <div class="form__control  hexa_Data__Elemnet radio-container">
+                        <input disabled readonly [(ngModel)]="hexValueOnline" type="text">
+                        <label for="">Hex value</label>
+                    </div>
+               
+                    <div class="d-flex">
+                        <button (click)="analyzeOnline()" class="btn btn-secondary semi-bold btn-lg">
+                            Analyze value
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       
+        
+      
+        <div class="tabs__container">
+            <div class="tab__buttons">
+                <a [className]="selectedTab === tabButton ? 'active' : ''" (click)="open_tabDailog(tabButton)"
+                    *ngFor="let tabButton of tabButtons">Byte {{ tabButton }}</a>
+            </div>
+       
+            <div class="tabs">
+                <div *ngFor="let tab of tabButtons">
+                    <div class="d__hor__2  " *ngIf="selectedTab === tab">
+                        
+                        <div class="box not__owned">
+                            <div class="list__box list__boxV2">
+                              <div class="scroll__list">
+                                <div class="item" *ngFor="let item of results.slice((tab - 1) * 8, (tab - 1) * 8 + 4)">
+                                  <div class="text">{{item.resultName}}</div>
+                                  <app-checkbox [checked]="item.checked"></app-checkbox>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                  
+                          <!-- Second box not__owned -->
+                          <div class="box not__owned">
+                            <div class="list__box">
+                              <div class="scroll__list">
+                                <div class="item" *ngFor="let item of results.slice((tab - 1) * 8 + 4, tab * 8)">
+                                  <div class="text">{{item.resultName}}</div>
+                                  <app-checkbox [checked]="item.checked"></app-checkbox>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</dialog>
+
+
+ </div>
+
+
+
+</div>

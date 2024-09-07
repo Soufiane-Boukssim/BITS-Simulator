@@ -1,0 +1,574 @@
+<div class="box_of_content">
+  <div class="side__list">
+    <div class="header">
+      <div>
+        <button class="btn btn-primary" (click)="open()" *ngIf="!isConnected">
+          <div *ngIf="loading" class="lds-dual-ring"></div>
+          <div *ngIf="!loading">{{ "button.Connect" | translate }}</div>
+        </button>
+        <button class="btn btn-danger" (click)="disconnect()" *ngIf="isConnected"  >{{ "button.Disconnect" | translate }}</button>
+      </div>
+      <!-- <button class="btn btn-danger" (click)="openModalConf()"   >test</button> -->
+      
+    </div>
+    <!-- <ul>
+      <li>
+        <div class="icon">
+          <img src="assets/icons/add.png" height="25" alt="" />
+        </div>
+        <span>New Scenario</span>
+      </li>
+    </ul> -->
+   
+    <fieldset class="fieldset_Aria1">
+      <legend class="legend1"><h2>{{ "legend.Scenarios" | translate }}</h2></legend>
+
+      <div class="form__control" style="margin-block: 0.5rem">
+        <input type="text" placeholder="search"  [(ngModel)]="searchscenarios"  />
+      </div>
+      <ul class="ul_scena">
+        <div *ngFor="let scenario of scenarios | search : searchscenarios |  paginate : { itemsPerPage: 10, currentPage: pS ,id:'1'}  ">
+          <li class="row__sb" #tooltip="matTooltip"
+          matTooltip={{scenario.caseSetDesc}} matTooltipPosition="right">
+  
+            <div class="icon">
+              <img src="assets/icons/scenario.png" height="15"  alt="" />
+            </div>
+            <span class="widh-desc-scenario" (click)="selectScenario(scenario.id)"  >
+              {{ scenario.caseSetDesc }}
+            </span>
+            <div class="img__div" (click)="toggleScenario(scenario.id.caseSetId)">
+              <img class="img" src="assets/icons/down-arrow.png" alt="" *ngIf="!expandedScenarios[scenario.id.caseSetId] "  height="10">
+              <img class="img" src="assets/icons/upload.png" alt="" *ngIf="expandedScenarios[scenario.id.caseSetId] " height="10">
+            </div>
+          </li>
+          <!--  -->
+          <div *ngIf="expandedScenarios[scenario.id.caseSetId] ">
+            <div *ngFor="let case of scenario.casesDefinitions">
+            <li *ngIf="case.caseDirection=='req' && (case.caseAction==='' || case.caseAction===null )  " (click)="selectCase(case.id,scenario.id)"
+            #tooltip="matTooltip"  matTooltip={{case.caseDesc}} matTooltipPosition="right"
+            >
+                <div class="icon li-case" >
+                  <img src="assets/icons/edit.png" height="15" alt="" />
+                </div>
+                <span class="widh-desc-scenario">{{ case.caseDesc }}</span>
+                <!-- <span (click)="logCaseDescription(case)">{{ case.caseDesc }}</span> -->
+            </li>
+
+            <li *ngIf="case.caseDirection=='req' &&  case.caseAction!=null  &&  case.caseAction!=''  " (click)="selectCase(case.id,scenario.id)"
+            #tooltip="matTooltip"  matTooltip={{case.caseDesc}} matTooltipPosition="right"
+            >
+              <div class="icon li-case" >
+                <img src="assets/icons/echo.png" height="15" alt="" />
+              </div>
+              <span  class="widh-desc-scenario">{{ case.caseDesc }}</span>
+              <!-- <span (click)="logCaseDescription(case)">{{ case.caseDesc }}</span> -->
+           </li>
+
+            
+            </div>
+          </div>
+        </div>
+      </ul>
+
+      <div  class="div-loader">
+        <span class="loader" *ngIf="isLoading"></span>
+      </div>
+      
+
+      
+
+    </fieldset> 
+
+    
+
+    
+
+
+
+  </div>
+  <div class="DflexPaginationV3 ">
+    <pagination-controls nextLabel="" previousLabel=""
+     (pageChange)="pS = $event"
+    [id]="'1'"></pagination-controls> 
+
+  </div>
+
+
+  <div class="side__content">
+    <div class="row">
+
+      <fieldset class="fieldset_Aria2">
+        <legend class="legend1"><h2>{{ "legend.Execution" | translate }}</h2></legend>
+        <form class="formExcution  " [formGroup]="caseForm" (ngSubmit)="sendMessage()">
+
+          <div *ngIf="scenariosSelect">
+            <div class="d-flex">
+              <p>{{ "text.SelectedScenario" | translate }}</p>
+              <div class="icon">
+                <img src="assets/icons/scenario.png" height="15" alt="" />
+              </div>
+                  
+              <h2> {{titleSelect}}</h2> </div>   
+
+              <div class="Vide-heignt">
+
+              </div>
+
+          </div>
+
+
+          
+          
+          <div *ngIf="!scenariosSelect" style="margin-top: -15px;">
+
+            <div class="d-flexCase"  *ngIf="titleSelect!=''">
+              <p>{{ "text.SelectedCase" | translate }}</p>
+              <!-- <div class="icon">
+                <img src="assets/icons/edit.png" height="25" alt="" />
+              </div> -->
+              <h2>{{titleSelect}}</h2>
+            </div>
+           
+            <div class="form__control">
+              <label>{{ "label.CardProfile" | translate }}</label>
+              <div class="select__box">
+                <select formControlName="caseCardRef">
+                  <option disabled selected value="">-- select --</option>
+                  <option *ngFor="let c of cards" [value]="c.id.cardNo">{{ c.cardDesc }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+
+            
+           
+            <div class="form__control" style="width: 118px;">
+              <label>{{ "label.MerchantProfile" | translate }}</label>
+              <div class="select__box">
+                <select formControlName="caseMerchantPrf">
+                  <option disabled selected value="">-- select --</option>
+                  <option *ngFor="let m of merchants" [value]="m.id.merCode">{{ m.merName
+                    }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form__control" style="width: 118px; position: absolute; margin-left: 130px;" >
+              <label>{{ "label.TerminalProfile" | translate }}</label>
+              <div class="select__box">
+                <select formControlName="caseTerminalPrf">
+                  <option disabled selected value="">-- select --</option>
+                  <option *ngFor="let t of terminals" [value]="t.id.termCode">{{
+                    t.termLocation }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+            <div class="row" >
+              <div class="form__control"  style="width: 118px;">
+                <label>{{ "label.Amount" | translate }}</label>
+                <div class="input__group" formArrayName="fields" formGroupName="fields">
+                  <input type="number" step=1 (input)="onInput($event)" [(ngModel)]="amount" 
+                    [ngModelOptions]="{standalone: true}" style="direction: rtl;" class="ammoutammout" pattern="[0-9]*(\.[0-9]+)?" />
+            
+                </div>
+              </div>
+              <div class="form__control selectCurrency"  style="width: 80px; position: absolute; margin-left: 130px;">
+                <label>{{ "label.Currency" | translate }}</label>
+                <div class="select__box">
+                  <select  [(ngModel)]="currency"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onCurrencyChange()"
+                  (click)="changeDisplaySelect($event)">
+                  <option disabled selected value="">-- select --</option>
+                  <option *ngFor="let t of currencies" [value]="t.id">
+                    <!-- <div *ngIf="selected==true">{{t.ccyDesc }}</div> 
+                           <div *ngIf="selected==false">{{t.ccyAlpha }}</div>  -->
+                    {{t.ccyAlpha }}
+                  </option>
+                </select>
+                </div>
+  
+              </div>
+               <p style="width: 80px; position: absolute; margin-left: 212px;
+                margin-top: 16px; height: 30px;width: auto;background-color: rgb(177, 175, 175);
+                border-radius: 8px;padding: 5px;" *ngIf="currency" >{{currency}}</p>
+             
+            </div>
+            
+
+            
+          </div>
+
+          <div class="row">
+            
+          </div>
+          <div class="bottom__form" style="width: 248px;display: flex;margin-top: 8px;">
+            <span class="send">
+              <label for="" class="label">{{ "label.Send" | translate }}</label>
+              <label for="" class="value">{{countourSend}}</label>
+            </span>
+            <span class="receive" style="margin-left: 10px;">
+              <label class="label">Receive</label>
+              <label  class="value"*ngIf="finalTable.length === 0">0</label>
+              <label  class="value"*ngIf="finalTable.length>0 ">{{finalTable.length}}</label>
+              <!-- <label >{{finalTable.Length}}</label> -->
+            </span>
+            <button style="margin-left: 20px;" type="submit" class="btn btn-primary">{{ "label.Send" | translate }}</button>
+          </div>
+        </form>
+
+      </fieldset>
+
+
+      <div class="form">
+        <fieldset class="fieldset_Aria3">
+          <legend class="legend1"><h2>{{ "legend.ExecutionResults" | translate }}</h2></legend>
+
+          <!-- <span class="title">Title Here</span> -->
+          <div  class="table">
+            <table cellspacing="0">
+              <thead>
+                <th>Date</th>
+                <th>{{ "label.Reference" | translate }}</th>
+                <th>{{ "label.MTI" | translate }}</th>
+                <th class="widh_Td_table">{{ "label.CaseName" | translate }}</th>
+                <th>{{ "label.CardProfile" | translate }}</th>
+    
+              </thead>
+              <tbody>
+    <!--
+              (click)="selectCountryRecord(item.id)"
+    -->
+              <tr
+                *ngFor="
+                        let item of finalTable
+                          | paginate : { itemsPerPage: 4, currentPage: p ,id:'2'}
+                      "
+                      (click)="selectMessageRecord(item.date)"
+              >
+                <td>{{ item.date  | date:'MM-dd HH:mm:ss' }}</td>
+                <td>{{ item.reference }}</td>
+                <td>{{ item.mti }} / {{ item.mtiRes }}</td>
+                <td class="widh_Td_table">{{ getNameCase(item.caseName) }}</td>
+                <td>{{ item.cardProfile }}</td>
+              </tr>
+              </tbody>
+            </table>
+            <p class="no_data" *ngIf="finalTable.length == 0">No data</p>
+          <pagination-controls
+            (pageChange)="p = $event" [id]="'2'"
+          ></pagination-controls>
+          </div>
+          
+
+        
+
+
+
+        <div class="row" style="bottom: 10%; position: absolute;">
+          <div class="form__control" style="display: flex;">
+            <a (click)="openModal()" [class.disabled]="isConnected" style="display: flex; position: absolute;">
+              <span style="position: relative;" ><img src="assets/icons/control_panel.png" alt=""  />
+              </span>
+               <!--<span class="text">{{
+                "text.ActionPanel" | translate }}</span> -->
+            </a>
+          </div>
+          <div class="form__control"  >
+            <div class="form__control">
+              <div class="select__box" style="width: 150px">
+                <select [(ngModel)]="selectedOption">
+                  <option value="">--select---</option>
+                  <option value="ET">{{ "option.EchoTest" | translate }}</option>
+                  <option value="RP">{{ "option.ResetPINKey" | translate }}</option>
+                  <option value="RM">{{ "option.ResetMACKey" | translate }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form__control"  >
+            <button class="btn btn-secondary" (click)="ChangeActionSend()">{{ "label.Send" | translate }}</button>
+        
+          </div>
+        
+        
+        </div>
+
+      </fieldset>
+      </div>
+
+
+    </div>
+    <!-- tab__component -->
+  
+      <div class="tabs__containerExcution tabs__ex">
+        <div class="tab__buttons">
+          <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)"
+          >{{ "label.FieldsDetails" | translate }}</a
+          >
+          <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">Hex Dump</a>
+          <a [className]="tab_3 ? 'active' : ''" (click)="open_tab(2)"
+          >{{ "label.TransactionLogTest" | translate }}</a
+          >
+
+          <img src="assets/icons/pdff.png"  class="icon-pdf" alt="" (click)="generatePDF()" >
+        </div>
+        <div class="tabs">
+          <div class="tab" *ngIf="tab_1">
+            <div class="logs">
+              <fieldset class="logg">
+                <legend class="legend1">{{ "label.Sender1" | translate }}</legend>
+                <!-- <span>Sender1</span> -->
+                <textarea readonly="true" [value]="resXml"></textarea>
+              </fieldset>
+              <fieldset class="logg">
+                <legend class="legend1">{{ "label.Receiver1" | translate }}</legend>
+                <!-- <span>Receiver1</span> -->
+                <textarea
+                  readonly="true"
+                  [value]="reqXml"
+                ></textarea>
+               
+              </fieldset>
+            </div>
+          </div>
+          <div class="tab" *ngIf="tab_2">
+            <div class="logs">
+              <fieldset class="logg">
+                <legend class="legend1">{{ "label.Sender2" | translate }}</legend>
+                <!-- <span>Sender2</span> -->
+                <textarea readonly="true" [value]="hexResp"></textarea>
+              </fieldset>
+
+              <fieldset class="logg">
+                <legend class="legend1">{{ "label.Receiver2" | translate }}</legend>
+                <!-- <span>Receiver2</span> -->
+                <textarea readonly="true" [value]="hexReq"></textarea>
+                
+              </fieldset>
+            </div>
+          </div>
+          <div class="tab" *ngIf="tab_3">
+            <div class="logs">
+
+                <fieldset class="loggV1">
+                  <legend class="legend1">{{ "label.Sender1" | translate }}</legend>
+                  <div class="log">
+                    <table class="fl-table">
+                      <thead>
+                      <tr>
+                        <th>{{ "label.ID" | translate }}</th>
+                        <th class="th-table-filed">{{ "label.FieldName" | translate }}</th>
+                        <th>{{ "label.Value" | translate }}</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let item of respFields">
+                        <td>
+                          {{ item.id }}
+                        </td>
+                        <td>
+                          {{ item.fieldName }}
+                        </td>
+                        <td>
+                          {{ item.value }}
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                 </fieldset>
+
+           
+              
+                <fieldset class="loggV1">
+                  <legend class="legend1">{{ "label.Receiver1" | translate }}</legend>
+                  <div class="log">
+                    <table class="fl-table">
+                      <thead>
+                      <tr>
+                        <th>{{ "label.ID" | translate }}</th>
+                        <th class="th-table-filed">{{ "label.FieldName" | translate }}</th>
+                        <th >{{ "label.Value" | translate }}</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let item of reqFields">
+                        <td>
+                          {{ item.id }}
+                        </td>
+                        <td>
+                          {{ item.fieldName }}
+                        </td>
+                        <td >
+                          {{ item.value }}
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                </fieldset>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- end tab component -->
+  </div>
+</div>
+
+
+
+
+<dialog class="modal" #modal>
+  <div class="header">
+    <div class="title">{{ "label.ActionPanel" | translate }}</div>
+    <div class="close" (click)="closeModal()">&times;</div>
+  </div>
+  <div class="form">
+    <div class="row">
+     
+      <app-checkbox-square class="check__square"
+       [text]="'Block on Error'" 
+      [isChecked]="blockError"
+      (checkboxChanged)="handleCheckboxChange('blockError')"
+      ></app-checkbox-square>
+      
+      <div class="form__control check__inputV1">
+        <label for="">{{ "label.Timeout" | translate }}out</label>
+        <input type="number"  step="1"  [(ngModel)]="blocktimeoutValue" />
+      </div>
+      
+      <div class="form__control check__input">
+        <h2 class="timeOutSecond">(S)</h2>
+      </div>
+    </div>
+    <div class="row">
+      <app-checkbox-square class="check__square" 
+      [text]="'Echo Test Auto Reply'"
+      [isChecked]="echoTestAutoReply"
+      (checkboxChanged)="handleCheckboxChange('echoTestAutoReply')"
+      ></app-checkbox-square>
+      <div class="form__control check__inputV1">
+      
+      </div>
+      <div class="form__control check__input">
+
+      </div>
+    </div>
+    <p style="color: red;">{{messageechoTestAutoReply}}</p>
+
+    <!-- <div class="row">
+      <app-checkbox-square class="check__square" 
+      [text]="'Loop'"
+      [isChecked]="loop"
+      (checkboxChanged)="handleCheckboxChange('loop')"
+      ></app-checkbox-square>
+      <div class="form__control check__inputV1 ">
+        <label for="">Time out</label>
+        <input type="number"  step="1"  [(ngModel)]="looptimeoutValue" />
+      </div>
+      <div class="form__control check__input">
+        <h2 class="timeOutSecond">(S)</h2>
+      </div>
+    </div> -->
+    
+    <div class="row">
+      <app-checkbox-square class="check__square" 
+      [text]="'Auto Reply All'"
+      [isChecked]="autoReplyAll"
+      (checkboxChanged)="handleCheckboxChange('autoReplyAll')"
+      ></app-checkbox-square>
+      <div class="form__control  check__inputV1">
+        <label>{{ "label.ResponseCode" | translate }}</label>
+        <div  class="select__box" >
+          <select  class="" [(ngModel)]="autoReplyAlltimeoutValue">
+            <option value="" >-- select --</option>
+            <option *ngFor="let resp of responseList" [value]="resp.id.respCode"> {{resp.respDesc}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form__control check__input">
+      
+      </div>
+     
+      
+    </div>
+    <div class="row">
+      <app-checkbox-square class="check__square" 
+      [text]="'Echo Test Periodic'"
+      [isChecked]="echoTestPeriodic"
+      (checkboxChanged)="handleCheckboxChange('echoTestPeriodic')"
+      ></app-checkbox-square>
+      <div class="form__control check__inputV1">
+        <label for="">{{ "label.Period" | translate }}</label>
+        <input type="number"  step="1" [(ngModel)]="echoTestPeriodictimeoutValue"  />
+      </div>
+      <div class="form__control check__input">
+         <h2 class="timeOutSecond">(S)</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form__control check__input">
+          <div class="DflexButton">
+              <button type="submit" class="btn btn-primary" (click)="saveAction()" >{{ "label.save" | translate }}</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+
+
+
+<dialog class="modal" #modalConf>
+  <div class="header">
+      <div class="title">{{ "label.actionPanel" | translate}}</div>
+      <div class="close" (click)="closemodalConf()">&times;</div>
+  </div>
+  <div class="form">
+      <div class="row">
+        <label class="lbl" for="">{{ "text.DisconnectConfirmation" | translate }} </label>
+
+      </div>
+      <div class="row">
+        <button id="cancelDelete" class="btn btn-danger" (click)="closemodalConf()">{{ "label.cancel" | translate}}</button>
+        <button id="cancelDelete" class="btn btn-primary" (click)="isPageChangeConfirmed()" >{{ "label.ok" | translate}}</button>
+       
+      </div>
+
+     
+  </div>
+
+</dialog>
+
+
+
+
+<dialog class="modal" #modalAleart>
+  <div class="header">
+      <div class="title">{{ "label.actionPanel" | translate}}</div>
+      <div class="close" (click)="closemodalAleart()">&times;</div>
+  </div>
+  <div class="form">
+      <div class="row">
+        <label class="lbl" for="">{{ "text.InstallationPrompt" | translate }} </label>
+
+      </div>
+      <div class="row">
+        <button id="cancelDelete" class="btn btn-danger"  (click)="closemodalAleartInstall()">Install</button>
+        <button id="cancelDelete" class="btn btn-primary"  (click)="closemodalAleart()">{{ "label.ok" | translate}}</button>
+       
+      </div>
+
+     
+  </div>
+
+</dialog>

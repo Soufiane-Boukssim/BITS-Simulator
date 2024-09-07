@@ -1,0 +1,22 @@
+<div class="table">
+    <table cellspacing="0">
+      <thead>
+        <tr>
+          <th *ngFor="let head of arrayHeader">{{head}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of arrayGrid | paginate : {itemsPerPage:numberOfLines, currentPage:p}">
+          <td *ngFor="let head of arrayHeader" (click)="select(item)">
+            <!-- {{item[head] | slice:0:dataLength}} -->
+            {{ cleanUnicode(item[head]) }}
+            
+               <!-- {{ item[head] | date:'dd/MM/yy' }} -->
+          </td>
+        </tr>
+        <p style="margin: auto; width: fit-content; padding: .5rem;" *ngIf="arrayGrid.length == 0" >No data </p>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+  

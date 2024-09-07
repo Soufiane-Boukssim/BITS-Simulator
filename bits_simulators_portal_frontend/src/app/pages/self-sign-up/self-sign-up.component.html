@@ -1,0 +1,135 @@
+<div class="containerChangepass"  >
+  <div class="horizontal__scroll">
+    <div class="title">
+      <div class="text">sign Up</div>
+    </div>
+    <div class="addUserForm">
+      
+      <div class="row">
+        <!--<app-checkbox-square class="check__square" [text]="'Block on Error'"></app-checkbox-square>-->
+        <div class="form__control" >
+          <label for="uCode" class="lbl">userCode<div class="required">*</div></label>
+          <input type="text" [(ngModel)]="user.userCode" name="uCode" maxlength="8" required>
+          <div class="errorValid" *ngIf="userEmpty">should not be empty</div>
+          <div class="isValid" *ngIf="user.userCode && user.userCode.length === 8">Maximum length reached!</div>
+        </div>
+        <div class="form__control" >
+
+        </div>
+      </div>
+      
+      <div class="row">
+        <!--<app-checkbox-square class="check__square" [text]="'Block on Error'"></app-checkbox-square>-->
+
+        <div class="form__control">
+            <label for="userName" class="lbl">userName<div class="required">*</div></label>
+            <input name="userName" type="text" [(ngModel)]="user.userName" >
+            <div class="errorValid" *ngIf="userNameEmpty">should not be empty</div>
+        </div>
+        <div class="form__control">
+          <label for="" class="lbl">email<div class="required">*</div></label>
+          <input type="mail" [(ngModel)]="user.email" >
+          <div class="errorValid" *ngIf="userEmailEmpty">should not be empty</div>
+          <div class="errorValid" *ngIf="!emailValid">Invalid Syntaxe</div>
+          <div class="isValid" *ngIf="emailValid && user.email.length > 0">valid email</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__control">
+            <label for="">adress</label>
+            <!-- <input type="text" [(ngModel)]="user.address" > -->
+            <textarea id="adressTA" style="width: 70%;border-radius: 10px; border: 0.2px solid rgb(192, 192, 192);" [(ngModel)]="user.address" cols="30" rows="2"></textarea>
+        </div>
+        <!--<div class="form__control">
+          <label for="">approval</label>
+          <div class="select__box">
+            <select [(ngModel)]="user.status" >
+                <option value="">--select--</option>
+                <option value="A">Approved</option>
+                <option value="P">Pending</option>
+            </select>
+        </div>
+        <div class="errorValid" *ngIf="userStatusEmpty">{{ "error.ShouldBeSelected" | translate }}</div>
+        </div>-->
+        <div class="form__control">
+          <label for="">mobile number</label>
+          <input type="text" [(ngModel)]="user.mobileNumber" >
+          <div class="errorValid" *ngIf="!phoneValid">Invalid Syntaxe</div>
+      </div>
+      </div>
+      <div class="row">
+        <!--<div class="form__control">
+          <label class="lbl">user type<div class="required">*</div></label>
+              <div class="select__box">
+                  <select [(ngModel)]="user.userType" >
+                    <option value="">--select--</option>
+                      <option value="USER">USER</option>
+                      <option value="ADMIN">ADMIN</option>
+                  </select>
+              </div>
+              <div class="errorValid" *ngIf="userTypeEmpty">{{ "error.ShouldBeSelected" | translate }}</div>
+        </div>
+         <div class="form__control">
+          <label for="">number of tries allowed</label>
+          <input type="text" [(ngModel)]="user.numberOfTriesAllowed" >
+          <div class="errorValid" *ngIf="userNbTryEmpty">should not be empty</div>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="form__control">
+          <label for="" class="lbl">language<div class="required">*</div></label>
+          <div class="select__box">
+            <select [(ngModel)]="user.languageCode" >
+                <option value="">--select--</option>
+                <option value="en">English</option>
+                <option value="fr">frensh</option>
+                <option value="esp">spanish</option>
+            </select>
+            <div class="errorValid" *ngIf="userLangEmpty">{{ "error.ShouldBeSelected" | translate }}</div>
+        </div>
+        </div>
+        <div class="form__control">
+          <label class="lbl">Bank<div class="required">*</div></label>
+              <div class="select__box">
+                  <select [(ngModel)]="user.userBankCode" >
+                      <option value="">--select--</option>
+                      <option *ngFor="let item of ListOfBanks" [value]="item.id">{{ item.wording }}</option>
+                  </select>
+              </div>
+              <div class="errorValid" *ngIf="userBankEmpty">{{ "error.ShouldBeSelected" | translate }}</div>
+        </div>
+      </div>
+      <!--<div class="row">
+        <div class="form__control">
+          <label>status</label>
+          <div class="checkbox-wrapper-4">
+            <input type="checkbox" id="cbx-4" [checked]="userBlocked" (change)="onCheckboxChange()" />
+            <label for="cbx-4" class="toggle"><span></span></label>
+          </div>
+        </div>
+      </div>-->
+      <div class="row">
+        <div class="form__control">
+          <div class="d-flex">
+            <button class="btn btn-primary" (click)="save()">Save</button>
+            <a href="sign-in" class="backToLoginLink">Back to Login</a>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<dialog class="modal" #modal>
+  <div class="header">
+      <div class="title">Action Panel</div>
+  </div>
+  <div class="form">
+      <div class="row">
+          <label for="">{{ message }}</label>
+      </div>
+      <div class="row">
+        <button  class="btn btn-primary" style="width: 100px;" (click)="closeModal()">{{ btnMsg }}</button>
+      </div>
+  </div>
+
+</dialog>
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>

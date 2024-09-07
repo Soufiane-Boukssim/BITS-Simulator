@@ -1,0 +1,32 @@
+<div class="container" (keydown.enter)="login()">
+    <div class="login__box">
+        <div class="image">
+            <div class="overlay">
+            </div>
+            <h2>SimSecure : Enter Your
+                Simulation Safely</h2>
+        </div>
+        <div class="form__content">
+            <div class="logo">
+                <!-- <img src="assets/logo.jpeg" height="120" alt=""> -->
+                <img src="assets/logo-removebg.png" height="140" alt="">
+            </div>
+                <div class="form__login">
+                    <div class="form__control">
+                        <label for="">Username</label>
+                        <input type="text" [(ngModel)]="body.userCode">
+                    </div>
+                    <div class="form__control">
+                        <label for="">Password</label>
+                        <input type="password" [(ngModel)]="body.password">
+                    </div>
+                    <button class="btn btn-primary" [disabled]="loading" type="submit" (click)="login()">
+                        <div *ngIf="loading" class="lds-dual-ring"></div>
+                        <div *ngIf="!loading">Login</div>
+                    </button>
+                    <span class="link">You don't have account? <a href="self-sign-up">Create one</a></span>
+                </div>
+        </div>
+    </div>
+</div>
+<app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>

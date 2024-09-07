@@ -1,0 +1,72 @@
+<div class="container mt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" (click)="selectComponent('terminal-configuration')">
+                  <div class="d-flex align-items-center">
+                    <img src="assets/computer.ico" alt="Terminal Configuration" class="mr-2" width="30" height="30">
+                    Terminal Configuration
+                  </div>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a class="nav-link" (click)="selectComponent('issues-configuration')">
+                  <div class="d-flex align-items-center">
+                    <img src="assets/eForum.ico" alt="Issuer Configuration" class="mr-2" width="30" height="30">
+                    Issuer Configuration
+                  </div>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a class="nav-link" (click)="selectComponent('transaction-configuration')">
+                  <div class="d-flex align-items-center">
+                    <img src="assets/eCreditCard.ico" alt="Transaction Configuration" class="mr-2" width="30" height="30">
+                    Transaction Configuration
+                  </div>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a class="nav-link" (click)="selectComponent('tags')">
+                  <div class="d-flex align-items-center">
+                    <img src="assets/computer.ico" alt="Tags" class="mr-2" width="30" height="30">
+                    Tags
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  
+
+    <div class="row">
+      <div *ngIf="selectedComponent === 'terminal-configuration'">
+        <app-terminal-configuration></app-terminal-configuration>
+      </div>
+
+      <div *ngIf="selectedComponent === 'issues-configuration'">
+        <app-issues-configuration></app-issues-configuration>
+      </div>
+
+      <div *ngIf="selectedComponent === 'transaction-configuration'">
+        <app-transaction-configuration></app-transaction-configuration>
+      </div>
+
+      <div *ngIf="selectedComponent === 'tags'">
+        <app-tags></app-tags>
+      </div>
+    </div>
+
+      
+  </div>
+  

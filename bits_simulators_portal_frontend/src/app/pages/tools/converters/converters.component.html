@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="tabs__container">
+    <div class="tab__buttons">
+      <a [className]="tab_1 ? 'active' : ''" (click)="open_tab(0)">ASCII To HEX</a>
+      <a [className]="tab_2 ? 'active' : ''" (click)="open_tab(1)">HEX To ASCII</a>
+
+    </div>
+    <div class="tabs">
+      <div class="box_of_content_fit" *ngIf="tab_1">
+       
+
+
+          <div class="div-content">
+            <div class="row">
+              <div class="form__control">
+                <label>Data in ASCII</label>
+                <textarea [(ngModel)]="ascii" ></textarea>
+              </div>
+            </div>
+  
+            <div class="row div-btn">
+              <button class="btn btn-secondary"   (click)="asciiTohex()" >Convert</button>
+  
+            </div>
+
+            <div class="form__control">
+              <label>HEX</label>
+              <textarea  [(ngModel)]="hex"></textarea>
+          </div>
+  
+          </div>
+
+
+
+          
+
+        
+        
+       
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_2">
+        <div class="div-content">
+          <div class="row">
+            <div class="form__control">
+              <label>Data in HEX</label>
+              <textarea [(ngModel)]="hex" ></textarea>
+            </div>
+          </div>
+
+          <div class="row div-btn">
+            <button class="btn btn-secondary"   (click)="hexToascii()" >Convert</button>
+
+          </div>
+
+          <div class="form__control">
+            <label>ASCII</label>
+            <textarea  [(ngModel)]="ascii"></textarea>
+        </div>
+
+        </div>
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_3">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_4">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_5">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_6">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_7">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_8">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_9">
+
+      </div>
+      <div class="box_of_content_fit" *ngIf="tab_10">
+
+      </div>
+    </div>
+  </div>
+</div>

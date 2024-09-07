@@ -1,0 +1,450 @@
+
+
+
+
+<div class="tabs__containerV2">
+
+<div  class="containerSelect">
+       <div class="form__control box_of_contentSelct ">
+            <div class="div-container">
+              <label for="" class="labelSelect"> Profile </label>
+              <select name="" id="" class="select__box"   [(ngModel)]="codeProfile" (change)="onProfilSelect()">
+                  <option value="">-- select--</option>
+                  <option *ngFor="let profil of data_profil" [value]="profil.codeProfile">{{ profil.codeProfile }} - {{ profil.wording }}</option>
+              </select>
+              <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+
+
+
+              <div class="container-button div-container">
+                <button class="btn btn-secondary" (click)="startProcess()">start</button>
+                <button class="btn btn-secondary btn-start" (click)="startStepByStepProcess()"> By_step</button>
+              </div>
+
+            </div>
+
+       </div>
+
+</div>
+
+
+<div class="container">
+  <div class="box_of_contentExcution">
+
+      <div class="side__list">
+          <ul>
+              <li [class]="tab1 ? 'active' : ''" (click)="openTab(1)">
+
+                   Initiate Application
+              </li>
+              <li [class]="tab2 ? 'active' : ''" (click)="openTab(2)">
+
+                  Read Application Data
+              </li>
+              <li [class]="tab3 ? 'active' : ''" (click)="openTab(3)">
+
+                  Offline Data Authentication
+              </li>
+              <li [class]="tab4 ? 'active' : ''" (click)="openTab(4)">
+                 Processing Restrictions
+              </li>
+              <li [class]="tab5 ? 'active' : ''" (click)="openTab(5)">
+
+                Cardholder Verification
+                </li>
+              <li [class]="tab6 ? 'active' : ''" (click)="openTab(6)">
+
+                  Terminal Risk Management
+              </li>
+              <li [class]="tab7 ? 'active' : ''" (click)="openTab(7)">
+
+                  Terminal Action Analysis
+              </li>
+              <li [class]="tab8 ? 'active' : ''" (click)="openTab(8)">
+
+                Card Action Analysis
+              </li>
+              <li [class]="tab9 ? 'active' : ''" (click)="openTab(9)">
+
+                Authorisation Request
+              </li>
+              <li [class]="tab10 ? 'active' : ''" (click)="openTab(10)">
+
+                Issuer Response
+               </li>
+              <li [class]="tab11? 'active' : ''" (click)="openTab(11)">
+
+                 Completion
+              </li>
+
+            </ul>
+
+      </div>
+
+          <div class="side__contentV1 p-1">
+            <div class="tab" *ngIf="tab0">
+
+            </div>
+          </div>
+
+          <div class="side__contentV1 p-1">
+            <div class="tab div-img" *ngIf="tab1">
+
+                 <img src="assets/icons/lecteur.png" class="img-lecteur" height="" alt=""  *ngIf="showImage" >
+
+
+                <div class="container_ReadApp"  *ngIf="!showImage">
+                  <label for="" class="form_ReadApp label-css"> Card Application Section </label>
+                  <label for="">{{cardApkSelect}}</label>
+                </div>
+
+
+            </div>
+
+          </div>
+          <div class="side__contentV1 p-1">
+            <div class="tab" *ngIf="tab2">
+
+                 <div  class="container_ReadApp">
+                  <div>
+                    <h1>Entrer Amount :</h1>
+                  </div>
+                  <div class="container_ReadApp">
+                    <label for="" class="label-css">Authorisation Amount</label>
+                    <form action="" class="form_ReadApp">
+                        <input type="number" name="" id="" value="100" class="input">
+                        <label for="" class="label-devi">MAD</label>
+                    </form>
+                </div>
+                 </div>
+
+
+            </div>
+          </div>
+          <div class="side__contentV1 p-1">
+            <div class="tab" *ngIf="tab3">
+
+            <div class="container_ReadApp">
+              <div>
+                <label for="" class="label-css">Fonction Supporter (AIP)</label>
+              </div>
+              <div class="container_ReadApp">
+                <div  class="container_Checkbox">
+                   <div >
+                        <input type="checkbox" id="sda" name="auth_method" value="sda">
+                        <label for="sda">Static Data Authentication (SDA)</label><br>
+
+                        <input type="checkbox" id="dda" name="auth_method" value="dda">
+                        <label for="dda">Dynamic Data Authentication (DDA)</label><br>
+
+                        <input type="checkbox" id="cda" name="auth_method" value="cda">
+                        <label for="cda">Combined DDA and application Cryptogram (CDA)</label><br>
+                   </div>
+                  <div>
+                    <input type="checkbox" id="cardholder_verification" name="auth_method" value="cardholder_verification" class="input-checkbox">
+                    <label for="cardholder_verification">Cardholder Verification</label><br>
+
+                    <input type="checkbox" id="terminal_risk_management" name="auth_method" value="terminal_risk_management" class="input-checkbox">
+                    <label for="terminal_risk_management">Terminal Risk Management</label><br>
+
+                    <input type="checkbox" id="issuer_authentication" name="auth_method" value="issuer_authentication" class="input-checkbox">
+                    <label for="issuer_authentication">Issuer Authentication</label><br>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="side__contentV1 p-1">
+            <div class="tab" *ngIf="tab4">
+              <div class="container_ReadApp">
+
+                <div class="Div_Prossing">
+                   <label for=""  class="label-Prossing">This is no paramter for this step</label> <br/>
+                   <label for=""  class="label-Prossing">Click on step button to continue</label>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="side__contentV1 p-1">
+            <div class="tab" *ngIf="tab5">
+
+              <div class="container_ReadApp">
+              <label for="" class="label-css">Fonction Supporter (AIP)</label>
+              <div class="container_ReadApp">
+                <div>
+                  <label for="">Entrer pin code</label>  <br/>
+                  <input type="number" id="pin" class="input">
+                </div>
+                <br/><br/>
+                <div  class="container_Checkbox">
+                  <button class="btn btn-danger btn-cardholder">Ignor</button>
+                  <button class="btn btn-danger btn-cardholder">Error</button>
+                  <button class="btn btn-secondary btn-cardholder">Valide</button>
+                </div>
+              </div>
+            </div>
+
+            </div>
+          </div>
+          <div class="side__contentV1 p-1">
+            <div class="tab" *ngIf="tab6">
+              <div class="container_ReadApp">
+                <div>
+                  <label for="" class="label-css">Fonction Supporter (AIP)</label>
+                </div>
+                <div class="container_ReadApp">
+                  <div  class="container_Checkbox">
+                     <div >
+                          <input type="checkbox" id="sda" name="auth_method" value="sda">
+                          <label for="sda">Static Data Authentication (SDA)</label><br>
+
+                          <input type="checkbox" id="dda" name="auth_method" value="dda">
+                          <label for="dda">Dynamic Data Authentication (DDA)</label><br>
+
+                          <input type="checkbox" id="cda" name="auth_method" value="cda">
+                          <label for="cda">Combined DDA and application Cryptogram (CDA)</label><br>
+                     </div>
+                    <div>
+                      <input type="checkbox" id="cardholder_verification" name="auth_method" value="cardholder_verification" class="input-checkbox">
+                      <label for="cardholder_verification">Cardholder Verification</label><br>
+
+                      <input type="checkbox" id="terminal_risk_management" name="auth_method" value="terminal_risk_management" class="input-checkbox">
+                      <label for="terminal_risk_management">Terminal Risk Management</label><br>
+
+                      <input type="checkbox" id="issuer_authentication" name="auth_method" value="issuer_authentication" class="input-checkbox">
+                      <label for="issuer_authentication">Issuer Authentication</label><br>
+
+                    </div>
+                  </div>
+
+                </div>
+                <div>
+                  <input type="checkbox" id="sda" name="auth_method" value="velocity">
+                  <label for="velocity">Velocity check(New Card,LCOL,ULCOL)</label><br>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="side__contentV1 p-1">
+            <div class="tab" *ngIf="tab7">
+              <div class="container_ReadApp">
+
+                <div class="Div_Prossing">
+                   <label for=""  class="label-Prossing">This is no paramter for this step</label> <br/>
+                   <label for=""  class="label-Prossing">Click on step button to continue</label>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="side__contentV1 p-1">
+            <div class="tab" *ngIf="tab8">
+
+                <div  class="container_ReadApp">
+                  <div>
+                    <h1>Terminal Request :</h1>
+                  </div>
+                  <div class="container_ReadApp">
+                    <input type="checkbox" id="sda" name="auth_method" value="velocity">
+                    <label for="velocity">Offline Requested</label><br>
+                    <input type="checkbox" id="sda" name="auth_method" value="velocity">
+                    <label for="velocity">Online Requested</label><br>
+                    <input type="checkbox" id="sda" name="auth_method" value="velocity">
+                    <label for="velocity">Decline Transaction</label><br>
+
+                </div>
+                 </div>
+
+
+
+            </div>
+          </div>
+
+          <div class="side__contentV1 p-1 ">
+            <div class="tab" *ngIf="tab9">
+              <div class="container_ReadApp">
+                <div class="container_ReadApp">
+                  <div class="Div_Prossing">
+                     <label for=""  class="label-Prossing">This is no paramter for this step</label> <br/>
+                     <label for=""  class="label-Prossing">Click on step button to continue</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="side__contentV1 p-1  ">
+            <div class="tab" *ngIf="tab10">
+              <div class="container_ReadApp container_Checkbox">
+               <div>
+                <div  class="container_ReadApp">
+                  <div>
+                    <h1>Online Connection :</h1>
+                  </div>
+
+                  <div  class="container_ReadApp">
+                    <input type="checkbox" id="sda" name="auth_method" value="velocity">
+                    <label for="velocity">Able to go online</label><br>
+                    <input type="checkbox" id="sda" name="auth_method" value="velocity">
+                    <label for="velocity">"Unable to go online</label><br>
+                  </div>
+                </div>
+
+               </div>
+
+               <div  class="container_ReadApp">
+                <div>
+                  <h1>OperationAtmDto Management:</h1>
+                </div>
+                <div  class="container_ReadApp">
+                  <div class="tabs__container">
+                    <div class="tab__buttons">
+                      <a  [className]="tab_Decision ? 'active':''" (click)="open_tabScript(0)"  >Decision</a>
+                      <a [className]="tab_Script ? 'active':''" (click)="open_tabScript(1)" >OperationAtmDto</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="side__contentV1 p-1 ">
+            <div class="tab" *ngIf="tab11">
+              <div class="container_ReadApp">
+
+                  <div>
+                    <h1>Transaction Status</h1>
+                  </div>
+                  <div class="container_ReadApp">
+                      <form action="" class="form-completion">
+                         <div class="State_Declined">
+                          <label for="" class="label-completion" >Date</label>
+                          <input type="date" name="" id="" class="input-completion">
+
+                         </div>
+
+                        <div class="State_Declined">
+                          <label for=""  class="label-completion" >Amount</label>
+                          <input type="number" name="" id="" class="input-completion">
+                          <label for="" class="label-devi">MAD</label>
+                        </div>
+
+                       <div class="State_Declined">
+                        <label for="" class="label-completion" >Cryptogram</label>
+                        <input type="date" name="" id="" class="input-completion">
+                       </div>
+
+                        <div class="State_Declined">
+                          <label for="" class="label-completion" >State</label>
+                         <p>Declined</p>
+                        </div>
+                      </form>
+
+                      <div>
+                         <button class="btn btn-secondary">New</button>
+                      </div>
+
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+        <!-- <div  class="analyze-tester-detait">
+          <br/>
+          <div class="div-container">
+            <button class="btn btn-danger" (click)="clearLog()">Clear</button>
+            <button class="btn btn-secondary button-save" (click)="saveToFile()">Save</button>
+
+          </div>
+          <br/>
+          <div class="div-details">
+             <table class="table-details">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Date</th>
+                  <th>Description</th>
+                </tr>
+
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data_initiateApplication; let i = index">
+                  <td> <mat-icon color="primary">info</mat-icon></td>
+                  <td>{{ item.date }}</td>
+                  <td>{{ item.description }}</td>
+                </tr>
+              </tbody>
+
+             </table>
+          </div>
+
+        </div> -->
+      </div>
+
+
+
+
+
+</div>
+
+
+<div class="details">
+  <div >
+    <br/>
+    <div class="div-container">
+      <button class="btn btn-danger" (click)="clearLog()">Clear</button>
+      <button class="btn btn-secondary button-save" (click)="saveToFile()">Save</button>
+
+    </div>
+    <br/>
+    <div >
+       <table class="table-details">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Date</th>
+            <th>Description</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data_initiateApplication; let i = index">
+            <td> <mat-icon color="primary">info</mat-icon></td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.description }}</td>
+          </tr>
+        </tbody>
+
+       </table>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="divheight">
+ <p>_</p>
+</div>
+
+
+</div>
+

@@ -1,0 +1,271 @@
+<div class="box_of_content p-block-1" xmlns="http://www.w3.org/1999/html" style="min-height: 600px; padding-top: 12px;">
+    <div class="row" style="margin-top: -20px">
+        <div class="form">
+            <div class="title">Status Descriptor</div>
+            <div class="radio__box">
+                <div class="col">
+                    <div class="d-flex">
+                        <input type="radio" name="b" (change)="changeVar()"  value="B"  [(ngModel)]="part1">
+                        <label for="">Ready</label>
+                    </div>
+                    <div class="d-flex">
+                        <input type="radio" name="b" (change)="changeVar()"  value="A" [(ngModel)]="part1">
+                        <label for="">Command Reject</label>
+                    </div>
+                    <div class="d-flex">
+                        <input type="radio" name="b" (change)="changeVar()" value="C" [(ngModel)]="part1">
+                        <label for="">Specific Command Reject</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tabs__container" style="margin-right: 10px">
+        <div class="tab__buttons">
+            <a [className]="tab_1 ? 'active':''" (click)="open_tab(0)">General</a>
+            <a [className]="tab_2 ? 'active':''" (click)="open_tab(1)">Message Format</a>
+            <a [className]="tab_3 ? 'active':''" (click)="open_tab(2)">Field Value</a>
+            <a [className]="tab_4 ? 'active':''" (click)="open_tab(3)">Illegal Message</a>
+          <a [className]="tab_5 ? 'active':''" (click)="open_tab(4)">Field Value</a>
+          <a [className]="tab_6 ? 'active':''" (click)="open_tab(5)">Illegal Message</a>
+
+
+        </div>
+        <div class="tabs">
+            <div class="tab" *ngIf="tab_1">
+                <div class="radio__box">
+                    <div class="col">
+                        <div class="d-flex">
+                            <input type="radio" name="a" (change)="changeVar()" value="01" [(ngModel)]="part2">
+                            <label for="">MAC Failure</label>
+                        </div>
+                        <div class="d-flex">
+                            <input type="radio" name="a" (change)="changeVar()" value="02" [(ngModel)]="part2">
+                            <label for="">Time Variant Number Failure</label>
+                        </div>
+                        <div class="d-flex">
+                            <input type="radio" name="a" (change)="changeVar()" value="03" [(ngModel)]="part2">
+                            <label for="">Security Terminal Number Mismatch</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab_2">
+                <div class="radio__box">
+                    <div class="col">
+                        <div class="d-flex">
+                            <input type="radio" name="a" (change)="changeVar()" value="A01" [(ngModel)]="part2">
+                            <label for="">Message length error</label>
+                        </div>
+                        <div class="d-flex">
+                            <input type="radio" name="a" (change)="changeVar()" value="A02" [(ngModel)]="part2">
+                            <label for="">Field Separator missing/undexpectedly found</label>
+                        </div>
+                        <div class="d-flex">
+                            <input type="radio" name="a" (change)="changeVar()" value="A03" [(ngModel)]="part2">
+                            <label for="">Transaction Reply message has too many print groups</label>
+                        </div>
+                        <div class="d-flex">
+                            <input type="radio" name="a" (change)="changeVar()" value="A04" [(ngModel)]="part2">
+                            <label for="">Group Seperator missing/unexpectedly found</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab scrollable" *ngIf="tab_3">
+                <div class="row">
+                    <div class="radio__box">
+                        <div class="col">
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B01" [(ngModel)]="part2">
+                                <label for="">Illegal Message Class</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B02" [(ngModel)]="part2">
+                                <label for="">Illegal Message Sub-Class or Identifier</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B03" [(ngModel)]="part2">
+                                <label for="">Illegal Encryption KeyChange or Extended Encryption Key</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B04" [(ngModel)]="part2">
+                                <label for="">Illegal Terminal Command Code</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B05" [(ngModel)]="part2">
+                                <label for="">Illegal Terminal Command Modifier</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B06" [(ngModel)]="part2">
+                                <label for="">Illegal Transaction Reply Function Identifier</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B07" [(ngModel)]="part2">
+                                <label for="">Data field contains non-decimal digit</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B08" [(ngModel)]="part2">
+                                <label for="">Data field value out of range</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B09" [(ngModel)]="part2">
+                                <label for="">Invalid Message Co-Ordination number</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="radio__box">
+                        <div class="col">
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B10" [(ngModel)]="part2">
+                                <label for="">Illegal FIT number</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B11" [(ngModel)]="part2">
+                                <label for="">Too many notes ina dispense function</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B12" [(ngModel)]="part2">
+                                <label for="">Unrecognised Document Destination</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B13" [(ngModel)]="part2">
+                                <label for="">Unrecognised Buffer Identifier</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B14" [(ngModel)]="part2">
+                                <label for="">Buffer Identifier 'E' Missing</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B15" [(ngModel)]="part2">
+                                <label for="">Document Name Error</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B16" [(ngModel)]="part2">
+                                <label for="">The screen identifier in an Override Reversed Screen Command is not the range 'D0000' - 'D0010'</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B17" [(ngModel)]="part2">
+                                <label for="">Insufficient screen pool memory to store screen</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B18" [(ngModel)]="part2">
+                                <label for="">No data supplied to endorse cheque in CPM</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="B19" [(ngModel)]="part2">
+                                <label for="">Invalid Encryption Key Size</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" *ngIf="tab_4">
+                <div class="row">
+                    <div class="radio__box">
+                        <div class="col">
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C01" [(ngModel)]="part2">
+                                <label for="">Message type only accepted while terminal is In-Service</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C02" [(ngModel)]="part2">
+                                <label for="">Message not accepted while diagnostics</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C03" [(ngModel)]="part2">
+                                <label for="">Message not accepted while in Out-of-Service</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C04" [(ngModel)]="part2">
+                                <label for="">Message not accepted while in In-of-Service</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C05" [(ngModel)]="part2">
+                                <label for="">Message not accepted while configured</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C06" [(ngModel)]="part2">
+                                <label for="">EKC initialisation command not accepted</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="radio__box">
+                        <div class="col">
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C07" [(ngModel)]="part2">
+                                <label for="">Cheque not present in CPM transport while processing a Transaction Reply</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C08" [(ngModel)]="part2">
+                                <label for="">Message not accepted while processing a Transaction Reply</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C09" [(ngModel)]="part2">
+                                <label for="">Encryption Key Change or Extended Encryption Key Change</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="a" (change)="changeVar()" value="C10" [(ngModel)]="part2">
+                                <label for="">Keychange operation cannot be accepted in restricted encryption mode</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <div class="tab" *ngIf="tab_5">
+            <div class="radio__box">
+              <div class="col">
+                <div class="d-flex">
+                  <input type="radio" name="a" (change)="changeVar()" value="D01" [(ngModel)]="part2">
+                  <label for="">Encryption during Encryption Key Change or Extended Encryption KeyChange message</label>
+                </div>
+                <div class="d-flex">
+                  <input type="radio" name="a" (change)="changeVar()" value="D02" [(ngModel)]="part2">
+                  <label for="">Time-of-DayClock failure or invalid data sent during Date/Time Set command</label>
+                </div>
+                <div class="d-flex">
+                  <input type="radio" name="a" (change)="changeVar()" value="D03" [(ngModel)]="part2">
+                  <label for="">EKC initialisation command not accepted due to encryption failure during initialisation</label>
+                </div>
+                <div class="d-flex">
+                  <input type="radio" name="a" (change)="changeVar()" value="D04" [(ngModel)]="part2">
+                  <label for="">Insufficient disk space</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab" *ngIf="tab_6">
+            <div class="radio__box">
+              <div class="col">
+                <div class="d-flex">
+                  <input type="radio" name="a" (change)="changeVar()" value="E01" [(ngModel)]="part2">
+                  <label for="">Function not supported by software</label>
+                </div>
+                <div class="d-flex">
+                  <input type="radio" name="a" (change)="changeVar()" value="E02" [(ngModel)]="part2">
+                  <label for="">Required device not configured</label>
+                </div>
+                <div class="d-flex">
+                  <input type="radio" name="a" (change)="changeVar()" value="E03" [(ngModel)]="part2">
+                  <label for="">Journal priter backup inactive</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <div class="d-flex message" style="justify-content: space-between;">
+          <div class="form__control">
+            <label>Message</label>
+            <input type="text" class="input" readonly [(ngModel)]="message">
+          </div>
+          <button class="btn btn-success fs-400" (click)="addReasonCommandRej()">Save</button>
+        </div>
+      </div>
+
+   
+      <app-alert [status]="alertBody.status" [message]="alertBody.message" [isAlertVisible]="alertBody.open"></app-alert>
+
+</div>
